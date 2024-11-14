@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("maven-publish")
 }
 
 android {
@@ -34,7 +35,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.4"
     }
 }
 
@@ -50,4 +51,18 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.mp.pie.chart)
+}
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            register("JetpackChili", MavenPublication::class.java) {
+                from(components["release"])
+                groupId = "kg.devcats"
+                artifactId = "jetpack_chili"
+                version = "1.0.0"
+            }
+        }
+    }
 }
