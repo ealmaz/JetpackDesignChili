@@ -1,0 +1,238 @@
+package kg.devcats.compose.jetpack_chili.theme
+
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
+
+class ChiliTypography(colorScheme: ChiliColorScheme) {
+
+    val DefaultTextStyle = TextStyle.Default.copy()
+
+    val BaseChiliTextStyle = DefaultTextStyle.copy()
+
+    val H64 = BaseChiliTextStyle.copy(fontSize = TextUnit(64f, TextUnitType.Sp))
+    val H32 = BaseChiliTextStyle.copy(fontSize = TextUnit(32f, TextUnitType.Sp))
+    val H28 = BaseChiliTextStyle.copy(fontSize = TextUnit(28f, TextUnitType.Sp))
+    val H24 = BaseChiliTextStyle.copy(fontSize = TextUnit(24f, TextUnitType.Sp))
+    val H20 = BaseChiliTextStyle.copy(fontSize = TextUnit(20f, TextUnitType.Sp))
+    val H18 = BaseChiliTextStyle.copy(fontSize = TextUnit(18f, TextUnitType.Sp))
+    val H16 = BaseChiliTextStyle.copy(fontSize = TextUnit(16f, TextUnitType.Sp))
+    val H14 = BaseChiliTextStyle.copy(fontSize = TextUnit(14f, TextUnitType.Sp))
+    val H12 = BaseChiliTextStyle.copy(fontSize = TextUnit(12f, TextUnitType.Sp))
+    val H10 = BaseChiliTextStyle.copy(fontSize = TextUnit(10f, TextUnitType.Sp))
+
+    //Primary
+    val H64_Primary = H64.copy(color = colorScheme.primaryText)
+    val H32_Primary = H32.copy(color = colorScheme.primaryText)
+    val H28_Primary = H28.copy(color = colorScheme.primaryText)
+    val H24_Primary = H24.copy(color = colorScheme.primaryText)
+    val H20_Primary = H20.copy(color = colorScheme.primaryText)
+    val H18_Primary = H18.copy(color = colorScheme.primaryText)
+    val H16_Primary = H16.copy(color = colorScheme.primaryText)
+    val H14_Primary = H14.copy(color = colorScheme.primaryText)
+    val H12_Primary = H12.copy(color = colorScheme.primaryText)
+    val H10_Primary = H10.copy(color = colorScheme.primaryText)
+
+    val H64_Primary_500 = H64_Primary.copy(fontWeight = FontWeight(500))
+    val H32_Primary_500 = H32_Primary.copy(fontWeight = FontWeight(500))
+    val H28_Primary_500 = H28_Primary.copy(fontWeight = FontWeight(500))
+    val H24_Primary_500 = H24_Primary.copy(fontWeight = FontWeight(500))
+    val H20_Primary_500 = H20_Primary.copy(fontWeight = FontWeight(500))
+    val H18_Primary_500 = H18_Primary.copy(fontWeight = FontWeight(500))
+    val H16_Primary_500 = H16_Primary.copy(fontWeight = FontWeight(500))
+    val H14_Primary_500 = H14_Primary.copy(fontWeight = FontWeight(500))
+    val H12_Primary_500 = H12_Primary.copy(fontWeight = FontWeight(500))
+    val H10_Primary_500 = H10_Primary.copy(fontWeight = FontWeight(500))
+
+    val H64_Primary_700 = H64_Primary.copy(fontWeight = FontWeight(700))
+    val H32_Primary_700 = H32_Primary.copy(fontWeight = FontWeight(700))
+    val H28_Primary_700 = H28_Primary.copy(fontWeight = FontWeight(700))
+    val H24_Primary_700 = H24_Primary.copy(fontWeight = FontWeight(700))
+    val H20_Primary_700 = H20_Primary.copy(fontWeight = FontWeight(700))
+    val H18_Primary_700 = H18_Primary.copy(fontWeight = FontWeight(700))
+    val H16_Primary_700 = H16_Primary.copy(fontWeight = FontWeight(700))
+    val H14_Primary_700 = H14_Primary.copy(fontWeight = FontWeight(700))
+    val H12_Primary_700 = H12_Primary.copy(fontWeight = FontWeight(700))
+    val H10_Primary_700 = H10_Primary.copy(fontWeight = FontWeight(700))
+
+
+    //Secondary
+    val H64_Secondary = H64.copy(color = colorScheme.secondaryText)
+    val H32_Secondary = H32.copy(color = colorScheme.secondaryText)
+    val H28_Secondary = H28.copy(color = colorScheme.secondaryText)
+    val H24_Secondary = H24.copy(color = colorScheme.secondaryText)
+    val H20_Secondary = H20.copy(color = colorScheme.secondaryText)
+    val H18_Secondary = H18.copy(color = colorScheme.secondaryText)
+    val H16_Secondary = H16.copy(color = colorScheme.secondaryText)
+    val H14_Secondary = H14.copy(color = colorScheme.secondaryText)
+    val H12_Secondary = H12.copy(color = colorScheme.secondaryText)
+    val H10_Secondary = H10.copy(color = colorScheme.secondaryText)
+
+    val H64_Secondary_500 = H64_Secondary.copy(fontWeight = FontWeight(500))
+    val H32_Secondary_500 = H32_Secondary.copy(fontWeight = FontWeight(500))
+    val H28_Secondary_500 = H28_Secondary.copy(fontWeight = FontWeight(500))
+    val H24_Secondary_500 = H24_Secondary.copy(fontWeight = FontWeight(500))
+    val H20_Secondary_500 = H20_Secondary.copy(fontWeight = FontWeight(500))
+    val H18_Secondary_500 = H18_Secondary.copy(fontWeight = FontWeight(500))
+    val H16_Secondary_500 = H16_Secondary.copy(fontWeight = FontWeight(500))
+    val H14_Secondary_500 = H14_Secondary.copy(fontWeight = FontWeight(500))
+    val H12_Secondary_500 = H12_Secondary.copy(fontWeight = FontWeight(500))
+    val H10_Secondary_500 = H10_Secondary.copy(fontWeight = FontWeight(500))
+
+    val H64_Secondary_700 = H64_Secondary.copy(fontWeight = FontWeight(700))
+    val H32_Secondary_700 = H32_Secondary.copy(fontWeight = FontWeight(700))
+    val H28_Secondary_700 = H28_Secondary.copy(fontWeight = FontWeight(700))
+    val H24_Secondary_700 = H24_Secondary.copy(fontWeight = FontWeight(700))
+    val H20_Secondary_700 = H20_Secondary.copy(fontWeight = FontWeight(700))
+    val H18_Secondary_700 = H18_Secondary.copy(fontWeight = FontWeight(700))
+    val H16_Secondary_700 = H16_Secondary.copy(fontWeight = FontWeight(700))
+    val H14_Secondary_700 = H14_Secondary.copy(fontWeight = FontWeight(700))
+    val H12_Secondary_700 = H12_Secondary.copy(fontWeight = FontWeight(700))
+    val H10_Secondary_700 = H10_Secondary.copy(fontWeight = FontWeight(700))
+
+
+    //Value
+    val H64_Value = H64.copy(color = colorScheme.valueText)
+    val H32_Value = H32.copy(color = colorScheme.valueText)
+    val H28_Value = H28.copy(color = colorScheme.valueText)
+    val H24_Value = H24.copy(color = colorScheme.valueText)
+    val H20_Value = H20.copy(color = colorScheme.valueText)
+    val H18_Value = H18.copy(color = colorScheme.valueText)
+    val H16_Value = H16.copy(color = colorScheme.valueText)
+    val H14_Value = H14.copy(color = colorScheme.valueText)
+    val H12_Value = H12.copy(color = colorScheme.valueText)
+    val H10_Value = H10.copy(color = colorScheme.valueText)
+
+    val H64_Value_500 = H64_Value.copy(fontWeight = FontWeight(500))
+    val H32_Value_500 = H32_Value.copy(fontWeight = FontWeight(500))
+    val H28_Value_500 = H28_Value.copy(fontWeight = FontWeight(500))
+    val H24_Value_500 = H24_Value.copy(fontWeight = FontWeight(500))
+    val H20_Value_500 = H20_Value.copy(fontWeight = FontWeight(500))
+    val H18_Value_500 = H18_Value.copy(fontWeight = FontWeight(500))
+    val H16_Value_500 = H16_Value.copy(fontWeight = FontWeight(500))
+    val H14_Value_500 = H14_Value.copy(fontWeight = FontWeight(500))
+    val H12_Value_500 = H12_Value.copy(fontWeight = FontWeight(500))
+    val H10_Value_500 = H10_Value.copy(fontWeight = FontWeight(500))
+
+    val H64_Value_700 = H64_Value.copy(fontWeight = FontWeight(700))
+    val H32_Value_700 = H32_Value.copy(fontWeight = FontWeight(700))
+    val H28_Value_700 = H28_Value.copy(fontWeight = FontWeight(700))
+    val H24_Value_700 = H24_Value.copy(fontWeight = FontWeight(700))
+    val H20_Value_700 = H20_Value.copy(fontWeight = FontWeight(700))
+    val H18_Value_700 = H18_Value.copy(fontWeight = FontWeight(700))
+    val H16_Value_700 = H16_Value.copy(fontWeight = FontWeight(700))
+    val H14_Value_700 = H14_Value.copy(fontWeight = FontWeight(700))
+    val H12_Value_700 = H12_Value.copy(fontWeight = FontWeight(700))
+    val H10_Value_700 = H10_Value.copy(fontWeight = FontWeight(700))
+
+
+    //Marked
+    val H64_Marked = H64.copy(color = colorScheme.markedText)
+    val H32_Marked = H32.copy(color = colorScheme.markedText)
+    val H28_Marked = H28.copy(color = colorScheme.markedText)
+    val H24_Marked = H24.copy(color = colorScheme.markedText)
+    val H20_Marked = H20.copy(color = colorScheme.markedText)
+    val H18_Marked = H18.copy(color = colorScheme.markedText)
+    val H16_Marked = H16.copy(color = colorScheme.markedText)
+    val H14_Marked = H14.copy(color = colorScheme.markedText)
+    val H12_Marked = H12.copy(color = colorScheme.markedText)
+    val H10_Marked = H10.copy(color = colorScheme.markedText)
+
+    val H64_Marked_500 = H64_Marked.copy(fontWeight = FontWeight(500))
+    val H32_Marked_500 = H32_Marked.copy(fontWeight = FontWeight(500))
+    val H28_Marked_500 = H28_Marked.copy(fontWeight = FontWeight(500))
+    val H24_Marked_500 = H24_Marked.copy(fontWeight = FontWeight(500))
+    val H20_Marked_500 = H20_Marked.copy(fontWeight = FontWeight(500))
+    val H18_Marked_500 = H18_Marked.copy(fontWeight = FontWeight(500))
+    val H16_Marked_500 = H16_Marked.copy(fontWeight = FontWeight(500))
+    val H14_Marked_500 = H14_Marked.copy(fontWeight = FontWeight(500))
+    val H12_Marked_500 = H12_Marked.copy(fontWeight = FontWeight(500))
+    val H10_Marked_500 = H10_Marked.copy(fontWeight = FontWeight(500))
+
+    val H64_Marked_700 = H64_Marked.copy(fontWeight = FontWeight(700))
+    val H32_Marked_700 = H32_Marked.copy(fontWeight = FontWeight(700))
+    val H28_Marked_700 = H28_Marked.copy(fontWeight = FontWeight(700))
+    val H24_Marked_700 = H24_Marked.copy(fontWeight = FontWeight(700))
+    val H20_Marked_700 = H20_Marked.copy(fontWeight = FontWeight(700))
+    val H18_Marked_700 = H18_Marked.copy(fontWeight = FontWeight(700))
+    val H16_Marked_700 = H16_Marked.copy(fontWeight = FontWeight(700))
+    val H14_Marked_700 = H14_Marked.copy(fontWeight = FontWeight(700))
+    val H12_Marked_700 = H12_Marked.copy(fontWeight = FontWeight(700))
+    val H10_Marked_700 = H10_Marked.copy(fontWeight = FontWeight(700))
+
+    //Link
+    val H64_Link = H64.copy(color = colorScheme.linkText)
+    val H32_Link = H32.copy(color = colorScheme.linkText)
+    val H28_Link = H28.copy(color = colorScheme.linkText)
+    val H24_Link = H24.copy(color = colorScheme.linkText)
+    val H20_Link = H20.copy(color = colorScheme.linkText)
+    val H18_Link = H18.copy(color = colorScheme.linkText)
+    val H16_Link = H16.copy(color = colorScheme.linkText)
+    val H14_Link = H14.copy(color = colorScheme.linkText)
+    val H12_Link = H12.copy(color = colorScheme.linkText)
+    val H10_Link = H10.copy(color = colorScheme.linkText)
+
+    val H64_Link_500 = H64_Link.copy(fontWeight = FontWeight(500))
+    val H32_Link_500 = H32_Link.copy(fontWeight = FontWeight(500))
+    val H28_Link_500 = H28_Link.copy(fontWeight = FontWeight(500))
+    val H24_Link_500 = H24_Link.copy(fontWeight = FontWeight(500))
+    val H20_Link_500 = H20_Link.copy(fontWeight = FontWeight(500))
+    val H18_Link_500 = H18_Link.copy(fontWeight = FontWeight(500))
+    val H16_Link_500 = H16_Link.copy(fontWeight = FontWeight(500))
+    val H14_Link_500 = H14_Link.copy(fontWeight = FontWeight(500))
+    val H12_Link_500 = H12_Link.copy(fontWeight = FontWeight(500))
+    val H10_Link_500 = H10_Link.copy(fontWeight = FontWeight(500))
+
+    val H64_Link_700 = H64_Link.copy(fontWeight = FontWeight(700))
+    val H32_Link_700 = H32_Link.copy(fontWeight = FontWeight(700))
+    val H28_Link_700 = H28_Link.copy(fontWeight = FontWeight(700))
+    val H24_Link_700 = H24_Link.copy(fontWeight = FontWeight(700))
+    val H20_Link_700 = H20_Link.copy(fontWeight = FontWeight(700))
+    val H18_Link_700 = H18_Link.copy(fontWeight = FontWeight(700))
+    val H16_Link_700 = H16_Link.copy(fontWeight = FontWeight(700))
+    val H14_Link_700 = H14_Link.copy(fontWeight = FontWeight(700))
+    val H12_Link_700 = H12_Link.copy(fontWeight = FontWeight(700))
+    val H10_Link_700 = H10_Link.copy(fontWeight = FontWeight(700))
+
+
+    //Error
+    val H64_Error = H64.copy(color = colorScheme.errorText)
+    val H32_Error = H32.copy(color = colorScheme.errorText)
+    val H28_Error = H28.copy(color = colorScheme.errorText)
+    val H24_Error = H24.copy(color = colorScheme.errorText)
+    val H20_Error = H20.copy(color = colorScheme.errorText)
+    val H18_Error = H18.copy(color = colorScheme.errorText)
+    val H16_Error = H16.copy(color = colorScheme.errorText)
+    val H14_Error = H14.copy(color = colorScheme.errorText)
+    val H12_Error = H12.copy(color = colorScheme.errorText)
+    val H10_Error = H10.copy(color = colorScheme.errorText)
+
+    val H64_Error_500 = H64_Error.copy(fontWeight = FontWeight(500))
+    val H32_Error_500 = H32_Error.copy(fontWeight = FontWeight(500))
+    val H28_Error_500 = H28_Error.copy(fontWeight = FontWeight(500))
+    val H24_Error_500 = H24_Error.copy(fontWeight = FontWeight(500))
+    val H20_Error_500 = H20_Error.copy(fontWeight = FontWeight(500))
+    val H18_Error_500 = H18_Error.copy(fontWeight = FontWeight(500))
+    val H16_Error_500 = H16_Error.copy(fontWeight = FontWeight(500))
+    val H14_Error_500 = H14_Error.copy(fontWeight = FontWeight(500))
+    val H12_Error_500 = H12_Error.copy(fontWeight = FontWeight(500))
+    val H10_Error_500 = H10_Error.copy(fontWeight = FontWeight(500))
+
+    val H64_Error_700 = H64_Error.copy(fontWeight = FontWeight(700))
+    val H32_Error_700 = H32_Error.copy(fontWeight = FontWeight(700))
+    val H28_Error_700 = H28_Error.copy(fontWeight = FontWeight(700))
+    val H24_Error_700 = H24_Error.copy(fontWeight = FontWeight(700))
+    val H20_Error_700 = H20_Error.copy(fontWeight = FontWeight(700))
+    val H18_Error_700 = H18_Error.copy(fontWeight = FontWeight(700))
+    val H16_Error_700 = H16_Error.copy(fontWeight = FontWeight(700))
+    val H14_Error_700 = H14_Error.copy(fontWeight = FontWeight(700))
+    val H12_Error_700 = H12_Error.copy(fontWeight = FontWeight(700))
+    val H10_Error_700 = H10_Error.copy(fontWeight = FontWeight(700))
+
+}
+
+val LocalChiliTypography = compositionLocalOf { ChiliTypography(ChiliLightColorScheme()) }
+
+
