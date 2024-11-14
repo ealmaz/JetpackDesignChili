@@ -43,7 +43,11 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    implementation("androidx.lifecycle:lifecycle-livedata-core:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-runtime:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
+
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)

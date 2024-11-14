@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "kg.devcats.compose.samples"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "kg.devcats.compose.chili"
@@ -43,11 +43,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.4"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
@@ -57,7 +52,11 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    implementation("androidx.lifecycle:lifecycle-livedata-core:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-runtime:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
+
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
