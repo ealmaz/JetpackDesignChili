@@ -57,7 +57,7 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            register("JetpackChili", MavenPublication::class.java) {
+            register("release", MavenPublication::class.java) {
                 from(components["release"])
                 groupId = "kg.devcats"
                 artifactId = "jetpack_chili"
