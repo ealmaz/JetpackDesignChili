@@ -53,15 +53,14 @@ dependencies {
     implementation(libs.mp.pie.chart)
 }
 
-
 afterEvaluate {
     publishing {
         publications {
-            register("release", MavenPublication::class.java) {
+            register("release", MavenPublication::class) {
                 from(components["release"])
-                groupId = "kg.devcats"
                 artifactId = "jetpack_chili"
-                version = "1.0.0"
+                groupId = "com.design"
+                version = "3.0.0"
             }
         }
     }
