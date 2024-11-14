@@ -56,10 +56,10 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            register("release", MavenPublication::class) {
+            create<MavenPublication>("release") {
                 from(components["release"])
                 artifactId = "jetpack_chili"
-                groupId = "com.design"
+                groupId = "kg.devcats.compose"
                 version = "3.0.0"
             }
         }
