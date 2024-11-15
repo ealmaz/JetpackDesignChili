@@ -41,20 +41,17 @@ android {
 
 dependencies {
 
+    implementation(libs.mp.pie.chart)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-
-    implementation("androidx.lifecycle:lifecycle-livedata-core:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-runtime:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
-
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.mp.pie.chart)
 }
 
 afterEvaluate {
@@ -64,7 +61,7 @@ afterEvaluate {
                 from(components["release"])
                 artifactId = "jetpack_chili"
                 groupId = "kg.devcats.compose"
-                version = "3.0.0"
+                version = "1.0.0"
             }
         }
     }
