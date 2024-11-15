@@ -18,32 +18,32 @@ import kg.devcats.compose.samples.ui.chili_sample.Toolbars
 @Composable
 fun SamplesNavGraph(navController: NavHostController = rememberNavController()) {
 
-    NavHost(navController = navController, startDestination = Screens.MainScreen) {
-        composable<Screens.MainScreen> {
+    NavHost(navController = navController, startDestination = Screens.MainScreen.toString()) {
+        composable(Screens.MainScreen.toString()) {
             ChiliSampleScreens(navController)
         }
-        composable<Screens.TextAppearancesScreen> {
+        composable(Screens.TextAppearancesScreen.toString()) {
             TextAppearance { navController.navigateUp() }
         }
-        composable<Screens.ButtonsScreen> {
+        composable(Screens.ButtonsScreen.toString()) {
             PreviewButtons { navController.navigateUp() }
         }
-        composable<Screens.InputFieldsScreen> {
+        composable(Screens.InputFieldsScreen.toString()) {
             InputFields { navController.navigateUp() }
         }
-        composable<Screens.CellViewsScreen> {
+        composable(Screens.CellViewsScreen.toString()) {
             CellViews { navController.navigateUp() }
         }
-        composable<Screens.CardViewsScreen> {
+        composable(Screens.CardViewsScreen.toString()) {
             CardViews { navController.navigateUp() }
         }
-        composable<Screens.BottomSheetsScreen> {
+        composable(Screens.BottomSheetsScreen.toString()) {
             BottomSheetsPreview { navController.navigateUp() }
         }
-        composable<Screens.CommonViewsScreen> {
+        composable(Screens.CommonViewsScreen.toString()) {
             CommonViews { navController.navigateUp() }
         }
-        composable<Screens.ToolbarsScreens> {
+        composable(Screens.ToolbarsScreens.toString()) {
             Toolbars { navController.navigateUp() }
         }
     }
