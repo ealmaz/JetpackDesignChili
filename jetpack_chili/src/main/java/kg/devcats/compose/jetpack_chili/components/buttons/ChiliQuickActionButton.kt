@@ -51,7 +51,8 @@ fun ChiliQuickActionButton(
         else -> Chili.color.quickActionIconDefaultColor
     }
 
-    val textStyle = if (enabled) Chili.typography.H14_Primary else Chili.typography.H14_Primary.copy(color = Chili.color.quickActionButtonDisabledTextColor)
+    val textStyle =
+        if (enabled) Chili.typography.H14_Primary else Chili.typography.H14_Primary.copy(color = Chili.color.quickActionButtonDisabledTextColor)
 
     Column(
         modifier = modifier
