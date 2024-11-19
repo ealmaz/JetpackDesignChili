@@ -30,4 +30,7 @@ sealed class Screens {
 
     @Serializable
     data object ToolbarsScreens : Screens()
+
+    @Serializable
+    data object PickerScreens : Screens()
 }

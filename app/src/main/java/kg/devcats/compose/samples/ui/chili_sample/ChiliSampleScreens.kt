@@ -78,9 +78,14 @@ fun ChiliSampleScreens(
                 .padding(top = 16.dp)) {
                 navController?.navigate(Screens.CardViewsScreen.toString())
             }
+
+            ChiliPrimaryButton(text = "Pickers", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController?.navigate(Screens.PickerScreens.toString())
+            }
         }
     }
-    
 }
 
 @Preview(showBackground = true, showSystemUi = true)
