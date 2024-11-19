@@ -29,7 +29,6 @@ import kg.devcats.compose.jetpack_chili.components.buttons.ChiliLoaderButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliQuickActionButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliSecondaryButton
-import kg.devcats.compose.jetpack_chili.components.buttons.QuickActionButtonState
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
@@ -91,16 +90,16 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
             Row {
                 val context = LocalContext.current
                 ChiliQuickActionButton(
-                    text = "В избранное",
-                    iconResource = R.drawable.chili_ic_add_to_favorites,
+                    text = "ChiliQuickActionButton",
+                    iconResource = R.drawable.chili_ic_bell,
                     modifier = Modifier.weight(1f),
                     coroutineScope = rememberCoroutineScope(),
                     onClick = {
                         Toast.makeText(context, "Clicked ChiliQuickActionButton", Toast.LENGTH_SHORT).show()
                     })
                 ChiliQuickActionButton(
-                    text = "В избранное",
-                    iconResource = R.drawable.chili_ic_add_to_favorites,
+                    text = "ChiliQuickActionButton",
+                    iconResource = R.drawable.chili_ic_bell,
                     modifier = Modifier.weight(1f),
                     coroutineScope = rememberCoroutineScope(),
                     enabled = false,
