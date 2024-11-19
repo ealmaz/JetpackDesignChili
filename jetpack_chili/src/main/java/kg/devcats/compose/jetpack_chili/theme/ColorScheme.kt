@@ -90,6 +90,15 @@ interface ChiliColorScheme {
 
     //BottomSheet
     val bottomSheetBackground: Color
+
+    //    QuickAction button
+    val quickActionIconBackgroundDisabledColor: Color
+    val quickActionIconBackgroundClickedColor: Color
+    val quickActionIconBackgroundDefaultColor: Color
+    val quickActionIconDisabledColor: Color
+    val quickActionIconClickedColor: Color
+    val quickActionIconDefaultColor: Color
+    val quickActionButtonDisabledTextColor: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -156,8 +165,15 @@ data class ChiliLightColorScheme(
     override val animatedGradient4: Color = white_1,
 
     override val bottomSheetBackground: Color = white_1,
-    ) : ChiliColorScheme
 
+    override val quickActionIconBackgroundDisabledColor: Color = gray_5,
+    override val quickActionIconBackgroundClickedColor: Color = gray_9,
+    override val quickActionIconBackgroundDefaultColor: Color = gray_9,
+    override val quickActionIconDisabledColor: Color = gray_2,
+    override val quickActionIconClickedColor: Color = magenta_1,
+    override val quickActionIconDefaultColor: Color = black_1,
+    override val quickActionButtonDisabledTextColor: Color = gray_2,
+    ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
     override val primaryText: Color = white_1,
@@ -220,5 +236,13 @@ data class ChiliDarkColorScheme(
     override val animatedGradient4: Color = black_3,
 
     override val bottomSheetBackground: Color = black_2,
+
+    override val quickActionIconBackgroundDisabledColor: Color = black_4,
+    override val quickActionIconBackgroundClickedColor: Color = black_4,
+    override val quickActionIconBackgroundDefaultColor: Color = black_4,
+    override val quickActionIconDisabledColor: Color = black_6,
+    override val quickActionIconClickedColor: Color = gray_1,
+    override val quickActionIconDefaultColor: Color = white_1,
+    override val quickActionButtonDisabledTextColor: Color = gray_1,
 ): ChiliColorScheme
 
