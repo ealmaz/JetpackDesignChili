@@ -1,4 +1,4 @@
-package kg.devcats.compose.jetpack_chili.components.picker.base
+package kg.devcats.compose.jetpack_chili.modals.picker.base
 
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme

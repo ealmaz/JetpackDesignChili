@@ -12,7 +12,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
-import kg.devcats.compose.jetpack_chili.components.picker.WheelDatePicker
+import kg.devcats.compose.jetpack_chili.modals.picker.WheelDatePicker
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @OptIn(ExperimentalComposeUiApi::class)

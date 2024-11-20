@@ -1,4 +1,4 @@
-package kg.devcats.compose.jetpack_chili.components.picker.base
+package kg.devcats.compose.jetpack_chili.modals.picker.base
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
@@ -31,7 +31,7 @@ internal fun DefaultWheelTimePicker(
     textStyle: TextStyle = MaterialTheme.typography.titleMedium,
     textColor: Color = LocalContentColor.current,
     selectorProperties: SelectorProperties = WheelPickerDefaults.selectorProperties(),
-    onSnappedTime : (snappedTime: SnappedTime, timeFormat: TimeFormat) -> Int? = { _,_ -> null },
+    onSnappedTime : (snappedTime: SnappedTime, timeFormat: TimeFormat) -> Int? = { _, _ -> null },
 ) {
 
     var snappedTime by remember { mutableStateOf(startTime.truncatedTo(ChronoUnit.MINUTES)) }

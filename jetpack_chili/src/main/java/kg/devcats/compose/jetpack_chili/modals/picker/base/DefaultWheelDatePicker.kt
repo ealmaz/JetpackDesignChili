@@ -1,4 +1,4 @@
-package kg.devcats.compose.jetpack_chili.components.picker.base
+package kg.devcats.compose.jetpack_chili.modals.picker.base
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box

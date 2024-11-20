@@ -1,4 +1,4 @@
-package kg.devcats.compose.jetpack_chili.components.picker
+package kg.devcats.compose.jetpack_chili.modals.picker
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.LocalContentColor
@@ -9,10 +9,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import kg.devcats.compose.jetpack_chili.components.picker.base.DefaultWheelDateTimePicker
-import kg.devcats.compose.jetpack_chili.components.picker.base.SelectorProperties
-import kg.devcats.compose.jetpack_chili.components.picker.base.TimeFormat
-import kg.devcats.compose.jetpack_chili.components.picker.base.WheelPickerDefaults
+import kg.devcats.compose.jetpack_chili.modals.picker.base.DefaultWheelDateTimePicker
+import kg.devcats.compose.jetpack_chili.modals.picker.base.SelectorProperties
+import kg.devcats.compose.jetpack_chili.modals.picker.base.TimeFormat
+import kg.devcats.compose.jetpack_chili.modals.picker.base.WheelPickerDefaults
 import java.time.LocalDateTime
 
 @SuppressLint("NewApi")

@@ -1,6 +1,4 @@
-@file:OptIn(ExperimentalFoundationApi::class)
-
-package kg.devcats.compose.jetpack_chili.components.picker.base
+package kg.devcats.compose.jetpack_chili.modals.picker.base
 
 import androidx.compose.animation.core.snap
 import androidx.compose.foundation.BorderStroke
@@ -28,6 +26,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import kotlin.math.absoluteValue
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun WheelPicker(
     modifier: Modifier = Modifier,
@@ -40,17 +39,6 @@ internal fun WheelPicker(
     content: @Composable LazyItemScope.(index: Int) -> Unit,
 ) {
     val lazyListState = rememberLazyListState(startIndex)
-    val snappingLayout = remember(lazyListState) { SnapLayoutInfoProvider(lazyListState) }
-    val snappingBehavior =  rememberSnapFlingBehavior(snappingLayout)
-    val isScrollInProgress = lazyListState.isScrollInProgress
-
-    /*LaunchedEffect(isScrollInProgress, count) {
-        if(!isScrollInProgress) {
-            onScrollFinished(calculateSnappedItemIndex(snappingLayout) ?: startIndex)?.let {
-                lazyListState.scrollToItem(it)
-            }
-        }
-    }*/
 
     Box(
         modifier = modifier,
@@ -71,7 +59,7 @@ internal fun WheelPicker(
                 .width(size.width),
             state = lazyListState,
             contentPadding = PaddingValues(vertical = size.height / rowCount * ((rowCount - 1 )/ 2)),
-            flingBehavior = snappingBehavior
+            flingBehavior = rememberSnapFlingBehavior(lazyListState)
         ){
             items(count){ index ->
                 /*val rotationX = calculateAnimatedRotationX(
