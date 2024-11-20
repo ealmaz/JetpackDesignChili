@@ -87,6 +87,8 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
             ChiliComponentButton(text = "Component button", modifier = Modifier
                 .padding(top = 4.dp), enabled = false) {}
 
+            Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
+
             Row {
                 val context = LocalContext.current
                 ChiliQuickActionButton(
@@ -96,7 +98,8 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
                     coroutineScope = rememberCoroutineScope(),
                     onClick = {
                         Toast.makeText(context, "Clicked ChiliQuickActionButton", Toast.LENGTH_SHORT).show()
-                    })
+                    }
+                )
                 ChiliQuickActionButton(
                     text = "ChiliQuickActionButton",
                     iconResource = R.drawable.chili_ic_bell,
@@ -105,7 +108,8 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
                     enabled = false,
                     onClick = {
                         Toast.makeText(context, "Clicked ChiliQuickActionButton", Toast.LENGTH_SHORT).show()
-                    })
+                    }
+                )
             }
         }
     }
