@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.cells.BonusTagView
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliCellView
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
@@ -305,9 +306,13 @@ fun CellViews(
                 }
             }
 
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "BonusTagView", style = Chili.typography.H16_Primary)
 
-
-
+            BonusTagView(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .clickable {  },
+                text = "+100,00")
         }
     }
 }
