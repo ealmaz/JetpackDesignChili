@@ -34,6 +34,7 @@ class StoryActivity : ComponentActivity(), StoryMoveListener, StoryOnFinishListe
                     this,
                     this,
                     this,
+                    onPageChanged = {}
                 )
             }
         }
@@ -96,6 +97,7 @@ class StoryActivity : ComponentActivity(), StoryMoveListener, StoryOnFinishListe
             ChilliStoryModel(
                 mediaUrl = "https://static.wikia.nocookie.net/adventures-of-chris-and-tifa/images/c/c6/71FA6EC3-137C-4A43-87A0-10130B2AC0A4.jpg/revision/latest?cb=20210830075712",
                 buttonText = "Go", buttonType = ChilliButtonType.ADDITIONAL,
+                backgroundColor = "#000000",
                 isViewed = true
             ),
             ChilliStoryModel(

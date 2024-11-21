@@ -33,6 +33,7 @@ fun ChiliStoriesView(
     onStoryMoveListener: StoryMoveListener,
     onStoryClickListener: StoryClickListener? = null,
     initialStoryBlockIndex: Int = 0,
+    onPageChanged: (Int) -> Unit = {}
 ) {
 
     var currentBlockIndex by remember { mutableIntStateOf(initialStoryBlockIndex) }
@@ -42,6 +43,7 @@ fun ChiliStoriesView(
 
     LaunchedEffect(pagerState.currentPage) {
         currentBlockIndex = pagerState.currentPage
+        onPageChanged(pagerState.currentPage)
     }
 
     VerticalDraggableView (
