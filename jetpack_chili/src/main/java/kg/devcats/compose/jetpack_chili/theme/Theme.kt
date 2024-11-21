@@ -71,6 +71,49 @@ fun ChiliTheme(
     }
 }
 
+@Composable
+fun ChiliTransparentTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+
+    val transparentMaterialColorScheme = materialDarkColorScheme.copy(
+        background = Color.Transparent,
+        surface = Color.Transparent,
+        onBackground = Color.Transparent,
+        onSurface = Color.Transparent
+    )
+
+    val transparentChiliColorScheme = chiliDefaultDarkColorScheme.copy(
+        screenBackground = Color.Transparent,
+        surfaceBackground = Color.Transparent,
+        toolbarBackground = Color.Transparent,
+    )
+
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = Color.Transparent.toArgb()
+            window.navigationBarColor = Color.Transparent.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+        }
+    }
+
+    CompositionLocalProvider(
+        LocalChiliTypography provides if (darkTheme) chiliDefaultDarkTypography else chiliDefaultLightTypography,
+        LocalChiliColorScheme provides transparentChiliColorScheme,
+        LocalChiliThemeAttributes provides ChiliThemeAttributes,
+        LocalChiliShapes provides Chili.shapes
+    ) {
+        MaterialTheme(
+            colorScheme = transparentMaterialColorScheme,
+            content = content
+        )
+    }
+}
+
+
 
 
 object Chili {

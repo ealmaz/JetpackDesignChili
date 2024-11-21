@@ -1,5 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,18 +10,21 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.StoryActivity
 import kg.devcats.compose.samples.ui.navigation.Screens
 
 @Composable
 fun ChiliSampleScreens(
     navController: NavController? = null,
 ) {
+    val context = LocalContext.current
     Column(modifier = Modifier
         .background(Chili.color.surfaceBackground)
         .fillMaxSize()) {
@@ -77,6 +81,12 @@ fun ChiliSampleScreens(
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
                 navController?.navigate(Screens.CardViewsScreen.toString())
+            }
+
+            ChiliPrimaryButton(text = "Stories", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                context.startActivity(Intent(context, StoryActivity::class.java))
             }
         }
     }
