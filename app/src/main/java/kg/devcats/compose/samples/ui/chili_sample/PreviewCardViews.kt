@@ -30,6 +30,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.CatalogCardView
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCardView
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCardView
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCardView
+import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedCellView
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -356,7 +357,7 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AccentCardView",
+                text = "MultiIconedCellView",
                 style = Chili.typography.H16_Primary
             )
             Column {
@@ -393,6 +394,23 @@ fun CardViews(
                     )
                 }
             }
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "AccentCardView",
+                style = Chili.typography.H16_Primary
+            )
+            MultiIconedCellView(
+                icons = listOf(
+                    kg.devcats.compose.samples.R.drawable.elcart,
+                    kg.devcats.compose.samples.R.drawable.elcart,
+                    kg.devcats.compose.samples.R.drawable.elcart,
+                    kg.devcats.compose.samples.R.drawable.elcart,
+                    kg.devcats.compose.samples.R.drawable.elcart,
+                    kg.devcats.compose.samples.R.drawable.elcart,
+                ),
+                title = "MultiiconedCellView title:",
+                additionalInfo = "Весь список"
+            )
         }
     }
 }
