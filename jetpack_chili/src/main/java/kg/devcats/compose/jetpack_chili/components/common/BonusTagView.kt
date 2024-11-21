@@ -1,4 +1,4 @@
-package kg.devcats.compose.jetpack_chili.components.cells
+package kg.devcats.compose.jetpack_chili.components.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,7 +36,7 @@ fun BonusTagView(
                 contentScale = ContentScale.FillWidth
             )
         .background(enabledColor)
-        .clickable { if (enabled) onClick.invoke() }, contentAlignment = Alignment.Center) {
+        .clickable { if (enabled) onClick.invoke() }, contentAlignment = Alignment.CenterStart) {
         Row(modifier = Modifier.padding(start = 8.dp, end = 4.dp, top = 4.dp, bottom = 4.dp), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 modifier = Modifier.padding(end = 2.dp),

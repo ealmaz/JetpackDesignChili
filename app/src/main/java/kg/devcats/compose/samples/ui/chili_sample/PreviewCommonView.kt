@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kg.devcats.compose.jetpack_chili.components.cells.BonusTagView
+import kg.devcats.compose.jetpack_chili.components.common.BonusTagView
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
