@@ -186,6 +186,14 @@ fun StoryView(
                                             }
                                         })
                                     }
+
+                                    setShutterBackgroundColor(currentStory.backgroundColor?.let { color ->
+                                        try {
+                                            Color(android.graphics.Color.parseColor(color))
+                                        } catch (e: Exception) {
+                                            Color.White
+                                        }
+                                    }?.toArgb() ?: Color.White.toArgb())
                                 }
                             },
                             modifier = Modifier.align(Alignment.BottomCenter)
