@@ -119,7 +119,13 @@ fun StoryView(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(currentStory?.backgroundColor?.let { color ->
+                try {
+                    Color(android.graphics.Color.parseColor(color))
+                } catch (e: Exception) {
+                    Color.White
+                }
+            } ?: Color.White)
     ) {
         Row(
             modifier = Modifier
@@ -276,7 +282,13 @@ fun StoryView(
                         Icon(
                             painter = painterResource(R.drawable.chili_ic_close),
                             contentDescription = null,
-                            tint = Color.Black
+                            tint = story.titleTextColor?.let { color ->
+                                try {
+                                    Color(android.graphics.Color.parseColor(color))
+                                } catch (e: Exception) {
+                                    Color.Black
+                                }
+                            } ?: Color.Black
                         )
                     }
 
@@ -287,7 +299,11 @@ fun StoryView(
                                 .align(Alignment.Start)
                                 .padding(horizontal = 16.dp),
                             color = story.titleTextColor?.let { color ->
-                                Color(android.graphics.Color.parseColor(color))
+                                try {
+                                    Color(android.graphics.Color.parseColor(color))
+                                } catch (e: Exception) {
+                                    Color.Black
+                                }
                             } ?: Color.Black,
                             textAlign = TextAlign.Start,
                             style = Chili.typography.H24_Primary_500
@@ -300,8 +316,12 @@ fun StoryView(
                             modifier = Modifier
                                 .align(Alignment.Start)
                                 .padding(top = 16.dp, start = 16.dp, end = 16.dp),
-                            color = story.titleTextColor?.let { color ->
-                                Color(android.graphics.Color.parseColor(color))
+                            color = story.subtitleTextColor?.let { color ->
+                                try {
+                                    Color(android.graphics.Color.parseColor(color))
+                                } catch (e: Exception) {
+                                    Color.Black
+                                }
                             } ?: Color.Black,
                             textAlign = TextAlign.Start,
                             style = Chili.typography.H16_Primary
