@@ -25,7 +25,7 @@ fun VerticalDraggableView(
 ) {
     var offsetY by remember { mutableFloatStateOf(0f) }
     val dragState = rememberDraggableState { delta ->
-        offsetY += delta
+        offsetY = (offsetY + delta).coerceAtLeast(0f)
     }
     val scale by remember {
         derivedStateOf {
