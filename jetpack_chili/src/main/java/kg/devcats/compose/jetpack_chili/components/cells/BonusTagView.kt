@@ -37,7 +37,7 @@ fun BonusTagView(
             )
         .background(enabledColor)
         .clickable { if (enabled) onClick.invoke() }, contentAlignment = Alignment.Center) {
-        Row(modifier = Modifier.padding(all = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(modifier = Modifier.padding(start = 8.dp, end = 4.dp, top = 4.dp, bottom = 4.dp), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 modifier = Modifier.padding(end = 2.dp),
                 text = text,
