@@ -31,6 +31,7 @@ import kg.devcats.compose.jetpack_chili.components.navigation.ChiliAppToolbar
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.common.BonusTagView
 
 @Composable
 fun Toolbars(
@@ -98,6 +99,27 @@ fun Toolbars(
                     popupMenu(expanded) { expanded = false }
                 })
 
+            Spacer(modifier = Modifier.height(8.dp))
+
+            ChiliCenteredAppToolbar(
+                title = "ToolbarWithBonusTag",
+                isNavigationIconVisible = true,
+                backgroundColor = Color.Transparent,
+                endFrame = {
+                    BonusTagView(modifier = Modifier, text = "Бонусы: 500")
+                }
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            ChiliCenteredAppToolbar(
+                title = "ToolbarWithBonusTag",
+                isNavigationIconVisible = true,
+                backgroundColor = Color.Transparent,
+                endFrame = {
+                    BonusTagView(modifier = Modifier, enabled = false, text = "Бонусы")
+                }
+            )
         }
     }
 }

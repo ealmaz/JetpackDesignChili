@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliCellView
+import kg.devcats.compose.jetpack_chili.components.common.BonusTagView
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
@@ -160,7 +161,9 @@ fun CellViews(
                 }
             }
 
-            ShadowRoundedBox(modifier = Modifier.padding(top = 16.dp)) {
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with BonusTag", style = Chili.typography.H16_Primary)
+
+            ShadowRoundedBox(modifier = Modifier) {
                 Column {
                     ChiliCellView(
                         modifier = Modifier.clickable {  },
@@ -169,7 +172,7 @@ fun CellViews(
                         isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
-                            Text(text = "Additonal text", style = Chili.typography.H14_Value)
+                            BonusTagView(modifier = Modifier, text = "1%")
                         },
                     )
                     ChiliCellView(
@@ -179,16 +182,16 @@ fun CellViews(
                         isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
-                            Text(text = "Additonal text", style = Chili.typography.H14_Value)
+                            BonusTagView(modifier = Modifier, text = "10%")
                         },
                     )
                     ChiliCellView(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
-                        subtitle = "Подзаголовок",
+                        subtitle = null,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
-                            Text(text = "Additonal text", style = Chili.typography.H14_Value)
+                            BonusTagView(modifier = Modifier, text = "100%")
                         },
                     )
                 }
