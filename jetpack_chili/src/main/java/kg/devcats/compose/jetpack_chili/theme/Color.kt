@@ -10,6 +10,7 @@ val black_3 = Color(0xFF1c1c1e)
 val black_4 = Color(0xFF28282a)
 val black_5 = Color(0xFF4a4a4a)
 val black_6 = Color(0xFF535353)
+val black_7 = Color(0xFF3d3d3d)
 
 // Gray
 
