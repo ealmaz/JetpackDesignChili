@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -55,10 +56,18 @@ fun ChiliCellView(
             }
             .fillMaxWidth()
     ) {
-        Column {
+        val iconEndMargin: Dp = 12.dp
+
+        Column(modifier = Modifier
+            .heightIn(min = 48.dp)
+            .padding(start = 12.dp)
+        ) {
             Row(
                 modifier = Modifier
-                    .padding(horizontal = 12.dp, vertical = 2.dp)
+                    .padding(vertical = 2.dp)
+                    .then(
+                        Modifier.padding(end = if (isChevronVisible) 8.dp else 12.dp)
+                    )
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -71,7 +80,7 @@ fun ChiliCellView(
                             .size(iconSize)
                             .clip(Chili.shapes.RoundedCornerShape)
                     )
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(iconEndMargin))
                 }
 
                 Column(modifier = Modifier.weight(1f)) {
@@ -97,7 +106,12 @@ fun ChiliCellView(
                 endFrame?.invoke()
                 if (isChevronVisible) ChiliChevron()
             }
-            if (isDividerVisible) Divider(modifier = Modifier.padding(start = 8.dp))
+            if (isDividerVisible) Divider(
+                modifier = Modifier.then(
+                    if (icon != null) Modifier.padding(start = iconSize + iconEndMargin)
+                    else Modifier
+                )
+            )
         }
     }
 }
