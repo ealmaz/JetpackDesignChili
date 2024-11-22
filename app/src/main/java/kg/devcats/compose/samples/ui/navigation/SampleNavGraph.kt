@@ -11,6 +11,7 @@ import kg.devcats.compose.samples.ui.chili_sample.CellViews
 import kg.devcats.compose.samples.ui.chili_sample.ChiliSampleScreens
 import kg.devcats.compose.samples.ui.chili_sample.CommonViews
 import kg.devcats.compose.samples.ui.chili_sample.InputFields
+import kg.devcats.compose.samples.ui.chili_sample.PreviewBanners
 import kg.devcats.compose.samples.ui.chili_sample.PreviewButtons
 import kg.devcats.compose.samples.ui.chili_sample.TextAppearance
 import kg.devcats.compose.samples.ui.chili_sample.Toolbars
@@ -45,6 +46,9 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
         }
         composable(Screens.ToolbarsScreens.toString()) {
             Toolbars { navController.navigateUp() }
+        }
+        composable(Screens.BannersScreens.toString()) {
+            PreviewBanners { navController.navigateUp() }
         }
     }
 
