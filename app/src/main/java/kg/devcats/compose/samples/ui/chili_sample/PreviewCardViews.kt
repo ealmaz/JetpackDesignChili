@@ -16,6 +16,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +35,8 @@ import kg.devcats.compose.jetpack_chili.components.cards.BonusCardView
 import kg.devcats.compose.jetpack_chili.components.cards.BorderAnimatedView
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCardView
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCardView
+import kg.devcats.compose.jetpack_chili.components.cards.InfoBlockCardView
+import kg.devcats.compose.jetpack_chili.components.cards.InfoState
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCardView
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCardView
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCellView
@@ -424,6 +430,35 @@ fun CardViews(
                     }
                 )
             }
+
+            var isOpened by remember { mutableStateOf(true) }
+
+            if (isOpened) {
+                InfoBlockCardView(
+                    modifier = Modifier.padding(top = 14.dp),
+                    title = "Title",
+                    infoState = InfoState.Neutral,
+                    subtitle = "Subtitle",
+                    buttonText = "Кнопка",
+                    isClosable = true,
+                    onCloseClick = { isOpened = false }
+                )
+            }
+
+            InfoBlockCardView(
+                modifier = Modifier.padding(top = 14.dp),
+                title = "Title",
+                infoState = InfoState.Warning,
+                subtitle = "Subtitle",
+            )
+
+            InfoBlockCardView(
+                modifier = Modifier.padding(top = 14.dp),
+                title = "Title",
+                infoState = InfoState.Error,
+                subtitle = "Subtitle",
+                buttonText = "Кнопка",
+            )
         }
     }
 }
