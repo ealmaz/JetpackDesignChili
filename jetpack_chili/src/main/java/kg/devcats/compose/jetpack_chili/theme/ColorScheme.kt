@@ -13,6 +13,9 @@ interface ChiliColorScheme {
     val linkText: Color
     val errorText: Color
 
+    //Icons
+    val primaryIcon: Color
+
     // ScreenBackground
     val screenBackground: Color
     val surfaceBackground: Color
@@ -111,6 +114,9 @@ data class ChiliLightColorScheme(
     override val markedText: Color = black_1,
     override val linkText: Color = magenta_1,
     override val errorText: Color = red_1,
+
+    override val primaryIcon: Color = black_1,
+
     override val screenBackground: Color = gray_4,
     override val surfaceBackground: Color = white_1,
     override val toolbarBackground: Color = white_1,
@@ -182,6 +188,9 @@ data class ChiliDarkColorScheme(
     override val markedText: Color = white_1,
     override val linkText: Color = magenta_1,
     override val errorText: Color = red_1,
+
+    override val primaryIcon: Color = white_1,
+
     override val screenBackground: Color = black_2,
     override val surfaceBackground: Color = black_1,
     override val toolbarBackground: Color = black_3,
