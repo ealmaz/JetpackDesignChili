@@ -19,6 +19,7 @@ interface ChiliColorScheme {
     // ScreenBackground
     val screenBackground: Color
     val surfaceBackground: Color
+    val screenSecondary: Color
 
     //Toolbar
     val toolbarBackground: Color
@@ -119,9 +120,10 @@ data class ChiliLightColorScheme(
 
     override val screenBackground: Color = gray_4,
     override val surfaceBackground: Color = white_1,
+    override val screenSecondary: Color = gray_9,
     override val toolbarBackground: Color = white_1,
     override val dividerColor: Color = gray_6,
-    override val chevronColor: Color = gray_2,
+    override val chevronColor: Color = black_7,
 
     override val cardViewBackground: Color = white_1,
     override val cellViewBackground: Color = white_1,
@@ -193,9 +195,10 @@ data class ChiliDarkColorScheme(
 
     override val screenBackground: Color = black_2,
     override val surfaceBackground: Color = black_1,
+    override val screenSecondary: Color = black_1,
     override val toolbarBackground: Color = black_3,
     override val dividerColor: Color = black_4,
-    override val chevronColor: Color = white_1,
+    override val chevronColor: Color = gray_4,
 
     override val cardViewBackground: Color = black_3,
     override val cellViewBackground: Color = black_3,
