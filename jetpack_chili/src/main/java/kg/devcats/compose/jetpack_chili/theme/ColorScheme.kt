@@ -95,7 +95,7 @@ interface ChiliColorScheme {
     //BottomSheet
     val bottomSheetBackground: Color
 
-    //    QuickAction button
+    //QuickAction button
     val quickActionIconBackgroundDisabledColor: Color
     val quickActionIconBackgroundClickedColor: Color
     val quickActionIconBackgroundDefaultColor: Color
@@ -103,6 +103,17 @@ interface ChiliColorScheme {
     val quickActionIconClickedColor: Color
     val quickActionIconDefaultColor: Color
     val quickActionButtonDisabledTextColor: Color
+
+    //AlertBlockCardView
+    val alertNeutralBg: Color
+    val alertNeutralContent: Color
+    val alertNeutralText: Color
+    val alertWarningBg: Color
+    val alertWarningContent: Color
+    val alertWarningText: Color
+    val alertErrorBg: Color
+    val alertErrorContent: Color
+    val alertErrorText: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -181,7 +192,17 @@ data class ChiliLightColorScheme(
     override val quickActionIconClickedColor: Color = magenta_1,
     override val quickActionIconDefaultColor: Color = black_1,
     override val quickActionButtonDisabledTextColor: Color = gray_2,
-    ) : ChiliColorScheme
+
+    override val alertNeutralBg: Color = blue_6,
+    override val alertNeutralContent: Color = blue_1,
+    override val alertNeutralText: Color = blue_9,
+    override val alertWarningBg: Color = orange_6,
+    override val alertWarningContent: Color = orange_1,
+    override val alertWarningText: Color = brown_1,
+    override val alertErrorBg: Color = red_5,
+    override val alertErrorContent: Color = red_1,
+    override val alertErrorText: Color = magenta_6,
+) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
     override val primaryText: Color = white_1,
@@ -256,5 +277,15 @@ data class ChiliDarkColorScheme(
     override val quickActionIconClickedColor: Color = gray_1,
     override val quickActionIconDefaultColor: Color = white_1,
     override val quickActionButtonDisabledTextColor: Color = gray_1,
+
+    override val alertNeutralBg: Color = blue_7,
+    override val alertNeutralContent: Color = blue_8,
+    override val alertNeutralText: Color = white_1,
+    override val alertWarningBg: Color = orange_7,
+    override val alertWarningContent: Color = orange_5,
+    override val alertWarningText: Color = white_1,
+    override val alertErrorBg: Color = red_6,
+    override val alertErrorContent: Color = red_7,
+    override val alertErrorText: Color = white_1,
 ): ChiliColorScheme
 

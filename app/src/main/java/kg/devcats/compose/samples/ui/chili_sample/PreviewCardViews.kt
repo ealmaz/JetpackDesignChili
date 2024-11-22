@@ -16,6 +16,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,18 +29,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.cards.AccentCardView
+import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCardView
 import kg.devcats.compose.jetpack_chili.components.cards.BalanceCardView
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardView
 import kg.devcats.compose.jetpack_chili.components.cards.BorderAnimatedView
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCardView
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCardView
+import kg.devcats.compose.jetpack_chili.components.cards.InfoState
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCardView
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCardView
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCellView
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
 fun CardViews(
@@ -424,6 +431,42 @@ fun CardViews(
                     }
                 )
             }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "AlertBlockCardView",
+                style = Chili.typography.H16_Primary
+            )
+
+            var isOpened by remember { mutableStateOf(true) }
+
+            if (isOpened) {
+                AlertBlockCardView(
+                    modifier = Modifier.padding(bottom = 14.dp),
+                    title = "Title",
+                    infoState = InfoState.Neutral,
+                    subtitle = "Subtitle",
+                    buttonText = "Кнопка",
+                    isClosable = true,
+                    onCloseClick = { isOpened = false }
+                )
+            }
+
+            AlertBlockCardView(
+                modifier = Modifier.padding(bottom = 14.dp),
+                title = "Деньги поступят на счёт по умолчанию",
+                infoState = InfoState.Warning
+            )
+
+            AlertBlockCardView(
+                title = "Title",
+                infoState = InfoState.Error,
+                subtitle = "Subtitle",
+                buttonText = "Кнопка",
+                onButtonClick = {
+                    context.showToast("AlertBlockCardView")
+                }
+            )
         }
     }
 }
