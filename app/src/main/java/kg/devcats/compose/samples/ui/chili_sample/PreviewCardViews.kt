@@ -1,5 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,11 +13,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,7 +33,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.CatalogCardView
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCardView
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCardView
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCardView
-import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedCellView
+import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCellView
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -357,7 +360,7 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "MultiIconedCellView",
+                text = "AccentCardView",
                 style = Chili.typography.H16_Primary
             )
             Column {
@@ -394,23 +397,33 @@ fun CardViews(
                     )
                 }
             }
+
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AccentCardView",
+                text = "MultiiconedCellView",
                 style = Chili.typography.H16_Primary
             )
-            MultiIconedCellView(
-                icons = listOf(
-                    kg.devcats.compose.samples.R.drawable.elcart,
-                    kg.devcats.compose.samples.R.drawable.elcart,
-                    kg.devcats.compose.samples.R.drawable.elcart,
-                    kg.devcats.compose.samples.R.drawable.elcart,
-                    kg.devcats.compose.samples.R.drawable.elcart,
-                    kg.devcats.compose.samples.R.drawable.elcart,
-                ),
-                title = "MultiiconedCellView title:",
-                additionalInfo = "Весь список"
-            )
+
+            val context = LocalContext.current
+            ShadowRoundedBox {
+                MultiIconedTitleCellView(
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
+                    icons = listOf(
+                        kg.devcats.compose.samples.R.drawable.elcart,
+                        kg.devcats.compose.samples.R.drawable.elcart,
+                        kg.devcats.compose.samples.R.drawable.elcart,
+                        kg.devcats.compose.samples.R.drawable.elcart,
+                        kg.devcats.compose.samples.R.drawable.elcart,
+                        kg.devcats.compose.samples.R.drawable.elcart,
+                    ),
+                    title = "MultiiconedCellView title",
+                    additionalInfo = "Весь список",
+                    isLoading = true,
+                    onAdditionalInfoClick = {
+                        Toast.makeText(context, "Additional info clicked", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
         }
     }
 }

@@ -19,18 +19,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun MultiIconedCellView(
+fun MultiIconedTitleCellView(
     modifier: Modifier = Modifier,
-    icons: List<Int> = emptyList(),
     title: String,
+    icons: List<Any> = emptyList(),
     titleStyle: TextStyle = Chili.typography.H16_Primary_700,
     additionalInfo: String = "",
-    onSurfaceClick: (() -> Unit)? = null,
-    onAdditionalInfoClick: (() -> Unit)? = null,
     additionalInfoStyle: TextStyle = Chili.typography.H16.copy(color = Chili.color.buttonSecondaryText),
+    onAdditionalInfoClick: (() -> Unit)? = null,
+    onSurfaceClick: (() -> Unit)? = null,
+    isLoading: Boolean = false
 ) {
     Column(
         modifier = modifier
@@ -38,7 +40,6 @@ fun MultiIconedCellView(
             .clickable { onSurfaceClick?.invoke() }
     ) {
         Row(
-            modifier = Modifier.padding(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -48,7 +49,7 @@ fun MultiIconedCellView(
                 modifier = Modifier
                     .weight(1f)
                     .padding(vertical = 16.dp),
-                maxLines = 1,
+                maxLines = 1
             )
             Text(
                 text = additionalInfo,
@@ -56,15 +57,39 @@ fun MultiIconedCellView(
                 modifier = Modifier
                     .clickable { onAdditionalInfoClick?.invoke() }
                     .padding(vertical = 12.dp),
-                maxLines = 1,
+                maxLines = 1
             )
         }
-        LazyRow(horizontalArrangement = Arrangement.spacedBy((-4).dp)) {
+        MultiIconedRow(icons = icons, isLoading = isLoading)
+    }
+}
+
+@Composable
+fun MultiIconedRow(
+    modifier: Modifier = Modifier,
+    icons: List<Any> = emptyList(),
+    isLoading: Boolean = false
+) {
+    LazyRow(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy((-4).dp)
+    ) {
+        if (isLoading) {
+            items(7) {
+                ShimmerView(
+                    height = 30.dp, width = 30.dp,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Chili.color.surfaceBackground)
+                        .padding(1.dp)
+                )
+            }
+        } else {
             items(icons) { imageLink ->
                 AsyncImage(
                     model = imageLink,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(10.dp))
+                        .clip(RoundedCornerShape(12.dp))
                         .background(Chili.color.surfaceBackground)
                         .padding(1.dp)
                         .size(30.dp),
