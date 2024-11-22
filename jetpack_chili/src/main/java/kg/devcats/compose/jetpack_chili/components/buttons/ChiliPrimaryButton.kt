@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,15 +27,20 @@ fun ChiliPrimaryButton(
         enabled = enabled,
         shape = Chili.shapes.RoundedCornerShape,
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Chili.color.buttonPrimaryContainer,
-            contentColor = Chili.color.buttonPrimaryText,
-            disabledContainerColor = Chili.color.buttonPrimaryDisabledContainer,
-            disabledContentColor = Chili.color.buttonPrimaryText,
-        )
+        colors = primaryButtonColors()
     ) {
         Text(text = text, style = Chili.typography.H14_Primary_500, color = Chili.color.buttonPrimaryText)
     }
+}
+
+@Composable
+fun primaryButtonColors(): ButtonColors {
+    return ButtonDefaults.buttonColors(
+        containerColor = Chili.color.buttonPrimaryContainer,
+        contentColor = Chili.color.buttonPrimaryText,
+        disabledContainerColor = Chili.color.buttonPrimaryDisabledContainer,
+        disabledContentColor = Chili.color.buttonPrimaryText,
+    )
 }
 
 @Preview(showBackground = true, showSystemUi = true)

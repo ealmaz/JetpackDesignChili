@@ -104,7 +104,7 @@ interface ChiliColorScheme {
     val quickActionIconDefaultColor: Color
     val quickActionButtonDisabledTextColor: Color
 
-    //Alert, InfoBlockCardView
+    //AlertBlockCardView
     val alertNeutralBg: Color
     val alertNeutralContent: Color
     val alertNeutralText: Color

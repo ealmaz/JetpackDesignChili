@@ -23,11 +23,12 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
-import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
+import kg.devcats.compose.jetpack_chili.components.buttons.ChiliCustomButton
+import kg.devcats.compose.jetpack_chili.components.buttons.primaryButtonColors
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun InfoBlockCardView(
+fun AlertBlockCardView(
     modifier: Modifier = Modifier,
     title: String,
     infoState: InfoState,
@@ -59,7 +60,7 @@ fun InfoBlockCardView(
                 )
             }
             Spacer(Modifier.width(8.dp))
-            Column(Modifier.weight(1f)) {
+            Column(Modifier.weight(1f).align(Alignment.CenterVertically)) {
                 Text(
                     text = title,
                     style = Chili.typography.H14_Primary_700.copy(color = infoState.getTextColor())
@@ -67,16 +68,17 @@ fun InfoBlockCardView(
                 if (!subtitle.isNullOrEmpty()) {
                     Text(
                         modifier = Modifier.padding(top = 4.dp),
-                        text = title,
-                        style = Chili.typography.H12.copy(color = infoState.getTextColor())
+                        text = subtitle,
+                        style = Chili.typography.H12,
+                        color = infoState.getTextColor()
                     )
                 }
 
                 if (!buttonText.isNullOrEmpty()) {
-                    ChiliPrimaryButton(
+                    ChiliCustomButton(
                         text = buttonText,
                         modifier = Modifier.padding(top = 12.dp),
-                    //    colors = primaryButtonColors().copy(containerColor = infoState.getContentColor()),
+                        colors = primaryButtonColors().copy(containerColor = infoState.getContentColor()),
                         onClick = { onButtonClick?.invoke() }
                     )
                 }

@@ -25,12 +25,15 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliAdditionalButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
+import kg.devcats.compose.jetpack_chili.components.buttons.ChiliCustomButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliLoaderButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliQuickActionButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliSecondaryButton
+import kg.devcats.compose.jetpack_chili.components.buttons.primaryButtonColors
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
 fun PreviewButtons(navigateUp: () -> Unit,) {
@@ -78,7 +81,9 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
                 .fillMaxWidth()
                 .padding(top = 8.dp), enabled = false) {}
 
-            ChiliAdditionalButton(text = "Additional button with icon", modifier = Modifier.fillMaxWidth().padding(top = 16.dp), endIconPainter = painterResource(
+            ChiliAdditionalButton(text = "Additional button with icon", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp), endIconPainter = painterResource(
                 id = R.drawable.chili_ic_documents_green), endIconModifier = Modifier.padding(start = 8.dp)) {}
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
@@ -89,15 +94,15 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
 
+            val context = LocalContext.current
             Row {
-                val context = LocalContext.current
                 ChiliQuickActionButton(
                     text = "ChiliQuickActionButton",
                     iconResource = R.drawable.chili_ic_bell,
                     modifier = Modifier.weight(1f),
                     coroutineScope = rememberCoroutineScope(),
                     onClick = {
-                        Toast.makeText(context, "Clicked ChiliQuickActionButton", Toast.LENGTH_SHORT).show()
+                        context.showToast("ChiliQuickActionButton")
                     }
                 )
                 ChiliQuickActionButton(
@@ -107,10 +112,18 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
                     coroutineScope = rememberCoroutineScope(),
                     enabled = false,
                     onClick = {
-                        Toast.makeText(context, "Clicked ChiliQuickActionButton", Toast.LENGTH_SHORT).show()
+                        context.showToast("ChiliQuickActionButton")
                     }
                 )
             }
+
+            Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
+
+            ChiliCustomButton(
+                text = "Custom button",
+                colors = primaryButtonColors().copy(containerColor = Chili.color.alertWarningContent),
+                onClick = { context.showToast() }
+            )
         }
     }
 }
