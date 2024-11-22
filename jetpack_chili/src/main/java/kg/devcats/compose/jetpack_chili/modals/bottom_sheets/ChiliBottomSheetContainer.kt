@@ -31,8 +31,8 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-@ExperimentalMaterial3Api
 fun ChiliBottomSheetContainer(
     isShown: Boolean,
     hideOnSwipe: Boolean = true,
