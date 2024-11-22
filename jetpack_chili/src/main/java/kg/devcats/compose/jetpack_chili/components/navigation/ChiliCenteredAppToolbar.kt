@@ -15,10 +15,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.ripple
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -58,7 +59,7 @@ fun ChiliCenteredAppToolbar(
                                     .clickable(
                                         onClick = onNavigationIconClick,
                                         interactionSource = remember { MutableInteractionSource() },
-                                        indication = rememberRipple(bounded = false),
+                                        indication = ripple(bounded = false),
                                     )
                             )
                         } else Spacer(modifier = Modifier.width(16.dp))
@@ -81,7 +82,7 @@ fun ChiliCenteredAppToolbar(
                     endFrame?.let {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             it.invoke(this)
-                            Spacer(modifier = Modifier.width(16.dp))
+
                         }
                     }
                 }
