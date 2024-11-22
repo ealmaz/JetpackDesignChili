@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ripple
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -78,7 +77,7 @@ fun ChiliCenteredAppToolbar(
                     )
                 }
 
-                Box(contentAlignment = Alignment.CenterEnd, modifier = Modifier.weight(1f)) {
+                Box(contentAlignment = Alignment.CenterEnd, modifier = Modifier.padding(end = 16.dp).weight(1f)) {
                     endFrame?.let {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             it.invoke(this)
