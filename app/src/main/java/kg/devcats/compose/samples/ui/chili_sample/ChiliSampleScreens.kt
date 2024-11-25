@@ -89,10 +89,10 @@ fun ChiliSampleScreens(
                 context.startActivity(Intent(context, StoryActivity::class.java))
             }
 
-            ChiliPrimaryButton(text = "Banners", modifier = Modifier
+            ChiliPrimaryButton(text = "Auto Scroll Banners", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.BannersScreens.toString())
+                navController?.navigate(Screens.AutoScrollBannersScreens.toString())
             }
         }
     }

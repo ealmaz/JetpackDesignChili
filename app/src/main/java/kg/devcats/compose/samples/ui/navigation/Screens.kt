@@ -32,5 +32,5 @@ sealed class Screens {
     data object ToolbarsScreens : Screens()
 
     @Serializable
-    data object BannersScreens : Screens()
+    data object AutoScrollBannersScreens : Screens()
 }
