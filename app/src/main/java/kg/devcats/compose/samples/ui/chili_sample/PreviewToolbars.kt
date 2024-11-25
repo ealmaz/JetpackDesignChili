@@ -106,7 +106,7 @@ fun Toolbars(
                 isNavigationIconVisible = true,
                 backgroundColor = Color.Transparent,
                 endFrame = {
-                    BonusTagView(modifier = Modifier, text = "Бонусы: 500")
+                    BonusTagView(modifier = Modifier.padding(end = 8.dp), text = "Бонусы: 500")
                 }
             )
 
@@ -117,7 +117,7 @@ fun Toolbars(
                 isNavigationIconVisible = true,
                 backgroundColor = Color.Transparent,
                 endFrame = {
-                    BonusTagView(modifier = Modifier, enabled = false, text = "Бонусы")
+                    BonusTagView(modifier = Modifier.padding(end = 8.dp), enabled = false, text = "Бонусы")
                 }
             )
         }
