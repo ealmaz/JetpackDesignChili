@@ -39,6 +39,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.ChiliCardView
 import kg.devcats.compose.jetpack_chili.components.cards.InfoState
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCardView
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCardView
+import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCardView
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCellView
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
@@ -467,6 +468,29 @@ fun CardViews(
                     context.showToast("AlertBlockCardView")
                 }
             )
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "SubtitledSimpleCardView",
+                style = Chili.typography.H16_Primary
+            )
+
+            ShadowRoundedBox {
+                SubtitledSimpleCardView(
+                    title = "Favorite",
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png"
+                )
+            }
+
+            ShadowRoundedBox(
+                modifier = Modifier.padding(top = 16.dp)
+            ) {
+                SubtitledSimpleCardView(
+                    title = "Favorite",
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
+                    isLoading = true
+                )
+            }
         }
     }
 }
