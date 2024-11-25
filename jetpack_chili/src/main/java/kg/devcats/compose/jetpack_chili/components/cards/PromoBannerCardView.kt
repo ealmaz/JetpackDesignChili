@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.common.ChiliChevron
 import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
 import kg.devcats.compose.jetpack_chili.components.shimmer.shimmerBrush
+import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.gray_2
 import kg.devcats.compose.jetpack_chili.theme.magenta_1
 import kg.devcats.compose.jetpack_chili.theme.white_1
@@ -34,18 +36,24 @@ import kg.devcats.compose.jetpack_chili.theme.white_1
 @Composable
 fun PromoBannerCardView(
     modifier: Modifier = Modifier,
-    title: String,
-    subTitle: String,
-    cardReadyText: String = "",
-    titleTextStyle: TextStyle,
-    subTitleTextStyle: TextStyle,
-    @DrawableRes icon: Int?,
+    title: String = "",
+    subTitle: String? = null,
+    cardReadyText: String? = null,
+    titleTextStyle: TextStyle = Chili.typography.H16_Primary_500,
+    subTitleTextStyle: TextStyle = Chili.typography.H12_Primary,
+    @DrawableRes icon: Int? = null,
     @DrawableRes rightImage: Int,
     showCardReadyText: Boolean = false,
+    gradientColors: List<Color> = emptyList(),
     isLoading: Boolean? = false
 ) {
         Box(
-            modifier = modifier
+            modifier = modifier.background(
+                brush = Brush.linearGradient(
+                    colors = gradientColors
+                ),
+                shape = Chili.shapes.RoundedCornerShape
+            )
         ) {
             if (isLoading == true) {
                 Column(modifier = Modifier.fillMaxWidth().height(80.dp), verticalArrangement = Arrangement.SpaceEvenly) {
@@ -81,11 +89,11 @@ fun PromoBannerCardView(
 @Composable
 private fun BannerContent(
     modifier: Modifier,
-    title: String,
-    subtitle: String,
-    cardReadyText: String,
-    titleTextStyle: TextStyle,
-    subTitleTextStyle: TextStyle,
+    title: String = "",
+    subtitle: String? = null,
+    cardReadyText: String? = null,
+    titleTextStyle: TextStyle = Chili.typography.H16_Primary_500,
+    subTitleTextStyle: TextStyle = Chili.typography.H12_Primary,
     @DrawableRes icon: Int?,
     showCardReadyText: Boolean = false,
 ) {
@@ -106,7 +114,7 @@ private fun BannerContent(
                 style = titleTextStyle
             )
         }
-        if (showCardReadyText) {
+        if (showCardReadyText && cardReadyText != null) {
             Text(
                 modifier = Modifier
                     .clip(RoundedCornerShape(20.dp))
@@ -121,11 +129,13 @@ private fun BannerContent(
                 style = subTitleTextStyle.copy(color = magenta_1)
             )
         } else {
-            Text(
-                modifier = Modifier,
-                text = subtitle,
-                style = subTitleTextStyle
-            )
+            subtitle?.let {
+                Text(
+                    modifier = Modifier,
+                    text = it,
+                    style = subTitleTextStyle
+                )
+            }
         }
     }
 }

@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -519,21 +518,17 @@ fun CardViews(
 
             LazyRow {
                 item {
-                    PromoBannerCardView(modifier = Modifier.wrapContentWidth().background(
-                        brush = Brush.linearGradient(
-                            colors = listOf(
-                                if(!isSystemInDarkTheme()) Color.White else Color(0xFF141414),
-                                if(!isSystemInDarkTheme()) Color(0xFFC3C3C3) else Color(0xFF212121)
-                            )
-                        ),
-                        shape = Chili.shapes.RoundedCornerShape
-                    ),
+                    PromoBannerCardView(modifier = Modifier.wrapContentWidth(),
                         title = "Виртуальная карта",
                         subTitle = "Открой бесплатно в приложении!",
                         titleTextStyle = Chili.typography.H16_Primary_500,
                         subTitleTextStyle = Chili.typography.H12_Primary,
-                        icon = R.drawable.chilli_ic_visa_logo,
-                        rightImage = R.drawable.chilli_bg_virtual_card
+                        gradientColors = listOf(
+                            if(!isSystemInDarkTheme()) Color.White else Color(0xFF141414),
+                            if(!isSystemInDarkTheme()) Color(0xFFC3C3C3) else Color(0xFF212121)
+                        ),
+                        icon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
+                        rightImage = kg.devcats.compose.samples.R.drawable.bg_virtual_card
                     )
                 }
 
@@ -542,24 +537,16 @@ fun CardViews(
                 }
 
                 item {
-                    PromoBannerCardView(modifier = Modifier.wrapContentWidth().background(
-                        brush = Brush.linearGradient(
-                            colors = listOf(
-                                Color(0xFF321B28),
-                                Color(0xFF1C1C1E)
-                            )
-                        ),
-                        shape = Chili.shapes.RoundedCornerShape
-                    ).clickable {
-                        showCardReadyTextState = !showCardReadyTextState
-                    },
+                    PromoBannerCardView(modifier = Modifier.wrapContentWidth()
+                        .clickable { showCardReadyTextState = !showCardReadyTextState },
                         title = "Карта ЭЛКАРТ",
                         subTitle = "Откройте карту в O!Store",
                         cardReadyText = "Your card is ready",
                         titleTextStyle = Chili.typography.H16_Primary_500.copy(color = white_1),
                         subTitleTextStyle = Chili.typography.H12_Primary.copy(color = white_1),
-                        icon = R.drawable.chilli_ic_visa_logo,
-                        rightImage = R.drawable.chilli_bg_virtual_card,
+                        gradientColors = listOf(Color(0xFF321B28), Color(0xFF1C1C1E)),
+                        icon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
+                        rightImage = kg.devcats.compose.samples.R.drawable.bg_virtual_card,
                         showCardReadyText = showCardReadyTextState
                     )
                 }
@@ -567,21 +554,17 @@ fun CardViews(
 
             Spacer(Modifier.height(16.dp))
 
-            PromoBannerCardView(modifier = Modifier.fillMaxHeight().background(
-                brush = Brush.linearGradient(
-                    colors = listOf(
-                        if(!isSystemInDarkTheme()) Color.White else Color(0xFF141414),
-                        if(!isSystemInDarkTheme()) Color(0xFFC3C3C3) else Color(0xFF212121)
-                    )
-                ),
-                shape = Chili.shapes.RoundedCornerShape
-            ),
+            PromoBannerCardView(modifier = Modifier.fillMaxHeight(),
                 title = "Виртуальная карта",
                 subTitle = "Открой бесплатно в приложении!",
                 titleTextStyle = Chili.typography.H16_Primary_500,
                 subTitleTextStyle = Chili.typography.H12_Primary,
-                icon = R.drawable.chilli_ic_visa_logo,
-                rightImage = R.drawable.chilli_bg_virtual_card,
+                gradientColors = listOf(
+                    if(!isSystemInDarkTheme()) Color.White else Color(0xFF141414),
+                    if(!isSystemInDarkTheme()) Color(0xFFC3C3C3) else Color(0xFF212121)
+                ),
+                icon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
+                rightImage = kg.devcats.compose.samples.R.drawable.bg_virtual_card,
                 isLoading = true
             )
         }

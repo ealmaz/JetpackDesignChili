@@ -13,13 +13,12 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun ChiliChevron(modifier: Modifier = Modifier, tint: Color? = null) {
-    val color = tint ?: Chili.color.chevronColor
+fun ChiliChevron(modifier: Modifier = Modifier, tint: Color = Chili.color.chevronColor) {
     Image(
         modifier = modifier.size(32.dp),
         painter = painterResource(id = R.drawable.chili_ic_chevron),
         contentDescription = "",
-        colorFilter = ColorFilter.tint(color)
+        colorFilter = ColorFilter.tint(tint)
     )
 }
 
