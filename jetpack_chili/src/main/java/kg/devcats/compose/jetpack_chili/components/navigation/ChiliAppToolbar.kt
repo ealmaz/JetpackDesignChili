@@ -32,7 +32,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 @Composable
 fun ChiliAppToolbar(
     modifier: Modifier = Modifier,
-    navigationIcon: Painter = painterResource(id = R.drawable.chili_ic_back_arrow),
+    navigationIcon: Painter = painterResource(id = R.drawable.chili_ic_back_arrow_rounded),
     isNavigationIconVisible: Boolean = true,
     onNavigationIconClick: () -> Unit = {},
     startFrame: (@Composable RowScope.() -> Unit)? = null,
