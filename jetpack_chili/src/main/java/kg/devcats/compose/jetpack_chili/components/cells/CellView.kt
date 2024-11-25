@@ -43,11 +43,12 @@ fun ChiliCellView(
     isChevronVisible: Boolean = true,
     icon: Painter? = null,
     iconSize: Dp = 32.dp,
+    containerBackgroundColor: Color = Chili.color.cellViewBackground,
     endFrame: @Composable (() -> Unit)? = null,
     onClick: (() -> Unit)? = null,
 ) {
     Surface(
-        color = Chili.color.cellViewBackground,
+        color = containerBackgroundColor,
         contentColor = Color.Unspecified,
         modifier = modifier
             .run {
