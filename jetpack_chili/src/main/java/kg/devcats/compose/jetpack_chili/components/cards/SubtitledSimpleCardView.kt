@@ -42,8 +42,6 @@ fun SubtitledSimpleCardView(
     iconUrl: String? = null,
     secondaryIcon: Painter? = null,
     emoji: String? = null,
-    iconVisible: Boolean = true,
-    secondaryIconVisible: Boolean = false,
     onCardClick: (() -> Unit)? = null,
     isLoading: Boolean = false
 ) {
@@ -63,9 +61,7 @@ fun SubtitledSimpleCardView(
                 icon = icon,
                 iconUrl = iconUrl,
                 secondaryIcon = secondaryIcon,
-                emoji = emoji,
-                iconVisible = iconVisible,
-                secondaryIconVisible = secondaryIconVisible
+                emoji = emoji
             )
         }
     }
@@ -93,14 +89,12 @@ private fun ContentCard(
     iconUrl: String?,
     secondaryIcon: Painter?,
     emoji: String?,
-    iconVisible: Boolean,
-    secondaryIconVisible: Boolean
 ) {
     Row(
         modifier = Modifier.padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        if (iconVisible) {
+        if (icon != null || emoji != null || iconUrl != null) {
             IconOrEmoji(icon = icon, iconUrl = iconUrl, emoji = emoji)
         }
 
@@ -115,22 +109,22 @@ private fun ContentCard(
             }
         }
 
-        if (secondaryIconVisible && secondaryIcon != null) {
+        if (secondaryIcon != null) {
             Spacer(modifier = Modifier.width(8.dp))
             Image(
                 painter = secondaryIcon,
                 contentDescription = "Secondary Icon",
-                modifier = Modifier.size(32.dp)
+                modifier = Modifier.size(32.dp).align(Alignment.CenterVertically)
             )
         }
     }
 }
 
 @Composable
-fun IconOrEmoji(
+private fun IconOrEmoji(
     icon: Painter?,
     emoji: String?,
-    iconUrl: String? = null
+    iconUrl: String?
 ) {
     Box(modifier = Modifier.size(32.dp)) {
         when {
@@ -172,16 +166,14 @@ fun SubtitledSimpleCardViewPreview() {
                 title = "Main Title",
                 subtitle = "This is a subtitle",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                secondaryIcon = painterResource(id = R.drawable.chili_ic_documents_green),
-                secondaryIconVisible = true
+                secondaryIcon = painterResource(id = R.drawable.chili_ic_documents_green)
             )
         }
 
         ShadowRoundedBox {
             SubtitledSimpleCardView(
                 title = "Card Title",
-                emoji = "🔥",
-                secondaryIconVisible = false
+                emoji = "🔥"
             )
         }
 
@@ -191,7 +183,6 @@ fun SubtitledSimpleCardViewPreview() {
                 subtitle = "Subtitle",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 secondaryIcon = painterResource(id = R.drawable.chili_ic_documents_green),
-                secondaryIconVisible = true,
                 isLoading = true
             )
         }
