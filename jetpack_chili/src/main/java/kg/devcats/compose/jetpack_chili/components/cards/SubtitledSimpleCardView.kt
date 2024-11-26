@@ -24,7 +24,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
@@ -45,14 +44,14 @@ fun SubtitledSimpleCardView(
     onCardClick: (() -> Unit)? = null,
     isLoading: Boolean = false
 ) {
-    Surface(
-        modifier = modifier.clickable(enabled = onCardClick != null) { onCardClick?.invoke() },
-        color = Chili.color.cardViewBackground,
-        contentColor = Color.Unspecified
-    ) {
-        if (isLoading) {
-            LoadingCard()
-        } else {
+    if (isLoading) {
+        LoadingCard()
+    } else {
+        Surface(
+            modifier = modifier.clickable(enabled = onCardClick != null) { onCardClick?.invoke() },
+            color = Chili.color.cardViewBackground,
+            contentColor = Color.Unspecified
+        ) {
             ContentCard(
                 title = title,
                 subtitle = subtitle,
@@ -65,10 +64,15 @@ fun SubtitledSimpleCardView(
             )
         }
     }
+
 }
 
 @Composable
 private fun LoadingCard() {
+    Surface(
+        color = Chili.color.cardViewBackground,
+        contentColor = Color.Unspecified
+    ) {
     Row(
         modifier = Modifier.padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -77,6 +81,7 @@ private fun LoadingCard() {
         Spacer(modifier = Modifier.width(8.dp))
         ShimmerView(modifier = Modifier.padding(top = 4.dp), height = 8.dp, width = 120.dp)
     }
+        }
 }
 
 @Composable
@@ -149,7 +154,7 @@ private fun IconOrEmoji(
             emoji != null -> {
                 Text(
                     text = emoji,
-                    style = TextStyle(fontSize = 24.sp),
+                    style = Chili.typography.H24,
                     modifier = Modifier.align(Alignment.Center)
                 )
             }

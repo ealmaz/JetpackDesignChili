@@ -491,6 +491,15 @@ fun CardViews(
                     isLoading = true
                 )
             }
+
+            ShadowRoundedBox(
+                modifier = Modifier.padding(top = 16.dp)
+            ) {
+                SubtitledSimpleCardView(
+                    title = "Favorite",
+                    emoji = "\uD83D\uDD25"
+                )
+            }
         }
     }
 }
