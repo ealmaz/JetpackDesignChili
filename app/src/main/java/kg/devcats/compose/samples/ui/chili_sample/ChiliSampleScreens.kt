@@ -94,9 +94,14 @@ fun ChiliSampleScreens(
                 .padding(top = 16.dp)) {
                 navController?.navigate(Screens.AutoScrollBannersScreens.toString())
             }
+
+            ChiliPrimaryButton(text = "Snackbar", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController?.navigate(Screens.SnackbarScreen.toString())
+            }
         }
     }
-    
 }
 
 @Preview(showBackground = true, showSystemUi = true)

@@ -95,6 +95,9 @@ interface ChiliColorScheme {
     //BottomSheet
     val bottomSheetBackground: Color
 
+    //Snackbar
+    val snackbarBackground: Color
+
     //QuickAction button
     val quickActionIconBackgroundDisabledColor: Color
     val quickActionIconBackgroundClickedColor: Color
@@ -185,6 +188,8 @@ data class ChiliLightColorScheme(
 
     override val bottomSheetBackground: Color = white_1,
 
+    override val snackbarBackground: Color = white_1,
+
     override val quickActionIconBackgroundDisabledColor: Color = gray_5,
     override val quickActionIconBackgroundClickedColor: Color = gray_9,
     override val quickActionIconBackgroundDefaultColor: Color = gray_9,
@@ -269,6 +274,8 @@ data class ChiliDarkColorScheme(
     override val animatedGradient4: Color = black_3,
 
     override val bottomSheetBackground: Color = black_2,
+
+    override val snackbarBackground: Color = black_3,
 
     override val quickActionIconBackgroundDisabledColor: Color = black_4,
     override val quickActionIconBackgroundClickedColor: Color = black_4,
