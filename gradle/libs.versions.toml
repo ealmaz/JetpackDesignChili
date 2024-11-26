@@ -15,6 +15,7 @@ media3Extractor = "1.4.1"
 media3Ui = "1.4.1"
 navigationCompose = "2.8.4"
 pie-chart = "v3.1.0"
+uiTooling = "1.7.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +36,7 @@ coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 mp-pie-chart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "pie-chart"}
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
