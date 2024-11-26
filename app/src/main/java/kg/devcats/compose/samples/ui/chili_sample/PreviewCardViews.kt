@@ -4,16 +4,21 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,10 +45,12 @@ import kg.devcats.compose.jetpack_chili.components.cards.InfoState
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCardView
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCardView
 import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCardView
+import kg.devcats.compose.jetpack_chili.components.cards.PromoBannerCardView
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCellView
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.jetpack_chili.theme.white_1
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
@@ -500,6 +507,66 @@ fun CardViews(
                     emoji = "\uD83D\uDD25"
                 )
             }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "PromoBannerCardView",
+                style = Chili.typography.H16_Primary
+            )
+
+            var showCardReadyTextState by remember { mutableStateOf(false) }
+
+            LazyRow {
+                item {
+                    PromoBannerCardView(modifier = Modifier.wrapContentWidth(),
+                        title = "Виртуальная карта",
+                        subTitle = "Открой бесплатно в приложении!",
+                        titleTextStyle = Chili.typography.H16_Primary_500,
+                        subTitleTextStyle = Chili.typography.H12_Primary,
+                        gradientColors = listOf(
+                            if(!isSystemInDarkTheme()) Color.White else Color(0xFF141414),
+                            if(!isSystemInDarkTheme()) Color(0xFFC3C3C3) else Color(0xFF212121)
+                        ),
+                        icon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
+                        rightImage = kg.devcats.compose.samples.R.drawable.bg_virtual_card
+                    )
+                }
+
+                item {
+                    Spacer(Modifier.width(16.dp))
+                }
+
+                item {
+                    PromoBannerCardView(modifier = Modifier.wrapContentWidth()
+                        .clickable { showCardReadyTextState = !showCardReadyTextState },
+                        title = "Карта ЭЛКАРТ",
+                        subTitle = "Откройте карту в O!Store",
+                        cardReadyText = "Your card is ready",
+                        titleTextStyle = Chili.typography.H16_Primary_500.copy(color = white_1),
+                        subTitleTextStyle = Chili.typography.H12_Primary.copy(color = white_1),
+                        gradientColors = listOf(Color(0xFF321B28), Color(0xFF1C1C1E)),
+                        icon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
+                        rightImage = kg.devcats.compose.samples.R.drawable.bg_virtual_card,
+                        showCardReadyText = showCardReadyTextState
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            PromoBannerCardView(modifier = Modifier.fillMaxHeight(),
+                title = "Виртуальная карта",
+                subTitle = "Открой бесплатно в приложении!",
+                titleTextStyle = Chili.typography.H16_Primary_500,
+                subTitleTextStyle = Chili.typography.H12_Primary,
+                gradientColors = listOf(
+                    if(!isSystemInDarkTheme()) Color.White else Color(0xFF141414),
+                    if(!isSystemInDarkTheme()) Color(0xFFC3C3C3) else Color(0xFF212121)
+                ),
+                icon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
+                rightImage = kg.devcats.compose.samples.R.drawable.bg_virtual_card,
+                isLoading = true
+            )
         }
     }
 }
