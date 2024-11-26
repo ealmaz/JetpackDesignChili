@@ -119,7 +119,9 @@ private fun ContentCard(
             Image(
                 painter = secondaryIcon,
                 contentDescription = "Secondary Icon",
-                modifier = Modifier.size(32.dp).align(Alignment.CenterVertically)
+                modifier = Modifier
+                    .size(32.dp)
+                    .align(Alignment.CenterVertically)
             )
         }
     }
@@ -131,27 +133,27 @@ private fun IconOrEmoji(
     emoji: String?,
     iconUrl: String?
 ) {
-    Box(modifier = Modifier.size(32.dp)) {
-        when {
-            iconUrl != null -> {
-                AsyncImage(
-                    model = iconUrl,
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(12.dp))
-                        .size(32.dp),
-                    contentDescription = "Icon"
-                )
-            }
+    when {
+        iconUrl != null -> {
+            AsyncImage(
+                model = iconUrl,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12.dp))
+                    .size(32.dp),
+                contentDescription = "Icon"
+            )
+        }
 
-            icon != null -> {
-                Image(
-                    painter = icon,
-                    contentDescription = "Icon",
-                    modifier = Modifier.size(32.dp)
-                )
-            }
+        icon != null -> {
+            Image(
+                painter = icon,
+                contentDescription = "Icon",
+                modifier = Modifier.size(32.dp)
+            )
+        }
 
-            emoji != null -> {
+        emoji != null -> {
+            Box(modifier = Modifier.size(32.dp)) {
                 Text(
                     text = emoji,
                     style = Chili.typography.H24,
@@ -160,6 +162,7 @@ private fun IconOrEmoji(
             }
         }
     }
+
 }
 
 @Preview(showBackground = true)
