@@ -41,6 +41,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
@@ -67,6 +70,8 @@ fun StoryView(
     onClickListener: StoryClickListener? = null
 ) {
     val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+
     var currentStoryIndex by remember {
         if (stories.all { it.isViewed == true }) mutableIntStateOf(0)
         else mutableIntStateOf(stories.indexOfFirst { it.isViewed != true })
@@ -85,7 +90,6 @@ fun StoryView(
         }
     }
     val timer = remember { mutableStateOf<CountDownTimer?>(null) }
-
 
     var isMediaLoaded by remember { mutableStateOf(false) }
     var currentPlayer by remember { mutableStateOf<ExoPlayer?>(null) }
@@ -143,6 +147,7 @@ fun StoryView(
                         .clip(RoundedCornerShape(50)),
                     color = black_5,
                     trackColor = gray_3_alpha_98,
+                    drawStopIndicator = {}
                 )
             }
         }
@@ -175,6 +180,7 @@ fun StoryView(
                                         setMediaItem(MediaItem.fromUri(story.mediaUrl!!))
                                         prepare()
                                         playWhenReady = true
+                                        volume = 0f
                                         currentPlayer = this
                                         addListener(object : Player.Listener {
                                             override fun onPlaybackStateChanged(playbackState: Int) {
@@ -378,8 +384,29 @@ fun StoryView(
         }
     }
 
-    DisposableEffect(Unit) {
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_PAUSE -> {
+                    currentPlayer?.pause()
+                    isPaused = true
+                }
+                Lifecycle.Event.ON_RESUME -> {
+                    currentPlayer?.play()
+                    isPaused = false
+                }
+                Lifecycle.Event.ON_DESTROY -> {
+                    currentPlayer?.release()
+                    currentPlayer = null
+                }
+                else -> {}
+            }
+        }
+
+        lifecycleOwner.lifecycle.addObserver(observer)
+
         onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
             timer.value?.cancel()
             currentPlayer?.release()
         }
