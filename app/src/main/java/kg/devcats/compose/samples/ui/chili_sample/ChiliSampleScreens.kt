@@ -100,6 +100,12 @@ fun ChiliSampleScreens(
                 .padding(top = 16.dp)) {
                 navController?.navigate(Screens.SnackbarScreen.toString())
             }
+
+            ChiliPrimaryButton(text = "Dialogs", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController?.navigate(Screens.DialogsScreen.toString())
+            }
         }
     }
 }
