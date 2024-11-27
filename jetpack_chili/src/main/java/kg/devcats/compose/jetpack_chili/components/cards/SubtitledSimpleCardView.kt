@@ -73,15 +73,15 @@ private fun LoadingCard() {
         color = Chili.color.cardViewBackground,
         contentColor = Color.Unspecified
     ) {
-    Row(
-        modifier = Modifier.padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        ShimmerView(modifier = Modifier.size(32.dp), height = 32.dp, width = 32.dp)
-        Spacer(modifier = Modifier.width(8.dp))
-        ShimmerView(modifier = Modifier.padding(top = 4.dp), height = 8.dp, width = 120.dp)
-    }
+        Row(
+            modifier = Modifier.padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            ShimmerView(modifier = Modifier.size(32.dp), height = 32.dp, width = 32.dp)
+            Spacer(modifier = Modifier.width(8.dp))
+            ShimmerView(modifier = Modifier.padding(top = 4.dp), height = 8.dp, width = 120.dp)
         }
+    }
 }
 
 @Composable
