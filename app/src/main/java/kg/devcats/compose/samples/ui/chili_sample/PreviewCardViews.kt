@@ -525,7 +525,7 @@ fun CardViews(
                             installmentPrice = "8 166,6 с x 12 мес",
                             description = "Электрочайник BEREKE BR-810 серый, гарантия 2 года, можно с рассрочками",
                             discountPrice = "-20%",
-                            discountGradientColors = listOf(Color(0xFFFF6491), Color(0xFFF91155)),
+                            discountBackgroundColor = "#F91155",
                             isLoading = false
                         )
                     }
