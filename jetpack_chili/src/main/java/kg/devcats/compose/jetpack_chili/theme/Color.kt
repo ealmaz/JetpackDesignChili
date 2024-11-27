@@ -91,6 +91,9 @@ val orange_5 = Color(0xFFD57D00)
 val orange_6 = Color(0xFFFEF9E7)
 val orange_7 = Color(0xFF291800)
 
+
+val orange_1_alpha_10 = Color(0x1AFF9500)
+
 // Cyan
 
 val cyan_1 = Color(0xFF5AC8FA)

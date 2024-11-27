@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,6 +41,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.ChiliCardView
 import kg.devcats.compose.jetpack_chili.components.cards.InfoState
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCardView
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCardView
+import kg.devcats.compose.jetpack_chili.components.cards.ProductCardView
 import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCardView
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCellView
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
@@ -500,6 +503,47 @@ fun CardViews(
                     emoji = "\uD83D\uDD25"
                 )
             }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "ProductCardView",
+                style = Chili.typography.H16_Primary
+            )
+
+            LazyVerticalGrid (
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.fillMaxWidth().height(300.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                item {
+                    ShadowRoundedBox {
+                        ProductCardView(
+                            modifier = Modifier.height(293.dp).width(168.dp),
+                            imageLink = "https://cdn.omarket.kg/ads-minify/XBxctjZWlSKjq9pgazTZoEOPh45SXToHMckuX1Ce7Rnb3egueT.WEBP",
+                            price = "2 090,00 c",
+                            installmentPrice = "8 166,6 с x 12 мес",
+                            description = "Электрочайник BEREKE BR-810 серый, гарантия 2 года, можно с рассрочками",
+                            discountPrice = "-20%",
+                            discountGradientColors = listOf(Color(0xFFFF6491), Color(0xFFF91155)),
+                            isLoading = false
+                        )
+                    }
+                }
+
+                item {
+                    ShadowRoundedBox {
+                        ProductCardView(
+                            modifier = Modifier.height(293.dp).width(168.dp),
+                            price = "2 090,00 c",
+                            installmentPrice = "8 166,6 с x 12 мес",
+                            description = "Электрочайник BEREKE BR-810 серый",
+                            isLoading = true
+                        )
+                    }
+                }
+            }
+
         }
     }
 }
