@@ -14,23 +14,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliCellView
+import kg.devcats.compose.jetpack_chili.components.cells.ProductCellView
 import kg.devcats.compose.jetpack_chili.components.common.BonusTagView
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
 fun CellViews(
     navigateUp: () -> Unit,
 ) {
+    val context = LocalContext.current
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)) {
@@ -306,6 +312,79 @@ fun CellViews(
                         },
                     )
                 }
+            }
+
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "ProductCellView", style = Chili.typography.H16_Primary)
+
+            Column {
+                ProductCellView(
+                    modifier = Modifier.clickable {  }.padding(vertical = 8.dp),
+                    title = "Заголовок",
+                    additionalText = "121212 <u>c</u>",
+                    icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
+                    isLoading = true
+                )
+                ProductCellView(
+                    modifier = Modifier.clickable {}.padding(vertical = 8.dp),
+                    title = "Заголовок",
+                    subtitle = "Подзаголовок",
+                    additionalText = "121212",
+                    icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
+                    isMain = true,
+                    onClick = {
+                        context.showToast("Clicked")
+                    }
+                )
+                ProductCellView(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    title = "Заголовок",
+                    subtitle = "Подзаголовок",
+                    additionalText = "121212 <u>c</u>",
+                    icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
+                    isBlocked = true,
+                    overlayIcon = painterResource(kg.devcats.compose.samples.R.drawable.chili_ic_lock),
+                    subtitleTextAppearance = Chili.typography.H12_Error,
+                    onClick = {
+                        context.showToast("Clicked")
+                    }
+                )
+                ProductCellView(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    title = "Заголовок",
+                    subtitle = "Подзаголовок",
+                    icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
+                    overlayIcon = painterResource(kg.devcats.compose.samples.R.drawable.ic_overlay_status_declined),
+                    onClick = {
+                        context.showToast("Clicked")
+                    }
+                )
+                ProductCellView(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    title = "Заголовок, занимающий 2 строки",
+                    subtitle = "Подзаголовок",
+                    additionalText = "121212 <u>c</u>",
+                    subtitleTextAppearance = Chili.typography.H12_Error,
+                    additionalTextAppearance = Chili.typography.H15_Error,
+                    icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
+                )
+                ProductCellView(
+                    modifier = Modifier.padding(vertical = 8.dp).alpha(0.4f),
+                    title = "Заголовок",
+                    additionalText = "Сервис \nнедоступен",
+                    icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
+                )
+                ProductCellView(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    title = "Заголовок",
+                    additionalText = "121212",
+                    icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default)
+                )
+                ProductCellView(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    title = "Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки",
+                    subtitle = "Подзаголовок, Подзаголовок, Подзаголовок, Подзаголовок, Подзаголовок, ",
+                    icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
+                )
             }
         }
     }
