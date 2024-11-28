@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
+//Material3 AlertDialog
 @Composable
 fun ChiliDialog(
     showDialog: Boolean,
@@ -40,7 +41,10 @@ fun ChiliDialog(
                     onPositiveClick()
                     onDismiss()
                 }) {
-                    Text(text = positiveButtonText.uppercase())
+                    Text(
+                        text = positiveButtonText,
+                        color = Chili.color.primaryText
+                    )
                 }
             },
             dismissButton = {
@@ -48,13 +52,17 @@ fun ChiliDialog(
                     onNegativeClick()
                     onDismiss()
                 }) {
-                    Text(text = negativeButtonText.uppercase())
+                    Text(
+                        text = negativeButtonText,
+                        color = Chili.color.primaryText
+                    )
                 }
             }
         )
     }
 }
 
+//Material3 AlertDialog
 @Composable
 fun <T> ChiliOptionDialog(
     showDialog: Boolean,
@@ -62,7 +70,8 @@ fun <T> ChiliOptionDialog(
     selectedOption: DialogOption<T>?,
     onOptionSelected: (DialogOption<T>) -> Unit,
     onDismiss: () -> Unit,
-    title: String
+    title: String,
+    positiveButtonText: String = "OK",
 ) {
     if (showDialog) {
         AlertDialog(
@@ -92,8 +101,12 @@ fun <T> ChiliOptionDialog(
             },
             confirmButton = {
                 TextButton(
-                    onClick = onDismiss) {
-                    Text(text = "OK")
+                    onClick = onDismiss
+                ) {
+                    Text(
+                        text = positiveButtonText,
+                        color = Chili.color.primaryText
+                    )
                 }
             }
         )

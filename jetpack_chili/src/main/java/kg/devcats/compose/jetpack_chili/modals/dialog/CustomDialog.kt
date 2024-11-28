@@ -1,53 +1,50 @@
 package kg.devcats.compose.jetpack_chili.modals.dialog
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun CustomDialog(
+fun CustomContentDialog(
     showDialog: Boolean,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-    cornerRadius: Dp = 16.dp,
+    cornerRadius: Dp = 8.dp,
     padding: Dp = 16.dp,
     content: @Composable ColumnScope.() -> Unit
 ) {
     if (showDialog) {
         Dialog(onDismissRequest = onDismissRequest) {
-            Surface(
-                shape = RoundedCornerShape(cornerRadius),
-                color = MaterialTheme.colorScheme.surface,
-                tonalElevation = 8.dp,
+            Box(
                 modifier = modifier
-                    .padding(horizontal = 32.dp)
+                    .padding(16.dp)
+                    .fillMaxWidth()
             ) {
-                Column(
-                    modifier = Modifier
-                        .padding(padding)
-                        .fillMaxWidth()
+                Surface(
+                    shape = RoundedCornerShape(cornerRadius),
+                    color = Chili.color.surfaceBackground,
                 ) {
-                    content()
+                    Column(
+                        modifier = modifier.padding(padding)
+                    ) {
+                        content()
+                    }
                 }
             }
         }
@@ -55,76 +52,61 @@ fun CustomDialog(
 }
 
 @Composable
-fun SimpleCustomDialog(
+fun CustomSimpleDialog(
     showDialog: Boolean,
-    onDismissRequest: () -> Unit,
-    onActionClick: () -> Unit,
+    onDismiss: () -> Unit,
+    title: String,
+    message: String,
+    positiveButtonText: String = "OK",
+    negativeButtonText: String = "Cancel",
+    onConfirm: () -> Unit,
+    onCancel: () -> Unit
 ) {
-    CustomDialog(
-        showDialog = showDialog,
-        onDismissRequest = onDismissRequest,
-        cornerRadius = 12.dp,
-        padding = 24.dp
-    ) {
-        Text(
-            text = "Это кастомный диалог с углами и внутренними отступами.",
-            style = MaterialTheme.typography.bodyMedium
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(
-            onClick = onActionClick,
-            modifier = Modifier.align(Alignment.End)
-        ) {
-            Text("Закрыть")
-        }
-    }
-}
-
-@Composable
-fun OptionCustomDialog(
-    showDialog: Boolean,
-    onDismissRequest: () -> Unit,
-    onActionClick: (String) -> Unit,
-) {
-
-    var text by remember { mutableStateOf("") }
-    CustomDialog(
-        showDialog = showDialog,
-        onDismissRequest = onDismissRequest,
-        cornerRadius = 16.dp,
-        padding = 12.dp
-    ) {
-        Text(
-            text = "Выберите элемент:",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        val items = listOf("Элемент 1", "Элемент 2", "Элемент 3")
-        items.forEach { item ->
-            Row(
+    if (showDialog) {
+        Dialog(onDismissRequest = onDismiss) {
+            Box(
                 modifier = Modifier
+                    .padding(16.dp)
                     .fillMaxWidth()
-                    .padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically
             ) {
-                RadioButton(
-                    selected = text == item,
-                    onClick = {
-                        text = item
-                        onActionClick(item)
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = Chili.color.surfaceBackground,
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = title,
+                            style = Chili.typography.H16_Primary_500,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                        Text(
+                            text = message,
+                            style = Chili.typography.H16_Secondary,
+                            modifier = Modifier.padding(bottom = 16.dp)
+                        )
+                        Row(
+                            horizontalArrangement = Arrangement.End,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            TextButton(onClick = onCancel) {
+                                Text(
+                                    text = negativeButtonText,
+                                    style = Chili.typography.H14,
+                                    color = Chili.color.primaryText
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(8.dp))
+                            TextButton(onClick = onConfirm) {
+                                Text(
+                                    text = positiveButtonText,
+                                    style = Chili.typography.H14,
+                                    color = Chili.color.primaryText
+                                )
+                            }
+                        }
                     }
-                )
-                Text(text = item, style = MaterialTheme.typography.bodyMedium)
+                }
             }
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(
-            onClick = {
-
-                onActionClick(text) },
-            modifier = Modifier.align(Alignment.End)
-        ) {
-            Text("Закрыть")
         }
     }
 }

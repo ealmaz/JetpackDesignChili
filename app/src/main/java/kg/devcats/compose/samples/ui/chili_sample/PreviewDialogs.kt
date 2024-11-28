@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,9 +21,9 @@ import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.modals.dialog.ChiliDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.ChiliOptionDialog
+import kg.devcats.compose.jetpack_chili.modals.dialog.CustomContentDialog
+import kg.devcats.compose.jetpack_chili.modals.dialog.CustomSimpleDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.DialogOption
-import kg.devcats.compose.jetpack_chili.modals.dialog.OptionCustomDialog
-import kg.devcats.compose.jetpack_chili.modals.dialog.SimpleCustomDialog
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -33,7 +34,7 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
     var showOptionDialog by remember { mutableStateOf(false) }
 
     var showSimpleCustomDialog by remember { mutableStateOf(false) }
-    var showOptionCustomDialog by remember { mutableStateOf(false) }
+    var showCustomContentDialog by remember { mutableStateOf(false) }
 
     var selectedOption by remember { mutableStateOf<DialogOption<Int>?>(null) }
 
@@ -80,11 +81,11 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
             }
 
             ChiliPrimaryButton(
-                text = "Option custom dialog", modifier = Modifier
+                text = "Custom content dialog", modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp)
             ) {
-                showOptionCustomDialog = true
+                showCustomContentDialog = true
             }
         }
     }
@@ -119,21 +120,42 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
         selectedOption = selectedOption
     )
 
-    SimpleCustomDialog(
-        showSimpleCustomDialog,
-        { showSimpleCustomDialog = false },
-        {
-            showSimpleCustomDialog = false
-            Toast.makeText(context, "Dialog closed", Toast.LENGTH_SHORT).show()
+    CustomContentDialog(
+        showCustomContentDialog,
+        { showCustomContentDialog = false},
+        content = {
+            Column {
+                Text(
+                    text = "Custom Content Dialog",
+                    style = Chili.typography.H16_Primary_500,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                ChiliPrimaryButton(
+                    text = "Close dialog",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
+                ) {
+                    showCustomContentDialog = false
+                    Toast.makeText(context, "Dialog closed", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
     )
 
-    OptionCustomDialog(
-        showOptionCustomDialog,
-        { showOptionCustomDialog = false},
-        {
-            showOptionCustomDialog = false
-            Toast.makeText(context, "$it option selected", Toast.LENGTH_SHORT).show()
+    CustomSimpleDialog(
+        showSimpleCustomDialog,
+        { showSimpleCustomDialog = false },
+        title = "Custom Material 2 Dialog",
+        message = "This is a custom material 2 dialog",
+        onConfirm = {
+            Toast.makeText(context, "Confirm button clicked", Toast.LENGTH_SHORT).show()
+            showSimpleCustomDialog = false
+        },
+        onCancel = {
+            Toast.makeText(context, "Cancel button clicked", Toast.LENGTH_SHORT).show()
+            showSimpleCustomDialog = false
         }
     )
 }
