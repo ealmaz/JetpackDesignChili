@@ -49,6 +49,7 @@ fun PreviewSnackbars(navigateUp: () -> Unit) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState())
             ) {
                 ChiliPrimaryButton(
