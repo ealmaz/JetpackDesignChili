@@ -288,6 +288,50 @@ class ChiliTypography(colorScheme: ChiliColorScheme) {
     val H12_Error_700 = H12_Error.copy(fontWeight = FontWeight(700))
     val H10_Error_700 = H10_Error.copy(fontWeight = FontWeight(700))
 
+
+    //Action
+    val H64_Action = H64.copy(color = colorScheme.buttonComponentText)
+    val H32_Action = H32.copy(color = colorScheme.buttonComponentText)
+    val H28_Action = H28.copy(color = colorScheme.buttonComponentText)
+    val H24_Action = H24.copy(color = colorScheme.buttonComponentText)
+    val H20_Action = H20.copy(color = colorScheme.buttonComponentText)
+    val H18_Action = H18.copy(color = colorScheme.buttonComponentText)
+    val H17_Action = H17.copy(color = colorScheme.buttonComponentText)
+    val H16_Action = H16.copy(color = colorScheme.buttonComponentText)
+    val H15_Action = H15.copy(color = colorScheme.buttonComponentText)
+    val H14_Action = H14.copy(color = colorScheme.buttonComponentText)
+    val H13_Action = H13.copy(color = colorScheme.buttonComponentText)
+    val H12_Action = H12.copy(color = colorScheme.buttonComponentText)
+    val H10_Action = H10.copy(color = colorScheme.buttonComponentText)
+
+    val H64_Action_500 = H64_Action.copy(fontWeight = FontWeight(500))
+    val H32_Action_500 = H32_Action.copy(fontWeight = FontWeight(500))
+    val H28_Action_500 = H28_Action.copy(fontWeight = FontWeight(500))
+    val H24_Action_500 = H24_Action.copy(fontWeight = FontWeight(500))
+    val H20_Action_500 = H20_Action.copy(fontWeight = FontWeight(500))
+    val H18_Action_500 = H18_Action.copy(fontWeight = FontWeight(500))
+    val H17_Action_500 = H17_Action.copy(fontWeight = FontWeight(500))
+    val H16_Action_500 = H16_Action.copy(fontWeight = FontWeight(500))
+    val H15_Action_500 = H15_Action.copy(fontWeight = FontWeight(500))
+    val H14_Action_500 = H14_Action.copy(fontWeight = FontWeight(500))
+    val H13_Action_500 = H13_Action.copy(fontWeight = FontWeight(500))
+    val H12_Action_500 = H12_Action.copy(fontWeight = FontWeight(500))
+    val H10_Action_500 = H10_Action.copy(fontWeight = FontWeight(500))
+
+    val H64_Action_700 = H64_Action.copy(fontWeight = FontWeight(700))
+    val H32_Action_700 = H32_Action.copy(fontWeight = FontWeight(700))
+    val H28_Action_700 = H28_Action.copy(fontWeight = FontWeight(700))
+    val H24_Action_700 = H24_Action.copy(fontWeight = FontWeight(700))
+    val H20_Action_700 = H20_Action.copy(fontWeight = FontWeight(700))
+    val H18_Action_700 = H18_Action.copy(fontWeight = FontWeight(700))
+    val H17_Action_700 = H17_Action.copy(fontWeight = FontWeight(700))
+    val H16_Action_700 = H16_Action.copy(fontWeight = FontWeight(700))
+    val H15_Action_700 = H15_Action.copy(fontWeight = FontWeight(700))
+    val H14_Action_700 = H14_Action.copy(fontWeight = FontWeight(700))
+    val H13_Action_700 = H13_Action.copy(fontWeight = FontWeight(700))
+    val H12_Action_700 = H12_Action.copy(fontWeight = FontWeight(700))
+    val H10_Action_700 = H10_Action.copy(fontWeight = FontWeight(700))
+
 }
 
 val LocalChiliTypography = compositionLocalOf { ChiliTypography(ChiliLightColorScheme()) }

@@ -39,4 +39,7 @@ sealed class Screens {
 
     @Serializable
     data object DialogsScreen : Screens()
+
+    @Serializable
+    data object DividersScreen : Screens()
 }
