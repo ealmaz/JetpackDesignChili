@@ -106,6 +106,12 @@ fun ChiliSampleScreens(
                 .padding(top = 16.dp)) {
                 navController?.navigate(Screens.DialogsScreen.toString())
             }
+
+            ChiliPrimaryButton(text = "Divider", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController?.navigate(Screens.DividersScreen.toString())
+            }
         }
     }
 }
