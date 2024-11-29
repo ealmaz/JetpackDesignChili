@@ -22,7 +22,7 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun BonusTagView(
+fun BonusTag(
     text: String,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,

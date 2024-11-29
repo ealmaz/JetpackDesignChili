@@ -1,9 +1,6 @@
 package kg.devcats.compose.jetpack_chili.story
 
 import android.os.CountDownTimer
-import android.util.Log
-import android.view.SurfaceView
-import android.view.TextureView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -63,7 +60,7 @@ import kg.devcats.compose.jetpack_chili.theme.gray_3_alpha_98
 import kg.devcats.compose.jetpack_chili.theme.magenta_1
 
 @Composable
-fun StoryView(
+fun ChiliStory(
     stories: List<ChilliStoryModel>,
     onMoveListener: StoryMoveListener? = null,
     onFinishListener: StoryOnFinishListener? = null,

@@ -18,7 +18,7 @@ import kotlin.math.abs
 import kotlin.math.roundToInt
 
 @Composable
-fun VerticalDraggableView(
+fun VerticalDraggable(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
     content: @Composable () -> Unit

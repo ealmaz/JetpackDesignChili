@@ -28,7 +28,7 @@ import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun ChiliCardView(
+fun ChiliCard(
     modifier: Modifier = Modifier,
     title: String,
     subtitle: String? = null,
@@ -98,7 +98,7 @@ fun ChiliCardView(
 fun ChiliCardPreview() {
     Column {
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
-            ChiliCardView(
+            ChiliCard(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Title",
                 subtitle = "1100 c",

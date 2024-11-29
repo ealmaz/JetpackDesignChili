@@ -47,7 +47,7 @@ fun shimmerBrush(targetValue: Float = 1000f, colors: List<Color>? = null): Brush
 
 @Preview
 @Composable
-fun ShimmerView(
+fun Shimmer(
     modifier: Modifier = Modifier,
     height: Dp = 16.dp,
     width: Dp = 200.dp,

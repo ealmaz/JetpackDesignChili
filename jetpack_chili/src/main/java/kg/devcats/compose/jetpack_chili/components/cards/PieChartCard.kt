@@ -22,7 +22,7 @@ import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun PieChartCardView(
+fun PieChartCard(
     modifier: Modifier = Modifier,
     title: String,
     data: List<Float>,
@@ -86,7 +86,7 @@ fun PieChartCardView(
 fun PieChartCardPreview() {
     Column {
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
-            PieChartCardView(
+            PieChartCard(
                 title = "Детализация на 06.06.2020",
                 data = listOf(40f, 30f, 20f, 10f),
                 colors = listOf(

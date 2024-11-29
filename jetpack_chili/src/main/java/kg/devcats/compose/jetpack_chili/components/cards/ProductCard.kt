@@ -17,14 +17,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.orange_1
 import kg.devcats.compose.jetpack_chili.theme.orange_1_alpha_10
 import kg.devcats.compose.jetpack_chili.theme.white_1
 
 @Composable
-fun ProductCardView(
+fun ProductCard(
     modifier: Modifier = Modifier,
     imageLink: String = "",
     imageContentScale: ContentScale = ContentScale.Crop,
@@ -71,7 +71,7 @@ private fun CardImage(
     isLoading: Boolean = false
 ) {
     if (isLoading) {
-        ShimmerView(
+        Shimmer(
             modifier = modifier
                 .height(210.dp)
                 .fillMaxWidth()
@@ -119,13 +119,13 @@ private fun ProductContent(
 ) {
     Column(modifier = modifier.padding(horizontal = 12.dp)) {
         if (isLoading) {
-            ShimmerView(
+            Shimmer(
                 modifier = Modifier.padding(top = 12.dp), height = 6.dp, width = 100.dp
             )
-            ShimmerView(
+            Shimmer(
                 modifier = Modifier.padding(top = 16.dp), height = 6.dp, width = 122.dp
             )
-            ShimmerView(
+            Shimmer(
                 modifier = Modifier.padding(top = 8.dp), height = 6.dp, width = 100.dp
             )
         } else {

@@ -19,11 +19,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun MultiIconedTitleCellView(
+fun MultiIconedTitleCell(
     modifier: Modifier = Modifier,
     title: String,
     icons: List<Any> = emptyList(),
@@ -76,7 +76,7 @@ fun MultiIconedRow(
     ) {
         if (isLoading) {
             items(7) {
-                ShimmerView(
+                Shimmer(
                     height = 30.dp, width = 30.dp,
                     modifier = Modifier
                         .clip(RoundedCornerShape(12.dp))
