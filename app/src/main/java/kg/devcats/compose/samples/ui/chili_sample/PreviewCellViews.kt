@@ -28,7 +28,7 @@ import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppTo
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun CellViews(
+fun PreviewCellScreen(
     navigateUp: () -> Unit,
 ) {
     Column(modifier = Modifier
@@ -314,5 +314,5 @@ fun CellViews(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewCellViews() {
-    CellViews({})
+    PreviewCellScreen({})
 }

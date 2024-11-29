@@ -32,7 +32,7 @@ import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppTo
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun CommonViews(
+fun PreviewCommonScreen(
     navigateUp: () -> Unit,
 ) {
     Column(modifier = Modifier
@@ -113,5 +113,5 @@ fun CommonViews(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewCommonViews() {
-    CommonViews({})
+    PreviewCommonScreen({})
 }
