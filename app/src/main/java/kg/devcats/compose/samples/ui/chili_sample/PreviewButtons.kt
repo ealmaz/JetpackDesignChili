@@ -1,6 +1,5 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -100,7 +98,6 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
                     text = "ChiliQuickActionButton",
                     iconResource = R.drawable.chili_ic_bell,
                     modifier = Modifier.weight(1f),
-                    coroutineScope = rememberCoroutineScope(),
                     onClick = {
                         context.showToast("ChiliQuickActionButton")
                     }
@@ -109,8 +106,7 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
                     text = "ChiliQuickActionButton",
                     iconResource = R.drawable.chili_ic_bell,
                     modifier = Modifier.weight(1f),
-                    coroutineScope = rememberCoroutineScope(),
-                    enabled = false,
+                    isEnabled = false,
                     onClick = {
                         context.showToast("ChiliQuickActionButton")
                     }

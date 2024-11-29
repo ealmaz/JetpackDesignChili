@@ -50,11 +50,12 @@ fun shimmerBrush(targetValue: Float = 1000f, colors: List<Color>? = null): Brush
 fun Shimmer(
     modifier: Modifier = Modifier,
     height: Dp = 16.dp,
-    width: Dp = 200.dp
+    width: Dp = 200.dp,
+    roundRadius: Dp = Chili.attrs.roundRadius
 ) {
     Spacer(modifier = modifier
         .height(height)
         .width(width)
-        .clip(RoundedCornerShape(Chili.attrs.roundRadius))
+        .clip(RoundedCornerShape(roundRadius))
         .background(shimmerBrush()))
 }
