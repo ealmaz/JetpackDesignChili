@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.divider.Divider
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -70,6 +71,27 @@ fun PreviewDividers(navigateUp: () -> Unit) {
                 onEndIconClick = { context.showToast("End Icon clicked for Divider 3") },
                 onActionClick = { context.showToast("Action clicked for Divider 3") },
                 modifier = Modifier.padding(top = 16.dp)
+            )
+            Divider(
+                title = "Счета",
+                modifier = Modifier.padding(top = 16.dp),
+                actionText = "Открыть",
+                onActionClick = { context.showToast("Action is clicked") }
+            )
+            Divider(
+                title = "Заголовок",
+                modifier = Modifier.padding(top = 16.dp)
+            )
+            Divider(
+                title = "Доступные услуги",
+                titleTextStyle = Chili.typography.H16_Primary,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+            Divider(
+                title = "Заголовок",
+                startIconPainter = painterResource(R.drawable.chili_ic_documents_green),
+                modifier = Modifier.padding(top = 16.dp),
+                startIconModifier = Modifier.padding(end = 16.dp)
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
