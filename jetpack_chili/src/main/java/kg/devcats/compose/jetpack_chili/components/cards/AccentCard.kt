@@ -18,11 +18,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun AccentCardView(
+fun AccentCard(
     modifier: Modifier = Modifier,
     title: String,
     subtitle: String? = null,
@@ -44,28 +44,28 @@ fun AccentCardView(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
-                    ShimmerView(
+                    Shimmer(
                         modifier = Modifier.padding(top = 8.dp),
                         height = 8.dp,
                         width = 200.dp
                     )
-                    ShimmerView(
+                    Shimmer(
                         modifier = Modifier.padding(top = 12.dp),
                         height = 8.dp,
                         width = 140.dp
                     )
-                    ShimmerView(
+                    Shimmer(
                         modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
                         height = 8.dp,
                         width = 82.dp
                     )
                 }
-                ShimmerView(height = 48.dp, width = 48.dp)
+                Shimmer(height = 48.dp, width = 48.dp)
             }
 
         }
     } else {
-        ChiliCardView(
+        ChiliCard(
             modifier = modifier.fillMaxWidth()
                 .padding(vertical = 10.dp, horizontal = 16.dp),
             title = title,
@@ -94,7 +94,7 @@ fun AccentCardView(
 fun AccentCardPreview() {
     Column {
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
-            AccentCardView(
+            AccentCard(
                 title = "Сканер штрихкодов и QR",
                 subtitle = "Для удобной оплаты \nбез ввода реквизитов",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -103,7 +103,7 @@ fun AccentCardPreview() {
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
-            AccentCardView(
+            AccentCard(
                 title = "Заголовок",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = true

@@ -56,7 +56,7 @@ fun ChiliSampleScreens(
             ChiliPrimaryButton(text = "Cell views", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.CellViewsScreen.toString())
+                navController?.navigate(Screens.CellsScreen.toString())
             }
 
             ChiliPrimaryButton(text = "Toolbars", modifier = Modifier
@@ -68,7 +68,7 @@ fun ChiliSampleScreens(
             ChiliPrimaryButton(text = "Common views", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.CommonViewsScreen.toString())
+                navController?.navigate(Screens.CommonScreen.toString())
             }
 
             ChiliPrimaryButton(text = "Bottom sheets", modifier = Modifier
@@ -80,7 +80,7 @@ fun ChiliSampleScreens(
             ChiliPrimaryButton(text = "Cards", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.CardViewsScreen.toString())
+                navController?.navigate(Screens.CardsScreen.toString())
             }
 
             ChiliPrimaryButton(text = "Stories", modifier = Modifier

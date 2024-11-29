@@ -27,11 +27,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun SubtitledSimpleCardView(
+fun SubtitledSimpleCard(
     modifier: Modifier = Modifier,
     title: String,
     subtitle: String? = null,
@@ -77,9 +77,9 @@ private fun LoadingCard() {
             modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ShimmerView(modifier = Modifier.size(32.dp), height = 32.dp, width = 32.dp)
+            Shimmer(modifier = Modifier.size(32.dp), height = 32.dp, width = 32.dp)
             Spacer(modifier = Modifier.width(8.dp))
-            ShimmerView(modifier = Modifier.padding(top = 4.dp), height = 8.dp, width = 120.dp)
+            Shimmer(modifier = Modifier.padding(top = 4.dp), height = 8.dp, width = 120.dp)
         }
     }
 }
@@ -170,7 +170,7 @@ private fun IconOrEmoji(
 fun SubtitledSimpleCardViewPreview() {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(16.dp)) {
         ShadowRoundedBox {
-            SubtitledSimpleCardView(
+            SubtitledSimpleCard(
                 title = "Main Title",
                 subtitle = "This is a subtitle",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -179,14 +179,14 @@ fun SubtitledSimpleCardViewPreview() {
         }
 
         ShadowRoundedBox {
-            SubtitledSimpleCardView(
+            SubtitledSimpleCard(
                 title = "Card Title",
                 emoji = "🔥"
             )
         }
 
         ShadowRoundedBox {
-            SubtitledSimpleCardView(
+            SubtitledSimpleCard(
                 title = "Card Title",
                 subtitle = "Subtitle",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),

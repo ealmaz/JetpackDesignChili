@@ -1,16 +1,10 @@
 package kg.devcats.compose.samples
 
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
-import kg.devcats.compose.jetpack_chili.story.ChiliStoriesView
+import kg.devcats.compose.jetpack_chili.story.ChiliStories
 import kg.devcats.compose.jetpack_chili.story.ChilliButtonType
 import kg.devcats.compose.jetpack_chili.story.ChilliStoryBlock
 import kg.devcats.compose.jetpack_chili.story.ChilliStoryModel
@@ -18,8 +12,6 @@ import kg.devcats.compose.jetpack_chili.story.ChilliStoryType
 import kg.devcats.compose.jetpack_chili.story.StoryClickListener
 import kg.devcats.compose.jetpack_chili.story.StoryMoveListener
 import kg.devcats.compose.jetpack_chili.story.StoryOnFinishListener
-import kg.devcats.compose.jetpack_chili.story.StoryView
-import kg.devcats.compose.jetpack_chili.theme.ChiliTheme
 import kg.devcats.compose.jetpack_chili.theme.ChiliTransparentTheme
 
 class StoryActivity : ComponentActivity(), StoryMoveListener, StoryOnFinishListener,
@@ -29,7 +21,7 @@ class StoryActivity : ComponentActivity(), StoryMoveListener, StoryOnFinishListe
         hideStatusBar()
         setContent {
             ChiliTransparentTheme {
-                ChiliStoriesView(
+                ChiliStories(
                     arrayListOf(storyBlock1, storyBlock2, storyBlock3, storyBlock4),
                     this,
                     this,

@@ -15,7 +15,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.scale
@@ -27,7 +26,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.min
 
 @Composable
-fun ChiliStoriesView(
+fun ChiliStories(
     storiesBlocks: List<ChilliStoryBlock>,
     onMoveListener: StoryMoveListener,
     onStoryMoveListener: StoryMoveListener,
@@ -46,7 +45,7 @@ fun ChiliStoriesView(
         onPageChanged(pagerState.currentPage)
     }
 
-    VerticalDraggableView (
+    VerticalDraggable (
         modifier = Modifier
             .fillMaxSize(),
         { onStoryMoveListener.onClose() }
@@ -57,7 +56,7 @@ fun ChiliStoriesView(
                 .fillMaxSize(),
             state = pagerState
         ) { page ->
-            StoryView(
+            ChiliStory(
                 stories = storiesBlocks[page].stories,
                 onMoveListener = object : StoryMoveListener {
                     override fun onAllStoriesCompleted() {

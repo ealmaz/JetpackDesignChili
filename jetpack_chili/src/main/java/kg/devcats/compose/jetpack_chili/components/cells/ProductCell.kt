@@ -16,13 +16,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.adjustFontWeight
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.setIsPressedEffect
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun ProductCellView(
+fun ProductCell(
     title: String? = null,
     subtitle: String? = null,
     additionalText: String? = null,
@@ -57,15 +57,15 @@ fun ProductCellView(
     ) {
         if (isLoading) {
             //shimmers
-            ShimmerView(width = iconWidth, height = iconHeight, roundRadius = 6.dp)
+            Shimmer(width = iconWidth, height = iconHeight, roundRadius = 6.dp)
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(start = 12.dp)
             ) {
-                ShimmerView(width = 120.dp, height = 8.dp, roundRadius = 8.dp)
+                Shimmer(width = 120.dp, height = 8.dp, roundRadius = 8.dp)
                 Spacer(modifier = Modifier.height(12.dp))
-                ShimmerView(width = 90.dp, height = 8.dp, roundRadius = 8.dp)
+                Shimmer(width = 90.dp, height = 8.dp, roundRadius = 8.dp)
             }
 
         } else {

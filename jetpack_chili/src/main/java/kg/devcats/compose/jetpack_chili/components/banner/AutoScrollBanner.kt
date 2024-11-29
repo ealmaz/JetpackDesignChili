@@ -25,7 +25,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun AutoScrollBannerView(
+fun AutoScrollBanner(
     modifier: Modifier = Modifier,
     images: List<String>,
     autoScrollDelayMillis: Long = 3000,

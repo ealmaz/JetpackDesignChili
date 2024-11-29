@@ -14,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
@@ -22,9 +21,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
-import kg.devcats.compose.jetpack_chili.components.cells.ChiliCellView
-import kg.devcats.compose.jetpack_chili.components.cells.ProductCellView
-import kg.devcats.compose.jetpack_chili.components.common.BonusTagView
+import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
+import kg.devcats.compose.jetpack_chili.components.cells.ProductCell
+import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
@@ -33,14 +32,14 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
-fun CellViews(
+fun PreviewCells(
     navigateUp: () -> Unit,
 ) {
     val context = LocalContext.current
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)) {
-        ChiliCenteredAppToolbar(title = "CellViews", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+        ChiliCenteredAppToolbar(title = "Cell", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
             navigateUp.invoke()
         })
         Column(modifier = Modifier
@@ -48,11 +47,11 @@ fun CellViews(
             .verticalScroll(rememberScrollState())
             .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)) {
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                     )
@@ -61,28 +60,28 @@ fun CellViews(
 
             ShadowRoundedBox(modifier = Modifier.padding(top = 16.dp)) {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         isDividerVisible = true,
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         isDividerVisible = true,
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                     )
                 }
             }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView subtitle", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell subtitle", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -92,19 +91,19 @@ fun CellViews(
 
             ShadowRoundedBox(modifier = Modifier.padding(top = 16.dp)) {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -112,11 +111,11 @@ fun CellViews(
                 }
             }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with icon", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with icon", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -127,21 +126,21 @@ fun CellViews(
 
             ShadowRoundedBox(modifier = Modifier.padding(top = 16.dp)) {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -151,11 +150,11 @@ fun CellViews(
             }
 
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with Additilnal text", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with Additilnal text", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -167,44 +166,44 @@ fun CellViews(
                 }
             }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with BonusTag", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with BonusTag", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox(modifier = Modifier) {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
-                            BonusTagView(modifier = Modifier, text = "1%")
+                            BonusTag(modifier = Modifier, text = "1%")
                         },
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
-                            BonusTagView(modifier = Modifier, text = "10%")
+                            BonusTag(modifier = Modifier, text = "10%")
                         },
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = null,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
-                            BonusTagView(modifier = Modifier, text = "100%")
+                            BonusTag(modifier = Modifier, text = "100%")
                         },
                     )
                 }
             }
 
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with Switch", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with Switch", style = Chili.typography.H16_Primary)
 
             var switchChecked by remember { mutableStateOf(false) }
             var switchChecked2 by remember { mutableStateOf(false) }
@@ -213,7 +212,7 @@ fun CellViews(
 
             ShadowRoundedBox() {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -227,7 +226,7 @@ fun CellViews(
 
             ShadowRoundedBox(modifier = Modifier.padding(top = 16.dp)) {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -237,7 +236,7 @@ fun CellViews(
                             ChiliSwitch(checked = switchChecked2) {switchChecked2 = it}
                         },
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -247,7 +246,7 @@ fun CellViews(
                             ChiliSwitch(checked = switchChecked3) {switchChecked3 = it}
                         },
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -264,11 +263,11 @@ fun CellViews(
             var checkBoxChecked3 by remember { mutableStateOf(false) }
             var checkBoxChecked4 by remember { mutableStateOf(false) }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with Check box", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with Check box", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -282,7 +281,7 @@ fun CellViews(
 
             ShadowRoundedBox(modifier = Modifier.padding(top = 16.dp)) {
                 Column {
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -292,7 +291,7 @@ fun CellViews(
                             ChiliCheckBox(checked = checkBoxChecked2) {checkBoxChecked2 = it}
                         },
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -302,7 +301,7 @@ fun CellViews(
                             ChiliCheckBox(checked = checkBoxChecked3) {checkBoxChecked3 = it}
                         },
                     )
-                    ChiliCellView(
+                    ChiliCell(
                         modifier = Modifier.clickable {  },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
@@ -314,17 +313,17 @@ fun CellViews(
                 }
             }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "ProductCellView", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "ProductCell", style = Chili.typography.H16_Primary)
 
             Column {
-                ProductCellView(
+                ProductCell(
                     modifier = Modifier.clickable {  }.padding(vertical = 8.dp),
                     title = "Заголовок",
                     additionalText = "121212 <u>c</u>",
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
                     isLoading = true
                 )
-                ProductCellView(
+                ProductCell(
                     modifier = Modifier.clickable {}.padding(vertical = 8.dp),
                     title = "Заголовок",
                     subtitle = "Подзаголовок",
@@ -335,7 +334,7 @@ fun CellViews(
                         context.showToast("Clicked")
                     }
                 )
-                ProductCellView(
+                ProductCell(
                     modifier = Modifier.padding(vertical = 8.dp),
                     title = "Заголовок",
                     subtitle = "Подзаголовок",
@@ -348,7 +347,7 @@ fun CellViews(
                         context.showToast("Clicked")
                     }
                 )
-                ProductCellView(
+                ProductCell(
                     modifier = Modifier.padding(vertical = 8.dp),
                     title = "Заголовок",
                     subtitle = "Подзаголовок",
@@ -358,7 +357,7 @@ fun CellViews(
                         context.showToast("Clicked")
                     }
                 )
-                ProductCellView(
+                ProductCell(
                     modifier = Modifier.padding(vertical = 8.dp),
                     title = "Заголовок, занимающий 2 строки",
                     subtitle = "Подзаголовок",
@@ -367,19 +366,19 @@ fun CellViews(
                     additionalTextAppearance = Chili.typography.H15_Error,
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
                 )
-                ProductCellView(
+                ProductCell(
                     modifier = Modifier.padding(vertical = 8.dp).alpha(0.4f),
                     title = "Заголовок",
                     additionalText = "Сервис \nнедоступен",
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
                 )
-                ProductCellView(
+                ProductCell(
                     modifier = Modifier.padding(vertical = 8.dp),
                     title = "Заголовок",
                     additionalText = "121212",
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default)
                 )
-                ProductCellView(
+                ProductCell(
                     modifier = Modifier.padding(vertical = 8.dp),
                     title = "Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки",
                     subtitle = "Подзаголовок, Подзаголовок, Подзаголовок, Подзаголовок, Подзаголовок, ",
@@ -393,5 +392,5 @@ fun CellViews(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewCellViews() {
-    CellViews({})
+    PreviewCells({})
 }

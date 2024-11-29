@@ -28,7 +28,7 @@ import kg.devcats.compose.jetpack_chili.components.buttons.primaryButtonColors
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun AlertBlockCardView(
+fun AlertBlockCard(
     modifier: Modifier = Modifier,
     title: String,
     infoState: InfoState,

@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import kg.devcats.compose.jetpack_chili.components.divider.DividerView
+import kg.devcats.compose.jetpack_chili.components.divider.Divider
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
@@ -27,14 +27,14 @@ fun PreviewDividers(navigateUp: () -> Unit) {
             onNavigationIconClick = { navigateUp() }
         )
         Column(modifier = Modifier.padding(16.dp)) {
-            DividerView(
+            Divider(
                 title = "Заголовок",
                 subtitle = "Подзаголовок",
                 actionText = "Кнопка",
                 onActionClick = { println("Action clicked for Divider 1") },
                 modifier = Modifier.padding(top = 16.dp)
             )
-            DividerView(
+            Divider(
                 title = "Заголовок",
                 subtitle = "Подзаголовок",
                 actionText = "Кнопка",
@@ -44,25 +44,25 @@ fun PreviewDividers(navigateUp: () -> Unit) {
                 onActionClick = { context.showToast("Action clicked for Divider 2") },
                 modifier = Modifier.padding(top = 16.dp)
             )
-            DividerView(
+            Divider(
                 title = "Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок",
                 subtitle = "Подзаголовок Подзаголовок Подзаголовок Подзаголовок Подзаголовок Подзаголовок Подзаголовок",
                 titleSubtitleSpaceHeight = 6.dp,
                 onActionClick = { println("Action clicked for Divider 1") },
                 modifier = Modifier.padding(top = 16.dp)
             )
-            DividerView(
+            Divider(
                 title = "Заголовок",
                 actionText = "Кнопка",
                 onActionClick = { println("Action clicked for Divider 2") },
                 modifier = Modifier.padding(top = 16.dp)
             )
-            DividerView(
+            Divider(
                 title = "Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок",
                 onActionClick = { println("Action clicked for Divider 2") },
                 modifier = Modifier.padding(top = 16.dp)
             )
-            DividerView(
+            Divider(
                 title = "Заголовок",
                 actionText = "Кнопка",
                 isNotificationVisible = true,

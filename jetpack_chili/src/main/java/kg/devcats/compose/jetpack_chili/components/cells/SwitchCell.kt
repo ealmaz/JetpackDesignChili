@@ -12,7 +12,7 @@ import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun ChiliSwitchCellView(
+fun ChiliSwitchCell(
     modifier: Modifier = Modifier,
     title: String,
     subtitle: String? = null,
@@ -29,7 +29,7 @@ fun ChiliSwitchCellView(
     enabled: Boolean = true,
     onCheckedChange: ((Boolean) -> Unit)?
 ) {
-    ChiliCellView(
+    ChiliCell(
         modifier = modifier,
         title = title,
         subtitle = subtitle,

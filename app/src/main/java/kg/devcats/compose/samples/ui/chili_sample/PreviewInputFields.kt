@@ -21,7 +21,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputOtp
@@ -31,7 +30,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun InputFields(navigateUp: () -> Unit,) {
+fun PreviewInputFields(navigateUp: () -> Unit,) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)
@@ -171,5 +170,5 @@ fun InputFields(navigateUp: () -> Unit,) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewInputFields() {
-    InputFields({})
+    PreviewInputFields({})
 }

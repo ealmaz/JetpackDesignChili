@@ -14,13 +14,13 @@ sealed class Screens {
     data object BottomSheetsScreen : Screens()
 
     @Serializable
-    data object CardViewsScreen : Screens()
+    data object CardsScreen : Screens()
 
     @Serializable
-    data object CellViewsScreen : Screens()
+    data object CellsScreen : Screens()
 
     @Serializable
-    data object CommonViewsScreen : Screens()
+    data object CommonScreen : Screens()
 
     @Serializable
     data object InputFieldsScreen : Screens()

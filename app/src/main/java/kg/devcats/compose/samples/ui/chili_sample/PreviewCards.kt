@@ -30,27 +30,27 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
-import kg.devcats.compose.jetpack_chili.components.cards.AccentCardView
-import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCardView
-import kg.devcats.compose.jetpack_chili.components.cards.BalanceCardView
+import kg.devcats.compose.jetpack_chili.components.cards.AccentCard
+import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCard
+import kg.devcats.compose.jetpack_chili.components.cards.BalanceCard
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
-import kg.devcats.compose.jetpack_chili.components.cards.BonusCardView
-import kg.devcats.compose.jetpack_chili.components.cards.BorderAnimatedView
-import kg.devcats.compose.jetpack_chili.components.cards.CatalogCardView
-import kg.devcats.compose.jetpack_chili.components.cards.ChiliCardView
+import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
+import kg.devcats.compose.jetpack_chili.components.cards.AnimatedBorderCard
+import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
+import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
 import kg.devcats.compose.jetpack_chili.components.cards.InfoState
-import kg.devcats.compose.jetpack_chili.components.cards.PaymentCardView
-import kg.devcats.compose.jetpack_chili.components.cards.PieChartCardView
-import kg.devcats.compose.jetpack_chili.components.cards.ProductCardView
-import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCardView
-import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCellView
+import kg.devcats.compose.jetpack_chili.components.cards.PaymentCard
+import kg.devcats.compose.jetpack_chili.components.cards.PieChartCard
+import kg.devcats.compose.jetpack_chili.components.cards.ProductCard
+import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCard
+import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCell
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
-fun CardViews(
+fun PreviewCards(
     navigateUp: () -> Unit,
 ) {
     Column(
@@ -59,7 +59,7 @@ fun CardViews(
             .background(Chili.color.surfaceBackground)
     ) {
         ChiliCenteredAppToolbar(
-            title = "CardViews",
+            title = "Card",
             isDividerVisible = true,
             isNavigationIconVisible = true,
             onNavigationIconClick = {
@@ -74,12 +74,12 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "ChiliCardView",
+                text = "ChiliCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
                 ShadowRoundedBox {
-                    ChiliCardView(
+                    ChiliCard(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(12.dp),
@@ -99,7 +99,7 @@ fun CardViews(
                 ShadowRoundedBox(
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
-                    ChiliCardView(
+                    ChiliCard(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(12.dp),
@@ -115,12 +115,12 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "BalanceCardView",
+                text = "BalanceCard",
                 style = Chili.typography.H16_Primary
             )
             Row {
                 ShadowRoundedBox {
-                    BalanceCardView(
+                    BalanceCard(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         balance = "100 000 c",
@@ -132,7 +132,7 @@ fun CardViews(
                 ShadowRoundedBox(
                     modifier = Modifier.padding(start = 16.dp)
                 ) {
-                    BalanceCardView(
+                    BalanceCard(
                         modifier = Modifier
                             .clickable { },
                         title = "Заголовок",
@@ -144,12 +144,12 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "CatalogCardView",
+                text = "CatalogCard",
                 style = Chili.typography.H16_Primary
             )
             Row {
                 ShadowRoundedBox {
-                    CatalogCardView(
+                    CatalogCard(
                         modifier = Modifier
                             .clickable { }
                             .width(186.dp),
@@ -162,7 +162,7 @@ fun CardViews(
                 ShadowRoundedBox(
                     modifier = Modifier.padding(start = 16.dp)
                 ) {
-                    CatalogCardView(
+                    CatalogCard(
                         modifier = Modifier
                             .clickable { }
                             .width(186.dp),
@@ -174,12 +174,12 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "PaymentCardView",
+                text = "PaymentCard",
                 style = Chili.typography.H16_Primary
             )
             Row {
                 ShadowRoundedBox {
-                    PaymentCardView(
+                    PaymentCard(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -189,7 +189,7 @@ fun CardViews(
                 ShadowRoundedBox(
                     modifier = Modifier.padding(start = 16.dp)
                 ) {
-                    PaymentCardView(
+                    PaymentCard(
                         modifier = Modifier
                             .clickable { },
                         title = "Заголовок",
@@ -201,12 +201,12 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AccentCardView",
+                text = "AccentCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
                 ShadowRoundedBox {
-                    AccentCardView(
+                    AccentCard(
                         modifier = Modifier.fillMaxWidth(),
                         title = "Сканер штрихкодов и QR",
                         subtitle = "Для удобной оплаты \nбез ввода реквизитов",
@@ -217,7 +217,7 @@ fun CardViews(
                 ShadowRoundedBox(
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
-                    AccentCardView(
+                    AccentCard(
                         modifier = Modifier.fillMaxWidth(),
                         title = "Заголовок",
                         subtitle = "100 000 c",
@@ -229,14 +229,14 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "BonusCardView",
+                text = "BonusCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
 
                 Row {
                     ShadowRoundedBox {
-                        BonusCardView(
+                        BonusCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -247,7 +247,7 @@ fun CardViews(
                     ShadowRoundedBox(
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
-                        BonusCardView(
+                        BonusCard(
                             modifier = Modifier,
                             title = "Заголовок",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -260,7 +260,7 @@ fun CardViews(
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
                     ShadowRoundedBox {
-                        BonusCardView(
+                        BonusCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -271,7 +271,7 @@ fun CardViews(
                     ShadowRoundedBox(
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
-                        BonusCardView(
+                        BonusCard(
                             modifier = Modifier,
                             title = "Заголовок",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -284,7 +284,7 @@ fun CardViews(
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
                     ShadowRoundedBox {
-                        BonusCardView(
+                        BonusCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -295,7 +295,7 @@ fun CardViews(
                     ShadowRoundedBox(
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
-                        BonusCardView(
+                        BonusCard(
                             modifier = Modifier,
                             title = "Заголовок",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -309,13 +309,13 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AnimatedCardView",
+                text = "AnimatedCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
                 Row {
                     ShadowRoundedBox {
-                        BorderAnimatedView(
+                        AnimatedBorderCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             commissionInfo = "Commission",
@@ -328,7 +328,7 @@ fun CardViews(
                     ShadowRoundedBox(
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
-                        BorderAnimatedView(
+                        AnimatedBorderCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             commissionInfo = "Commission",
@@ -343,7 +343,7 @@ fun CardViews(
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
                     ShadowRoundedBox {
-                        BorderAnimatedView(
+                        AnimatedBorderCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             commissionInfo = "Commission",
@@ -356,7 +356,7 @@ fun CardViews(
                     ShadowRoundedBox(
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
-                        BorderAnimatedView(
+                        AnimatedBorderCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             commissionInfo = "Commission",
@@ -371,12 +371,12 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AccentCardView",
+                text = "AccentCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
                 ShadowRoundedBox {
-                    PieChartCardView(
+                    PieChartCard(
                         modifier = Modifier.fillMaxWidth(),
                         title = "Детализация на 06.06.2020",
                         data = listOf(40f, 30f, 20f, 10f),
@@ -394,7 +394,7 @@ fun CardViews(
                 ShadowRoundedBox(
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
-                    PieChartCardView(
+                    PieChartCard(
                         modifier = Modifier.fillMaxWidth(),
                         title = "Детализация на 06.06.2020",
                         data = listOf(100f, 1000f),
@@ -411,13 +411,13 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "MultiiconedCellView",
+                text = "MultiiconedCell",
                 style = Chili.typography.H16_Primary
             )
 
             val context = LocalContext.current
             ShadowRoundedBox {
-                MultiIconedTitleCellView(
+                MultiIconedTitleCell(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
                     icons = listOf(
                         kg.devcats.compose.samples.R.drawable.elcart,
@@ -427,7 +427,7 @@ fun CardViews(
                         kg.devcats.compose.samples.R.drawable.elcart,
                         kg.devcats.compose.samples.R.drawable.elcart,
                     ),
-                    title = "MultiiconedCellView title",
+                    title = "MultiiconedCell title",
                     additionalInfo = "Весь список",
                     isLoading = true,
                     onAdditionalInfoClick = {
@@ -438,14 +438,14 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AlertBlockCardView",
+                text = "AlertBlockCard",
                 style = Chili.typography.H16_Primary
             )
 
             var isOpened by remember { mutableStateOf(true) }
 
             if (isOpened) {
-                AlertBlockCardView(
+                AlertBlockCard(
                     modifier = Modifier.padding(bottom = 14.dp),
                     title = "Title",
                     infoState = InfoState.Neutral,
@@ -456,30 +456,30 @@ fun CardViews(
                 )
             }
 
-            AlertBlockCardView(
+            AlertBlockCard(
                 modifier = Modifier.padding(bottom = 14.dp),
                 title = "Деньги поступят на счёт по умолчанию",
                 infoState = InfoState.Warning
             )
 
-            AlertBlockCardView(
+            AlertBlockCard(
                 title = "Title",
                 infoState = InfoState.Error,
                 subtitle = "Subtitle",
                 buttonText = "Кнопка",
                 onButtonClick = {
-                    context.showToast("AlertBlockCardView")
+                    context.showToast("AlertBlockCard")
                 }
             )
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "SubtitledSimpleCardView",
+                text = "SubtitledSimpleCard",
                 style = Chili.typography.H16_Primary
             )
 
             ShadowRoundedBox {
-                SubtitledSimpleCardView(
+                SubtitledSimpleCard(
                     title = "Favorite",
                     iconUrl = "https://minio.o.kg/catalog/logos/obank.png"
                 )
@@ -488,7 +488,7 @@ fun CardViews(
             ShadowRoundedBox(
                 modifier = Modifier.padding(top = 16.dp)
             ) {
-                SubtitledSimpleCardView(
+                SubtitledSimpleCard(
                     title = "Favorite",
                     iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
                     isLoading = true
@@ -498,7 +498,7 @@ fun CardViews(
             ShadowRoundedBox(
                 modifier = Modifier.padding(top = 16.dp)
             ) {
-                SubtitledSimpleCardView(
+                SubtitledSimpleCard(
                     title = "Favorite",
                     emoji = "\uD83D\uDD25"
                 )
@@ -506,7 +506,7 @@ fun CardViews(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "ProductCardView",
+                text = "ProductCard",
                 style = Chili.typography.H16_Primary
             )
 
@@ -518,7 +518,7 @@ fun CardViews(
             ) {
                 item {
                     ShadowRoundedBox {
-                        ProductCardView(
+                        ProductCard(
                             modifier = Modifier.height(293.dp).width(168.dp),
                             imageLink = "https://cdn.omarket.kg/ads-minify/XBxctjZWlSKjq9pgazTZoEOPh45SXToHMckuX1Ce7Rnb3egueT.WEBP",
                             price = "2 090,00 c",
@@ -533,7 +533,7 @@ fun CardViews(
 
                 item {
                     ShadowRoundedBox {
-                        ProductCardView(
+                        ProductCard(
                             modifier = Modifier.height(293.dp).width(168.dp),
                             price = "2 090,00 c",
                             installmentPrice = "8 166,6 с x 12 мес",
@@ -551,5 +551,5 @@ fun CardViews(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewCardViews() {
-    CardViews({})
+    PreviewCards({})
 }

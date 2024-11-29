@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kg.devcats.compose.jetpack_chili.components.common.BonusTagView
+import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
@@ -32,13 +32,13 @@ import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppTo
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun CommonViews(
+fun PreviewCommon(
     navigateUp: () -> Unit,
 ) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)) {
-        ChiliCenteredAppToolbar(title = "CommonViews", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+        ChiliCenteredAppToolbar(title = "Common", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
             navigateUp.invoke()
         })
         Column(modifier = Modifier
@@ -93,16 +93,16 @@ fun CommonViews(
             }
         }
 
-        Text(modifier = Modifier.padding(start = 16.dp), text = "BonusTagView", style = Chili.typography.H16_Primary)
+        Text(modifier = Modifier.padding(start = 16.dp), text = "BonusTag", style = Chili.typography.H16_Primary)
 
         val context = LocalContext.current
         Row {
-            BonusTagView(modifier = Modifier
+            BonusTag(modifier = Modifier
                 .padding(16.dp), text = "Бонусы: 21 343,00") {
                 Toast.makeText(context, "Bonus clicked", Toast.LENGTH_SHORT).show()
             }
 
-            BonusTagView(modifier = Modifier
+            BonusTag(modifier = Modifier
                 .padding(16.dp), enabled = false, text = "+10,00") {
                 Toast.makeText(context, "Bonus clicked", Toast.LENGTH_SHORT).show()
             }
@@ -113,5 +113,5 @@ fun CommonViews(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewCommonViews() {
-    CommonViews({})
+    PreviewCommon({})
 }

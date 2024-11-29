@@ -16,11 +16,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun BonusCardView(
+fun BonusCard(
     modifier: Modifier = Modifier,
     title: String,
     icon: Painter? = null,
@@ -39,17 +39,17 @@ fun BonusCardView(
             Column(
                 modifier = modifier.width(size.width)
             ) {
-                ShimmerView(height = size.iconSize, width = size.iconSize)
+                Shimmer(height = size.iconSize, width = size.iconSize)
                 when(size) {
                     is BonusCardSize.Large -> Spacer(modifier = Modifier.height(8.dp))
                     is BonusCardSize.Middle -> Spacer(modifier = Modifier.height(4.dp))
                 }
-                ShimmerView(
+                Shimmer(
                     modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
                     height = 8.dp,
                     width = 82.dp
                 )
-                ShimmerView(
+                Shimmer(
                     modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
                     height = 8.dp,
                     width = 48.dp
@@ -57,7 +57,7 @@ fun BonusCardView(
             }
         }
     } else {
-        ChiliCardView(
+        ChiliCard(
             modifier = modifier
                 .padding(12.dp)
                 .width(size.width),
@@ -101,7 +101,7 @@ open class BonusCardSize(
 fun BonusCardPreview() {
     Column {
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BonusCardView(
+            BonusCard(
                 title = "Заголовок в 2 строки",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = false
@@ -109,7 +109,7 @@ fun BonusCardPreview() {
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BonusCardView(
+            BonusCard(
                 title = "Заголовок в 2 строки",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = false,
@@ -118,7 +118,7 @@ fun BonusCardPreview() {
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BonusCardView(
+            BonusCard(
                 title = "Заголовок в 2 строки",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = false,
@@ -127,7 +127,7 @@ fun BonusCardPreview() {
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BonusCardView(
+            BonusCard(
                 title = "Заголовок в 2 строки",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = true
@@ -135,7 +135,7 @@ fun BonusCardPreview() {
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BonusCardView(
+            BonusCard(
                 title = "Заголовок в 2 строки",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = true,
@@ -144,7 +144,7 @@ fun BonusCardPreview() {
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BonusCardView(
+            BonusCard(
                 title = "Заголовок в 2 строки",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = true,
