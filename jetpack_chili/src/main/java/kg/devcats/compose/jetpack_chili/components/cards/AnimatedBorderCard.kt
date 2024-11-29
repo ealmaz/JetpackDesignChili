@@ -22,7 +22,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.R
 
 @Composable
-fun BorderAnimated(
+fun AnimatedBorderCard(
     modifier: Modifier = Modifier,
     title: String,
     commissionInfo: String,
@@ -138,7 +138,7 @@ fun BorderAnimated(
 fun BorderAnimatedCardPreview() {
     Column {
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BorderAnimated(
+            AnimatedBorderCard(
                 title = "Title",
                 commissionInfo = "13",
                 commissionValue = "13%",
@@ -147,7 +147,7 @@ fun BorderAnimatedCardPreview() {
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BorderAnimated(
+            AnimatedBorderCard(
                 title = "Title",
                 commissionInfo = "13",
                 commissionValue = "13%",

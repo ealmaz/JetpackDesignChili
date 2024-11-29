@@ -35,7 +35,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCard
 import kg.devcats.compose.jetpack_chili.components.cards.BalanceCard
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
-import kg.devcats.compose.jetpack_chili.components.cards.BorderAnimated
+import kg.devcats.compose.jetpack_chili.components.cards.AnimatedBorderCard
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
 import kg.devcats.compose.jetpack_chili.components.cards.InfoState
@@ -315,7 +315,7 @@ fun PreviewCardScreen(
             Column {
                 Row {
                     ShadowRoundedBox {
-                        BorderAnimated(
+                        AnimatedBorderCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             commissionInfo = "Commission",
@@ -328,7 +328,7 @@ fun PreviewCardScreen(
                     ShadowRoundedBox(
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
-                        BorderAnimated(
+                        AnimatedBorderCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             commissionInfo = "Commission",
@@ -343,7 +343,7 @@ fun PreviewCardScreen(
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
                     ShadowRoundedBox {
-                        BorderAnimated(
+                        AnimatedBorderCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             commissionInfo = "Commission",
@@ -356,7 +356,7 @@ fun PreviewCardScreen(
                     ShadowRoundedBox(
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
-                        BorderAnimated(
+                        AnimatedBorderCard(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             commissionInfo = "Commission",
