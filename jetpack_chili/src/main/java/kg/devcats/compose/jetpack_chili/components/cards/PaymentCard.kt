@@ -15,14 +15,14 @@ import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun PaymentCardView(
+fun PaymentCard(
     modifier: Modifier = Modifier,
     title: String,
     icon: Painter? = null,
     onClick: (() -> Unit)? = null,
     isEnabled: Boolean = true
 ) {
-    ChiliCardView(
+    ChiliCard(
         modifier = modifier.padding(12.dp),
         title = title,
         icon = icon,
@@ -40,7 +40,7 @@ fun PaymentCardPreview() {
     Column {
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
             Column {
-                PaymentCardView(
+                PaymentCard(
                     title = "Заголовок",
                     icon = painterResource(id = R.drawable.chili_ic_documents_green)
                 )
@@ -49,7 +49,7 @@ fun PaymentCardPreview() {
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
             Column {
-                PaymentCardView(
+                PaymentCard(
                     title = "Заголовок",
                     icon = painterResource(id = R.drawable.chili_ic_documents_green),
                     isEnabled = false

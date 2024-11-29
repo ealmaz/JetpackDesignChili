@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kg.devcats.compose.jetpack_chili.components.common.BonusTagView
+import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
@@ -97,12 +97,12 @@ fun CommonViews(
 
         val context = LocalContext.current
         Row {
-            BonusTagView(modifier = Modifier
+            BonusTag(modifier = Modifier
                 .padding(16.dp), text = "Бонусы: 21 343,00") {
                 Toast.makeText(context, "Bonus clicked", Toast.LENGTH_SHORT).show()
             }
 
-            BonusTagView(modifier = Modifier
+            BonusTag(modifier = Modifier
                 .padding(16.dp), enabled = false, text = "+10,00") {
                 Toast.makeText(context, "Bonus clicked", Toast.LENGTH_SHORT).show()
             }

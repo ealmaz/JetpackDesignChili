@@ -14,11 +14,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun CatalogCardView(
+fun CatalogCard(
     modifier: Modifier = Modifier,
     title: String,
     icon: Painter? = null,
@@ -34,9 +34,9 @@ fun CatalogCardView(
                 .padding(12.dp),
         ) {
             Column {
-                ShimmerView(height = 32.dp, width = 32.dp)
+                Shimmer(height = 32.dp, width = 32.dp)
                 Spacer(modifier = Modifier.height(8.dp))
-                ShimmerView(
+                Shimmer(
                     modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
                     height = 8.dp,
                     width = 68.dp
@@ -44,7 +44,7 @@ fun CatalogCardView(
             }
         }
     } else {
-        ChiliCardView(
+        ChiliCard(
             modifier = modifier.padding(12.dp),
             title = title,
             icon = icon,
@@ -59,7 +59,7 @@ fun CatalogCardView(
 fun CatalogCardPreview() {
     Column {
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
-            CatalogCardView(
+            CatalogCard(
                 title = "Заголовок",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = false
@@ -67,7 +67,7 @@ fun CatalogCardPreview() {
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
-            CatalogCardView(
+            CatalogCard(
                 title = "Заголовок",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = true

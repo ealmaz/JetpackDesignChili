@@ -28,7 +28,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 const val EMPTY_ITEM = " "
 
 @Composable
-fun ChiliSpinnerView(
+fun ChiliSpinner(
     modifier: Modifier = Modifier,
     items: List<String>,
     currentIndex: Int = 0,

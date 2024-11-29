@@ -40,7 +40,7 @@ fun SpinnerDatePicker(
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
 
 
-            ChiliSpinnerView(
+            ChiliSpinner(
                 modifier = Modifier.width(55.dp),
                 items = (1 .. 30).map { it.toString() },
                 currentIndex = 0

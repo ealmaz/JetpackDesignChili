@@ -10,7 +10,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import kg.devcats.compose.jetpack_chili.components.banner.AutoScrollBannerView
+import kg.devcats.compose.jetpack_chili.components.banner.AutoScrollBanner
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
@@ -34,7 +34,7 @@ fun PreviewAutoScrollBanners(navigateUp: () -> Unit) {
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
         ) {
-            AutoScrollBannerView(
+            AutoScrollBanner(
                 Modifier.fillMaxWidth(),
                 listOf(
                 "https://postium.ru/wp-content/uploads/2024/10/mem-bu-ispugalsya-ne-bojsya.jpg",

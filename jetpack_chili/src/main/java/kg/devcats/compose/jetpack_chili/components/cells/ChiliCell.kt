@@ -31,7 +31,7 @@ import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun ChiliCellView(
+fun ChiliCell(
     modifier: Modifier = Modifier,
     title: String,
     subtitle: String? = null,
@@ -122,7 +122,7 @@ fun ChiliCellView(
 fun CellPreview() {
     ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
         Column {
-            ChiliCellView(
+            ChiliCell(
                 title = "Заголовок",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
             )

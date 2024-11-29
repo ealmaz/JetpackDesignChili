@@ -17,12 +17,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.R
 
 @Composable
-fun BorderAnimatedView(
+fun BorderAnimated(
     modifier: Modifier = Modifier,
     title: String,
     commissionInfo: String,
@@ -42,8 +42,8 @@ fun BorderAnimatedView(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    ShimmerView(height = 32.dp, width = 32.dp)
-                    ShimmerView(
+                    Shimmer(height = 32.dp, width = 32.dp)
+                    Shimmer(
                         modifier = Modifier.padding(start = 8.dp),
                         height = 8.dp,
                         width = 105.dp
@@ -52,12 +52,12 @@ fun BorderAnimatedView(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    ShimmerView(
+                    Shimmer(
                         modifier = Modifier.padding(top = 14.dp, bottom = 4.dp, end = 5.dp),
                         height = 8.dp,
                         width = 105.dp
                     )
-                    ShimmerView(height = 20.dp, width = 38.dp)
+                    Shimmer(height = 20.dp, width = 38.dp)
                 }
             }
         }
@@ -138,7 +138,7 @@ fun BorderAnimatedView(
 fun BorderAnimatedCardPreview() {
     Column {
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BorderAnimatedView(
+            BorderAnimated(
                 title = "Title",
                 commissionInfo = "13",
                 commissionValue = "13%",
@@ -147,7 +147,7 @@ fun BorderAnimatedCardPreview() {
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
-            BorderAnimatedView(
+            BorderAnimated(
                 title = "Title",
                 commissionInfo = "13",
                 commissionValue = "13%",

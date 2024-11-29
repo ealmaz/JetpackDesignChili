@@ -1,7 +1,7 @@
 package kg.devcats.compose.jetpack_chili.components.cells
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -11,12 +11,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
-import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
+
 @Composable
-fun ChiliCheckBoxCellView(
+fun ChiliAdditionalInfoCell(
     modifier: Modifier = Modifier,
     title: String,
     subtitle: String? = null,
@@ -29,11 +29,10 @@ fun ChiliCheckBoxCellView(
     icon: Painter? = null,
     iconSize: Dp = 32.dp,
     onClick: (() -> Unit)? = null,
-    checked: Boolean,
-    enabled: Boolean = true,
-    onCheckedChange: ((Boolean) -> Unit)?,
+    additionalInfo: String? = null,
+    additionalInfoStyle: TextStyle = Chili.typography.H16_Value,
 ) {
-    ChiliCellView(
+    ChiliCell(
         modifier = modifier,
         title = title,
         subtitle = subtitle,
@@ -47,29 +46,27 @@ fun ChiliCheckBoxCellView(
         iconSize = iconSize,
         onClick = onClick,
         endFrame = {
-            ChiliCheckBox(
-                checked = checked,
-                onCheckedChange = onCheckedChange,
-                enabled = enabled,
-                modifier = Modifier.size(24.dp),
-            )
+            additionalInfo?.let {
+                Text(
+                    text = it,
+                    style = additionalInfoStyle,
+                    modifier = Modifier
+                        .padding(end = 4.dp)
+                )
+            }
         }
     )
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun PreviewChiliCheckBoxCellView() {
-    ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
-
-        ChiliCheckBoxCellView(
+fun AdditionalTextCellPreview() {
+    ShadowRoundedBox(modifier = Modifier.padding(16.dp)) {
+        ChiliAdditionalInfoCell(
             title = "Заголовок",
             subtitle = "Подзаголовок",
             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-            enabled = true,
-            checked = true,
-            onCheckedChange = {}
+            additionalInfo = "Additionl info "
         )
     }
 }
-

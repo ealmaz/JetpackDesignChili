@@ -15,18 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
 import kg.devcats.compose.jetpack_chili.components.common.ChiliChevron
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun BalanceCardView(
+fun BalanceCard(
     modifier: Modifier = Modifier,
     title: String,
     balance: String? = null,
@@ -54,11 +52,11 @@ fun BalanceCardView(
         ) {
             Column {
                 if (isLoading == true) {
-                    ShimmerView(
+                    Shimmer(
                         modifier = Modifier.padding(top = 12.dp), height = 8.dp, width = 52.dp
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    ShimmerView(
+                    Shimmer(
                         modifier = Modifier.padding(bottom = 8.dp), height = 8.dp, width = 104.dp
                     )
                 } else {
@@ -116,12 +114,12 @@ fun BalanceCardView(
 fun BalanceCardPreview() {
     Column {
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
-            BalanceCardView(
+            BalanceCard(
                 title = "Title", balance = "1100 c", actionText = "Action", isLoading = false
             )
         }
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
-            BalanceCardView(
+            BalanceCard(
                 title = "Title", balance = "1100 c", actionText = "Action", isLoading = true
             )
         }
