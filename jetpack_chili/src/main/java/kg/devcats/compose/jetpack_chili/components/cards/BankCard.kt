@@ -1,9 +1,5 @@
 package kg.devcats.compose.jetpack_chili.components.cards
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -42,6 +37,8 @@ fun BankCard(
     modifier: Modifier = Modifier,
     date: String,
     userName: String,
+    maskedCardNumber: String,
+    maskedCVV: String,
     @DrawableRes cardIcon: Int,
     @DrawableRes cardBackground: Int,
     cardNumberState: BankCardFieldState = BankCardFieldState.Loading,
@@ -49,20 +46,14 @@ fun BankCard(
     onCardNumberToggleClick: (BankCardFieldState) -> Unit = {},
     onCVVToggleClick: (BankCardFieldState) -> Unit = {},
 ) {
-    val cardNumberToggleIcon = getIconByState(cardNumberState)
-    val cvvToggleIcon = getIconByState(cvvState)
-
-    val cardNumber: String = getTextData(cardNumberState)
-    val cvv: String = getTextData(cvvState)
-
-    val context = LocalContext.current
+    val cardNumber: String = getTextData(cardNumberState, maskedCardNumber)
+    val cvv: String = getTextData(cvvState, maskedCVV)
 
     Box(
         modifier = modifier
             .fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
-        println("Recompose... BankCardView")
         Image(
             modifier = Modifier.fillMaxWidth(),
             painter = painterResource(id = cardBackground),
@@ -78,17 +69,11 @@ fun BankCard(
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                text = cardPanHideDelegate(
-                    cardNumber,
-                    cardNumberState is BankCardFieldState.IconShow
-                ).toString(),
-                toggleIcon = cardNumberToggleIcon,
+                text = cardNumber,
+                toggleIcon = cardNumberState.getIconByState(),
                 shimmerWidth = 200.dp,
                 isLoading = cardNumberState is BankCardFieldState.Loading
             ) {
-                if (cardNumberState is BankCardFieldState.IconCopy) {
-                    copyText(context = context, text = cardNumber)
-                }
                 onCardNumberToggleClick.invoke(cardNumberState)
             }
             Row(
@@ -108,17 +93,11 @@ fun BankCard(
                     modifier = Modifier
                         .wrapContentWidth()
                         .wrapContentHeight(),
-                    text = cardCvvHideDelegate(
-                        cvv,
-                        cvvState is BankCardFieldState.IconShow
-                    ).toString(),
-                    toggleIcon = cvvToggleIcon,
+                    text = cvv,
+                    toggleIcon = cvvState.getIconByState(),
                     shimmerWidth = 28.dp,
                     isLoading = cvvState is BankCardFieldState.Loading
                 ) {
-                    if (cvvState is BankCardFieldState.IconCopy) {
-                        copyText(context = context, text = cvv)
-                    }
                     onCVVToggleClick.invoke(cvvState)
                 }
             }
@@ -143,49 +122,25 @@ fun BankCard(
     }
 }
 
-fun getTextData(bankCardFieldState: BankCardFieldState): String =
+fun getTextData(bankCardFieldState: BankCardFieldState, maskedText: String): String =
     when (bankCardFieldState) {
-        is BankCardFieldState.IconShow -> bankCardFieldState.text
+        is BankCardFieldState.IconShow -> maskedText
         is BankCardFieldState.IconCopy -> bankCardFieldState.text
         else -> ""
     }
 
-private fun getIconByState(bankCardFieldState: BankCardFieldState) =
-    when (bankCardFieldState) {
-        is BankCardFieldState.IconShow -> R.drawable.chilli_ic_visible1
-        is BankCardFieldState.IconCopy -> R.drawable.chilli_ic_copy
-        else -> null
-    }
-
 sealed class BankCardFieldState {
-    data class IconShow(val text: String = "") : BankCardFieldState()
+    data object IconShow : BankCardFieldState()
     data class IconCopy(val text: String = "") : BankCardFieldState()
     data object IconNone : BankCardFieldState()
     data object Loading : BankCardFieldState()
-}
 
-private var cardPanHideDelegate: (CharSequence, Boolean) -> CharSequence =
-    { pan: CharSequence, isHidden: Boolean ->
-        if (isHidden) {
-            try {
-                pan.replaceRange(6..11, " • • •  • •")
-            } catch (_: Exception) {
-                pan
-            }
-        } else pan
-    }
-
-private var cardCvvHideDelegate = { pan: CharSequence, isHidden: Boolean ->
-    if (isHidden) "• • •"
-    else pan
-}
-
-private fun copyText(context: Context, text: String) {
-    val clipboard: ClipboardManager? =
-        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
-    val clip = ClipData.newPlainText(text, text)
-    clipboard?.setPrimaryClip(clip)
-    Toast.makeText(context, R.string.chili_copied_to_clipboard, Toast.LENGTH_SHORT).show()
+    fun getIconByState() =
+        when (this) {
+            is IconShow -> R.drawable.chilli_ic_visible
+            is IconCopy -> R.drawable.chilli_ic_copy
+            else -> null
+        }
 }
 
 @Composable

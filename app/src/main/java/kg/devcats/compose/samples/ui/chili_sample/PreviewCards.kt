@@ -1,5 +1,8 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -557,8 +560,8 @@ fun PreviewCards(
                 style = Chili.typography.H16_Primary
             )
 
-            var bankCardNumberState by remember { mutableStateOf<BankCardFieldState>(BankCardFieldState.IconShow("1234 5678 9012 3456")) }
-            var bankCardCVVState by remember { mutableStateOf<BankCardFieldState>(BankCardFieldState.IconShow("123")) }
+            var bankCardNumberState by remember { mutableStateOf<BankCardFieldState>(BankCardFieldState.IconShow) }
+            var bankCardCVVState by remember { mutableStateOf<BankCardFieldState>(BankCardFieldState.IconShow) }
 
             val coroutineScope = rememberCoroutineScope()
 
@@ -566,20 +569,22 @@ fun PreviewCards(
                 modifier = Modifier,
                 date = "01/ 26",
                 userName = "Ivanov Ivanovskii",
+                maskedCardNumber = "1234 5• • •  • •12 3456",
+                maskedCVV = "• • •",
                 cardIcon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
                 cardBackground = kg.devcats.compose.samples.R.drawable.card_bg,
                 cardNumberState = bankCardNumberState,
                 cvvState = bankCardCVVState,
                 onCardNumberToggleClick = {
                     coroutineScope.launch {
-                        getBankCardState(bankCardNumberState, "1234 5678 9012 3456").collect {
+                        getBankCardState(context, bankCardNumberState, "1234 5678 9012 3456").collect {
                             bankCardNumberState = it
                         }
                     }
                 },
                 onCVVToggleClick = {
                     coroutineScope.launch {
-                        getBankCardState(bankCardCVVState, "123").collect {
+                        getBankCardState(context, bankCardCVVState, "123").collect {
                             bankCardCVVState = it
                         }
                     }
@@ -589,7 +594,7 @@ fun PreviewCards(
     }
 }
 
-fun getBankCardState(bankCardState: BankCardFieldState, text: String): Flow<BankCardFieldState> = flow {
+fun getBankCardState(context: Context, bankCardState: BankCardFieldState, text: String): Flow<BankCardFieldState> = flow {
     when (bankCardState) {
         is BankCardFieldState.IconShow -> {
             emit(BankCardFieldState.Loading)
@@ -598,7 +603,8 @@ fun getBankCardState(bankCardState: BankCardFieldState, text: String): Flow<Bank
         }
 
         is BankCardFieldState.IconCopy -> {
-            emit(BankCardFieldState.IconShow(text))
+            copyText(context = context, text = bankCardState.text)
+            emit(BankCardFieldState.IconShow)
         }
 
         is BankCardFieldState.IconNone -> {
@@ -609,6 +615,14 @@ fun getBankCardState(bankCardState: BankCardFieldState, text: String): Flow<Bank
 
         }
     }
+}
+
+private fun copyText(context: Context, text: String) {
+    val clipboard: ClipboardManager? =
+        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
+    val clip = ClipData.newPlainText(text, text)
+    clipboard?.setPrimaryClip(clip)
+    Toast.makeText(context, R.string.chili_copied_to_clipboard, Toast.LENGTH_SHORT).show()
 }
 
 @Preview(showBackground = true, showSystemUi = true)
