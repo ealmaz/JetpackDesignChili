@@ -5,41 +5,41 @@ import kotlinx.serialization.Serializable
 sealed class Screens {
 
     @Serializable
-    data object MainScreen : Screens()
+    data object Main : Screens()
 
     @Serializable
-    data object ButtonsScreen : Screens()
+    data object Buttons : Screens()
 
     @Serializable
-    data object BottomSheetsScreen : Screens()
+    data object BottomSheets : Screens()
 
     @Serializable
-    data object CardViewsScreen : Screens()
+    data object Cards : Screens()
 
     @Serializable
-    data object CellViewsScreen : Screens()
+    data object Cells : Screens()
 
     @Serializable
-    data object CommonViewsScreen : Screens()
+    data object Common : Screens()
 
     @Serializable
-    data object InputFieldsScreen : Screens()
+    data object InputFields : Screens()
 
     @Serializable
-    data object TextAppearancesScreen : Screens()
+    data object TextAppearances : Screens()
 
     @Serializable
-    data object ToolbarsScreens : Screens()
+    data object Toolbars : Screens()
 
     @Serializable
-    data object AutoScrollBannersScreens : Screens()
+    data object AutoScrollBanners : Screens()
 
     @Serializable
-    data object SnackbarScreen : Screens()
+    data object Snackbars : Screens()
 
     @Serializable
-    data object DialogsScreen : Screens()
+    data object Dialogs : Screens()
 
     @Serializable
-    data object DividersScreen : Screens()
+    data object Dividers : Screens()
 }

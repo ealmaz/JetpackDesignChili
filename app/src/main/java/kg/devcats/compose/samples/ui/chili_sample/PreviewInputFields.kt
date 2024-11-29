@@ -30,7 +30,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun PreviewInputFieldScreen(navigateUp: () -> Unit,) {
+fun PreviewInputFields(navigateUp: () -> Unit,) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)
@@ -170,5 +170,5 @@ fun PreviewInputFieldScreen(navigateUp: () -> Unit,) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewInputFields() {
-    PreviewInputFieldScreen({})
+    PreviewInputFields({})
 }

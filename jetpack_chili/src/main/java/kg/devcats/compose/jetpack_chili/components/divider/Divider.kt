@@ -17,7 +17,7 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun DividerView(
+fun Divider(
     title: String,
     subtitle: String? = null,
     actionText: String? = null,

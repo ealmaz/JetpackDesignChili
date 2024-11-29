@@ -50,7 +50,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
-fun PreviewCardScreen(
+fun PreviewCards(
     navigateUp: () -> Unit,
 ) {
     Column(
@@ -551,5 +551,5 @@ fun PreviewCardScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewCardViews() {
-    PreviewCardScreen({})
+    PreviewCards({})
 }

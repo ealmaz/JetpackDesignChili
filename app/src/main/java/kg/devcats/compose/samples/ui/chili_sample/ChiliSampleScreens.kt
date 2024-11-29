@@ -39,48 +39,48 @@ fun ChiliSampleScreens(
             ChiliPrimaryButton(text = "Typography", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.TextAppearancesScreen.toString())
+                navController?.navigate(Screens.TextAppearances.toString())
             }
             ChiliPrimaryButton(text = "Buttons", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.ButtonsScreen.toString())
+                navController?.navigate(Screens.Buttons.toString())
             }
 
             ChiliPrimaryButton(text = "Input fields", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.InputFieldsScreen.toString())
+                navController?.navigate(Screens.InputFields.toString())
             }
 
             ChiliPrimaryButton(text = "Cell views", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.CellViewsScreen.toString())
+                navController?.navigate(Screens.Cells.toString())
             }
 
             ChiliPrimaryButton(text = "Toolbars", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.ToolbarsScreens.toString())
+                navController?.navigate(Screens.Toolbars.toString())
             }
 
             ChiliPrimaryButton(text = "Common views", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.CommonViewsScreen.toString())
+                navController?.navigate(Screens.Common.toString())
             }
 
             ChiliPrimaryButton(text = "Bottom sheets", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.BottomSheetsScreen.toString())
+                navController?.navigate(Screens.BottomSheets.toString())
             }
 
             ChiliPrimaryButton(text = "Cards", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.CardViewsScreen.toString())
+                navController?.navigate(Screens.Cards.toString())
             }
 
             ChiliPrimaryButton(text = "Stories", modifier = Modifier
@@ -92,25 +92,25 @@ fun ChiliSampleScreens(
             ChiliPrimaryButton(text = "Auto Scroll Banners", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.AutoScrollBannersScreens.toString())
+                navController?.navigate(Screens.AutoScrollBanners.toString())
             }
 
             ChiliPrimaryButton(text = "Snackbar", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.SnackbarScreen.toString())
+                navController?.navigate(Screens.Snackbars.toString())
             }
 
             ChiliPrimaryButton(text = "Dialogs", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.DialogsScreen.toString())
+                navController?.navigate(Screens.Dialogs.toString())
             }
 
             ChiliPrimaryButton(text = "Divider", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.DividersScreen.toString())
+                navController?.navigate(Screens.Dividers.toString())
             }
         }
     }

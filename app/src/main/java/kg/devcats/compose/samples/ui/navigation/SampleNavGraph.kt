@@ -6,11 +6,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kg.devcats.compose.samples.ui.chili_sample.BottomSheetsPreview
-import kg.devcats.compose.samples.ui.chili_sample.PreviewCardScreen
-import kg.devcats.compose.samples.ui.chili_sample.PreviewCellScreen
+import kg.devcats.compose.samples.ui.chili_sample.PreviewCards
+import kg.devcats.compose.samples.ui.chili_sample.PreviewCells
 import kg.devcats.compose.samples.ui.chili_sample.ChiliSampleScreens
-import kg.devcats.compose.samples.ui.chili_sample.PreviewCommonScreen
-import kg.devcats.compose.samples.ui.chili_sample.PreviewInputFieldScreen
+import kg.devcats.compose.samples.ui.chili_sample.PreviewCommons
+import kg.devcats.compose.samples.ui.chili_sample.PreviewInputFields
 import kg.devcats.compose.samples.ui.chili_sample.PreviewSnackbars
 import kg.devcats.compose.samples.ui.chili_sample.PreviewAutoScrollBanners
 import kg.devcats.compose.samples.ui.chili_sample.PreviewButtons
@@ -22,44 +22,44 @@ import kg.devcats.compose.samples.ui.chili_sample.Toolbars
 @Composable
 fun SamplesNavGraph(navController: NavHostController = rememberNavController()) {
 
-    NavHost(navController = navController, startDestination = Screens.MainScreen.toString()) {
-        composable(Screens.MainScreen.toString()) {
+    NavHost(navController = navController, startDestination = Screens.Main.toString()) {
+        composable(Screens.Main.toString()) {
             ChiliSampleScreens(navController)
         }
-        composable(Screens.TextAppearancesScreen.toString()) {
+        composable(Screens.TextAppearances.toString()) {
             TextAppearance { navController.navigateUp() }
         }
-        composable(Screens.ButtonsScreen.toString()) {
+        composable(Screens.Buttons.toString()) {
             PreviewButtons { navController.navigateUp() }
         }
-        composable(Screens.InputFieldsScreen.toString()) {
-            PreviewInputFieldScreen { navController.navigateUp() }
+        composable(Screens.InputFields.toString()) {
+            PreviewInputFields { navController.navigateUp() }
         }
-        composable(Screens.CellViewsScreen.toString()) {
-            PreviewCellScreen { navController.navigateUp() }
+        composable(Screens.Cells.toString()) {
+            PreviewCells { navController.navigateUp() }
         }
-        composable(Screens.CardViewsScreen.toString()) {
-            PreviewCardScreen { navController.navigateUp() }
+        composable(Screens.Cards.toString()) {
+            PreviewCards { navController.navigateUp() }
         }
-        composable(Screens.BottomSheetsScreen.toString()) {
+        composable(Screens.BottomSheets.toString()) {
             BottomSheetsPreview { navController.navigateUp() }
         }
-        composable(Screens.CommonViewsScreen.toString()) {
-            PreviewCommonScreen { navController.navigateUp() }
+        composable(Screens.Common.toString()) {
+            PreviewCommons { navController.navigateUp() }
         }
-        composable(Screens.ToolbarsScreens.toString()) {
+        composable(Screens.Toolbars.toString()) {
             Toolbars { navController.navigateUp() }
         }
-        composable(Screens.AutoScrollBannersScreens.toString()) {
+        composable(Screens.AutoScrollBanners.toString()) {
             PreviewAutoScrollBanners { navController.navigateUp() }
         }
-        composable(Screens.SnackbarScreen.toString()) {
+        composable(Screens.Snackbars.toString()) {
             PreviewSnackbars { navController.navigateUp() }
         }
-        composable(Screens.DialogsScreen.toString()) {
+        composable(Screens.Dialogs.toString()) {
             PreviewDialogs { navController.navigateUp() }
         }
-        composable(Screens.DividersScreen.toString()) {
+        composable(Screens.Dividers.toString()) {
             PreviewDividers { navController.navigateUp() }
         }
     }
