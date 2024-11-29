@@ -9,7 +9,7 @@ import kg.devcats.compose.samples.ui.chili_sample.BottomSheetsPreview
 import kg.devcats.compose.samples.ui.chili_sample.PreviewCards
 import kg.devcats.compose.samples.ui.chili_sample.PreviewCells
 import kg.devcats.compose.samples.ui.chili_sample.ChiliSampleScreens
-import kg.devcats.compose.samples.ui.chili_sample.PreviewCommons
+import kg.devcats.compose.samples.ui.chili_sample.PreviewCommon
 import kg.devcats.compose.samples.ui.chili_sample.PreviewInputFields
 import kg.devcats.compose.samples.ui.chili_sample.PreviewSnackbars
 import kg.devcats.compose.samples.ui.chili_sample.PreviewAutoScrollBanners
@@ -45,7 +45,7 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
             BottomSheetsPreview { navController.navigateUp() }
         }
         composable(Screens.CommonScreen.toString()) {
-            PreviewCommons { navController.navigateUp() }
+            PreviewCommon { navController.navigateUp() }
         }
         composable(Screens.ToolbarsScreens.toString()) {
             Toolbars { navController.navigateUp() }
