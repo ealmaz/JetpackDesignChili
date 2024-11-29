@@ -88,6 +88,11 @@ fun PreviewDividers(navigateUp: () -> Unit) {
                 modifier = Modifier.padding(top = 16.dp)
             )
             Divider(
+                title = "Выбрать язык",
+                titleTextStyle = Chili.typography.H18_Primary_700,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+            Divider(
                 title = "Заголовок",
                 startIconPainter = painterResource(R.drawable.chili_ic_documents_green),
                 modifier = Modifier.padding(top = 16.dp),
