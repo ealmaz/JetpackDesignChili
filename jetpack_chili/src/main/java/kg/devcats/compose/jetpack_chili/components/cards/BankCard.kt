@@ -32,7 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
-import kg.devcats.compose.jetpack_chili.components.shimmer.ShimmerView
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.black_3_alpha_45
 import kg.devcats.compose.jetpack_chili.theme.white_1
@@ -205,7 +205,7 @@ private fun TextWithMask(
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (isLoading) {
-            ShimmerView(modifier = Modifier
+            Shimmer(modifier = Modifier
                 .padding(end = 24.dp)
                 .width(shimmerWidth)
                 .height(12.dp))
