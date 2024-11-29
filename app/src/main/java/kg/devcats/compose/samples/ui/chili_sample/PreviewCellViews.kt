@@ -32,7 +32,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
-fun CellViews(
+fun PreviewCellScreen(
     navigateUp: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -392,5 +392,5 @@ fun CellViews(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewCellViews() {
-    CellViews({})
+    PreviewCellScreen({})
 }

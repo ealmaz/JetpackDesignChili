@@ -6,11 +6,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kg.devcats.compose.samples.ui.chili_sample.BottomSheetsPreview
-import kg.devcats.compose.samples.ui.chili_sample.CardViews
-import kg.devcats.compose.samples.ui.chili_sample.CellViews
+import kg.devcats.compose.samples.ui.chili_sample.PreviewCardScreen
+import kg.devcats.compose.samples.ui.chili_sample.PreviewCellScreen
 import kg.devcats.compose.samples.ui.chili_sample.ChiliSampleScreens
-import kg.devcats.compose.samples.ui.chili_sample.CommonViews
-import kg.devcats.compose.samples.ui.chili_sample.InputFields
+import kg.devcats.compose.samples.ui.chili_sample.PreviewCommonScreen
+import kg.devcats.compose.samples.ui.chili_sample.PreviewInputFieldScreen
 import kg.devcats.compose.samples.ui.chili_sample.PreviewSnackbars
 import kg.devcats.compose.samples.ui.chili_sample.PreviewAutoScrollBanners
 import kg.devcats.compose.samples.ui.chili_sample.PreviewButtons
@@ -33,19 +33,19 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
             PreviewButtons { navController.navigateUp() }
         }
         composable(Screens.InputFieldsScreen.toString()) {
-            InputFields { navController.navigateUp() }
+            PreviewInputFieldScreen { navController.navigateUp() }
         }
         composable(Screens.CellViewsScreen.toString()) {
-            CellViews { navController.navigateUp() }
+            PreviewCellScreen { navController.navigateUp() }
         }
         composable(Screens.CardViewsScreen.toString()) {
-            CardViews { navController.navigateUp() }
+            PreviewCardScreen { navController.navigateUp() }
         }
         composable(Screens.BottomSheetsScreen.toString()) {
             BottomSheetsPreview { navController.navigateUp() }
         }
         composable(Screens.CommonViewsScreen.toString()) {
-            CommonViews { navController.navigateUp() }
+            PreviewCommonScreen { navController.navigateUp() }
         }
         composable(Screens.ToolbarsScreens.toString()) {
             Toolbars { navController.navigateUp() }
