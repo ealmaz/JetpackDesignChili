@@ -59,7 +59,7 @@ fun PreviewCards(
             .background(Chili.color.surfaceBackground)
     ) {
         ChiliCenteredAppToolbar(
-            title = "CardViews",
+            title = "Card",
             isDividerVisible = true,
             isNavigationIconVisible = true,
             onNavigationIconClick = {
@@ -74,7 +74,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "ChiliCardView",
+                text = "ChiliCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
@@ -115,7 +115,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "BalanceCardView",
+                text = "BalanceCard",
                 style = Chili.typography.H16_Primary
             )
             Row {
@@ -144,7 +144,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "CatalogCardView",
+                text = "CatalogCard",
                 style = Chili.typography.H16_Primary
             )
             Row {
@@ -174,7 +174,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "PaymentCardView",
+                text = "PaymentCard",
                 style = Chili.typography.H16_Primary
             )
             Row {
@@ -201,7 +201,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AccentCardView",
+                text = "AccentCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
@@ -229,7 +229,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "BonusCardView",
+                text = "BonusCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
@@ -309,7 +309,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AnimatedCardView",
+                text = "AnimatedCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
@@ -371,7 +371,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AccentCardView",
+                text = "AccentCard",
                 style = Chili.typography.H16_Primary
             )
             Column {
@@ -411,7 +411,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "MultiiconedCellView",
+                text = "MultiiconedCell",
                 style = Chili.typography.H16_Primary
             )
 
@@ -427,7 +427,7 @@ fun PreviewCards(
                         kg.devcats.compose.samples.R.drawable.elcart,
                         kg.devcats.compose.samples.R.drawable.elcart,
                     ),
-                    title = "MultiiconedCellView title",
+                    title = "MultiiconedCell title",
                     additionalInfo = "Весь список",
                     isLoading = true,
                     onAdditionalInfoClick = {
@@ -438,7 +438,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "AlertBlockCardView",
+                text = "AlertBlockCard",
                 style = Chili.typography.H16_Primary
             )
 
@@ -468,13 +468,13 @@ fun PreviewCards(
                 subtitle = "Subtitle",
                 buttonText = "Кнопка",
                 onButtonClick = {
-                    context.showToast("AlertBlockCardView")
+                    context.showToast("AlertBlockCard")
                 }
             )
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "SubtitledSimpleCardView",
+                text = "SubtitledSimpleCard",
                 style = Chili.typography.H16_Primary
             )
 
@@ -506,7 +506,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "ProductCardView",
+                text = "ProductCard",
                 style = Chili.typography.H16_Primary
             )
 

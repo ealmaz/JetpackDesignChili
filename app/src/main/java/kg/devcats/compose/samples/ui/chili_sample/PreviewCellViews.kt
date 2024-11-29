@@ -39,7 +39,7 @@ fun PreviewCells(
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)) {
-        ChiliCenteredAppToolbar(title = "CellViews", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+        ChiliCenteredAppToolbar(title = "Cell", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
             navigateUp.invoke()
         })
         Column(modifier = Modifier
@@ -47,7 +47,7 @@ fun PreviewCells(
             .verticalScroll(rememberScrollState())
             .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)) {
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
@@ -77,7 +77,7 @@ fun PreviewCells(
                 }
             }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView subtitle", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell subtitle", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
@@ -111,7 +111,7 @@ fun PreviewCells(
                 }
             }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with icon", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with icon", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
@@ -150,7 +150,7 @@ fun PreviewCells(
             }
 
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with Additilnal text", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with Additilnal text", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
@@ -166,7 +166,7 @@ fun PreviewCells(
                 }
             }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with BonusTag", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with BonusTag", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox(modifier = Modifier) {
                 Column {
@@ -203,7 +203,7 @@ fun PreviewCells(
             }
 
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with Switch", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with Switch", style = Chili.typography.H16_Primary)
 
             var switchChecked by remember { mutableStateOf(false) }
             var switchChecked2 by remember { mutableStateOf(false) }
@@ -263,7 +263,7 @@ fun PreviewCells(
             var checkBoxChecked3 by remember { mutableStateOf(false) }
             var checkBoxChecked4 by remember { mutableStateOf(false) }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "CellView with Check box", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "Cell with Check box", style = Chili.typography.H16_Primary)
 
             ShadowRoundedBox() {
                 Column {
@@ -313,7 +313,7 @@ fun PreviewCells(
                 }
             }
 
-            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "ProductCellView", style = Chili.typography.H16_Primary)
+            Text(modifier = Modifier.padding(top = 32.dp, bottom = 16.dp), text = "ProductCell", style = Chili.typography.H16_Primary)
 
             Column {
                 ProductCell(

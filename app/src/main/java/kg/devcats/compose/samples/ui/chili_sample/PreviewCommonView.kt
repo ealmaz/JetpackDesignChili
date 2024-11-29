@@ -38,7 +38,7 @@ fun PreviewCommons(
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)) {
-        ChiliCenteredAppToolbar(title = "CommonViews", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+        ChiliCenteredAppToolbar(title = "Common", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
             navigateUp.invoke()
         })
         Column(modifier = Modifier
@@ -93,7 +93,7 @@ fun PreviewCommons(
             }
         }
 
-        Text(modifier = Modifier.padding(start = 16.dp), text = "BonusTagView", style = Chili.typography.H16_Primary)
+        Text(modifier = Modifier.padding(start = 16.dp), text = "BonusTag", style = Chili.typography.H16_Primary)
 
         val context = LocalContext.current
         Row {

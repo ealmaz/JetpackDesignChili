@@ -22,44 +22,44 @@ import kg.devcats.compose.samples.ui.chili_sample.Toolbars
 @Composable
 fun SamplesNavGraph(navController: NavHostController = rememberNavController()) {
 
-    NavHost(navController = navController, startDestination = Screens.Main.toString()) {
-        composable(Screens.Main.toString()) {
+    NavHost(navController = navController, startDestination = Screens.MainScreen.toString()) {
+        composable(Screens.MainScreen.toString()) {
             ChiliSampleScreens(navController)
         }
-        composable(Screens.TextAppearances.toString()) {
+        composable(Screens.TextAppearancesScreen.toString()) {
             TextAppearance { navController.navigateUp() }
         }
-        composable(Screens.Buttons.toString()) {
+        composable(Screens.ButtonsScreen.toString()) {
             PreviewButtons { navController.navigateUp() }
         }
-        composable(Screens.InputFields.toString()) {
+        composable(Screens.InputFieldsScreen.toString()) {
             PreviewInputFields { navController.navigateUp() }
         }
-        composable(Screens.Cells.toString()) {
+        composable(Screens.CellsScreen.toString()) {
             PreviewCells { navController.navigateUp() }
         }
-        composable(Screens.Cards.toString()) {
+        composable(Screens.CardsScreen.toString()) {
             PreviewCards { navController.navigateUp() }
         }
-        composable(Screens.BottomSheets.toString()) {
+        composable(Screens.BottomSheetsScreen.toString()) {
             BottomSheetsPreview { navController.navigateUp() }
         }
-        composable(Screens.Common.toString()) {
+        composable(Screens.CommonScreen.toString()) {
             PreviewCommons { navController.navigateUp() }
         }
-        composable(Screens.Toolbars.toString()) {
+        composable(Screens.ToolbarsScreens.toString()) {
             Toolbars { navController.navigateUp() }
         }
-        composable(Screens.AutoScrollBanners.toString()) {
+        composable(Screens.AutoScrollBannersScreens.toString()) {
             PreviewAutoScrollBanners { navController.navigateUp() }
         }
-        composable(Screens.Snackbars.toString()) {
+        composable(Screens.SnackbarScreen.toString()) {
             PreviewSnackbars { navController.navigateUp() }
         }
-        composable(Screens.Dialogs.toString()) {
+        composable(Screens.DialogsScreen.toString()) {
             PreviewDialogs { navController.navigateUp() }
         }
-        composable(Screens.Dividers.toString()) {
+        composable(Screens.DividersScreen.toString()) {
             PreviewDividers { navController.navigateUp() }
         }
     }
