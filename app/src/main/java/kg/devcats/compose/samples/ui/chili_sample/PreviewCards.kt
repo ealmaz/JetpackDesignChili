@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +31,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.cards.AccentCardView
+import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCardView
+import kg.devcats.compose.jetpack_chili.components.cards.BalanceCardView
+import kg.devcats.compose.jetpack_chili.components.cards.BankCard
+import kg.devcats.compose.jetpack_chili.components.cards.BankCardFieldState
 import kg.devcats.compose.jetpack_chili.components.cards.AccentCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertState
@@ -48,6 +54,10 @@ import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 @Composable
 fun PreviewCards(
@@ -543,6 +553,62 @@ fun PreviewCards(
                     }
                 }
             }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "BankCardView",
+                style = Chili.typography.H16_Primary
+            )
+
+            var bankCardNumberState by remember { mutableStateOf<BankCardFieldState>(BankCardFieldState.IconShow("1234 5678 9012 3456")) }
+            var bankCardCVVState by remember { mutableStateOf<BankCardFieldState>(BankCardFieldState.IconShow("123")) }
+
+            val coroutineScope = rememberCoroutineScope()
+
+            BankCard(
+                modifier = Modifier,
+                date = "01/ 26",
+                userName = "Ivanov Ivanovskii",
+                cardIcon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
+                cardBackground = kg.devcats.compose.samples.R.drawable.card_bg,
+                cardNumberState = bankCardNumberState,
+                cvvState = bankCardCVVState,
+                onCardNumberToggleClick = {
+                    coroutineScope.launch {
+                        getBankCardState(bankCardNumberState, "1234 5678 9012 3456").collect {
+                            bankCardNumberState = it
+                        }
+                    }
+                },
+                onCVVToggleClick = {
+                    coroutineScope.launch {
+                        getBankCardState(bankCardCVVState, "123").collect {
+                            bankCardCVVState = it
+                        }
+                    }
+                }
+            )
+        }
+    }
+}
+
+fun getBankCardState(bankCardState: BankCardFieldState, text: String): Flow<BankCardFieldState> = flow {
+    when (bankCardState) {
+        is BankCardFieldState.IconShow -> {
+            emit(BankCardFieldState.Loading)
+            delay(1000)
+            emit(BankCardFieldState.IconCopy(text))
+        }
+
+        is BankCardFieldState.IconCopy -> {
+            emit(BankCardFieldState.IconShow(text))
+        }
+
+        is BankCardFieldState.IconNone -> {
+
+        }
+
+        is BankCardFieldState.Loading -> {
 
         }
     }
