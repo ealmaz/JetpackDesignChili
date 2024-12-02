@@ -31,6 +31,8 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
     val context = LocalContext.current
 
     var showSimpleDialog by remember { mutableStateOf(false) }
+    var showSimpleDialogTitle by remember { mutableStateOf(false) }
+
     var showOptionDialog by remember { mutableStateOf(false) }
 
     var showSimpleCustomDialog by remember { mutableStateOf(false) }
@@ -62,6 +64,14 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
                     .padding(top = 16.dp)
             ) {
                 showSimpleDialog = true
+            }
+
+            ChiliPrimaryButton(
+                text = "Simple dialog, just title", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                showSimpleDialogTitle = true
             }
 
             ChiliPrimaryButton(
@@ -102,6 +112,16 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
         },
         onNegativeClick = {
             Toast.makeText(context, "Negative button clicked", Toast.LENGTH_SHORT).show()
+        }
+    )
+
+    ChiliDialog(
+        showDialog = showSimpleDialogTitle,
+        onDismiss = { showSimpleDialogTitle = false },
+        message = "This is a simple dialog",
+        positiveButtonText = "OK",
+        onPositiveClick = {
+            Toast.makeText(context, "Positive button clicked", Toast.LENGTH_SHORT).show()
         }
     )
 

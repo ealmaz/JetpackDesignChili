@@ -20,42 +20,51 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 fun ChiliDialog(
     showDialog: Boolean,
     onDismiss: () -> Unit,
-    title: String,
-    message: String,
-    positiveButtonText: String = "OK",
-    negativeButtonText: String = "Cancel",
+    title: String? = null,
+    message: String? = null,
+    positiveButtonText: String? = null,
+    negativeButtonText: String? = null,
     onPositiveClick: () -> Unit = {},
     onNegativeClick: () -> Unit = {}
 ) {
     if (showDialog) {
         AlertDialog(
             onDismissRequest = onDismiss,
+
             title = {
-                Text(text = title, style = Chili.typography.H16)
+                title?.let {
+                    Text(text = it, style = Chili.typography.H16)
+                }
             },
             text = {
-                Text(text = message)
+                message?.let {
+                    Text(text = it)
+                }
             },
             confirmButton = {
-                TextButton(onClick = {
-                    onPositiveClick()
-                    onDismiss()
-                }) {
-                    Text(
-                        text = positiveButtonText,
-                        color = Chili.color.primaryText
-                    )
+                positiveButtonText?.let {
+                    TextButton(onClick = {
+                        onPositiveClick()
+                        onDismiss()
+                    }) {
+                        Text(
+                            text = it,
+                            color = Chili.color.primaryText
+                        )
+                    }
                 }
             },
             dismissButton = {
-                TextButton(onClick = {
-                    onNegativeClick()
-                    onDismiss()
-                }) {
-                    Text(
-                        text = negativeButtonText,
-                        color = Chili.color.primaryText
-                    )
+                negativeButtonText?.let {
+                    TextButton(onClick = {
+                        onNegativeClick()
+                        onDismiss()
+                    }) {
+                        Text(
+                            text = it,
+                            color = Chili.color.primaryText
+                        )
+                    }
                 }
             }
         )
