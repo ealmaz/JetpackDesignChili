@@ -38,7 +38,7 @@ fun AgreementCell(
     isEditable: Boolean = true,
     icon: Painter? = painterResource(id = R.drawable.chili_ic_checkmark),
     linkColor: Color = Chili.color.linkText,
-    containerBackgroundColor: Color = Chili.color.cellViewBackground,
+    containerBackgroundColor: Color = Chili.color.surfaceBackground,
     onCheckedChange: (Boolean) -> Unit = {},
     action: (url: String) -> (Unit)
 ) {
@@ -118,7 +118,7 @@ fun ClickableLinkText(
         text = annotatedString,
         onClick = { offset ->
             annotatedString.getStringAnnotations(tag = "URL", start = offset, end = offset).firstOrNull()?.let { annotation ->
-                action.invoke(annotation.item)
+                action(annotation.item)
             }
         }
     )
