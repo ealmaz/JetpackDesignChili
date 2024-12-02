@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JetpackDesingChili</string>
+    <string name="clickable_link_example"><![CDATA[<a href="ссылка">Это кликабельный текст</a> это некликабельный текст <a href="вторая_ссылка">тут второй кликабельный текст</a>]]></string>
 </resources>

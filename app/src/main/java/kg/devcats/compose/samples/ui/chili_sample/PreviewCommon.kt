@@ -21,8 +21,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kg.devcats.compose.jetpack_chili.components.common.AgreementCell
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
@@ -105,6 +107,23 @@ fun PreviewCommon(
             BonusTag(modifier = Modifier
                 .padding(16.dp), enabled = false, text = "+10,00") {
                 Toast.makeText(context, "Bonus clicked", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        Column {
+            AgreementCell(
+                modifier = Modifier.padding(start = 6.dp),
+                title = stringResource(id = kg.devcats.compose.samples.R.string.clickable_link_example)
+            ){
+                Toast.makeText(context, "Link clicked: $it", Toast.LENGTH_SHORT).show()
+            }
+
+            AgreementCell(
+                modifier = Modifier.padding(start = 16.dp),
+                isEditable = false,
+                title = stringResource(id = kg.devcats.compose.samples.R.string.clickable_link_example)
+            ){
+                Toast.makeText(context, "Link clicked: $it", Toast.LENGTH_SHORT).show()
             }
         }
     }
