@@ -30,8 +30,8 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 @Composable
 fun AlertBlockCard(
     modifier: Modifier = Modifier,
-    title: String,
-    infoState: InfoState,
+    title: String? = null,
+    alertState: AlertState,
     subtitle: String? = null,
     buttonText: String? = null,
     onButtonClick: (() -> Unit)? = null,
@@ -42,35 +42,37 @@ fun AlertBlockCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .background(infoState.getBgColor())
+            .background(alertState.getBgColor())
             .padding(12.dp)
     ) {
         Row {
             Box(
                 modifier = Modifier
-                    .size(30.dp)
+                    .size(20.dp)
                     .clip(CircleShape)
-                    .background(infoState.getContentColor()),
+                    .background(alertState.getContentColor()),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = infoState.getIcon(),
+                    painter = alertState.getIcon(),
                     contentDescription = null,
                     tint = Color.White
                 )
             }
             Spacer(Modifier.width(8.dp))
             Column(Modifier.weight(1f).align(Alignment.CenterVertically)) {
-                Text(
-                    text = title,
-                    style = Chili.typography.H14_Primary_700.copy(color = infoState.getTextColor())
-                )
+                if (!title.isNullOrEmpty()){
+                    Text(
+                        text = title,
+                        style = Chili.typography.H14_Primary_700.copy(color = alertState.getTextColor())
+                    )
+                }
                 if (!subtitle.isNullOrEmpty()) {
                     Text(
-                        modifier = Modifier.padding(top = 4.dp),
+                        modifier = Modifier.padding(top = if (title.isNullOrEmpty()) 0.dp else 4.dp),
                         text = subtitle,
                         style = Chili.typography.H12,
-                        color = infoState.getTextColor()
+                        color = alertState.getTextColor()
                     )
                 }
 
@@ -78,7 +80,7 @@ fun AlertBlockCard(
                     ChiliCustomButton(
                         text = buttonText,
                         modifier = Modifier.padding(top = 12.dp),
-                        colors = primaryButtonColors().copy(containerColor = infoState.getContentColor()),
+                        colors = primaryButtonColors().copy(containerColor = alertState.getContentColor()),
                         onClick = { onButtonClick?.invoke() }
                     )
                 }
@@ -89,7 +91,7 @@ fun AlertBlockCard(
                         .size(20.dp)
                         .clickable { onCloseClick?.invoke() },
                     painter = painterResource(R.drawable.chili_ic_close),
-                    tint = infoState.getContentColor(),
+                    tint = alertState.getContentColor(),
                     contentDescription = null,
                 )
             }
@@ -97,15 +99,15 @@ fun AlertBlockCard(
     }
 }
 
-enum class InfoState {
+enum class AlertState {
     Neutral, Warning, Error;
 
     @Composable
     fun getIcon(): Painter {
         return when (this) {
-            Neutral -> painterResource(R.drawable.chili_ic_information)
-            Warning -> painterResource(R.drawable.chili_ic_caution)
-            Error -> painterResource(R.drawable.chili_ic_error)
+            Neutral -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_information)
+            Warning -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_caution)
+            Error -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_error)
         }
     }
 

@@ -32,13 +32,13 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.cards.AccentCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCard
+import kg.devcats.compose.jetpack_chili.components.cards.AlertState
 import kg.devcats.compose.jetpack_chili.components.cards.BalanceCard
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
 import kg.devcats.compose.jetpack_chili.components.cards.AnimatedBorderCard
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
-import kg.devcats.compose.jetpack_chili.components.cards.InfoState
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCard
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCard
 import kg.devcats.compose.jetpack_chili.components.cards.ProductCard
@@ -448,7 +448,7 @@ fun PreviewCards(
                 AlertBlockCard(
                     modifier = Modifier.padding(bottom = 14.dp),
                     title = "Title",
-                    infoState = InfoState.Neutral,
+                    alertState = AlertState.Neutral,
                     subtitle = "Subtitle",
                     buttonText = "Кнопка",
                     isClosable = true,
@@ -458,13 +458,13 @@ fun PreviewCards(
 
             AlertBlockCard(
                 modifier = Modifier.padding(bottom = 14.dp),
-                title = "Деньги поступят на счёт по умолчанию",
-                infoState = InfoState.Warning
+                subtitle = "Деньги поступят на счёт по умолчанию",
+                alertState = AlertState.Neutral
             )
 
             AlertBlockCard(
                 title = "Title",
-                infoState = InfoState.Error,
+                alertState = AlertState.Error,
                 subtitle = "Subtitle",
                 buttonText = "Кнопка",
                 onButtonClick = {
