@@ -41,3 +41,13 @@ fun Modifier.setIsPressedEffect(
         onClick = { if (isSurfaceClickable) onClick() }
     )
 }
+
+fun Modifier.clickableWithoutEffect(
+    onClick: () -> Unit
+): Modifier = composed {
+    return@composed clickable(
+        interactionSource = null,
+        indication = null,
+        onClick = onClick
+    )
+}
