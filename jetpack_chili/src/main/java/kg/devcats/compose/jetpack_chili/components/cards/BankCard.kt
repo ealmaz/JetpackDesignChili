@@ -35,6 +35,7 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.black_3_alpha_45
+import kg.devcats.compose.jetpack_chili.theme.gray_10_alpha_70
 import kg.devcats.compose.jetpack_chili.theme.white_1
 
 @Composable
@@ -108,7 +109,8 @@ fun BankCard(
                 text = cardNumber,
                 toggleIcon = cardNumberState.getIconByState(),
                 shimmerWidth = 200.dp,
-                isLoading = cardNumberState is BankCardFieldState.Loading
+                isLoading = cardNumberState is BankCardFieldState.Loading,
+                isBackgroundLoading = isBankingCard && !isCardBackgroundLoaded
             ) {
                 onCardNumberToggleClick.invoke(cardNumberState)
             }
@@ -132,7 +134,8 @@ fun BankCard(
                     text = cvv,
                     toggleIcon = cvvState.getIconByState(),
                     shimmerWidth = 28.dp,
-                    isLoading = cvvState is BankCardFieldState.Loading
+                    isLoading = cvvState is BankCardFieldState.Loading,
+                    isBackgroundLoading = isBankingCard && !isCardBackgroundLoaded
                 ) {
                     onCVVToggleClick.invoke(cvvState)
                 }
@@ -190,12 +193,14 @@ private fun TextWithMask(
     text: String,
     toggleIcon: Int?,
     isLoading: Boolean = false,
+    isBackgroundLoading: Boolean = false,
     shimmerWidth: Dp,
     onToggleClick: () -> Unit
 ) {
+    val backgroundColor = if (isBackgroundLoading) gray_10_alpha_70 else black_3_alpha_45
     Row(
         modifier = modifier
-            .background(color = black_3_alpha_45, shape = RoundedCornerShape(8.dp))
+            .background(color = backgroundColor, shape = RoundedCornerShape(8.dp))
             .padding(12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
