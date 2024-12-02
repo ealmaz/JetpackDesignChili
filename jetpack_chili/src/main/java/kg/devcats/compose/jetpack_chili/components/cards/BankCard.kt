@@ -53,8 +53,8 @@ fun BankCard(
     onCardNumberToggleClick: (BankCardFieldState) -> Unit = {},
     onCVVToggleClick: (BankCardFieldState) -> Unit = {},
 ) {
-    val cardNumber: String = getTextData(cardNumberState, maskedCardNumber)
-    val cvv: String = getTextData(cvvState, maskedCVV)
+    val cardNumber: String = cardNumberState.getTextData(maskedCardNumber)
+    val cvv: String = cvvState.getTextData(maskedCVV)
     var isCardBackgroundLoaded by remember { mutableStateOf(false) }
 
     Box(
@@ -161,13 +161,6 @@ fun BankCard(
     }
 }
 
-fun getTextData(bankCardFieldState: BankCardFieldState, maskedText: String): String =
-    when (bankCardFieldState) {
-        is BankCardFieldState.IconShow -> maskedText
-        is BankCardFieldState.IconNone -> maskedText
-        is BankCardFieldState.IconCopy -> bankCardFieldState.text
-        else -> ""
-    }
 
 sealed class BankCardFieldState {
     data object IconShow : BankCardFieldState()
@@ -180,6 +173,14 @@ sealed class BankCardFieldState {
             is IconShow -> R.drawable.chilli_ic_visible
             is IconCopy -> R.drawable.chilli_ic_copy
             else -> null
+        }
+
+    fun getTextData(maskedText: String): String =
+        when (this) {
+            is IconShow -> maskedText
+            is IconNone -> maskedText
+            is IconCopy -> this.text
+            else -> ""
         }
 }
 

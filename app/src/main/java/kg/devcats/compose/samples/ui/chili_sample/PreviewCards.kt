@@ -603,7 +603,7 @@ fun PreviewCards(
                 maskedCVV = "• • •",
                 cardIcon = null,
                 cardBackground = null,
-                imageLink = "https://link.of.background.png",
+                imageLink = "https://minio.o.kg/media-service/mybank/bank-cards/light/BANK_VISA_GOLD.png",
                 cardNumberState = bankCardNumberState,
                 cvvState = bankCardCVVState,
                 onCardNumberToggleClick = {
@@ -653,7 +653,7 @@ private fun copyText(context: Context, text: String) {
         context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
     val clip = ClipData.newPlainText(text, text)
     clipboard?.setPrimaryClip(clip)
-    Toast.makeText(context, R.string.chili_copied_to_clipboard, Toast.LENGTH_SHORT).show()
+    Toast.makeText(context, "Реквизит скопирован", Toast.LENGTH_SHORT).show()
 }
 
 @Preview(showBackground = true, showSystemUi = true)
