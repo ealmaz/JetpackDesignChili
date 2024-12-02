@@ -10,6 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -530,7 +531,7 @@ fun PreviewCards(
                     ShadowRoundedBox {
                         ProductCard(
                             modifier = Modifier.height(293.dp).width(168.dp),
-                            imageLink = "https://cdn.omarket.kg/ads-minify/XBxctjZWlSKjq9pgazTZoEOPh45SXToHMckuX1Ce7Rnb3egueT.WEBP",
+                            imageLink = "",
                             price = "2 090,00 c",
                             installmentPrice = "8 166,6 с x 12 мес",
                             description = "Электрочайник BEREKE BR-810 серый, гарантия 2 года, можно с рассрочками",
@@ -556,7 +557,7 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
-                text = "BankCardView",
+                text = "BankCard",
                 style = Chili.typography.H16_Primary
             )
 
@@ -573,6 +574,36 @@ fun PreviewCards(
                 maskedCVV = "• • •",
                 cardIcon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
                 cardBackground = kg.devcats.compose.samples.R.drawable.card_bg,
+                cardNumberState = bankCardNumberState,
+                cvvState = bankCardCVVState,
+                onCardNumberToggleClick = {
+                    coroutineScope.launch {
+                        getBankCardState(context, bankCardNumberState, "1234 5678 9012 3456").collect {
+                            bankCardNumberState = it
+                        }
+                    }
+                },
+                onCVVToggleClick = {
+                    coroutineScope.launch {
+                        getBankCardState(context, bankCardCVVState, "123").collect {
+                            bankCardCVVState = it
+                        }
+                    }
+                }
+            )
+
+            Spacer(Modifier.height(8.dp))
+
+            BankCard(
+                modifier = Modifier,
+                isBankingCard = true,
+                date = "01/ 26",
+                userName = "Ivanov Ivanovskii",
+                maskedCardNumber = "1234 5• • •  • •12 3456",
+                maskedCVV = "• • •",
+                cardIcon = null,
+                cardBackground = null,
+                imageLink = "https://link.of.background.png",
                 cardNumberState = bankCardNumberState,
                 cvvState = bankCardCVVState,
                 onCardNumberToggleClick = {

@@ -20,12 +20,17 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -35,12 +40,14 @@ import kg.devcats.compose.jetpack_chili.theme.white_1
 @Composable
 fun BankCard(
     modifier: Modifier = Modifier,
+    isBankingCard: Boolean = false,
     date: String,
     userName: String,
     maskedCardNumber: String,
     maskedCVV: String,
-    @DrawableRes cardIcon: Int,
-    @DrawableRes cardBackground: Int,
+    @DrawableRes cardIcon: Int? = null,
+    @DrawableRes cardBackground: Int? = null,
+    imageLink: String? = null,
     cardNumberState: BankCardFieldState = BankCardFieldState.Loading,
     cvvState: BankCardFieldState = BankCardFieldState.Loading,
     onCardNumberToggleClick: (BankCardFieldState) -> Unit = {},
@@ -48,18 +55,47 @@ fun BankCard(
 ) {
     val cardNumber: String = getTextData(cardNumberState, maskedCardNumber)
     val cvv: String = getTextData(cvvState, maskedCVV)
+    var isCardBackgroundLoaded by remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier
             .fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
-        Image(
-            modifier = Modifier.fillMaxWidth(),
-            painter = painterResource(id = cardBackground),
-            contentScale = ContentScale.Crop,
-            contentDescription = null
-        )
+        if (isBankingCard) {
+            imageLink?.let {
+                if (!isCardBackgroundLoaded){
+                    Shimmer(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(220.dp)
+                    )
+                }
+                AsyncImage(
+                    model = it,
+                    contentScale = ContentScale.Crop,
+                    modifier = modifier
+                        .fillMaxWidth(),
+                    contentDescription = null,
+                    placeholder = null,
+                    onSuccess = {
+                        isCardBackgroundLoaded = true
+                    },
+                    onError = {
+                        isCardBackgroundLoaded = false
+                    }
+                )
+            }
+        } else {
+            cardBackground?.let {
+                Image(
+                    modifier = Modifier.fillMaxWidth(),
+                    painter = painterResource(id = it),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = null
+                )
+            }
+        }
         Column(
             modifier = Modifier,
             verticalArrangement = Arrangement.Bottom
@@ -109,14 +145,17 @@ fun BankCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
+                    modifier = Modifier.padding(bottom = 3.dp),
                     text = userName,
                     style = Chili.typography.H14.copy(color = white_1)
                 )
-                Image(
-                    modifier = Modifier,
-                    painter = painterResource(id = cardIcon),
-                    contentDescription = null
-                )
+                cardIcon?.let {
+                    Image(
+                        modifier = Modifier,
+                        painter = painterResource(id = it),
+                        contentDescription = null
+                    )
+                }
             }
         }
     }
@@ -125,6 +164,7 @@ fun BankCard(
 fun getTextData(bankCardFieldState: BankCardFieldState, maskedText: String): String =
     when (bankCardFieldState) {
         is BankCardFieldState.IconShow -> maskedText
+        is BankCardFieldState.IconNone -> maskedText
         is BankCardFieldState.IconCopy -> bankCardFieldState.text
         else -> ""
     }
