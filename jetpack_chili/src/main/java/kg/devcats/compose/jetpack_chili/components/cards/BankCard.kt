@@ -20,10 +20,6 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -56,7 +52,7 @@ fun BankCard(
 ) {
     val cardNumber: String = cardNumberState.getTextData(maskedCardNumber)
     val cvv: String = cvvState.getTextData(maskedCVV)
-    var isCardBackgroundLoaded by remember { mutableStateOf(false) }
+    val isLoading: Boolean = cardNumberState is BankCardFieldState.Loading
 
     Box(
         modifier = modifier
@@ -65,27 +61,22 @@ fun BankCard(
     ) {
         if (isBankingCard) {
             imageLink?.let {
-                if (!isCardBackgroundLoaded){
+                if (isLoading){
                     Shimmer(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(220.dp)
                     )
+                } else {
+                    AsyncImage(
+                        model = it,
+                        contentScale = ContentScale.Crop,
+                        modifier = modifier
+                            .fillMaxWidth(),
+                        contentDescription = null,
+                        error = painterResource(R.drawable.bank_card_shimmer)
+                    )
                 }
-                AsyncImage(
-                    model = it,
-                    contentScale = ContentScale.Crop,
-                    modifier = modifier
-                        .fillMaxWidth(),
-                    contentDescription = null,
-                    placeholder = null,
-                    onSuccess = {
-                        isCardBackgroundLoaded = true
-                    },
-                    onError = {
-                        isCardBackgroundLoaded = false
-                    }
-                )
             }
         } else {
             cardBackground?.let {
@@ -110,7 +101,7 @@ fun BankCard(
                 toggleIcon = cardNumberState.getIconByState(),
                 shimmerWidth = 200.dp,
                 isLoading = cardNumberState is BankCardFieldState.Loading,
-                isBackgroundLoading = isBankingCard && !isCardBackgroundLoaded
+                isBackgroundLoading = isBankingCard && isLoading
             ) {
                 onCardNumberToggleClick.invoke(cardNumberState)
             }
@@ -135,7 +126,7 @@ fun BankCard(
                     toggleIcon = cvvState.getIconByState(),
                     shimmerWidth = 28.dp,
                     isLoading = cvvState is BankCardFieldState.Loading,
-                    isBackgroundLoading = isBankingCard && !isCardBackgroundLoaded
+                    isBackgroundLoading = isBankingCard && isLoading
                 ) {
                     onCVVToggleClick.invoke(cvvState)
                 }
@@ -163,7 +154,6 @@ fun BankCard(
         }
     }
 }
-
 
 sealed class BankCardFieldState {
     data object IconShow : BankCardFieldState()
