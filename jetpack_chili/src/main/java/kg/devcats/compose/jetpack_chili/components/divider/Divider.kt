@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
@@ -21,6 +22,7 @@ fun Divider(
     title: String,
     subtitle: String? = null,
     actionText: String? = null,
+    startIconPainter: Painter? = null,
     endIconPainter: Painter? = null,
     isNotificationVisible: Boolean = false,
     notificationIcon: Painter = painterResource(id = R.drawable.chili_ic_notification),
@@ -34,7 +36,8 @@ fun Divider(
     onActionClick: (() -> Unit)? = null,
     onEndIconClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
-    endIconModifier: Modifier = Modifier
+    endIconModifier: Modifier = Modifier,
+    startIconModifier: Modifier = Modifier.padding(end = 16.dp)
 ) {
     Row(modifier = modifier.fillMaxWidth()) {
         Column(
@@ -42,7 +45,15 @@ fun Divider(
                 .weight(1f)
                 .padding(end = 6.dp)
         ) {
-            Row {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                startIconPainter?.let {
+                    Image(
+                        painter = startIconPainter,
+                        contentDescription = "Notification Icon",
+                        modifier = startIconModifier
+                    )
+                }
+
                 Text(
                     text = title,
                     style = titleTextStyle,
