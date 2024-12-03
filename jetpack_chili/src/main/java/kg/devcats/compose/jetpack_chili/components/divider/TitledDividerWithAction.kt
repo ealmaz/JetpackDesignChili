@@ -37,16 +37,10 @@ fun TitledDividerWithAction(
                 endActionList.forEach { actionType ->
                     when (actionType) {
                         is TitledDividerActionType.Icon -> {
-                            TitledDividerIconAction(
-                                params = actionType,
-                                onActionClick = actionType.onActionClick
-                            )
+                            TitledDividerIconAction(params = actionType)
                         }
                         is TitledDividerActionType.Text -> {
-                            TitledDividerTextAction(
-                                params = actionType,
-                                onActionClick = actionType.onActionClick
-                            )
+                            TitledDividerTextAction(params = actionType)
                         }
                     }
                 }
@@ -57,11 +51,10 @@ fun TitledDividerWithAction(
 
 @Composable
 private fun TitledDividerTextAction(
-    params: TitledDividerActionType.Text,
-    onActionClick: () -> Unit = {}
+    params: TitledDividerActionType.Text
 ) {
     Text(
-        modifier = params.modifier.clickableWithoutEffect { onActionClick.invoke() },
+        modifier = params.modifier.clickableWithoutEffect(onClick = params.onActionClick),
         text = params.text,
         style = params.style ?: Chili.typography.H16_Action_500,
         maxLines = params.maxLines,
@@ -70,15 +63,14 @@ private fun TitledDividerTextAction(
 
 @Composable
 private fun TitledDividerIconAction(
-    params: TitledDividerActionType.Icon,
-    onActionClick: () -> Unit = {}
+    params: TitledDividerActionType.Icon
 ) {
     Image(
         painter = params.icon,
         contentDescription = "End Icon",
         modifier = params.modifier
             .padding(end = 6.dp)
-            .clickableWithoutEffect(onClick = onActionClick)
+            .clickableWithoutEffect(onClick = params.onActionClick)
     )
 }
 
