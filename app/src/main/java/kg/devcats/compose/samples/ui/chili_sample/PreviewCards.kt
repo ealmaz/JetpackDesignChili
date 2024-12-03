@@ -47,6 +47,9 @@ import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
+import kg.devcats.compose.jetpack_chili.components.cards.InfoCard
+import kg.devcats.compose.jetpack_chili.components.cards.InfoCardButtonConfig
+import kg.devcats.compose.jetpack_chili.components.cards.InfoCardButtonType
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCard
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCard
 import kg.devcats.compose.jetpack_chili.components.cards.ProductCard
@@ -631,6 +634,46 @@ fun PreviewCards(
                 delay(3000)
                 isLoading.value = false
             }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "InfoCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            InfoCard(
+                modifier = Modifier.padding(bottom = 16.dp),
+                title = "Title",
+                subtitle = "Subtitle",
+                buttonConfig = InfoCardButtonConfig(
+                    text = "Button",
+                    type = InfoCardButtonType.PRIMARY,
+                    onClick = {
+                        context.showToast("InfoCard single button")
+                    }
+                )
+            )
+
+            InfoCard(
+                title = "Title",
+                subtitle = "Subtitle",
+                horizontalButtons = Pair(
+                    InfoCardButtonConfig(
+                        text = "Additional",
+                        type = InfoCardButtonType.ADDITIONAL,
+                        onClick = {
+                            context.showToast("InfoCard additional button")
+                        }
+                    ),
+                    InfoCardButtonConfig(
+                        text = "Primary",
+                        type = InfoCardButtonType.PRIMARY,
+                        onClick = {
+                            context.showToast("InfoCard primary button")
+                        }
+                    )
+                )
+            )
         }
     }
 }
