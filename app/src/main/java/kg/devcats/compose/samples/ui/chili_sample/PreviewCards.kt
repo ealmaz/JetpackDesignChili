@@ -56,7 +56,6 @@ import kg.devcats.compose.jetpack_chili.components.cards.PaymentCard
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCard
 import kg.devcats.compose.jetpack_chili.components.cards.ProductCard
 import kg.devcats.compose.jetpack_chili.components.cards.StoriesCard
-import kg.devcats.compose.jetpack_chili.components.cards.StoriesStatus
 import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCard
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCell
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
@@ -693,39 +692,40 @@ fun PreviewCards(
 
             LazyRow {
                 item {
-                    var storiesStatus by remember { mutableStateOf<StoriesStatus>(StoriesStatus.UnViewed) }
+                    var storiesIsViewed by remember { mutableStateOf(false) }
                     StoriesCard(
                         imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/125ac05b-0cbb-4bde-9da0-1f090d1fac2e",
-                        storiesStatus = storiesStatus,
+                        isViewed = storiesIsViewed,
                         iconSize = IconSize.MEDIUM
                     ) {
-                        storiesStatus = StoriesStatus.Viewed
+                        storiesIsViewed = true
                     }
                 }
                 item {
                     Spacer(modifier = Modifier.width(8.dp))
                 }
                 item {
-                    var storiesStatus by remember { mutableStateOf<StoriesStatus>(StoriesStatus.UnViewed) }
+                    var storiesIsViewed by remember { mutableStateOf(false) }
                     StoriesCard(
                         imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/de574e23-7478-43af-b3df-b572093b818c",
-                        storiesStatus = storiesStatus,
+                        isViewed = storiesIsViewed,
                         iconSize = IconSize.MEDIUM
                     ) {
-                        storiesStatus = StoriesStatus.Viewed
+                        storiesIsViewed = true
                     }
                 }
                 item {
                     Spacer(modifier = Modifier.width(8.dp))
                 }
                 item {
-                    var storiesStatus by remember { mutableStateOf<StoriesStatus>(StoriesStatus.UnViewed) }
+                    var storiesIsViewed by remember { mutableStateOf(false) }
                     StoriesCard(
                         imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/de574e23-7478-43af-b3df-b572093b818c",
-                        storiesStatus = storiesStatus,
-                        iconSize = IconSize.MEDIUM
+                        isViewed = storiesIsViewed,
+                        iconSize = IconSize.MEDIUM,
+                        isLoading = true
                     ) {
-                        storiesStatus = StoriesStatus.Viewed
+                        storiesIsViewed = true
                     }
                 }
             }

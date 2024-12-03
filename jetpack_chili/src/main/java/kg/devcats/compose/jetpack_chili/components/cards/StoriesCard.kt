@@ -22,26 +22,31 @@ import kg.devcats.compose.jetpack_chili.theme.magenta_1
 fun StoriesCard(
     modifier: Modifier = Modifier,
     imageLink: String,
-    storiesStatus: StoriesStatus = StoriesStatus.UnViewed,
+    isViewed: Boolean = false,
     iconSize: IconSize,
     isLoading: Boolean = false,
     onClick: () -> Unit = {},
 ) {
-    val borderColor = if (storiesStatus is StoriesStatus.UnViewed) magenta_1 else gray_2
+    val borderColor = if (isViewed) gray_2 else magenta_1
     val width = when (iconSize) {
         IconSize.SMALL -> 88.dp
         IconSize.MEDIUM -> 128.dp
         IconSize.LARGE -> 163.dp
     }
-    Box(
-        modifier = modifier
-            .height(78.dp)
-            .width(width)
-            .border(2.dp, color = borderColor, shape = RoundedCornerShape(15.dp))
-    ) {
-        if (isLoading) {
-            Shimmer(modifier = modifier)
-        } else {
+    if (isLoading) {
+        Shimmer(
+            modifier = modifier
+                .height(78.dp)
+                .width(width),
+            roundRadius = 15.dp
+        )
+    } else {
+        Box(
+            modifier = modifier
+                .height(78.dp)
+                .width(width)
+                .border(2.dp, color = borderColor, shape = RoundedCornerShape(15.dp))
+        ) {
             AsyncImage(
                 modifier = Modifier
                     .padding(4.dp)
@@ -57,9 +62,4 @@ fun StoriesCard(
 
 enum class IconSize {
     SMALL, MEDIUM, LARGE
-}
-
-sealed class StoriesStatus {
-    data object Viewed : StoriesStatus()
-    data object UnViewed : StoriesStatus()
 }
