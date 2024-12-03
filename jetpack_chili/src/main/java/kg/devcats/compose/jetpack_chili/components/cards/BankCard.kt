@@ -49,10 +49,10 @@ fun BankCard(
     cvvState: BankCardFieldState = BankCardFieldState.Loading,
     onCardNumberToggleClick: (BankCardFieldState) -> Unit = {},
     onCVVToggleClick: (BankCardFieldState) -> Unit = {},
+    isLoading: Boolean = false
 ) {
     val cardNumber: String = cardNumberState.getTextData(maskedCardNumber)
     val cvv: String = cvvState.getTextData(maskedCVV)
-    val isLoading: Boolean = cardNumberState is BankCardFieldState.Loading
 
     Box(
         modifier = modifier
