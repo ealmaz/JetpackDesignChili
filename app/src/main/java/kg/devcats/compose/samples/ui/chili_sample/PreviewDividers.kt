@@ -5,12 +5,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.divider.Divider
 import kg.devcats.compose.jetpack_chili.components.divider.TitledDivider
 import kg.devcats.compose.jetpack_chili.components.divider.TitledDividerActionType
@@ -36,21 +38,16 @@ fun PreviewDividers(navigateUp: () -> Unit) {
             onNavigationIconClick = { navigateUp() }
         )
         Column(modifier = Modifier.padding(16.dp)) {
+
+            ShadowRoundedBox {
+                Text("Simple Dividers (title, subtitle, actionText):", style = Chili.typography.H24_Primary_700, modifier = Modifier.padding(horizontal = 16.dp))
+            }
+
             Divider(
                 title = "Заголовок",
                 subtitle = "Подзаголовок",
                 actionText = "Кнопка",
                 onActionClick = { println("Action clicked for Divider 1") },
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            Divider(
-                title = "Заголовок",
-                subtitle = "Подзаголовок",
-                actionText = "Кнопка",
-                isNotificationVisible = true,
-                endIconPainter = painterResource(id = kg.devcats.compose.samples.R.drawable.chili_ic_switcher),
-                onEndIconClick = { context.showToast("End Icon clicked for Divider 2") },
-                onActionClick = { context.showToast("Action clicked for Divider 2") },
                 modifier = Modifier.padding(top = 16.dp)
             )
             Divider(
@@ -66,47 +63,10 @@ fun PreviewDividers(navigateUp: () -> Unit) {
                 onActionClick = { println("Action clicked for Divider 2") },
                 modifier = Modifier.padding(top = 16.dp)
             )
-            Divider(
-                title = "Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок",
-                onActionClick = { println("Action clicked for Divider 2") },
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            Divider(
-                title = "Заголовок",
-                actionText = "Кнопка",
-                isNotificationVisible = true,
-                endIconPainter = painterResource(id = kg.devcats.compose.samples.R.drawable.chili_ic_switcher),
-                onEndIconClick = { context.showToast("End Icon clicked for Divider 3") },
-                onActionClick = { context.showToast("Action clicked for Divider 3") },
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            Divider(
-                title = "Счета",
-                modifier = Modifier.padding(top = 16.dp),
-                actionText = "Открыть",
-                onActionClick = { context.showToast("Action is clicked") }
-            )
-            Divider(
-                title = "Заголовок",
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            Divider(
-                title = "Доступные услуги",
-                titleTextStyle = Chili.typography.H16_Primary,
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            Divider(
-                title = "Выбрать язык",
-                titleTextStyle = Chili.typography.H18_Primary_700,
-                modifier = Modifier.padding(top = 16.dp)
-            )
-            Divider(
-                title = "Заголовок",
-                startIconPainter = painterResource(R.drawable.chili_ic_documents_green),
-                modifier = Modifier.padding(top = 16.dp),
-                startIconModifier = Modifier.padding(end = 16.dp)
-            )
-            Spacer(modifier = Modifier.height(60.dp))
+
+            ShadowRoundedBox (modifier = Modifier.padding(top = 32.dp)) {
+                Text("TitledDivider (custom):", style = Chili.typography.H24_Primary_700, modifier = Modifier.padding(horizontal = 16.dp))
+            }
 
             TitledDivider(
                 modifier = Modifier.padding(top = 16.dp),

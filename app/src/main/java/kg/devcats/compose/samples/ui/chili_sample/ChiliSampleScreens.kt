@@ -35,7 +35,7 @@ fun ChiliSampleScreens(
         )
         Column(modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp)) {
+            .padding(horizontal = 16.dp, vertical = 16.dp)) {
             ChiliPrimaryButton(text = "Typography", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
