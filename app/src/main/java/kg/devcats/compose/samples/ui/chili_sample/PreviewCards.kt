@@ -1,5 +1,9 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,6 +11,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,10 +39,12 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.cards.AccentCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertState
-import kg.devcats.compose.jetpack_chili.components.cards.BalanceCard
-import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
-import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
 import kg.devcats.compose.jetpack_chili.components.cards.AnimatedBorderCard
+import kg.devcats.compose.jetpack_chili.components.cards.BalanceCard
+import kg.devcats.compose.jetpack_chili.components.cards.BankCard
+import kg.devcats.compose.jetpack_chili.components.cards.BankCardFieldState
+import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
+import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCard
@@ -48,7 +56,12 @@ import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun PreviewCards(
     navigateUp: () -> Unit,
@@ -520,7 +533,7 @@ fun PreviewCards(
                     ShadowRoundedBox {
                         ProductCard(
                             modifier = Modifier.height(293.dp).width(168.dp),
-                            imageLink = "https://cdn.omarket.kg/ads-minify/XBxctjZWlSKjq9pgazTZoEOPh45SXToHMckuX1Ce7Rnb3egueT.WEBP",
+                            imageLink = "",
                             price = "2 090,00 c",
                             installmentPrice = "8 166,6 с x 12 мес",
                             description = "Электрочайник BEREKE BR-810 серый, гарантия 2 года, можно с рассрочками",
@@ -544,8 +557,113 @@ fun PreviewCards(
                 }
             }
 
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "BankCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            var bankCardNumberState by remember { mutableStateOf<BankCardFieldState>(BankCardFieldState.IconShow) }
+            var bankCardCVVState by remember { mutableStateOf<BankCardFieldState>(BankCardFieldState.IconShow) }
+
+            val coroutineScope = rememberCoroutineScope()
+
+            BankCard(
+                modifier = Modifier,
+                date = "01/ 26",
+                userName = "Ivanov Ivanovskii",
+                maskedCardNumber = "1234 5• • •  • •12 3456",
+                maskedCVV = "• • •",
+                cardIcon = kg.devcats.compose.samples.R.drawable.ic_visa_logo,
+                cardBackground = kg.devcats.compose.samples.R.drawable.card_bg,
+                cardNumberState = bankCardNumberState,
+                cvvState = bankCardCVVState,
+                onCardNumberToggleClick = {
+                    coroutineScope.launch {
+                        getBankCardState(context, bankCardNumberState, "1234 5678 9012 3456").collect {
+                            bankCardNumberState = it
+                        }
+                    }
+                },
+                onCVVToggleClick = {
+                    coroutineScope.launch {
+                        getBankCardState(context, bankCardCVVState, "123").collect {
+                            bankCardCVVState = it
+                        }
+                    }
+                }
+            )
+
+            Spacer(Modifier.height(8.dp))
+
+            val isLoading = remember { mutableStateOf(true) }
+
+            BankCard(
+                modifier = Modifier,
+                isBankingCard = true,
+                isLoading = isLoading.value,
+                date = "01/ 26",
+                userName = "Ivanov Ivanovskii",
+                maskedCardNumber = "1234 5• • •  • •12 3456",
+                maskedCVV = "• • •",
+                cardIcon = null,
+                cardBackground = null,
+                imageLink = "https://minio.o.kg/media-service/mybank/bank-cards/light/BANK_VISA_GOLD.png",
+                cardNumberState = bankCardNumberState,
+                cvvState = bankCardCVVState,
+                onCardNumberToggleClick = {
+                    coroutineScope.launch {
+                        getBankCardState(context, bankCardNumberState, "1234 5678 9012 3456").collect {
+                            bankCardNumberState = it
+                        }
+                    }
+                },
+                onCVVToggleClick = {
+                    coroutineScope.launch {
+                        getBankCardState(context, bankCardCVVState, "123").collect {
+                            bankCardCVVState = it
+                        }
+                    }
+                }
+            )
+
+            coroutineScope.launch {
+                delay(3000)
+                isLoading.value = false
+            }
         }
     }
+}
+
+fun getBankCardState(context: Context, bankCardState: BankCardFieldState, text: String): Flow<BankCardFieldState> = flow {
+    when (bankCardState) {
+        is BankCardFieldState.IconShow -> {
+            emit(BankCardFieldState.Loading)
+            delay(1000)
+            emit(BankCardFieldState.IconCopy(text))
+        }
+
+        is BankCardFieldState.IconCopy -> {
+            copyText(context = context, text = bankCardState.text)
+            emit(BankCardFieldState.IconShow)
+        }
+
+        is BankCardFieldState.IconNone -> {
+
+        }
+
+        is BankCardFieldState.Loading -> {
+
+        }
+    }
+}
+
+private fun copyText(context: Context, text: String) {
+    val clipboard: ClipboardManager? =
+        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
+    val clip = ClipData.newPlainText(text, text)
+    clipboard?.setPrimaryClip(clip)
+    Toast.makeText(context, "Реквизит скопирован", Toast.LENGTH_SHORT).show()
 }
 
 @Preview(showBackground = true, showSystemUi = true)
