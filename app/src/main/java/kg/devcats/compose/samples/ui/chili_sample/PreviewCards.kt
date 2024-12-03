@@ -1,5 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -60,6 +61,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun PreviewCards(
     navigateUp: () -> Unit,
@@ -594,9 +596,12 @@ fun PreviewCards(
 
             Spacer(Modifier.height(8.dp))
 
+            val isLoading = remember { mutableStateOf(true) }
+
             BankCard(
                 modifier = Modifier,
                 isBankingCard = true,
+                isLoading = isLoading.value,
                 date = "01/ 26",
                 userName = "Ivanov Ivanovskii",
                 maskedCardNumber = "1234 5• • •  • •12 3456",
@@ -621,6 +626,11 @@ fun PreviewCards(
                     }
                 }
             )
+
+            coroutineScope.launch {
+                delay(3000)
+                isLoading.value = false
+            }
         }
     }
 }

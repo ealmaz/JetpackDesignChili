@@ -65,7 +65,7 @@ fun BankCard(
                     Shimmer(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(220.dp)
+                            .height(240.dp)
                     )
                 } else {
                     AsyncImage(
@@ -74,6 +74,7 @@ fun BankCard(
                         modifier = modifier
                             .fillMaxWidth(),
                         contentDescription = null,
+                        placeholder = painterResource(R.drawable.bank_card_shimmer),
                         error = painterResource(R.drawable.bank_card_shimmer)
                     )
                 }
