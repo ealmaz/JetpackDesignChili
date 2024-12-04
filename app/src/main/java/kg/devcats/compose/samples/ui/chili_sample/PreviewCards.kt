@@ -840,8 +840,6 @@ fun PreviewCards(
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
@@ -858,6 +856,17 @@ fun PreviewCards(
                 Button(onClick = { progressPercent = 100 }) {
                     Text("100%")
                 }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                ProgressCard(
+                    title = "",
+                    description = "Доступный объем счета",
+                    progressPercent = 20,
+                    isLoading = true
+                )
             }
         }
     }
