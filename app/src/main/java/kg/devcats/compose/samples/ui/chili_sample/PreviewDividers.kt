@@ -37,7 +37,7 @@ fun PreviewDividers(navigateUp: () -> Unit) {
             isNavigationIconVisible = true,
             onNavigationIconClick = { navigateUp() }
         )
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column() {
 
             ShadowRoundedBox {
                 Text("Simple Dividers (title, subtitle, actionText):", style = Chili.typography.H24_Primary_700, modifier = Modifier.padding(horizontal = 16.dp))
@@ -48,20 +48,20 @@ fun PreviewDividers(navigateUp: () -> Unit) {
                 subtitle = "Подзаголовок",
                 actionText = "Кнопка",
                 onActionClick = { println("Action clicked for Divider 1") },
-                modifier = Modifier.padding(top = 16.dp)
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
             Divider(
                 title = "Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок",
                 subtitle = "Подзаголовок Подзаголовок Подзаголовок Подзаголовок Подзаголовок Подзаголовок Подзаголовок",
                 titleSubtitleSpaceHeight = 6.dp,
                 onActionClick = { println("Action clicked for Divider 1") },
-                modifier = Modifier.padding(top = 16.dp)
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
             Divider(
                 title = "Заголовок",
                 actionText = "Кнопка",
                 onActionClick = { println("Action clicked for Divider 2") },
-                modifier = Modifier.padding(top = 16.dp)
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
 
             ShadowRoundedBox (modifier = Modifier.padding(top = 32.dp)) {
@@ -71,9 +71,12 @@ fun PreviewDividers(navigateUp: () -> Unit) {
             TitledDivider(
                 modifier = Modifier.padding(top = 16.dp),
                 params = TitledDividerDefaults.titledDividerParams(
-                    title = "Заголовок"
+                    isShevronIsVisible = true,
+                    title = "Заголовок",
+                    hideAbleContent = { Text(text = "Скрываемый контент без паддингов", style = Chili.typography.H14_Primary, modifier = Modifier.padding(horizontal = 0.dp)) },
                 )
             )
+
             TitledDividerWithAction(
                 modifier = Modifier.padding(top = 16.dp),
                 params = TitledDividerDefaults.titledDividerParams(

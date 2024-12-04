@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.clickableWithoutEffect
@@ -36,23 +37,28 @@ fun TitledDivider(
     modifier: Modifier = Modifier,
     params: TitleDividerParams,
     startPlaceholder: @Composable () -> Unit = {},
-    endPlaceholder: @Composable () -> Unit = {}
+    endPlaceholder: @Composable () -> Unit = {},
+    dividerHorizontalPadding: Dp = 16.dp,
 ) {
     var subtitleIsVisible by remember { mutableStateOf(true) }
+    var contentIsVisible by remember { mutableStateOf(true) }
 
     Row(modifier = modifier.fillMaxWidth()) {
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(end = 6.dp)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(horizontal = dividerHorizontalPadding)) {
                 TitledDividerTitleSection(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier
+                        .weight(1f),
                     params = params,
                     startPlaceholder = startPlaceholder,
                     subtitleIsVisible = subtitleIsVisible,
-                    onChevronClick = { subtitleIsVisible = !subtitleIsVisible }
+                    onChevronClick = {
+                        subtitleIsVisible = !subtitleIsVisible
+                        contentIsVisible = !contentIsVisible
+                    }
                 )
 
                 endPlaceholder.invoke()
@@ -61,13 +67,17 @@ fun TitledDivider(
             AnimatedVisibility(subtitleIsVisible) {
                 params.subtitle?.let {
                     Text(
-                        modifier = Modifier.padding(top = 11.dp),
+                        modifier = Modifier.padding(start = dividerHorizontalPadding, end = dividerHorizontalPadding, top = 11.dp),
                         text = params.subtitle,
                         overflow = TextOverflow.Ellipsis,
                         style = params.subtitleTextStyle,
                         maxLines = params.subtitleMaxLines
                     )
                 }
+            }
+
+            AnimatedVisibility(contentIsVisible) {
+                params.hideAbleContent?.invoke()
             }
         }
     }
