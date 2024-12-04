@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
+import kg.devcats.compose.jetpack_chili.components.shimmer.ShowShimmerOrContent
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 
@@ -31,6 +32,7 @@ fun ChiliAdditionalInfoCell(
     onClick: (() -> Unit)? = null,
     additionalInfo: String? = null,
     additionalInfoStyle: TextStyle = Chili.typography.H16_Value,
+    isLoading: Boolean = false
 ) {
     ChiliCell(
         modifier = modifier,
@@ -45,14 +47,22 @@ fun ChiliAdditionalInfoCell(
         icon = icon,
         iconSize = iconSize,
         onClick = onClick,
+        isLoading = isLoading,
         endFrame = {
             additionalInfo?.let {
-                Text(
-                    text = it,
-                    style = additionalInfoStyle,
-                    modifier = Modifier
-                        .padding(end = 4.dp)
-                )
+                ShowShimmerOrContent(
+                    modifier = Modifier.padding(end = 4.dp),
+                    isLoading = isLoading,
+                    shimmerHeight = 8.dp,
+                    shimmerWidth = 46.dp
+                ) {
+                    Text(
+                        text = it,
+                        style = additionalInfoStyle,
+                        modifier = Modifier
+                            .padding(end = 4.dp)
+                    )
+                }
             }
         }
     )

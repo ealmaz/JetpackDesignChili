@@ -29,7 +29,7 @@ import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ChiliChevron
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
-import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
+import kg.devcats.compose.jetpack_chili.components.shimmer.ShowShimmerOrContent
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -158,27 +158,6 @@ fun ChiliCell(
                 )
             )
         }
-    }
-}
-
-@Composable
-private fun ShowShimmerOrContent(
-    modifier: Modifier = Modifier,
-    shimmerHeight: Dp = 16.dp,
-    shimmerWidth: Dp = 200.dp,
-    shimmerRoundRadius: Dp = Chili.attrs.roundRadius,
-    isLoading: Boolean = false,
-    content: @Composable (() -> Unit)
-) {
-    if (isLoading) {
-        Shimmer(
-            modifier = modifier,
-            height = shimmerHeight,
-            width = shimmerWidth,
-            roundRadius = shimmerRoundRadius
-        )
-    } else {
-        content.invoke()
     }
 }
 

@@ -59,3 +59,25 @@ fun Shimmer(
         .clip(RoundedCornerShape(roundRadius))
         .background(shimmerBrush()))
 }
+
+@Composable
+fun ShowShimmerOrContent(
+    modifier: Modifier = Modifier,
+    shimmerHeight: Dp = 16.dp,
+    shimmerWidth: Dp = 200.dp,
+    shimmerRoundRadius: Dp = Chili.attrs.roundRadius,
+    isLoading: Boolean = false,
+    content: @Composable (() -> Unit)
+) {
+    if (isLoading) {
+        Shimmer(
+            modifier = modifier,
+            height = shimmerHeight,
+            width = shimmerWidth,
+            roundRadius = shimmerRoundRadius
+        )
+    } else {
+        content.invoke()
+    }
+}
+

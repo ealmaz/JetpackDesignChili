@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.cells.ChiliAdditionalInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
 import kg.devcats.compose.jetpack_chili.components.cells.ProductCell
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
@@ -201,28 +202,26 @@ fun PreviewCells(
 
             ShadowRoundedBox() {
                 Column {
-                    ChiliCell(
-                        modifier = Modifier.clickable { },
+                    ChiliAdditionalInfoCell(
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
+                        isChevronVisible = true,
                         isDividerVisible = true,
-                        endFrame = {
-
-                        },
+                        additionalInfo = "Additional text",
+                        additionalInfoStyle = Chili.typography.H14_Value,
                         isLoading = true
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    ChiliCell(
-                        modifier = Modifier.clickable { },
+                    ChiliAdditionalInfoCell(
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                        endFrame = {
-                            Text(text = "Additonal text", style = Chili.typography.H14_Value)
-                        },
+                        isChevronVisible = true,
+                        additionalInfo = "Additional text",
+                        additionalInfoStyle = Chili.typography.H14_Value
                     )
                 }
             }
