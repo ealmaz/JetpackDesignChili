@@ -55,6 +55,8 @@ import kg.devcats.compose.jetpack_chili.components.cards.InfoCardButtonType
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCard
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCard
 import kg.devcats.compose.jetpack_chili.components.cards.ProductCard
+import kg.devcats.compose.jetpack_chili.components.cards.PromoCard
+import kg.devcats.compose.jetpack_chili.components.cards.PromoStatusState
 import kg.devcats.compose.jetpack_chili.components.cards.StoriesCard
 import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCard
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCell
@@ -726,6 +728,92 @@ fun PreviewCards(
                         isLoading = true
                     ) {
                         storiesIsViewed = true
+                    }
+                }
+            }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "PromoCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            LazyRow {
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "",
+                            isLoading = true
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp).clickable {
+
+                            },
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.New("Новое")
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.Active("Активный")
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.Expired("Просрочен")
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.Wait("В ожидании")
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.NoStatus
+                        )
                     }
                 }
             }
