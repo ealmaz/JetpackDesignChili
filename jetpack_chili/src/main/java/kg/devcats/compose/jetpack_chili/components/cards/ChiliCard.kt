@@ -69,7 +69,7 @@ fun ChiliCard(
                         modifier = Modifier
                             .clip(Chili.shapes.RoundedCornerShape)
                             .size(iconSize)
-                            .padding(end = 8.dp)
+
                     )
                 }
                 Text(
