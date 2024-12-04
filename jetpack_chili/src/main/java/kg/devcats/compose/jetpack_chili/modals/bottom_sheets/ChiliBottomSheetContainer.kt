@@ -34,6 +34,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun ChiliBottomSheetContainer(
+    modifier: Modifier = Modifier,
     isShown: Boolean,
     hideOnSwipe: Boolean = true,
     isCloseIconVisible: Boolean = true,
@@ -69,7 +70,7 @@ fun ChiliBottomSheetContainer(
                 shape = Chili.shapes.RoundedCornerShape,
                 contentColor = Color.Unspecified,
                 color = Chili.color.bottomSheetBackground,
-                modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 16.dp),
+                modifier = modifier,
             ) {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     if (isCloseIconVisible) ChiliBottomSheetCloseIcon(onDismissRequest)
