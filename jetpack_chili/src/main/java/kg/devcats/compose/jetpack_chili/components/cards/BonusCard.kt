@@ -1,6 +1,7 @@
 package kg.devcats.compose.jetpack_chili.components.cards
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -66,6 +67,7 @@ fun BonusCard(
             icon = icon,
             iconSize = size.iconSize,
             onClick = onClick,
+            titlePaddingValues = PaddingValues(top = 12.dp, end = 8.dp),
             titleMaxLines = 2,
             titleStyle = if (size is BonusCardSize.Large) Chili.typography.H16_Primary_500
             else Chili.typography.H12_Primary

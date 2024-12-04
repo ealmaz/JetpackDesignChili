@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -33,6 +34,7 @@ fun ChiliCard(
     title: String,
     subtitle: String? = null,
     titleStyle: TextStyle = Chili.typography.H16_Primary,
+    titlePaddingValues: PaddingValues = PaddingValues(top = 4.dp, end = 8.dp),
     subtitleStyle: TextStyle = Chili.typography.H12_Secondary,
     titleMaxLines: Int = 1,
     subtitleMaxLines: Int = 1,
@@ -69,11 +71,10 @@ fun ChiliCard(
                         modifier = Modifier
                             .clip(Chili.shapes.RoundedCornerShape)
                             .size(iconSize)
-
                     )
                 }
                 Text(
-                    modifier = Modifier.padding(top = 4.dp, end = 8.dp),
+                    modifier = Modifier.padding(titlePaddingValues),
                     text = title,
                     style = titleStyle,
                     maxLines = titleMaxLines,
