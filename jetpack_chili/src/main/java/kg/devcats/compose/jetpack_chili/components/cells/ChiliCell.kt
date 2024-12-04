@@ -29,6 +29,7 @@ import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ChiliChevron
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -48,6 +49,7 @@ fun ChiliCell(
     containerBackgroundColor: Color = Chili.color.cellViewBackground,
     endFrame: @Composable (() -> Unit)? = null,
     onClick: (() -> Unit)? = null,
+    isLoading: Boolean = false,
 ) {
     Surface(
         color = containerBackgroundColor,
@@ -61,9 +63,10 @@ fun ChiliCell(
     ) {
         val iconEndMargin: Dp = 12.dp
 
-        Column(modifier = Modifier
-            .heightIn(min = 48.dp)
-            .padding(start = 12.dp)
+        Column(
+            modifier = Modifier
+                .heightIn(min = 48.dp)
+                .padding(start = 12.dp)
         ) {
             Row(
                 modifier = Modifier
@@ -75,43 +78,73 @@ fun ChiliCell(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 iconUrl?.let {
-                    AsyncImage(
-                        model = it,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .size(iconSize)
-                            .clip(Chili.shapes.RoundedCornerShape)
-                    )
+                    ShowShimmerOrContent(
+                        shimmerHeight = iconSize,
+                        shimmerWidth = iconSize,
+                        isLoading = isLoading
+                    ) {
+                        AsyncImage(
+                            model = it,
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(iconSize)
+                                .clip(Chili.shapes.RoundedCornerShape)
+                        )
+                    }
                     Spacer(modifier = Modifier.width(iconEndMargin))
                 }
                 icon?.let {
-                    Image(
-                        painter = it,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .size(iconSize)
-                            .clip(Chili.shapes.RoundedCornerShape)
-                    )
+                    ShowShimmerOrContent(
+                        shimmerHeight = iconSize,
+                        shimmerWidth = iconSize,
+                        isLoading = isLoading
+                    ) {
+                        Image(
+                            painter = it,
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(iconSize)
+                                .clip(Chili.shapes.RoundedCornerShape)
+                        )
+                    }
                     Spacer(modifier = Modifier.width(iconEndMargin))
                 }
 
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = title,
-                        style = titleStyle,
+                    ShowShimmerOrContent(
                         modifier = Modifier
-                            .align(Alignment.Start)
-                            .padding(top = 12.dp, bottom = 4.dp),
-                        maxLines = titleMaxLines,
-                    )
-                    subtitle?.let {
+                            .padding(top = 18.dp, bottom = 10.dp),
+                        shimmerWidth = 200.dp,
+                        shimmerHeight = 8.dp,
+                        isLoading = isLoading
+                    ) {
                         Text(
-                            text = it,
-                            style = subtitleStyle,
-                            maxLines = subtitleMaxLines,
+                            text = title,
+                            style = titleStyle,
                             modifier = Modifier
-                                .padding(bottom = 12.dp)
+                                .align(Alignment.Start)
+                                .padding(top = 12.dp, bottom = 4.dp),
+                            maxLines = titleMaxLines,
                         )
+                    }
+
+                    subtitle?.let {
+                        ShowShimmerOrContent(
+                            modifier = Modifier
+                                .padding(bottom = 12.dp),
+                            shimmerWidth = 82.dp,
+                            shimmerHeight = 8.dp,
+                            isLoading = isLoading
+                        ) {
+                            Text(
+                                text = it,
+                                style = subtitleStyle,
+                                maxLines = subtitleMaxLines,
+                                modifier = Modifier
+                                    .padding(bottom = 12.dp)
+                            )
+                        }
+
                     } ?: run { Spacer(modifier = Modifier.height(8.dp)) }
                 }
 
@@ -125,6 +158,27 @@ fun ChiliCell(
                 )
             )
         }
+    }
+}
+
+@Composable
+private fun ShowShimmerOrContent(
+    modifier: Modifier = Modifier,
+    shimmerHeight: Dp = 16.dp,
+    shimmerWidth: Dp = 200.dp,
+    shimmerRoundRadius: Dp = Chili.attrs.roundRadius,
+    isLoading: Boolean = false,
+    content: @Composable (() -> Unit)
+) {
+    if (isLoading) {
+        Shimmer(
+            modifier = modifier,
+            height = shimmerHeight,
+            width = shimmerWidth,
+            roundRadius = shimmerRoundRadius
+        )
+    } else {
+        content.invoke()
     }
 }
 
