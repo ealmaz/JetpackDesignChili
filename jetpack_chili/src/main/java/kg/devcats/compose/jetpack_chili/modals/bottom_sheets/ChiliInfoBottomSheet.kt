@@ -24,6 +24,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun ChiliInfoBottomSheet(
+    modifier: Modifier,
     isShown: Boolean,
     icon: Painter? = null,
     headerText: String? = null,
@@ -34,7 +35,11 @@ fun ChiliInfoBottomSheet(
     onPrimaryButtonClick: (() -> Unit) = {},
     onDismissRequest: () -> Unit
 ) {
-    ChiliBottomSheetContainer(isShown, onDismissRequest = onDismissRequest) {
+    ChiliBottomSheetContainer(
+        modifier = modifier,
+        isShown = isShown,
+        onDismissRequest = onDismissRequest
+    ) {
         ChiliInfoBottomSheetContent(
             icon = icon,
             headerText = headerText,

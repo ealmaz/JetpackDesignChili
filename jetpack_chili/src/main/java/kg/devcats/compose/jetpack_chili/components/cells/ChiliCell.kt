@@ -25,6 +25,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ChiliChevron
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
@@ -42,6 +43,7 @@ fun ChiliCell(
     isDividerVisible: Boolean = false,
     isChevronVisible: Boolean = true,
     icon: Painter? = null,
+    iconUrl: String? = null,
     iconSize: Dp = 32.dp,
     containerBackgroundColor: Color = Chili.color.cellViewBackground,
     endFrame: @Composable (() -> Unit)? = null,
@@ -72,7 +74,16 @@ fun ChiliCell(
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-
+                iconUrl?.let {
+                    AsyncImage(
+                        model = it,
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(iconSize)
+                            .clip(Chili.shapes.RoundedCornerShape)
+                    )
+                    Spacer(modifier = Modifier.width(iconEndMargin))
+                }
                 icon?.let {
                     Image(
                         painter = it,
