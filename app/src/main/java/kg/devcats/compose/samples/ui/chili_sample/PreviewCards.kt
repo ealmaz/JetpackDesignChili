@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
@@ -47,12 +48,14 @@ import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
+import kg.devcats.compose.jetpack_chili.components.cards.IconSize
 import kg.devcats.compose.jetpack_chili.components.cards.InfoCard
 import kg.devcats.compose.jetpack_chili.components.cards.InfoCardButtonConfig
 import kg.devcats.compose.jetpack_chili.components.cards.InfoCardButtonType
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCard
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCard
 import kg.devcats.compose.jetpack_chili.components.cards.ProductCard
+import kg.devcats.compose.jetpack_chili.components.cards.StoriesCard
 import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCard
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCell
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
@@ -528,14 +531,18 @@ fun PreviewCards(
 
             LazyVerticalGrid (
                 columns = GridCells.Fixed(2),
-                modifier = Modifier.fillMaxWidth().height(300.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 item {
                     ShadowRoundedBox {
                         ProductCard(
-                            modifier = Modifier.height(293.dp).width(168.dp),
+                            modifier = Modifier
+                                .height(293.dp)
+                                .width(168.dp),
                             imageLink = "",
                             price = "2 090,00 c",
                             installmentPrice = "8 166,6 с x 12 мес",
@@ -550,7 +557,9 @@ fun PreviewCards(
                 item {
                     ShadowRoundedBox {
                         ProductCard(
-                            modifier = Modifier.height(293.dp).width(168.dp),
+                            modifier = Modifier
+                                .height(293.dp)
+                                .width(168.dp),
                             price = "2 090,00 c",
                             installmentPrice = "8 166,6 с x 12 мес",
                             description = "Электрочайник BEREKE BR-810 серый",
@@ -674,6 +683,52 @@ fun PreviewCards(
                     )
                 )
             )
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "StoriesCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            LazyRow {
+                item {
+                    var storiesIsViewed by remember { mutableStateOf(false) }
+                    StoriesCard(
+                        imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/125ac05b-0cbb-4bde-9da0-1f090d1fac2e",
+                        isViewed = storiesIsViewed,
+                        iconSize = IconSize.MEDIUM
+                    ) {
+                        storiesIsViewed = true
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    var storiesIsViewed by remember { mutableStateOf(false) }
+                    StoriesCard(
+                        imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/de574e23-7478-43af-b3df-b572093b818c",
+                        isViewed = storiesIsViewed,
+                        iconSize = IconSize.MEDIUM
+                    ) {
+                        storiesIsViewed = true
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    var storiesIsViewed by remember { mutableStateOf(false) }
+                    StoriesCard(
+                        imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/de574e23-7478-43af-b3df-b572093b818c",
+                        isViewed = storiesIsViewed,
+                        iconSize = IconSize.MEDIUM,
+                        isLoading = true
+                    ) {
+                        storiesIsViewed = true
+                    }
+                }
+            }
         }
     }
 }
