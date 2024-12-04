@@ -2,6 +2,7 @@ package kg.devcats.compose.samples.ui.chili_sample
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,9 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -25,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.common.AgreementCell
+import kg.devcats.compose.jetpack_chili.components.common.AnimatedProgressLine
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
@@ -32,6 +36,9 @@ import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.jetpack_chili.theme.blue_1
+import kg.devcats.compose.jetpack_chili.theme.green_1
+import kg.devcats.compose.jetpack_chili.theme.red_1
 
 @Composable
 fun PreviewCommon(
@@ -124,6 +131,45 @@ fun PreviewCommon(
                 title = stringResource(id = kg.devcats.compose.samples.R.string.clickable_link_example)
             ){
                 Toast.makeText(context, "Link clicked: $it", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        Text(modifier = Modifier.padding(16.dp), text = "AnimatedProgressLine", style = Chili.typography.H16_Primary)
+
+        var progress by remember { mutableIntStateOf(20) }
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            AnimatedProgressLine(
+                progressPercent = progress,
+                progressGradientStartColor = red_1,
+                progressGradientCenterColor = green_1,
+                progressGradientEndColor = blue_1,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Button(onClick = { progress = 0 }) {
+                    Text("0%")
+                }
+                Button(onClick = { progress = 20 }) {
+                    Text("20%")
+                }
+                Button(onClick = { progress = 80 }) {
+                    Text("80%")
+                }
+                Button(onClick = { progress = 100 }) {
+                    Text("100%")
+                }
             }
         }
     }
