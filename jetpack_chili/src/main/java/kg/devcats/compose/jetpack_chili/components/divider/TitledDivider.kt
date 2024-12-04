@@ -3,14 +3,12 @@ package kg.devcats.compose.jetpack_chili.components.divider
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -117,7 +115,7 @@ private fun TitledDividerTitleSection(
             modifier = Modifier
                 .rotate(animatedRotation.value)
                 .clickableWithoutEffect(onClick = onChevronClick),
-            icon = painterResource(R.drawable.ic_shevron),
+            icon = painterResource(R.drawable.chilli_ic_shevron),
             isVisible = params.isShevronIsVisible,
         )
     }
