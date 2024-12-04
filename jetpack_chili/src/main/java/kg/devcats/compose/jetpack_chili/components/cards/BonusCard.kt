@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -37,7 +38,7 @@ fun BonusCard(
                 .padding(12.dp),
         ) {
             Column(
-                modifier = modifier.width(size.width)
+                modifier = modifier.size(width = size.width, height = size.height)
             ) {
                 Shimmer(height = size.iconSize, width = size.iconSize)
                 when(size) {
@@ -60,7 +61,7 @@ fun BonusCard(
         ChiliCard(
             modifier = modifier
                 .padding(12.dp)
-                .width(size.width),
+                .size(width = size.width, height = size.height),
             title = title,
             icon = icon,
             iconSize = size.iconSize,
