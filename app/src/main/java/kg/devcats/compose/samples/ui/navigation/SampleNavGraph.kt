@@ -5,6 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kg.devcats.compose.jetpack_chili.components.pdf_viewer.PdfLoadCategory
+import kg.devcats.compose.jetpack_chili.components.pdf_viewer.PdfViewer
 import kg.devcats.compose.samples.ui.chili_sample.BottomSheetsPreview
 import kg.devcats.compose.samples.ui.chili_sample.PreviewCards
 import kg.devcats.compose.samples.ui.chili_sample.PreviewCells
@@ -68,6 +70,34 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
         }
         composable(Screens.PdfViewerScreen.toString()) {
             PreviewPdfViewer(navController = navController)
+        }
+        composable(Screens.PdfViewerPortraitScreen.toString()) {
+            PdfViewer(
+                title = "PdfViewer Portrait",
+                onNavigationIconClick = { navController.navigateUp() },
+                pdfFileCategory = PdfLoadCategory.Remote("https://www.akchabulak.kg/storage/documents/ru/Oferta.pdf"),
+                errorPdfLoadText = "Не удалось загрузить PDF файл",
+                errorDialogCloseText = "Ок"
+            )
+        }
+        composable(Screens.PdfViewerAlbumScreen.toString()) {
+            PdfViewer(
+                title = "PdfViewer Album",
+                onNavigationIconClick = { navController.navigateUp() },
+                pdfFileCategory = PdfLoadCategory.Remote("https://fiu.gov.kg/uploads/65e953b2c33b7.pdf"),
+                errorPdfLoadText = "Не удалось загрузить PDF файл",
+                errorDialogCloseText = "Ок"
+            )
+        }
+        composable(Screens.PdfViewerWithShareScreen.toString()) {
+            PdfViewer(
+                title = "PdfViewer With Share",
+                onNavigationIconClick = { navController.navigateUp() },
+                shareIsVisible = true,
+                pdfFileCategory = PdfLoadCategory.Remote("https://www.akchabulak.kg/storage/documents/ru/Oferta.pdf"),
+                errorPdfLoadText = "Не удалось загрузить PDF файл",
+                errorDialogCloseText = "Ок"
+            )
         }
     }
 
