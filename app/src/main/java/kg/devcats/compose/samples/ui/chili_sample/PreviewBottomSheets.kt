@@ -1,6 +1,7 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,6 +32,8 @@ import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailActionsB
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailBottomSheet
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliInfoBottomSheet
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.jetpack_chili.theme.black_5
+import kg.devcats.compose.jetpack_chili.theme.gray_8
 import kg.devcats.compose.jetpack_chili.theme.green_3
 
 
@@ -39,6 +42,22 @@ import kg.devcats.compose.jetpack_chili.theme.green_3
 fun BottomSheetsPreview(
     navigateUp: () -> Unit,
 ) {
+
+    var containerBSTopDrawable by remember { mutableStateOf(false) }
+
+    ChiliBottomSheetContainer(
+        isShown = containerBSTopDrawable,
+        isTopIconVisible = true,
+        topIconColor = if (isSystemInDarkTheme()) black_5 else gray_8,
+        onDismissRequest = {containerBSTopDrawable = false}
+    ) {
+        Box(modifier = Modifier
+            .background(green_3)
+            .fillMaxWidth()
+            .height(250.dp), contentAlignment = Alignment.Center) {
+            Text(text = "Bottom sheet container", style = Chili.typography.H20_Primary)
+        }
+    }
 
     var containerBS by remember { mutableStateOf(false) }
 
@@ -120,6 +139,9 @@ fun BottomSheetsPreview(
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
             .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)) {
+            ChiliPrimaryButton(text = "Container bottom sheet with top drawable", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {containerBSTopDrawable = true }
             ChiliPrimaryButton(text = "Container bottom sheet", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {containerBS = true }
