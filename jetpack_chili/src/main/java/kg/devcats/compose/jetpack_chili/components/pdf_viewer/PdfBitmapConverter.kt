@@ -10,50 +10,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
-class PdfManager(
-    val context: Context,
-    val listener: PdfDownloadListener
+class PdfBitmapConverter(
+    private val context: Context
 ) {
     var renderer: PdfRenderer? = null
-
-    suspend fun downloadPdf(pdfUrl: String, fileName: String) {
-        withContext(Dispatchers.IO) {
-            try {
-                val pdfBytes = downloadPdfBytes(pdfUrl)
-                savePdfToFile(pdfBytes, fileName)
-            } catch (e: Exception) {
-                listener.onDownloadFailed(e)
-            }
-        }
-    }
-
-    private suspend fun downloadPdfBytes(pdfUrl: String): ByteArray = withContext(Dispatchers.IO) {
-        val client = OkHttpClient()
-        val request = Request.Builder()
-            .url(pdfUrl)
-            .build()
-
-        val response = client.newCall(request).execute()
-        if (response.isSuccessful) {
-            return@withContext response.body?.bytes() ?: throw IOException("Response body is null")
-        } else {
-            throw IOException("Unexpected code $response")
-        }
-    }
-
-    private fun savePdfToFile(pdfBytes: ByteArray, fileName: String) {
-        val destinationFolder = File(context.filesDir, PDF_FOLDER_DIRECTORY).apply { mkdir() }
-        val destinationFile = File(destinationFolder, fileName).apply { createNewFile() }
-
-        destinationFile.writeBytes(pdfBytes)
-        listener.onDownloadSuccess(destinationFile)
-    }
 
     suspend fun pdfToBitmaps(contentUri: Uri): List<Bitmap> = withContext(Dispatchers.IO) {
         renderer?.close()
@@ -66,8 +27,8 @@ class PdfManager(
                         async {
                             openPage(pageIndex).use { page ->
                                 val bitmap = createBitmap(
-                                    width = page.width,
-                                    height = page.height
+                                    width = page.width * 2,
+                                    height = page.height * 2
                                 )
 
                                 page.render(
@@ -101,9 +62,5 @@ class PdfManager(
             drawBitmap(bitmap, 0f, 0f, null)
         }
         return bitmap
-    }
-
-    companion object {
-        const val PDF_FOLDER_DIRECTORY = "pdf_files"
     }
 }

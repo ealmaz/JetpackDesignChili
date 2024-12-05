@@ -17,6 +17,9 @@ import kg.devcats.compose.samples.ui.chili_sample.PreviewButtons
 import kg.devcats.compose.samples.ui.chili_sample.PreviewDialogs
 import kg.devcats.compose.samples.ui.chili_sample.PreviewDividers
 import kg.devcats.compose.samples.ui.chili_sample.PreviewPdfViewer
+import kg.devcats.compose.samples.ui.chili_sample.PreviewPdfViewerAlbum
+import kg.devcats.compose.samples.ui.chili_sample.PreviewPdfViewerPortrait
+import kg.devcats.compose.samples.ui.chili_sample.PreviewPdfViewerWithShare
 import kg.devcats.compose.samples.ui.chili_sample.TextAppearance
 import kg.devcats.compose.samples.ui.chili_sample.Toolbars
 
@@ -64,7 +67,16 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
             PreviewDividers { navController.navigateUp() }
         }
         composable(Screens.PdfViewerScreen.toString()) {
-            PreviewPdfViewer { navController.navigateUp() }
+            PreviewPdfViewer(navController = navController)
+        }
+        composable(Screens.PdfViewerPortraitScreen.toString()) {
+            PreviewPdfViewerPortrait { navController.navigateUp() }
+        }
+        composable(Screens.PdfViewerAlbumScreen.toString()) {
+            PreviewPdfViewerAlbum { navController.navigateUp() }
+        }
+        composable(Screens.PdfViewerWithShareScreen.toString()) {
+            PreviewPdfViewerWithShare { navController.navigateUp() }
         }
     }
 
