@@ -26,9 +26,13 @@ class PdfBitmapConverter(
                     return@withContext (0 until pageCount).map { pageIndex ->
                         async {
                             openPage(pageIndex).use { page ->
+                                val scale = 2 // for high quality
+                                val bimapWidth = page.width * scale
+                                val bimapHeight = page.height * scale
+
                                 val bitmap = createBitmap(
-                                    width = page.width * 2,
-                                    height = page.height * 2
+                                    width = bimapWidth,
+                                    height = bimapHeight
                                 )
 
                                 page.render(

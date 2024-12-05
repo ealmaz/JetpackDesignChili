@@ -43,8 +43,8 @@ fun PdfViewerComponent(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    var pdfState by remember { mutableStateOf<PdfState>(PdfState.Loading) }
     val pdfBitmapConverter = remember { PdfBitmapConverter(context = context) }
+    var pdfState by remember { mutableStateOf<PdfState>(PdfState.Loading) }
     var errorDialog by remember { mutableStateOf(false) }
 
     val pdfDownloadListener = object : PdfDownloadListener {
@@ -62,7 +62,6 @@ fun PdfViewerComponent(
 
         override fun onDownloadFailed(e: Exception) {
             pdfState = PdfState.Error(e = e)
-            errorDialog = true
         }
     }
 
@@ -78,7 +77,11 @@ fun PdfViewerComponent(
         }
 
         is PdfLoadCategory.LocalFile -> {
-            pdfDownloadListener.onDownloadSuccess(pdfFile.destinationUri.toFile())
+            try {
+                pdfDownloadListener.onDownloadSuccess(pdfFile.destinationUri.toFile())
+            } catch (e: Exception) {
+                pdfState = PdfState.Error(e)
+            }
         }
     }
 
@@ -88,36 +91,33 @@ fun PdfViewerComponent(
                 ChiliLoader()
             }
             is PdfState.Success -> {
-                Column(
+                val pages = (pdfState as PdfState.Success).pdfBitmapPages
+
+                LazyColumn(
                     modifier = Modifier
-                        .zoomable(rememberZoomState()),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .fillMaxWidth()
+                        .zoomable(rememberZoomState())
                 ) {
-                    LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                        items((pdfState as PdfState.Success).pdfBitmapPages) { page ->
-                            Box(modifier = Modifier.padding(8.dp)) {
-                                PdfPage(
-                                    modifier = Modifier.fillMaxSize(),
-                                    page = page
-                                )
-                            }
-                        }
+                    items(pages) { page ->
+                        PdfPage(
+                            modifier = Modifier.fillMaxSize().padding(8.dp),
+                            page = page
+                        )
                     }
                 }
             }
-            is PdfState.Error -> {
-                ChiliDialog(
-                    showDialog = errorDialog,
-                    onDismiss = { errorDialog = false },
-                    title = errorText,
-                    positiveButtonText = closeDialogButtonText,
-                    onPositiveClick = {
-                        errorDialog = false
-                        errorDialogIsClosed()
-                    }
-                )
-            }
+            is PdfState.Error -> errorDialog = true
         }
+        ChiliDialog(
+            showDialog = errorDialog,
+            onDismiss = { errorDialog = false },
+            title = errorText,
+            positiveButtonText = closeDialogButtonText,
+            onPositiveClick = {
+                errorDialog = false
+                errorDialogIsClosed()
+            }
+        )
     }
 }
 
