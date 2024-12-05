@@ -18,19 +18,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
-import kg.devcats.compose.jetpack_chili.sharePdfFile
+import kg.devcats.compose.jetpack_chili.shareFile
 
 @Composable
 fun PdfViewer(
     modifier: Modifier = Modifier,
     title: String,
     shareIsVisible: Boolean = false,
+    shareTitle: String? = null,
     isDividerVisible: Boolean = true,
     isNavigationIconVisible: Boolean = true,
     onNavigationIconClick: () -> Unit,
     pdfFileCategory: PdfLoadCategory,
     errorPdfLoadText: String,
-    errorDialogCloseText: String
+    errorDialogCloseText: String,
 ) {
     val context = LocalContext.current
     var pdfUri by remember { mutableStateOf(Uri.EMPTY) }
@@ -48,7 +49,11 @@ fun PdfViewer(
                 ) {
                     Image(
                         modifier = Modifier.clickable {
-                            context.sharePdfFile(uri = pdfUri)
+                            context.shareFile(
+                                uri = pdfUri,
+                                fileType = "application/pdf",
+                                title = shareTitle ?: ""
+                            )
                         },
                         painter = painterResource(R.drawable.chili_ic_share),
                         contentDescription = null

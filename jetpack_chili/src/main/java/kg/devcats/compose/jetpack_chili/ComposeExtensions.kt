@@ -59,12 +59,12 @@ fun Modifier.clickableWithoutEffect(
     )
 }
 
-fun Context.sharePdfFile(uri: Uri) {
+fun Context.shareFile(uri: Uri, fileType: String, title: String) {
     val shareIntent = Intent(Intent.ACTION_SEND).apply {
-        type = "application/pdf"
+        type = fileType
 
         val contentUri = FileProvider.getUriForFile(
-            this@sharePdfFile,
+            this@shareFile,
             "${packageName}.fileprovider",
             uri.toFile()
         )

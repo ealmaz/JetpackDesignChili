@@ -29,6 +29,7 @@ import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.components.zoomable.rememberZoomState
 import kg.devcats.compose.jetpack_chili.components.zoomable.zoomable
 import kg.devcats.compose.jetpack_chili.modals.dialog.ChiliDialog
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -49,7 +50,7 @@ fun PdfViewerComponent(
 
     val pdfDownloadListener = object : PdfDownloadListener {
         override fun onDownloadSuccess(file: File) {
-            if (file.isAbsolute) {
+            if (file.exists()) {
                 coroutineScope.launch {
                     fileUploaded.invoke(file.toUri())
                     val renderedPages = pdfBitmapConverter.pdfToBitmaps(file.toUri())
@@ -107,7 +108,9 @@ fun PdfViewerComponent(
                 }
             }
             is PdfState.Error -> errorDialog = true
+            is PdfState.None -> {}
         }
+
         ChiliDialog(
             showDialog = errorDialog,
             onDismiss = { errorDialog = false },
@@ -115,6 +118,7 @@ fun PdfViewerComponent(
             positiveButtonText = closeDialogButtonText,
             onPositiveClick = {
                 errorDialog = false
+                pdfState = PdfState.None
                 errorDialogIsClosed()
             }
         )

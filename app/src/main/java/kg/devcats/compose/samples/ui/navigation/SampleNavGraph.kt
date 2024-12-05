@@ -69,15 +69,6 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
         composable(Screens.PdfViewerScreen.toString()) {
             PreviewPdfViewer(navController = navController)
         }
-        composable(Screens.PdfViewerPortraitScreen.toString()) {
-            PreviewPdfViewerPortrait { navController.navigateUp() }
-        }
-        composable(Screens.PdfViewerAlbumScreen.toString()) {
-            PreviewPdfViewerAlbum { navController.navigateUp() }
-        }
-        composable(Screens.PdfViewerWithShareScreen.toString()) {
-            PreviewPdfViewerWithShare { navController.navigateUp() }
-        }
     }
 
 }

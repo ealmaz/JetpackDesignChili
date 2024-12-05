@@ -17,4 +17,6 @@ sealed interface PdfState {
     data class Success(val pdfFile: File, val pdfBitmapPages: List<Bitmap>): PdfState
 
     data class Error(val e: Exception): PdfState
+
+    data object None: PdfState
 }
