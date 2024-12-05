@@ -66,6 +66,7 @@ fun BottomSheetsPreview(
         onDismissRequest = {containerBS = false}
     ) {
         Box(modifier = Modifier
+            .padding(bottom = 16.dp)
             .background(green_3)
             .fillMaxWidth()
             .height(250.dp), contentAlignment = Alignment.Center) {
