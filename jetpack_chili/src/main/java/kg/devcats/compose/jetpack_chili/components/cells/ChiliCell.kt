@@ -153,7 +153,7 @@ fun ChiliCell(
             }
             if (isDividerVisible) Divider(
                 modifier = Modifier.then(
-                    if (icon != null && iconUrl != null) Modifier.padding(start = iconSize + iconEndMargin)
+                    if (icon != null || iconUrl != null) Modifier.padding(start = iconSize + iconEndMargin)
                     else Modifier
                 )
             )
