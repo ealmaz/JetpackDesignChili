@@ -1,6 +1,7 @@
 package kg.devcats.compose.jetpack_chili.modals.bottom_sheets
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
@@ -38,6 +41,8 @@ fun ChiliBottomSheetContainer(
     isShown: Boolean,
     hideOnSwipe: Boolean = true,
     isCloseIconVisible: Boolean = true,
+    isTopIconVisible: Boolean = false,
+    topIconColor: Color = Chili.color.bottomSheetTopIconColor,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -66,19 +71,55 @@ fun ChiliBottomSheetContainer(
             shape = Chili.shapes.CornerNone,
             dragHandle = null,
         ) {
-            Surface(
-                shape = Chili.shapes.RoundedCornerShape,
-                contentColor = Color.Unspecified,
-                color = Chili.color.bottomSheetBackground,
-                modifier = modifier,
-            ) {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    if (isCloseIconVisible) ChiliBottomSheetCloseIcon(onDismissRequest)
-                    else Spacer(modifier = Modifier.height(8.dp))
-                    Column(modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 16.dp)) {
-                        content.invoke(this)
-                    }
+            if (isTopIconVisible) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Spacer(
+                        modifier = Modifier
+                            .height(3.dp)
+                            .width(40.dp)
+                            .background(
+                                color = topIconColor,
+                                shape = RoundedCornerShape(100.dp)
+                            )
+                    )
+                    Spacer(Modifier.height(6.dp))
+                    BottomSheetContent(
+                        modifier = modifier,
+                        isCloseIconVisible = isCloseIconVisible,
+                        onDismissRequest = onDismissRequest,
+                        content = content
+                    )
                 }
+            } else {
+                BottomSheetContent(
+                    modifier = modifier,
+                    isCloseIconVisible = isCloseIconVisible,
+                    onDismissRequest = onDismissRequest,
+                    content = content
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun BottomSheetContent(
+    modifier: Modifier = Modifier,
+    isCloseIconVisible: Boolean = true,
+    onDismissRequest: () -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Surface(
+        shape = Chili.shapes.RoundedCornerShape,
+        contentColor = Color.Unspecified,
+        color = Chili.color.bottomSheetBackground,
+        modifier = modifier,
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            if (isCloseIconVisible) ChiliBottomSheetCloseIcon(onDismissRequest)
+            else Spacer(modifier = Modifier.height(8.dp))
+            Column(modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 0.dp)) {
+                content.invoke(this)
             }
         }
     }

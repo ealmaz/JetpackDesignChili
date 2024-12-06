@@ -67,7 +67,7 @@ fun ColumnScope.ChiliDetailActionsBottomSheetContent(
     headerText?.let {Text(text = headerText, modifier = Modifier.padding(top = 16.dp), style = Chili.typography.H16_Primary_500) } ?: Spacer(modifier = Modifier.height(8.dp)
     )
     bodyText?. let { Text(text = bodyText, modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H14_Primary) }
-    Column(modifier = Modifier.padding(top = 16.dp)) {
+    Column(modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)) {
         secondaryButtonText?.let { ChiliAdditionalButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onSecondaryButtonClick) }
         if (secondaryButtonText != null && primaryButtonText != null) Spacer(modifier = Modifier.height(12.dp))
         primaryButtonText?.let { ChiliPrimaryButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onPrimaryButtonClick) }
