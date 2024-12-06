@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
@@ -43,6 +44,7 @@ fun ChiliBottomSheetContainer(
     isCloseIconVisible: Boolean = true,
     isTopIconVisible: Boolean = false,
     topIconColor: Color = Chili.color.bottomSheetTopIconColor,
+    bottomSheetShape: Shape = Chili.shapes.RoundedCornerShape,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -86,6 +88,7 @@ fun ChiliBottomSheetContainer(
                     BottomSheetContent(
                         modifier = modifier,
                         isCloseIconVisible = isCloseIconVisible,
+                        shape = bottomSheetShape,
                         onDismissRequest = onDismissRequest,
                         content = content
                     )
@@ -94,6 +97,7 @@ fun ChiliBottomSheetContainer(
                 BottomSheetContent(
                     modifier = modifier,
                     isCloseIconVisible = isCloseIconVisible,
+                    shape = bottomSheetShape,
                     onDismissRequest = onDismissRequest,
                     content = content
                 )
@@ -106,11 +110,12 @@ fun ChiliBottomSheetContainer(
 fun BottomSheetContent(
     modifier: Modifier = Modifier,
     isCloseIconVisible: Boolean = true,
+    shape: Shape = Chili.shapes.RoundedCornerShape,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Surface(
-        shape = Chili.shapes.RoundedCornerShape,
+        shape = shape,
         contentColor = Color.Unspecified,
         color = Chili.color.bottomSheetBackground,
         modifier = modifier,
