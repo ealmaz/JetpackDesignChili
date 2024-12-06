@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -34,11 +35,18 @@ fun NestedBoxWithEmoji(
                 .background(params.innerPlaceholderColor),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = params.emoji,
-                style = params.emojiTextStyle,
-                textAlign = TextAlign.Center
-            )
+            if (params.emoji != null){
+                Text(
+                    text = params.emoji,
+                    style = params.emojiTextStyle,
+                    textAlign = TextAlign.Center
+                )
+            } else if(params.emojiIconPlaceHolder!= null) {
+                Icon(
+                    modifier = Modifier.size(params.emojiIconPlaceHolderSize),
+                    painter = params.emojiIconPlaceHolder,
+                    contentDescription = "")
+            }
         }
     }
 }
