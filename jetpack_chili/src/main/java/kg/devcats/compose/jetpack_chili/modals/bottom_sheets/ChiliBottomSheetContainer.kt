@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -33,8 +32,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.theme.Chili
-import kg.devcats.compose.jetpack_chili.theme.black_5
-import kg.devcats.compose.jetpack_chili.theme.gray_1
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
@@ -45,7 +42,7 @@ fun ChiliBottomSheetContainer(
     hideOnSwipe: Boolean = true,
     isCloseIconVisible: Boolean = true,
     isTopIconVisible: Boolean = false,
-    topIconColor: Color = if (isSystemInDarkTheme()) black_5 else gray_1,
+    topIconColor: Color = Chili.color.bottomSheetTopIconColor,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
