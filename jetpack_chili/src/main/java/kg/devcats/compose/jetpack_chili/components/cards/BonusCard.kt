@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,6 +17,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
+import kg.devcats.compose.jetpack_chili.components.emoji.EmojiDefaults
+import kg.devcats.compose.jetpack_chili.components.emoji.EmojiParams
 import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
@@ -27,8 +28,9 @@ fun BonusCard(
     title: String,
     icon: Painter? = null,
     size: BonusCardSize = BonusCardSize.Large(),
+    isLoading: Boolean? = false,
+    emojiParams: EmojiParams? = null,
     onClick: (() -> Unit)? = null,
-    isLoading: Boolean? = false
 ) {
 
     if (isLoading == true) {
@@ -70,7 +72,8 @@ fun BonusCard(
             titlePaddingValues = PaddingValues(top = 12.dp, end = 8.dp),
             titleMaxLines = 2,
             titleStyle = if (size is BonusCardSize.Large) Chili.typography.H16_Primary_500
-            else Chili.typography.H12_Primary
+            else Chili.typography.H12_Primary,
+            emojiParams = emojiParams
         )
     }
 }
@@ -107,16 +110,25 @@ fun BonusCardPreview() {
             BonusCard(
                 title = "Заголовок в 2 строки",
                 icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                isLoading = false
+                isLoading = false,
+                emojiParams = EmojiDefaults.emojiParams(
+                    emoji = "🔥",
+                    outerPlaceholderColor = Color.Blue,
+                    innerPlaceholderColor = Color.White
+                )
             )
         }
 
         ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 16.dp)) {
             BonusCard(
                 title = "Заголовок в 2 строки",
-                icon = painterResource(id = R.drawable.chili_ic_documents_green),
                 isLoading = false,
-                size = BonusCardSize.Middle()
+                size = BonusCardSize.Middle(),
+                emojiParams = EmojiDefaults.emojiParams(
+                    emoji = "🔥",
+                    outerPlaceholderColor = Color.Blue,
+                    innerPlaceholderColor = Color.White
+                )
             )
         }
 

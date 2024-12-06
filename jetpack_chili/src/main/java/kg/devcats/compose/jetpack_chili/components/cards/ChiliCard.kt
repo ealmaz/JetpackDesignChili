@@ -81,6 +81,7 @@ fun ChiliCard(
 
                     emojiParams != null -> {
                         NestedBoxWithEmoji(
+                            size = iconSize,
                             params = emojiParams
                         )
                     }

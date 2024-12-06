@@ -14,7 +14,6 @@ object EmojiDefaults {
      */
     @Composable
     fun emojiParams(
-        outerPlaceholderSize: Dp = 32.dp,
         outerPlaceholderColor: Color = Color.Transparent,
         innerPlaceholderSize: Dp = 22.dp,
         innerPlaceholderColor: Color = Color.Transparent,
@@ -22,7 +21,6 @@ object EmojiDefaults {
         emoji: String
     ): EmojiParams {
         return EmojiParams(
-            outerPlaceholderSize = outerPlaceholderSize,
             outerPlaceholderColor = outerPlaceholderColor,
             innerPlaceholderSize = innerPlaceholderSize,
             innerPlaceholderColor = innerPlaceholderColor,
@@ -34,7 +32,6 @@ object EmojiDefaults {
 }
 
 data class EmojiParams(
-    val outerPlaceholderSize: Dp,
     val outerPlaceholderColor: Color,
     val innerPlaceholderSize: Dp ,
     val innerPlaceholderColor: Color,

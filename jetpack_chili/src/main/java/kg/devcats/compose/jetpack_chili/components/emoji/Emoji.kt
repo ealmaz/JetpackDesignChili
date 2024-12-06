@@ -10,17 +10,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun NestedBoxWithEmoji(
     modifier: Modifier = Modifier,
+    size: Dp = 32.dp,
     params: EmojiParams,
 ) {
     Box(
         modifier = modifier
-            .size(params.outerPlaceholderSize)
-            .background(color = params.outerPlaceholderColor, shape = Chili.shapes.RoundedCornerShape),
+            .size(size)
+            .clip(Chili.shapes.RoundedCornerShape)
+            .background(color = params.outerPlaceholderColor),
         contentAlignment = Alignment.Center
     ) {
         Box(
