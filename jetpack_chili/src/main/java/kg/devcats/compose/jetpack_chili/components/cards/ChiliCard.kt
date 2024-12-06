@@ -26,6 +26,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
+import kg.devcats.compose.jetpack_chili.components.emoji.EmojiDefaults
+import kg.devcats.compose.jetpack_chili.components.emoji.EmojiParams
+import kg.devcats.compose.jetpack_chili.components.emoji.NestedBoxWithEmoji
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -45,6 +48,7 @@ fun ChiliCard(
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     isEnabled: Boolean = true,
+    emojiParams: EmojiParams? = null,
     onClick: (() -> Unit)? = null
 ) {
     val alphaForDisableState = if (isEnabled) 1f else 0.5f
@@ -64,15 +68,24 @@ fun ChiliCard(
             Column(
                 horizontalAlignment = horizontalAlignment
             ) {
-                icon?.let {
-                    Image(
-                        painter = it,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .clip(Chili.shapes.RoundedCornerShape)
-                            .size(iconSize)
-                    )
+                when {
+                    icon != null -> {
+                        Image(
+                            painter = icon,
+                            contentDescription = "",
+                            modifier = Modifier
+                                .clip(Chili.shapes.RoundedCornerShape)
+                                .size(iconSize)
+                        )
+                    }
+
+                    emojiParams != null -> {
+                        NestedBoxWithEmoji(
+                            params = emojiParams
+                        )
+                    }
                 }
+
                 Text(
                     modifier = Modifier.padding(titlePaddingValues),
                     text = title,
@@ -98,13 +111,33 @@ fun ChiliCard(
 @Composable
 fun ChiliCardPreview() {
     Column {
-        ShadowRoundedBox(modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 40.dp)) {
+
+        ShadowRoundedBox(modifier = Modifier.padding(16.dp)) {
             ChiliCard(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Title",
                 subtitle = "1100 c",
                 verticalAlignment = Alignment.CenterVertically,
+                endFrame = {
+                    Image(
+                        painter = painterResource(id = R.drawable.chili_ic_documents_green),
+                        contentDescription = ""
+                    )
+                }
+            )
+        }
 
+        ShadowRoundedBox(modifier = Modifier.padding(horizontal = 16.dp)) {
+            ChiliCard(
+                modifier = Modifier.fillMaxWidth(),
+                title = "Title",
+                subtitle = "1100 c",
+                verticalAlignment = Alignment.CenterVertically,
+                emojiParams = EmojiDefaults.emojiParams(
+                    emoji = "🔥",
+                    outerPlaceholderColor = Color.Blue,
+                    innerPlaceholderColor = Color.White
+                ),
                 endFrame = {
                     Image(
                         painter = painterResource(id = R.drawable.chili_ic_documents_green),
