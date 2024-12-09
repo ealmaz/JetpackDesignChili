@@ -1,6 +1,8 @@
 package kg.devcats.compose.jetpack_chili.components.cells
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,6 +34,8 @@ fun ChiliAdditionalInfoCell(
     onClick: (() -> Unit)? = null,
     additionalInfo: String? = null,
     additionalInfoStyle: TextStyle = Chili.typography.H16_Value,
+    additionalEndIcon: Painter? = null,
+    additionalEndIconSize: Dp = 18.dp,
     isLoading: Boolean = false
 ) {
     ChiliCell(
@@ -64,6 +68,13 @@ fun ChiliAdditionalInfoCell(
                     )
                 }
             }
+            additionalEndIcon?.let {
+                Icon(
+                    modifier = Modifier.size(additionalEndIconSize),
+                    painter = additionalEndIcon,
+                    contentDescription = ""
+                )
+            }
         }
     )
 }
@@ -76,7 +87,8 @@ fun AdditionalTextCellPreview() {
             title = "Заголовок",
             subtitle = "Подзаголовок",
             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-            additionalInfo = "Additionl info "
+            additionalInfo = "Additionl info ",
+            additionalEndIcon = painterResource(id = R.drawable.chili_ic_documents_green)
         )
     }
 }
