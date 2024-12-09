@@ -68,9 +68,6 @@ class ZoomableState(
     internal var boundOffset by mutableStateOf(IntOffset.Zero)
         private set
 
-    internal var dismissDragAbsoluteOffsetY by mutableStateOf(0f)
-        private set
-
     internal var size: IntSize = IntSize.Zero
         set(value) {
             field = value

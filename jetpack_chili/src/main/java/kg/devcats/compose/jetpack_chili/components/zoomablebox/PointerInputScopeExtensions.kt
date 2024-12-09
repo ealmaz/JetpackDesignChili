@@ -46,10 +46,8 @@ internal suspend fun PointerInputScope.detectZoomableGestures(
         detectTransformGestures(
             onGestureStart = { state.onGestureStart() },
             onGesture = { centroid, pan, zoom ->
-                if (state.dismissDragAbsoluteOffsetY == 0f) {
-                    launch {
-                        state.onTransform(centroid, pan, zoom)
-                    }
+                launch {
+                    state.onTransform(centroid, pan, zoom)
                 }
             },
             onGestureEnd = { state.onTransformEnd() }
@@ -71,7 +69,7 @@ private suspend fun PointerInputScope.detectTransformGestures(
             if (!canceled) {
                 val zoomChange = event.calculateZoom()
                 val panChange = event.calculatePan()
-                val centroid = event.calculateCentroid(useCurrent = false)
+                val centroid = event.calculateCentroid()
                 if (zoomChange != 1f || panChange != Offset.Zero) {
                     onGesture(centroid, panChange, zoomChange)
                 }
