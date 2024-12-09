@@ -97,6 +97,11 @@ class ZoomableState(
         updateFitContentSize()
     }
 
+    suspend fun onDrag(dragAmount: Offset) {
+        _translationX.snapTo(_translationX.value + dragAmount.x)
+        _translationY.snapTo(_translationY.value + dragAmount.y)
+    }
+
     private fun updateFitContentSize() {
         if (layoutSize == Size.Zero) {
             fitContentSize = Size.Zero
