@@ -3,7 +3,6 @@ package kg.devcats.compose.jetpack_chili.components.pdf_viewer
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,10 +25,8 @@ import androidx.core.net.toFile
 import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
-import kg.devcats.compose.jetpack_chili.components.zoomable.rememberZoomState
-import kg.devcats.compose.jetpack_chili.components.zoomable.zoomable
+import kg.devcats.compose.jetpack_chili.components.zoomablebox.ZoomableBox
 import kg.devcats.compose.jetpack_chili.modals.dialog.ChiliDialog
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -54,10 +51,14 @@ fun PdfViewerComponent(
                 coroutineScope.launch {
                     fileUploaded.invoke(file.toUri())
                     val renderedPages = pdfBitmapConverter.pdfToBitmaps(file.toUri())
-                    pdfState = PdfState.Success(pdfFile = file, pdfBitmapPages = renderedPages)
+                    if (renderedPages == null) {
+                        onDownloadFailed(IllegalArgumentException("Cannot open PDF file"))
+                    } else {
+                        pdfState = PdfState.Success(pdfFile = file, pdfBitmapPages = renderedPages)
+                    }
                 }
             } else {
-                pdfState = PdfState.Error(e = IllegalArgumentException("file must be absolute"))
+                pdfState = PdfState.Error(e = IllegalArgumentException("file must be exists"))
             }
         }
 
@@ -94,16 +95,17 @@ fun PdfViewerComponent(
             is PdfState.Success -> {
                 val pages = (pdfState as PdfState.Success).pdfBitmapPages
 
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .zoomable(rememberZoomState())
-                ) {
-                    items(pages) { page ->
-                        PdfPage(
-                            modifier = Modifier.fillMaxSize().padding(8.dp),
-                            page = page
-                        )
+                ZoomableBox(modifier = Modifier.matchParentSize()) {
+                    LazyColumn(
+                        modifier = modifier
+                            .fillMaxWidth()
+                    ) {
+                        items(pages) { page ->
+                            PdfPage(
+                                modifier = Modifier.fillMaxSize().padding(8.dp),
+                                page = page
+                            )
+                        }
                     }
                 }
             }
