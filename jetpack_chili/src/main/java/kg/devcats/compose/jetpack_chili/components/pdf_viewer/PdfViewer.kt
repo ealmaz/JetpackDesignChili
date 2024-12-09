@@ -28,6 +28,7 @@ fun PdfViewer(
     shareTitle: String? = null,
     isDividerVisible: Boolean = true,
     isNavigationIconVisible: Boolean = true,
+    zoomIsEnabled: Boolean = true,
     onNavigationIconClick: () -> Unit,
     pdfFileCategory: PdfLoadCategory,
     errorPdfLoadText: String,
@@ -66,6 +67,7 @@ fun PdfViewer(
             modifier = modifier.fillMaxSize(),
             pdfFile = pdfFileCategory,
             errorText = errorPdfLoadText,
+            zoomIsEnabled = zoomIsEnabled,
             closeDialogButtonText = errorDialogCloseText,
             errorDialogIsClosed = onNavigationIconClick,
             fileUploaded = { uri -> pdfUri = uri }

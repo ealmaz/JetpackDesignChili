@@ -35,6 +35,7 @@ fun PdfViewerComponent(
     modifier: Modifier = Modifier,
     pdfFile: PdfLoadCategory,
     errorText: String,
+    zoomIsEnabled: Boolean = true,
     closeDialogButtonText: String? = null,
     errorDialogIsClosed: () -> Unit = {},
     fileUploaded: (uri: Uri) -> Unit = {}
@@ -95,9 +96,13 @@ fun PdfViewerComponent(
             is PdfState.Success -> {
                 val pages = (pdfState as PdfState.Success).pdfBitmapPages
 
-                ZoomableBox(modifier = Modifier.matchParentSize()) {
+                ZoomableBox(
+                    modifier = Modifier.matchParentSize(),
+                    enabled = zoomIsEnabled,
+                    contentAlignment = Alignment.Center
+                ) {
                     LazyColumn(
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxWidth()
                     ) {
                         items(pages) { page ->

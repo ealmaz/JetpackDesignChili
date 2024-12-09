@@ -3,6 +3,7 @@ package kg.devcats.compose.jetpack_chili.components.zoomablebox
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.layout
@@ -14,6 +15,7 @@ fun ZoomableBox(
     modifier: Modifier = Modifier,
     state: ZoomableState = rememberZoomableState(),
     enabled: Boolean = true,
+    contentAlignment: Alignment = Alignment.Center,
     content: @Composable BoxScope.() -> Unit
 ) {
     val gesturesModifier = if (!enabled) Modifier else {
@@ -40,6 +42,7 @@ fun ZoomableBox(
                     }
                 }
             },
+        contentAlignment = contentAlignment,
         content = content
     )
 }

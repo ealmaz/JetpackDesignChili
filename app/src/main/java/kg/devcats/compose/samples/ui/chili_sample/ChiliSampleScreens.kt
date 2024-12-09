@@ -116,7 +116,7 @@ fun ChiliSampleScreens(
             ChiliPrimaryButton(text = "PdfViewer", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {
-                navController?.navigate(Screens.PdfViewerScreen.toString())
+                navController?.navigate(Screens.PdfViewerNavGraph.toString())
             }
         }
     }
