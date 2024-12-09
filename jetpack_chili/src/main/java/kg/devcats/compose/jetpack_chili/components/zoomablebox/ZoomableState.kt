@@ -2,40 +2,25 @@ package kg.devcats.compose.jetpack_chili.components.zoomablebox
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.animation.core.DecayAnimationSpec
-import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.listSaver
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.center
 import androidx.compose.ui.geometry.lerp
-import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.toSize
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlin.math.PI
-import kotlin.math.abs
-import kotlin.math.max
 import kotlin.math.roundToInt
-import kotlin.math.sin
 
 @Composable
 fun rememberZoomableState(
@@ -68,13 +53,19 @@ class ZoomableState(
     internal var boundOffset by mutableStateOf(IntOffset.Zero)
         private set
 
-    internal var size: IntSize = IntSize.Zero
+    internal var layoutSize: Size = Size.Zero
         set(value) {
             field = value
             updateBounds()
         }
 
-    internal var childSize: Size = Size.Zero
+    internal var fitContentSize: Size = Size.Zero
+        set(value) {
+            field = value
+            updateBounds()
+        }
+
+    internal var contentSize: Size = Size.Zero
         set(value) {
             field = value
             updateBounds()
@@ -101,10 +92,36 @@ class ZoomableState(
     internal var isGestureInProgress: Boolean by mutableStateOf(false)
         private set
 
+    fun setLayoutSize(size: Size) {
+        layoutSize = size
+        updateFitContentSize()
+    }
+
+    private fun updateFitContentSize() {
+        if (layoutSize == Size.Zero) {
+            fitContentSize = Size.Zero
+            return
+        }
+
+        if (contentSize == Size.Zero) {
+            fitContentSize = layoutSize
+            return
+        }
+
+        val contentAspectRatio = contentSize.width / contentSize.height
+        val layoutAspectRatio = layoutSize.width / layoutSize.height
+
+        fitContentSize = if (contentAspectRatio > layoutAspectRatio) {
+            contentSize * (layoutSize.width / contentSize.width)
+        } else {
+            contentSize * (layoutSize.height / contentSize.height)
+        }
+    }
+
     private fun updateBounds() {
-        if (childSize == Size.Zero) return
-        val offsetX = childSize.width * scale - size.width
-        val offsetY = childSize.height * scale - size.height
+        if (fitContentSize == Size.Zero) return
+        val offsetX = fitContentSize.width * scale - layoutSize.width
+        val offsetY = fitContentSize.height * scale - layoutSize.height
         boundOffset = IntOffset((offsetX / 2f).roundToInt(), (offsetY / 2f).roundToInt())
         val maxX = offsetX.coerceAtLeast(0f) / 2f
         val maxY = offsetY.coerceAtLeast(0f) / 2f
@@ -113,7 +130,7 @@ class ZoomableState(
     }
 
     internal fun calculateTargetTranslation(centroid: Offset): Offset =
-        (size.toSize().center + Offset(translationX, translationY) - centroid) / scale
+        (layoutSize.center + Offset(translationX, translationY) - centroid) / scale
 
     suspend fun animateScaleTo(
         targetScale: Float,
@@ -148,7 +165,7 @@ class ZoomableState(
     internal suspend fun onTransform(centroid: Offset, pan: Offset, zoom: Float) {
         var targetTranslation = calculateTargetTranslation(centroid - pan)
         scale *= zoom
-        targetTranslation = targetTranslation * scale - size.toSize().center + centroid
+        targetTranslation = targetTranslation * scale - layoutSize.center + centroid
         _translationX.snapTo(targetTranslation.x)
         _translationY.snapTo(targetTranslation.y)
     }
