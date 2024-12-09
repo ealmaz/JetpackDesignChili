@@ -72,5 +72,5 @@ fun Context.shareFile(uri: Uri, fileType: String, title: String) {
         putExtra(Intent.EXTRA_STREAM, contentUri)
         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     }
-    startActivity(Intent.createChooser(shareIntent, "Share file with"))
+    startActivity(Intent.createChooser(shareIntent, title))
 }

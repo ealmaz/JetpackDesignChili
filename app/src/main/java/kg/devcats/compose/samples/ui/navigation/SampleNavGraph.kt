@@ -74,7 +74,7 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
                 onNavigationIconClick = { navController.navigateUp() },
                 pdfFileCategory = PdfLoadCategory.Remote("https://www.akchabulak.kg/storage/documents/ru/Oferta.pdf"),
                 errorPdfLoadText = "Не удалось загрузить PDF файл",
-                errorDialogCloseText = "Ок"
+                errorDialogCloseText = "Ок",
             )
         }
         composable(Screens.PdfViewerAlbumScreen.toString()) {
@@ -83,7 +83,7 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
                 onNavigationIconClick = { navController.navigateUp() },
                 pdfFileCategory = PdfLoadCategory.Remote("https://fiu.gov.kg/uploads/65e953b2c33b7.pdf"),
                 errorPdfLoadText = "Не удалось загрузить PDF файл",
-                errorDialogCloseText = "Ок"
+                errorDialogCloseText = "Ок",
             )
         }
         composable(Screens.PdfViewerWithShareScreen.toString()) {
@@ -93,7 +93,8 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
                 shareIsVisible = true,
                 pdfFileCategory = PdfLoadCategory.Remote("https://www.akchabulak.kg/storage/documents/ru/Oferta.pdf"),
                 errorPdfLoadText = "Не удалось загрузить PDF файл",
-                errorDialogCloseText = "Ок"
+                errorDialogCloseText = "Ок",
+                shareTitle = "Share"
             )
         }
     }
