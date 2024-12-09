@@ -23,8 +23,6 @@ fun PdfSampleScreens(navController: NavController, navigateUp: () -> Unit) {
         modifier = Modifier
             .background(Chili.color.surfaceBackground)
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp, vertical = 16.dp)
     ) {
         ChiliCenteredAppToolbar(
             title = "Pdf Viewers",
@@ -33,44 +31,50 @@ fun PdfSampleScreens(navController: NavController, navigateUp: () -> Unit) {
             onNavigationIconClick = navigateUp
         )
 
-        ChiliPrimaryButton(
-            text = "PdfViewer Portrait", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp, vertical = 16.dp)
         ) {
-            navController.navigate(PdfScreens.PdfViewerPortraitScreen.toString())
-        }
+            ChiliPrimaryButton(
+                text = "PdfViewer Portrait", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                navController.navigate(PdfScreens.PdfViewerPortraitScreen.toString())
+            }
 
-        ChiliPrimaryButton(
-            text = "PdfViewer Album", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)
-        ) {
-            navController.navigate(PdfScreens.PdfViewerAlbumScreen.toString())
-        }
+            ChiliPrimaryButton(
+                text = "PdfViewer Album", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                navController.navigate(PdfScreens.PdfViewerAlbumScreen.toString())
+            }
 
-        ChiliPrimaryButton(
-            text = "PdfViewer With Share", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)
-        ) {
-            navController.navigate(PdfScreens.PdfViewerWithShareScreen.toString())
-        }
+            ChiliPrimaryButton(
+                text = "PdfViewer With Share", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                navController.navigate(PdfScreens.PdfViewerWithShareScreen.toString())
+            }
 
-        ChiliPrimaryButton(
-            text = "PdfViewer Without Zoom", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)
-        ) {
-            navController.navigate(PdfScreens.PdfViewerWithoutZoomScreen.toString())
-        }
+            ChiliPrimaryButton(
+                text = "PdfViewer Without Zoom", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                navController.navigate(PdfScreens.PdfViewerWithoutZoomScreen.toString())
+            }
 
-        ChiliPrimaryButton(
-            text = "PdfViewer One Element", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)
-        ) {
-            navController.navigate(PdfScreens.PdfViewerOneElementScreen.toString())
+            ChiliPrimaryButton(
+                text = "PdfViewer One Element", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                navController.navigate(PdfScreens.PdfViewerOneElementScreen.toString())
+            }
         }
     }
 }
