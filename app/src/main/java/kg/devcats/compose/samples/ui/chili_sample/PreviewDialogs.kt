@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -24,7 +25,10 @@ import kg.devcats.compose.jetpack_chili.modals.dialog.ChiliOptionDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.CustomContentDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.CustomSimpleDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.DialogOption
+import kg.devcats.compose.jetpack_chili.modals.dialog.SemiTransparentLoadingDialog
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun PreviewDialogs(navigateUp: () -> Unit) {
@@ -37,8 +41,12 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
 
     var showSimpleCustomDialog by remember { mutableStateOf(false) }
     var showCustomContentDialog by remember { mutableStateOf(false) }
+    var showLoadingDialog by remember { mutableStateOf(false) }
+    var showDismissLoadingDialogOnBackPress by remember { mutableStateOf(false) }
 
     var selectedOption by remember { mutableStateOf<DialogOption<Int>?>(null) }
+
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -96,6 +104,32 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
                     .padding(top = 16.dp)
             ) {
                 showCustomContentDialog = true
+            }
+
+            ChiliPrimaryButton(
+                text = "Loading dialog", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                showLoadingDialog = true
+                Toast.makeText(context, "Loader shows for 10 seconds", Toast.LENGTH_LONG).show()
+                scope.launch {
+                    delay(10_000)
+                    showLoadingDialog = false
+                }
+            }
+
+            ChiliPrimaryButton(
+                text = "Dismissible Loading dialog on back press", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                showDismissLoadingDialogOnBackPress = true
+                Toast.makeText(context, "Loader shows for a minute", Toast.LENGTH_SHORT).show()
+                scope.launch {
+                    delay(60_000)
+                    showLoadingDialog = false
+                }
             }
         }
     }
@@ -178,4 +212,11 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
             showSimpleCustomDialog = false
         }
     )
+
+    if (showLoadingDialog) SemiTransparentLoadingDialog()
+
+    if (showDismissLoadingDialogOnBackPress) SemiTransparentLoadingDialog {
+        Toast.makeText(context, "Loader's hidden", Toast.LENGTH_SHORT).show()
+        showDismissLoadingDialogOnBackPress = false
+    }
 }
