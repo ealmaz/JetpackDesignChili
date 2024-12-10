@@ -16,7 +16,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 
 @Composable
-fun SemiTransparentLoadingDialog(
+fun LoaderDialog(
     onDismissRequest: (() -> Unit)? = null
 ) {
     Dialog(

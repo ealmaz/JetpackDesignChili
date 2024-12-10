@@ -25,7 +25,7 @@ import kg.devcats.compose.jetpack_chili.modals.dialog.ChiliOptionDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.CustomContentDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.CustomSimpleDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.DialogOption
-import kg.devcats.compose.jetpack_chili.modals.dialog.SemiTransparentLoadingDialog
+import kg.devcats.compose.jetpack_chili.modals.dialog.LoaderDialog
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -41,8 +41,8 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
 
     var showSimpleCustomDialog by remember { mutableStateOf(false) }
     var showCustomContentDialog by remember { mutableStateOf(false) }
-    var showLoadingDialog by remember { mutableStateOf(false) }
-    var showDismissLoadingDialogOnBackPress by remember { mutableStateOf(false) }
+    var showLoaderDialog by remember { mutableStateOf(false) }
+    var showDismissLoaderDialogOnBackPress by remember { mutableStateOf(false) }
 
     var selectedOption by remember { mutableStateOf<DialogOption<Int>?>(null) }
 
@@ -111,11 +111,11 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
                     .fillMaxWidth()
                     .padding(top = 16.dp)
             ) {
-                showLoadingDialog = true
+                showLoaderDialog = true
                 Toast.makeText(context, "Loader shows for 10 seconds", Toast.LENGTH_LONG).show()
                 scope.launch {
                     delay(10_000)
-                    showLoadingDialog = false
+                    showLoaderDialog = false
                 }
             }
 
@@ -124,11 +124,11 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
                     .fillMaxWidth()
                     .padding(top = 16.dp)
             ) {
-                showDismissLoadingDialogOnBackPress = true
+                showDismissLoaderDialogOnBackPress = true
                 Toast.makeText(context, "Loader shows for a minute", Toast.LENGTH_SHORT).show()
                 scope.launch {
                     delay(60_000)
-                    showLoadingDialog = false
+                    showDismissLoaderDialogOnBackPress = false
                 }
             }
         }
@@ -213,10 +213,10 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
         }
     )
 
-    if (showLoadingDialog) SemiTransparentLoadingDialog()
+    if (showLoaderDialog) LoaderDialog()
 
-    if (showDismissLoadingDialogOnBackPress) SemiTransparentLoadingDialog {
+    if (showDismissLoaderDialogOnBackPress) LoaderDialog {
         Toast.makeText(context, "Loader's hidden", Toast.LENGTH_SHORT).show()
-        showDismissLoadingDialogOnBackPress = false
+        showDismissLoaderDialogOnBackPress = false
     }
 }
