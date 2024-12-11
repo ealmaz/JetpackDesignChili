@@ -62,26 +62,6 @@ fun ChiliUneditableInputField(
     }
 }
 
-@Composable
-private fun UneditableText(
-    modifier: Modifier = Modifier,
-    text: String = "",
-    textStyle: TextStyle = Chili.typography.H16_Primary_500,
-    textAlign: TextAlign = TextAlign.Unspecified,
-    color: Color = Chili.color.valueText,
-    suffix: (@Composable () -> Unit)? = null,
-) {
-    Row(modifier = modifier) {
-        Text(
-            text = text,
-            style = textStyle,
-            color = color,
-            textAlign = textAlign
-        )
-        suffix?.invoke()
-    }
-}
-
 @Preview
 @Composable
 private fun PreviewValue() {
