@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,13 +24,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.jetpack_chili.theme.gray_1
 
 @Composable
 fun ChiliUneditableInputField(
     modifier: Modifier,
     text: String = "",
     hint: String = "",
-    textStyle: TextStyle = Chili.typography.H16_Primary_500,
+    textStyle: TextStyle = Chili.typography.H20_Primary_500,
     textAlign: TextAlign = TextAlign.Unspecified,
     onClick: () -> Unit
 ) {
@@ -43,7 +45,7 @@ fun ChiliUneditableInputField(
         onClick = onClick
     ) {
         Row(
-            Modifier.padding(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
+            Modifier.padding(vertical = 12.dp, horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -54,9 +56,10 @@ fun ChiliUneditableInputField(
                 textAlign = textAlign
             )
 
-            Image(
+            Icon(
                 painter = painterResource(R.drawable.chili_ic_chevron),
-                contentDescription = null
+                contentDescription = null,
+                tint = gray_1.copy(alpha = 0.5f)
             )
         }
     }

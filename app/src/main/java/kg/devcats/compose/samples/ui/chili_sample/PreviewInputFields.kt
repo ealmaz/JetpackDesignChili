@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -176,11 +177,6 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
             ChiliUneditableInputField(
                 modifier = Modifier.padding(top = 16.dp),
                 hint = "Chili Uneditable Input Field",
-                onClick = { context.showToast("Chili Uneditable Input Field") }
-            )
-
-            ChiliUneditableInputField(
-                modifier = Modifier.padding(top = 16.dp),
                 onClick = { context.showToast("Chili Uneditable Input Field") }
             )
         }
