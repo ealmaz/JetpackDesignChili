@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.extractor)
+    implementation(libs.androidx.localbroadcastmanager)
+    implementation(libs.androidx.lifecycle.process)
     implementation(libs.coil)
     debugImplementation(libs.androidx.ui.tooling)
 }
