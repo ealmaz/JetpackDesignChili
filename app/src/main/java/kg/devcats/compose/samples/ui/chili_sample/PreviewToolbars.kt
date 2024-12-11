@@ -1,5 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -130,6 +132,14 @@ fun Toolbars(
             var isSearchMode by remember { mutableStateOf(false) }
             var searchQuery by remember { mutableStateOf(TextFieldValue()) }
             val focusRequester = remember { FocusRequester() }
+
+            val focusManager = LocalFocusManager.current
+
+            BackHandler(enabled = isSearchMode) {
+                isSearchMode = false
+                searchQuery = TextFieldValue()
+                focusManager.clearFocus()
+            }
 
             ChiliSearchAppToolbar(
                 modifier = Modifier.fillMaxWidth(),

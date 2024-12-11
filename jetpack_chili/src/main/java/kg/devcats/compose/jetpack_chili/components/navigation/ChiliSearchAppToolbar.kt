@@ -63,24 +63,17 @@ fun ChiliSearchAppToolbar(
                     contentAlignment = Alignment.CenterStart
                 ) {
                     if (showNavigationIcon) {
-                        Image(
+                        IconButton(
                             painter = navigationIcon,
                             contentDescription = "Back",
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .size(24.dp)
-                                .clickable(
-                                    onClick = {
-                                        if (isSearchMode) {
-                                            onSearchModeChange(false)
-                                            onSearchQueryChange(TextFieldValue())
-                                        } else {
-                                            onNavigationIconClick()
-                                        }
-                                    },
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = ripple(bounded = false),
-                                )
+                            onClick = {
+                                if (isSearchMode) {
+                                    onSearchModeChange(false)
+                                    onSearchQueryChange(TextFieldValue())
+                                } else {
+                                    onNavigationIconClick()
+                                }
+                            }
                         )
                     } else {
                         Spacer(modifier = Modifier.size(24.dp))
@@ -117,33 +110,19 @@ fun ChiliSearchAppToolbar(
                 ) {
                     if (isSearchMode) {
                         if (searchQuery.text.isNotEmpty()) {
-                            Image(
+                            IconButton(
                                 painter = painterResource(id = R.drawable.chili_ic_close),
                                 contentDescription = "Clear Search",
-                                modifier = Modifier
-                                    .padding(16.dp)
-                                    .size(24.dp)
-                                    .clickable(
-                                        onClick = { onSearchQueryChange(TextFieldValue()) },
-                                        interactionSource = remember { MutableInteractionSource() },
-                                        indication = ripple(bounded = false)
-                                    )
+                                onClick = { onSearchQueryChange(TextFieldValue()) }
                             )
                         } else {
                             Spacer(modifier = Modifier.size(24.dp))
                         }
                     } else {
-                        Image(
+                        IconButton(
                             painter = painterResource(id = R.drawable.chili_ic_search),
                             contentDescription = "Search",
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .size(24.dp)
-                                .clickable(
-                                    onClick = { onSearchModeChange(true) },
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = ripple(bounded = false),
-                                )
+                            onClick = { onSearchModeChange(true) }
                         )
                     }
                 }
@@ -153,6 +132,27 @@ fun ChiliSearchAppToolbar(
         }
     }
 }
+
+@Composable
+private fun IconButton(
+    painter: Painter,
+    contentDescription: String?,
+    onClick: () -> Unit
+) {
+    Image(
+        painter = painter,
+        contentDescription = contentDescription,
+        modifier = Modifier
+            .padding(16.dp)
+            .size(24.dp)
+            .clickable(
+                onClick = onClick,
+                interactionSource = remember { MutableInteractionSource() },
+                indication = ripple(bounded = false)
+            )
+    )
+}
+
 
 @Preview
 @Composable
