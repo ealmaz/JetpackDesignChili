@@ -46,10 +46,8 @@ fun ChiliInputField(
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
     actionText: String? = null,
-    enabled: Boolean = true,
     isInputCenteredAlign: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
-    endPlaceHolder: (@Composable () -> Unit)? = null,
     onActionClick: (() -> Unit) = {},
     suffix: (@Composable () -> Unit)? = null,
     onValueChange: ((String) -> Unit),
@@ -67,10 +65,8 @@ fun ChiliInputField(
         focusRequester = focusRequester,
         message = message,
         actionText = actionText,
-        enabled = enabled,
         isInputCenteredAlign = isInputCenteredAlign,
         keyboardType = keyboardType,
-        endPlaceHolder = endPlaceHolder,
         onActionClick = onActionClick,
         suffix = suffix,
         onValueChange = { newTextFieldValueState ->
@@ -90,11 +86,9 @@ fun ChiliInputField(
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
     actionText: String? = null,
-    enabled: Boolean = true,
     isInputCenteredAlign: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
-    endPlaceHolder: (@Composable () -> Unit)? = null,
     suffix: (@Composable () -> Unit)? = null,
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
@@ -114,7 +108,6 @@ fun ChiliInputField(
                     onValueChange = onValueChange,
                     placeholder = placeholder,
                     textStyle = textStyle,
-                    enabled = enabled,
                     isInputCenteredAlign = isInputCenteredAlign,
                     suffix = suffix,
                     keyboardType = keyboardType
@@ -122,8 +115,6 @@ fun ChiliInputField(
                 if (isClearButtonEnabled && value.text.isNotEmpty()) {
                     InputFieldClearIcon { onValueChange(TextFieldValue()) }
                 }
-
-                endPlaceHolder?.invoke()
             }
         }
 

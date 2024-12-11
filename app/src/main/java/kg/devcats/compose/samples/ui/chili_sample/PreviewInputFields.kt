@@ -169,13 +169,18 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
 
             ChiliUneditableInputField(
                 modifier = Modifier.padding(top = 16.dp),
+                text = "Chili Uneditable Input Field",
+                onClick = { context.showToast("Chili Uneditable Input Field") }
+            )
+
+            ChiliUneditableInputField(
+                modifier = Modifier.padding(top = 16.dp),
                 hint = "Chili Uneditable Input Field",
                 onClick = { context.showToast("Chili Uneditable Input Field") }
             )
 
             ChiliUneditableInputField(
                 modifier = Modifier.padding(top = 16.dp),
-                text = "Chili Uneditable Input Field",
                 onClick = { context.showToast("Chili Uneditable Input Field") }
             )
         }
