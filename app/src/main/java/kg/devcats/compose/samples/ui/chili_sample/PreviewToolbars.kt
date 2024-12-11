@@ -1,5 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,13 +19,17 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliAppToolbar
@@ -32,6 +37,7 @@ import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppTo
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
+import kg.devcats.compose.jetpack_chili.components.navigation.ChiliSearchAppToolbar
 
 @Composable
 fun Toolbars(
@@ -120,6 +126,39 @@ fun Toolbars(
                     BonusTag(modifier = Modifier, enabled = false, text = "Бонусы")
                 }
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            var isSearchMode by remember { mutableStateOf(false) }
+            var searchQuery by remember { mutableStateOf(TextFieldValue()) }
+            val focusRequester = remember { FocusRequester() }
+
+            val focusManager = LocalFocusManager.current
+
+            BackHandler(enabled = isSearchMode) {
+                isSearchMode = false
+                searchQuery = TextFieldValue()
+                focusManager.clearFocus()
+            }
+
+            ChiliSearchAppToolbar(
+                modifier = Modifier.fillMaxWidth(),
+                isSearchMode = isSearchMode,
+                searchQuery = searchQuery,
+                onSearchQueryChange = { searchQuery = it },
+                onSearchModeChange = { isSearchMode = it },
+                title = "SearchViewToolbar",
+                isNavigationIconVisible = true,
+                onNavigationIconClick = { navigateUp.invoke() },
+                placeholder = "Search...",
+                focusRequester = focusRequester
+            )
+
+            LaunchedEffect(isSearchMode) {
+                if (isSearchMode) {
+                    focusRequester.requestFocus()
+                }
+            }
         }
     }
 }
