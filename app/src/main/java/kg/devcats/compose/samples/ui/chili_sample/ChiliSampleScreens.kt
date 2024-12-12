@@ -113,6 +113,12 @@ fun ChiliSampleScreens(
                 navController?.navigate(Screens.DividersScreen.toString())
             }
 
+            ChiliPrimaryButton(text = "Pin Input Field", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController?.navigate(Screens.PinInputFieldScreen.toString())
+            }
+
             ChiliPrimaryButton(text = "Number Keyboard", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)) {

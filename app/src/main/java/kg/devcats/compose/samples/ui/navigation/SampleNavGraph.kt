@@ -18,6 +18,7 @@ import kg.devcats.compose.samples.ui.chili_sample.PreviewDialogs
 import kg.devcats.compose.samples.ui.chili_sample.PreviewDividers
 import kg.devcats.compose.samples.ui.chili_sample.PreviewKeyboard
 import kg.devcats.compose.samples.ui.chili_sample.PreviewPdfViewerNavGraph
+import kg.devcats.compose.samples.ui.chili_sample.PreviewPinInput
 import kg.devcats.compose.samples.ui.chili_sample.TextAppearance
 import kg.devcats.compose.samples.ui.chili_sample.Toolbars
 
@@ -69,6 +70,9 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
         }
         composable(Screens.PdfViewerNavGraph.toString()) {
             PreviewPdfViewerNavGraph(navController = navController)
+        }
+        composable(Screens.PinInputFieldScreen.toString()) {
+            PreviewPinInput { navController.navigateUp() }
         }
     }
 
