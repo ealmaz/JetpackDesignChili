@@ -42,4 +42,7 @@ sealed class Screens {
 
     @Serializable
     data object DividersScreen : Screens()
+
+    @Serializable
+    data object NumberKeyboardScreen : Screens()
 }
