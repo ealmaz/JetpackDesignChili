@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,6 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
@@ -31,13 +32,13 @@ import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliChooseActionBo
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailActionsBottomSheet
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailBottomSheet
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliInfoBottomSheet
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.black_5
 import kg.devcats.compose.jetpack_chili.theme.gray_8
 import kg.devcats.compose.jetpack_chili.theme.green_3
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheetsPreview(
     navigateUp: () -> Unit,
@@ -89,6 +90,25 @@ fun BottomSheetsPreview(
     )
 
     var detailActionBsState by remember { mutableStateOf(false) }
+    var detailActionWithInnerDrugIconBsState by remember { mutableStateOf(false) }
+
+    ChiliDetailActionsBottomSheet(
+        isShown = detailActionWithInnerDrugIconBsState,
+        hideOnSwipe = false,
+        isTopInnerIconVisible = true,
+        isCloseIconVisible = true,
+        icon = painterResource(id = R.drawable.chili_ic_documents_green),
+        iconSize = 100.dp,
+        headerTextAnnotatedString = stringResource(id = kg.devcats.compose.samples.R.string.example_with_colored_text, "Вы ").parseHtml(),
+        headerTextStyle = Chili.typography.H16_Primary_500.copy(textAlign = TextAlign.Center),
+        bodyText = "Описание содержит до 113 символов, что очень приятно, потому что теперь можно написать его аж в целых три строки и развернуть любую мысль ",
+        bodyTextStyle = Chili.typography.H16_Primary_500.copy(textAlign = TextAlign.End),
+        secondaryButtonText = "Ясно",
+        onPrimaryButtonClick = { detailActionWithInnerDrugIconBsState = false },
+        onSecondaryButtonClick = { detailActionWithInnerDrugIconBsState = false },
+        primaryButtonText = "Понятно",
+        onDismissRequest = {detailActionWithInnerDrugIconBsState = false}
+    )
 
     ChiliDetailActionsBottomSheet(
         isShown = detailActionBsState,
@@ -152,6 +172,9 @@ fun BottomSheetsPreview(
             ChiliPrimaryButton(text = "Detail action bottom sheet", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 8.dp)) {detailActionBsState = true }
+            ChiliPrimaryButton(text = "Detail action bottom sheet with inner drug icon", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)) {detailActionWithInnerDrugIconBsState = true }
             ChiliPrimaryButton(text = "Info bottom sheet", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 8.dp)) {infoBottomSheetState = true }
