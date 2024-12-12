@@ -12,12 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -33,18 +31,15 @@ fun ChiliDetailActionsBottomSheet(
     isCloseIconVisible: Boolean = true,
     isTopIconVisible: Boolean = false,
     isTopInnerIconVisible: Boolean = false,
-    topIconColor: Color? = null,
     isShown: Boolean,
     icon: Painter? = null,
     iconSize: Dp? = null,
     headerText: String? = null,
     headerTextAnnotatedString: AnnotatedString? = null,
     headerTextStyle: TextStyle? = null,
-    headerTextAlign: TextAlign? = null,
     bodyText: String? = null,
     bodyTextAnnotatedString: AnnotatedString? = null,
     bodyTextStyle: TextStyle? = null,
-    bodyTextAlign: TextAlign? = null,
     secondaryButtonText: String? = null,
     onSecondaryButtonClick: (() -> Unit) = {},
     primaryButtonText: String? = null,
@@ -58,7 +53,6 @@ fun ChiliDetailActionsBottomSheet(
         isCloseIconVisible = isCloseIconVisible,
         isTopIconVisible = isTopIconVisible,
         isTopInnerIconVisible = isTopInnerIconVisible,
-        topIconColor= topIconColor,
         onDismissRequest = onDismissRequest
     ) {
         ChiliDetailActionsBottomSheetContent(
@@ -67,11 +61,9 @@ fun ChiliDetailActionsBottomSheet(
             headerText = headerText,
             headerTextAnnotatedString = headerTextAnnotatedString,
             headerTextStyle = headerTextStyle,
-            headerTextAlign = headerTextAlign,
             bodyText = bodyText,
             bodyTextAnnotatedString = bodyTextAnnotatedString,
             bodyTextStyle = bodyTextStyle,
-            bodyTextAlign = bodyTextAlign,
             secondaryButtonText = secondaryButtonText,
             onSecondaryButtonClick = onSecondaryButtonClick,
             primaryButtonText = primaryButtonText,
@@ -87,11 +79,9 @@ fun ColumnScope.ChiliDetailActionsBottomSheetContent(
     headerText: String? = null,
     headerTextAnnotatedString: AnnotatedString? = null,
     headerTextStyle: TextStyle? = null,
-    headerTextAlign: TextAlign? = null,
     bodyText: String? = null,
     bodyTextAnnotatedString: AnnotatedString? = null,
     bodyTextStyle: TextStyle? = null,
-    bodyTextAlign: TextAlign? = null,
     secondaryButtonText: String? = null,
     onSecondaryButtonClick: (() -> Unit) = {},
     primaryButtonText: String? = null,
@@ -107,14 +97,12 @@ fun ColumnScope.ChiliDetailActionsBottomSheetContent(
             text = it,
             modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
             style = headerTextStyle ?: Chili.typography.H16_Primary_500,
-            textAlign = headerTextAlign
         )
     } ?: headerText?.let {
         Text(
             text = it,
             modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
             style = headerTextStyle ?: Chili.typography.H16_Primary_500,
-            textAlign = headerTextAlign
         )
     } ?: Spacer(
         modifier = Modifier.height(8.dp)
@@ -124,14 +112,12 @@ fun ColumnScope.ChiliDetailActionsBottomSheetContent(
             text = it,
             modifier = Modifier.padding(top = 8.dp),
             style = bodyTextStyle ?: Chili.typography.H14_Primary,
-            textAlign = bodyTextAlign
         )
     } ?: bodyText?.let {
         Text(
             text = it,
             modifier = Modifier.padding(top = 8.dp),
             style = bodyTextStyle ?: Chili.typography.H14_Primary,
-            textAlign = bodyTextAlign
         )
     }
     Column(modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)) {

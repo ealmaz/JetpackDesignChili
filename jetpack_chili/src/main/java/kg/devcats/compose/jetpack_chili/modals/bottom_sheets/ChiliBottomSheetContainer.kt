@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -37,7 +36,7 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChiliBottomSheetContainer(
     modifier: Modifier = Modifier,
@@ -46,7 +45,7 @@ fun ChiliBottomSheetContainer(
     isCloseIconVisible: Boolean = true,
     isTopIconVisible: Boolean = false,
     isTopInnerIconVisible: Boolean = false,
-    topIconColor: Color? = null,
+    topIconColor: Color = Chili.color.bottomSheetTopIconColor,
     bottomSheetShape: Shape = Chili.shapes.RoundedCornerShape,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
@@ -83,7 +82,7 @@ fun ChiliBottomSheetContainer(
                             .height(3.dp)
                             .width(40.dp)
                             .background(
-                                color = topIconColor ?: Chili.color.bottomSheetTopIconColor,
+                                color = topIconColor,
                                 shape = RoundedCornerShape(100.dp)
                             )
                     )
@@ -101,6 +100,7 @@ fun ChiliBottomSheetContainer(
                     modifier = modifier,
                     isCloseIconVisible = isCloseIconVisible,
                     isTopInnerIconVisible = isTopInnerIconVisible,
+                    topIconColor = topIconColor,
                     shape = bottomSheetShape,
                     onDismissRequest = onDismissRequest,
                     content = content
