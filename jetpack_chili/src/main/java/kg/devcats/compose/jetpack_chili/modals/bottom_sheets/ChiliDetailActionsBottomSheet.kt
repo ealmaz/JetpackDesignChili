@@ -47,11 +47,8 @@ fun ChiliDetailActionsBottomSheet(
     bodyTextAlign: TextAlign? = null,
     secondaryButtonText: String? = null,
     onSecondaryButtonClick: (() -> Unit) = {},
-    secondaryButtonTextStyle: TextStyle? = null,
-    secondaryButtonTextColor: Color? = null,
     primaryButtonText: String? = null,
     onPrimaryButtonClick: (() -> Unit) = {},
-    primaryButtonTextStyle: TextStyle? = null,
     onDismissRequest: () -> Unit,
 ) {
     ChiliBottomSheetContainer(
@@ -76,11 +73,8 @@ fun ChiliDetailActionsBottomSheet(
             bodyTextStyle = bodyTextStyle,
             bodyTextAlign = bodyTextAlign,
             secondaryButtonText = secondaryButtonText,
-            secondaryButtonTextStyle = secondaryButtonTextStyle,
-            secondaryButtonTextColor = secondaryButtonTextColor,
             onSecondaryButtonClick = onSecondaryButtonClick,
             primaryButtonText = primaryButtonText,
-            primaryButtonTextStyle = primaryButtonTextStyle,
             onPrimaryButtonClick = onPrimaryButtonClick
         )
     }
@@ -99,11 +93,8 @@ fun ColumnScope.ChiliDetailActionsBottomSheetContent(
     bodyTextStyle: TextStyle? = null,
     bodyTextAlign: TextAlign? = null,
     secondaryButtonText: String? = null,
-    secondaryButtonTextStyle: TextStyle? = null,
-    secondaryButtonTextColor: Color? = null,
     onSecondaryButtonClick: (() -> Unit) = {},
     primaryButtonText: String? = null,
-    primaryButtonTextStyle: TextStyle? = null,
     onPrimaryButtonClick: (() -> Unit) = {},
 ) {
     icon?.let {
@@ -144,23 +135,9 @@ fun ColumnScope.ChiliDetailActionsBottomSheetContent(
         )
     }
     Column(modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)) {
-        secondaryButtonText?.let {
-            ChiliAdditionalButton(
-                text = it, modifier = Modifier.fillMaxWidth(),
-                onClick = onSecondaryButtonClick,
-                textStyle = secondaryButtonTextStyle,
-                textColorOnEnabled = secondaryButtonTextColor
-            )
-        }
+        secondaryButtonText?.let { ChiliAdditionalButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onSecondaryButtonClick) }
         if (secondaryButtonText != null && primaryButtonText != null) Spacer(modifier = Modifier.height(12.dp))
-        primaryButtonText?.let {
-            ChiliPrimaryButton(
-                text = it,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = onPrimaryButtonClick,
-                textStyle = primaryButtonTextStyle
-            )
-        }
+        primaryButtonText?.let { ChiliPrimaryButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onPrimaryButtonClick) }
     }
 }
 
