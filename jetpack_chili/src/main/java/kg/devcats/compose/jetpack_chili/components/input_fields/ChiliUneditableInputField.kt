@@ -1,9 +1,5 @@
 package kg.devcats.compose.jetpack_chili.components.input_fields
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,10 +12,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
@@ -33,6 +29,7 @@ fun ChiliUneditableInputField(
     hint: String = "",
     textStyle: TextStyle = Chili.typography.H20_Primary_500,
     textAlign: TextAlign = TextAlign.Unspecified,
+    maxLines: Int = 1,
     onClick: () -> Unit
 ) {
     val textState by remember(text) { mutableStateOf(text) }
@@ -53,7 +50,9 @@ fun ChiliUneditableInputField(
                 text = textState.ifEmpty { hintState },
                 style = textStyle,
                 color = if (textState.isNotEmpty()) Chili.color.markedText else Chili.color.valueText,
-                textAlign = textAlign
+                textAlign = textAlign,
+                maxLines = maxLines,
+                overflow = TextOverflow.Ellipsis
             )
 
             Icon(

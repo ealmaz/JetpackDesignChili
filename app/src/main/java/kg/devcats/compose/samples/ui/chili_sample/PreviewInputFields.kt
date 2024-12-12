@@ -179,6 +179,12 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 hint = "Chili Uneditable Input Field",
                 onClick = { context.showToast("Chili Uneditable Input Field") }
             )
+
+            ChiliUneditableInputField(
+                modifier = Modifier.padding(top = 16.dp),
+                text = "Chili Uneditable Input Field Max",
+                onClick = { context.showToast("Chili Uneditable Input Field") }
+            )
         }
     }
 }
