@@ -45,6 +45,7 @@ fun ChiliBottomSheetContainer(
     isTopIconVisible: Boolean = false,
     topIconColor: Color = Chili.color.bottomSheetTopIconColor,
     bottomSheetShape: Shape = Chili.shapes.RoundedCornerShape,
+    backgroundColor: Color = Chili.color.bottomSheetBackground,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -89,6 +90,7 @@ fun ChiliBottomSheetContainer(
                         modifier = modifier,
                         isCloseIconVisible = isCloseIconVisible,
                         shape = bottomSheetShape,
+                        backgroundColor = backgroundColor,
                         onDismissRequest = onDismissRequest,
                         content = content
                     )
@@ -98,6 +100,7 @@ fun ChiliBottomSheetContainer(
                     modifier = modifier,
                     isCloseIconVisible = isCloseIconVisible,
                     shape = bottomSheetShape,
+                    backgroundColor = backgroundColor,
                     onDismissRequest = onDismissRequest,
                     content = content
                 )
@@ -111,13 +114,14 @@ fun BottomSheetContent(
     modifier: Modifier = Modifier,
     isCloseIconVisible: Boolean = true,
     shape: Shape = Chili.shapes.RoundedCornerShape,
+    backgroundColor: Color = Chili.color.bottomSheetBackground,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Surface(
         shape = shape,
         contentColor = Color.Unspecified,
-        color = Chili.color.bottomSheetBackground,
+        color = backgroundColor,
         modifier = modifier,
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
