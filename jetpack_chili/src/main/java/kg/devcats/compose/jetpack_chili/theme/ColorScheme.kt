@@ -119,6 +119,13 @@ interface ChiliColorScheme {
     val alertErrorContent: Color
     val alertErrorText: Color
 
+    //LockBackgroundColor
+    val lockNonSelectedBg: Color
+    val lockSelectedBg: Color
+    val lockErrorBg: Color
+    val lockSuccessBg: Color
+    val lockBorderColor: Color
+
     val keyColor: Color
 }
 
@@ -212,6 +219,12 @@ data class ChiliLightColorScheme(
     override val alertErrorContent: Color = red_1,
     override val alertErrorText: Color = magenta_6,
 
+    override val lockNonSelectedBg: Color = white_1,
+    override val lockSelectedBg: Color = black_1,
+    override val lockErrorBg: Color = red_1,
+    override val lockSuccessBg: Color = green_1,
+    override val lockBorderColor: Color = black_4,
+
     override val keyColor: Color = black_6
 ) : ChiliColorScheme
 
@@ -301,6 +314,12 @@ data class ChiliDarkColorScheme(
     override val alertErrorBg: Color = red_6,
     override val alertErrorContent: Color = red_7,
     override val alertErrorText: Color = white_1,
+
+    override val lockNonSelectedBg: Color = black_1,
+    override val lockSelectedBg: Color = white_1,
+    override val lockErrorBg: Color = red_1,
+    override val lockSuccessBg: Color = green_1,
+    override val lockBorderColor: Color = gray_3,
     override val keyColor: Color = gray_6
 ): ChiliColorScheme
 
