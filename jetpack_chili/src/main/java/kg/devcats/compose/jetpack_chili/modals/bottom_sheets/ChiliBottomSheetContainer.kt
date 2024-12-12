@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -43,7 +45,8 @@ fun ChiliBottomSheetContainer(
     hideOnSwipe: Boolean = true,
     isCloseIconVisible: Boolean = true,
     isTopIconVisible: Boolean = false,
-    topIconColor: Color = Chili.color.bottomSheetTopIconColor,
+    isTopInnerIconVisible: Boolean = false,
+    topIconColor: Color? = null,
     bottomSheetShape: Shape = Chili.shapes.RoundedCornerShape,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
@@ -80,7 +83,7 @@ fun ChiliBottomSheetContainer(
                             .height(3.dp)
                             .width(40.dp)
                             .background(
-                                color = topIconColor,
+                                color = topIconColor ?: Chili.color.bottomSheetTopIconColor,
                                 shape = RoundedCornerShape(100.dp)
                             )
                     )
@@ -97,6 +100,7 @@ fun ChiliBottomSheetContainer(
                 BottomSheetContent(
                     modifier = modifier,
                     isCloseIconVisible = isCloseIconVisible,
+                    isTopInnerIconVisible = isTopInnerIconVisible,
                     shape = bottomSheetShape,
                     onDismissRequest = onDismissRequest,
                     content = content
@@ -110,6 +114,8 @@ fun ChiliBottomSheetContainer(
 fun BottomSheetContent(
     modifier: Modifier = Modifier,
     isCloseIconVisible: Boolean = true,
+    isTopInnerIconVisible: Boolean = false,
+    topIconColor: Color = Chili.color.bottomSheetTopIconColor,
     shape: Shape = Chili.shapes.RoundedCornerShape,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
@@ -121,8 +127,21 @@ fun BottomSheetContent(
         modifier = modifier,
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            if (isCloseIconVisible) ChiliBottomSheetCloseIcon(onDismissRequest)
-            else Spacer(modifier = Modifier.height(8.dp))
+            Box(modifier = Modifier.fillMaxWidth()) {
+                if (isTopInnerIconVisible) Spacer(
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .height(5.dp)
+                        .width(40.dp)
+                        .background(
+                            color = topIconColor,
+                            shape = RoundedCornerShape(100.dp)
+                        )
+                        .align(Alignment.TopCenter)
+                )
+                if (isCloseIconVisible) ChiliBottomSheetCloseIcon(onDismissRequest)
+            }
+            if (!isCloseIconVisible) Spacer(modifier = Modifier.height(8.dp))
             Column(modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 0.dp)) {
                 content.invoke(this)
             }
@@ -131,12 +150,12 @@ fun BottomSheetContent(
 }
 
 @Composable
-private fun ColumnScope.ChiliBottomSheetCloseIcon(onDismissRequest: () -> Unit) {
+private fun BoxScope.ChiliBottomSheetCloseIcon(onDismissRequest: () -> Unit) {
     Image(
         painter = painterResource(id = R.drawable.chili_ic_circle_clear),
         contentDescription = "",
         modifier = Modifier
-            .align(Alignment.End)
+            .align(Alignment.CenterEnd)
             .padding(8.dp)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },

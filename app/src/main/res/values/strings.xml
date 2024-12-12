@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">JetpackDesingChili</string>
     <string name="clickable_link_example"><![CDATA[<a href="ссылка">Это кликабельный текст</a> это некликабельный текст <a href="вторая_ссылка">тут второй кликабельный текст</a>]]></string>
+    <string name="example_with_colored_text"><![CDATA[<font color="#F0047F">%s</font> — это <br> <b><u>вы</u></b></br>?]]></string>
 </resources>

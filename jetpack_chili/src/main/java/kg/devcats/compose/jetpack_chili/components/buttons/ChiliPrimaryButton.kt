@@ -10,6 +10,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -18,6 +20,8 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 fun ChiliPrimaryButton(
     modifier: Modifier = Modifier,
     text: String,
+    textColor: Color? = null,
+    textStyle: TextStyle? = null,
     enabled: Boolean = true,
     onClick: () -> Unit
 ) {
@@ -29,7 +33,11 @@ fun ChiliPrimaryButton(
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp),
         colors = primaryButtonColors()
     ) {
-        Text(text = text, style = Chili.typography.H14_Primary_500, color = Chili.color.buttonPrimaryText)
+        Text(
+            text = text,
+            style = textStyle ?: Chili.typography.H14_Primary_500,
+            color = textColor ?: Chili.color.buttonPrimaryText
+        )
     }
 }
 

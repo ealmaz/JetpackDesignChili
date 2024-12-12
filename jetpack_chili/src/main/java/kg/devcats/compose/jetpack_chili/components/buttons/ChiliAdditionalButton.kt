@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -25,7 +26,9 @@ import kg.devcats.compose.jetpack_chili.R
 fun ChiliAdditionalButton(
     modifier: Modifier = Modifier,
     text: String,
-    textStyle: TextStyle = Chili.typography.H14_Primary_500,
+    textColorOnEnabled: Color? = null,
+    textColorOnDisabled: Color? = null,
+    textStyle: TextStyle? = null,
     enabled: Boolean = true,
     endIconPainter: Painter? = null,
     endIconContentDescription: String? = null,
@@ -45,8 +48,9 @@ fun ChiliAdditionalButton(
             Text(
                 modifier = Modifier.padding(vertical = 16.dp,),
                 text = text,
-                style = textStyle,
-                color = if (enabled) Chili.color.buttonAdditionalText else Chili.color.buttonAdditionalDisabledText
+                style = textStyle ?: Chili.typography.H14_Primary_500,
+                color = if (enabled) textColorOnEnabled ?: Chili.color.buttonAdditionalText
+                        else textColorOnDisabled ?: Chili.color.buttonAdditionalDisabledText
             )
             endIconPainter?.let {
                 Image(modifier = endIconModifier, painter = endIconPainter, contentDescription = endIconContentDescription ?: "")
