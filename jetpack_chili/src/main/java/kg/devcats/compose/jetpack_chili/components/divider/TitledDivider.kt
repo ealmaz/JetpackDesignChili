@@ -56,6 +56,7 @@ fun TitledDivider(
                     onChevronClick = {
                         subtitleIsVisible = !subtitleIsVisible
                         contentIsVisible = !contentIsVisible
+                        params.onContentExpanded?.invoke(contentIsVisible)
                     }
                 )
 
