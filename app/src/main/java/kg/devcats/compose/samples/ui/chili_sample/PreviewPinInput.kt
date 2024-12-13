@@ -1,5 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,13 +16,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
-import kg.devcats.compose.jetpack_chili.components.pin.ChiliPinInput
+import kg.devcats.compose.jetpack_chili.components.pin.ChiliPinInputField
 import kg.devcats.compose.jetpack_chili.components.pin.PinStatusType
+import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
 fun PreviewPinInput(navigateUp: () -> Unit) {
+    val context = LocalContext.current
     val pinCode = remember { mutableStateOf("") }
     val code = "2323"
     val pinStatusState = remember { mutableStateOf(PinStatusType.None) }
@@ -52,14 +57,23 @@ fun PreviewPinInput(navigateUp: () -> Unit) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(contentPadding),
+                    .padding(contentPadding)
+                    .background(Chili.color.surfaceBackground),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                ChiliPinInput(
+                ChiliPinInputField(
                     modifier = Modifier.padding(top = 40.dp),
                     pinCode = pinCode,
-                    pinStatusType = pinStatusState
+                    pinStatusType = pinStatusState,
+                    errorAnimFinished = {
+                        pinCode.value = ""
+                        context.showToast("Error")
+                    },
+                    successAnimFinished = {
+                        pinCode.value = ""
+                        context.showToast("Success")
+                    }
                 )
 
                 Column(
