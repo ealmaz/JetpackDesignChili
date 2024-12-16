@@ -56,7 +56,7 @@ internal suspend fun PointerInputScope.detectZoomableGestures(
                     state.onTransform(centroid, pan, zoom)
                 }
             },
-            onGestureEnd = { state.onTransformEnd() }
+            onGestureEnd = { state.onGestureEnd() }
         )
     }
     launch(start = CoroutineStart.UNDISPATCHED) {
@@ -72,7 +72,7 @@ internal suspend fun PointerInputScope.detectZoomableGestures(
                 }
             },
             onDragEnd = {
-                state.onTransformEnd()
+                state.onGestureEnd()
             }
         )
     }

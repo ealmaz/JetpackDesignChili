@@ -14,78 +14,40 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toFile
 import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
+import kg.devcats.compose.jetpack_chili.components.pdf_viewer.manager.PdfRenderManager
 import kg.devcats.compose.jetpack_chili.components.zoomablebox.ZoomableBox
 import kg.devcats.compose.jetpack_chili.modals.dialog.ChiliDialog
-import kotlinx.coroutines.launch
-import java.io.File
 
 @Composable
 fun PdfViewerComponent(
     modifier: Modifier = Modifier,
-    pdfFile: PdfLoadCategory,
+    pdfSourceCategory: PdfSourceCategory,
     errorText: String,
     zoomIsEnabled: Boolean = true,
     closeDialogButtonText: String? = null,
-    errorDialogIsClosed: () -> Unit = {},
-    fileUploaded: (uri: Uri) -> Unit = {}
+    onErrorDialogIsClosed: () -> Unit = {},
+    onFileUploaded: (uri: Uri) -> Unit = {}
 ) {
     val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
-    val pdfBitmapConverter = remember { PdfBitmapConverter(context = context) }
     var pdfState by remember { mutableStateOf<PdfState>(PdfState.Loading) }
-    var errorDialog by remember { mutableStateOf(false) }
-
-    val pdfDownloadListener = object : PdfDownloadListener {
-        override fun onDownloadSuccess(file: File) {
-            if (file.exists()) {
-                coroutineScope.launch {
-                    fileUploaded.invoke(file.toUri())
-                    val renderedPages = pdfBitmapConverter.pdfToBitmaps(file.toUri())
-                    if (renderedPages == null) {
-                        onDownloadFailed(IllegalArgumentException("Cannot open PDF file"))
-                    } else {
-                        pdfState = PdfState.Success(pdfFile = file, pdfBitmapPages = renderedPages)
-                    }
-                }
-            } else {
-                pdfState = PdfState.Error(e = IllegalArgumentException("file must be exists"))
-            }
-        }
-
-        override fun onDownloadFailed(e: Exception) {
-            pdfState = PdfState.Error(e = e)
-        }
+    val pdfRenderManager = remember {
+        PdfRenderManager(
+            context = context,
+            listener = { state -> pdfState = state }
+        )
     }
 
-    val pdfRemoteDownloader = remember {
-        PdfRemoteDownloader(context = context, listener = pdfDownloadListener)
-    }
-
-    when (pdfFile) {
-        is PdfLoadCategory.Remote -> {
-            LaunchedEffect(Unit) {
-                pdfRemoteDownloader.downloadPdf(pdfUrl = pdfFile.pdfUrl)
-            }
-        }
-
-        is PdfLoadCategory.LocalFile -> {
-            try {
-                pdfDownloadListener.onDownloadSuccess(pdfFile.destinationUri.toFile())
-            } catch (e: Exception) {
-                pdfState = PdfState.Error(e)
-            }
-        }
+    LaunchedEffect(pdfSourceCategory) {
+        pdfRenderManager.renderPdfFile(pdfSourceCategory)
     }
 
     Box(modifier = modifier.clipToBounds(), contentAlignment = Alignment.Center) {
@@ -94,7 +56,9 @@ fun PdfViewerComponent(
                 ChiliLoader()
             }
             is PdfState.Success -> {
-                val pages = (pdfState as PdfState.Success).pdfBitmapPages
+                val result = (pdfState as PdfState.Success)
+                val pages = result.pdfBitmapPages
+                onFileUploaded(result.pdfFile.toUri())
 
                 ZoomableBox(
                     modifier = Modifier.matchParentSize(),
@@ -107,33 +71,34 @@ fun PdfViewerComponent(
                     ) {
                         items(pages) { page ->
                             PdfPage(
-                                modifier = Modifier.fillMaxSize().padding(8.dp),
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(8.dp),
                                 page = page
                             )
                         }
                     }
                 }
             }
-            is PdfState.Error -> errorDialog = true
-            is PdfState.None -> {}
-        }
-
-        ChiliDialog(
-            showDialog = errorDialog,
-            onDismiss = { errorDialog = false },
-            title = errorText,
-            positiveButtonText = closeDialogButtonText,
-            onPositiveClick = {
-                errorDialog = false
-                pdfState = PdfState.None
-                errorDialogIsClosed()
+            is PdfState.Error -> {
+                ChiliDialog(
+                    showDialog = true,
+                    onDismiss = {},
+                    title = errorText,
+                    positiveButtonText = closeDialogButtonText,
+                    onPositiveClick = {
+                        pdfState = PdfState.Empty
+                        onErrorDialogIsClosed()
+                    }
+                )
             }
-        )
+            is PdfState.Empty -> {}
+        }
     }
 }
 
 @Composable
-fun PdfPage(
+private fun PdfPage(
     modifier: Modifier = Modifier,
     page: Bitmap
 ) {
@@ -146,7 +111,7 @@ fun PdfPage(
     )
 }
 
-sealed interface PdfLoadCategory {
-    data class Remote(val pdfUrl: String) : PdfLoadCategory
-    data class LocalFile(val destinationUri: Uri) : PdfLoadCategory
+sealed interface PdfSourceCategory {
+    data class Remote(val pdfUrl: String) : PdfSourceCategory
+    data class LocalFile(val destinationUri: Uri) : PdfSourceCategory
 }

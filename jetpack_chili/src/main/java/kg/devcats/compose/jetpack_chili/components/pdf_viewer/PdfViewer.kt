@@ -30,9 +30,9 @@ fun PdfViewer(
     isNavigationIconVisible: Boolean = true,
     zoomIsEnabled: Boolean = true,
     onNavigationIconClick: () -> Unit,
-    pdfFileCategory: PdfLoadCategory,
+    pdfSourceCategory: PdfSourceCategory,
     errorPdfLoadText: String,
-    errorDialogCloseText: String,
+    closeDialogButtonText: String,
 ) {
     val context = LocalContext.current
     var pdfUri by remember { mutableStateOf(Uri.EMPTY) }
@@ -65,12 +65,12 @@ fun PdfViewer(
 
         PdfViewerComponent(
             modifier = modifier.fillMaxSize(),
-            pdfFile = pdfFileCategory,
+            pdfSourceCategory = pdfSourceCategory,
             errorText = errorPdfLoadText,
             zoomIsEnabled = zoomIsEnabled,
-            closeDialogButtonText = errorDialogCloseText,
-            errorDialogIsClosed = onNavigationIconClick,
-            fileUploaded = { uri -> pdfUri = uri }
+            closeDialogButtonText = closeDialogButtonText,
+            onErrorDialogIsClosed = onNavigationIconClick,
+            onFileUploaded = { uri -> pdfUri = uri }
         )
     }
 }

@@ -1,8 +1,5 @@
 package kg.devcats.compose.jetpack_chili
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -15,10 +12,6 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.core.app.ShareCompat
-import androidx.core.content.FileProvider
-import androidx.core.net.toFile
-import java.io.File
 
 @Composable
 fun pixelsToDp(pixels: Int) = with(LocalDensity.current) { pixels.toDp() }
@@ -57,20 +50,4 @@ fun Modifier.clickableWithoutEffect(
         indication = null,
         onClick = onClick
     )
-}
-
-fun Context.shareFile(uri: Uri, fileType: String, title: String) {
-    val shareIntent = Intent(Intent.ACTION_SEND).apply {
-        type = fileType
-
-        val contentUri = FileProvider.getUriForFile(
-            this@shareFile,
-            "${packageName}.fileprovider",
-            uri.toFile()
-        )
-
-        putExtra(Intent.EXTRA_STREAM, contentUri)
-        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-    }
-    startActivity(Intent.createChooser(shareIntent, title))
 }
