@@ -1,6 +1,8 @@
 package kg.devcats.compose.jetpack_chili.components.cells
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,6 +14,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
+import kg.devcats.compose.jetpack_chili.components.shimmer.ShowShimmerOrContent
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 
@@ -27,10 +30,14 @@ fun ChiliAdditionalInfoCell(
     isDividerVisible: Boolean = false,
     isChevronVisible: Boolean = false,
     icon: Painter? = null,
+    iconUrl: String? = null,
     iconSize: Dp = 32.dp,
     onClick: (() -> Unit)? = null,
     additionalInfo: String? = null,
     additionalInfoStyle: TextStyle = Chili.typography.H16_Value,
+    additionalEndIcon: Painter? = null,
+    additionalEndIconSize: Dp = 18.dp,
+    isLoading: Boolean = false
 ) {
     ChiliCell(
         modifier = modifier,
@@ -43,15 +50,31 @@ fun ChiliAdditionalInfoCell(
         isDividerVisible = isDividerVisible,
         isChevronVisible = isChevronVisible,
         icon = icon,
+        iconUrl = iconUrl,
         iconSize = iconSize,
         onClick = onClick,
+        isLoading = isLoading,
         endFrame = {
             additionalInfo?.let {
-                Text(
-                    text = it,
-                    style = additionalInfoStyle,
-                    modifier = Modifier
-                        .padding(end = 4.dp)
+                ShowShimmerOrContent(
+                    modifier = Modifier.padding(end = 4.dp),
+                    isLoading = isLoading,
+                    shimmerHeight = 8.dp,
+                    shimmerWidth = 46.dp
+                ) {
+                    Text(
+                        text = it,
+                        style = additionalInfoStyle,
+                        modifier = Modifier
+                            .padding(end = 4.dp)
+                    )
+                }
+            }
+            additionalEndIcon?.let {
+                Icon(
+                    modifier = Modifier.size(additionalEndIconSize),
+                    painter = additionalEndIcon,
+                    contentDescription = ""
                 )
             }
         }
@@ -66,7 +89,8 @@ fun AdditionalTextCellPreview() {
             title = "Заголовок",
             subtitle = "Подзаголовок",
             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-            additionalInfo = "Additionl info "
+            additionalInfo = "Additionl info ",
+            additionalEndIcon = painterResource(id = R.drawable.chili_ic_documents_green)
         )
     }
 }

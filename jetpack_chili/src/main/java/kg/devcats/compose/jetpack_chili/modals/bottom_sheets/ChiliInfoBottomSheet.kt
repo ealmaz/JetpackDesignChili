@@ -24,6 +24,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun ChiliInfoBottomSheet(
+    modifier: Modifier,
     isShown: Boolean,
     icon: Painter? = null,
     headerText: String? = null,
@@ -34,7 +35,11 @@ fun ChiliInfoBottomSheet(
     onPrimaryButtonClick: (() -> Unit) = {},
     onDismissRequest: () -> Unit
 ) {
-    ChiliBottomSheetContainer(isShown, onDismissRequest = onDismissRequest) {
+    ChiliBottomSheetContainer(
+        modifier = modifier,
+        isShown = isShown,
+        onDismissRequest = onDismissRequest
+    ) {
         ChiliInfoBottomSheetContent(
             icon = icon,
             headerText = headerText,
@@ -68,7 +73,7 @@ fun ColumnScope.ChiliInfoBottomSheetContent(
             bodyText?. let { Text(text = bodyText, modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H14_Primary) }
         }
     }
-    Column(modifier = Modifier.padding(top = 16.dp)) {
+    Column(modifier = Modifier.padding(vertical = 16.dp)) {
         secondaryButtonText?.let { ChiliAdditionalButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onSecondaryButtonClick) }
         if (secondaryButtonText != null && primaryButtonText != null) Spacer(modifier = Modifier.height(12.dp))
         primaryButtonText?.let { ChiliPrimaryButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onPrimaryButtonClick) }

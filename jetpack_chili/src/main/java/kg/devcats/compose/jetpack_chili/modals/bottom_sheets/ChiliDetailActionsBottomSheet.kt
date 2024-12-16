@@ -14,7 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliAdditionalButton
@@ -23,21 +26,44 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun ChiliDetailActionsBottomSheet(
+    modifier: Modifier = Modifier,
+    hideOnSwipe: Boolean = true,
+    isCloseIconVisible: Boolean = true,
+    isTopIconVisible: Boolean = false,
+    isTopInnerIconVisible: Boolean = false,
     isShown: Boolean,
     icon: Painter? = null,
+    iconSize: Dp? = null,
     headerText: String? = null,
+    headerTextAnnotatedString: AnnotatedString? = null,
+    headerTextStyle: TextStyle? = null,
     bodyText: String? = null,
+    bodyTextAnnotatedString: AnnotatedString? = null,
+    bodyTextStyle: TextStyle? = null,
     secondaryButtonText: String? = null,
     onSecondaryButtonClick: (() -> Unit) = {},
     primaryButtonText: String? = null,
     onPrimaryButtonClick: (() -> Unit) = {},
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
-    ChiliBottomSheetContainer(isShown, onDismissRequest = onDismissRequest) {
+    ChiliBottomSheetContainer(
+        modifier = modifier,
+        isShown = isShown,
+        hideOnSwipe = hideOnSwipe,
+        isCloseIconVisible = isCloseIconVisible,
+        isTopIconVisible = isTopIconVisible,
+        isTopInnerIconVisible = isTopInnerIconVisible,
+        onDismissRequest = onDismissRequest
+    ) {
         ChiliDetailActionsBottomSheetContent(
             icon = icon,
+            iconSize = iconSize,
             headerText = headerText,
+            headerTextAnnotatedString = headerTextAnnotatedString,
+            headerTextStyle = headerTextStyle,
             bodyText = bodyText,
+            bodyTextAnnotatedString = bodyTextAnnotatedString,
+            bodyTextStyle = bodyTextStyle,
             secondaryButtonText = secondaryButtonText,
             onSecondaryButtonClick = onSecondaryButtonClick,
             primaryButtonText = primaryButtonText,
@@ -49,20 +75,52 @@ fun ChiliDetailActionsBottomSheet(
 @Composable
 fun ColumnScope.ChiliDetailActionsBottomSheetContent(
     icon: Painter? = null,
+    iconSize: Dp? = null,
     headerText: String? = null,
+    headerTextAnnotatedString: AnnotatedString? = null,
+    headerTextStyle: TextStyle? = null,
     bodyText: String? = null,
+    bodyTextAnnotatedString: AnnotatedString? = null,
+    bodyTextStyle: TextStyle? = null,
     secondaryButtonText: String? = null,
     onSecondaryButtonClick: (() -> Unit) = {},
     primaryButtonText: String? = null,
     onPrimaryButtonClick: (() -> Unit) = {},
 ) {
-    icon?.let { Image(painter = icon, contentDescription = "", modifier = Modifier
-        .size(60.dp)
-        .align(Alignment.CenterHorizontally)) }
-    headerText?.let {Text(text = headerText, modifier = Modifier.padding(top = 16.dp), style = Chili.typography.H16_Primary_500) } ?: Spacer(modifier = Modifier.height(8.dp)
+    icon?.let {
+        Image(painter = icon, contentDescription = "", modifier = Modifier
+            .size(iconSize ?: 60.dp)
+            .align(Alignment.CenterHorizontally))
+    }
+    headerTextAnnotatedString?.let {
+        Text(
+            text = it,
+            modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
+            style = headerTextStyle ?: Chili.typography.H16_Primary_500,
+        )
+    } ?: headerText?.let {
+        Text(
+            text = it,
+            modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
+            style = headerTextStyle ?: Chili.typography.H16_Primary_500,
+        )
+    } ?: Spacer(
+        modifier = Modifier.height(8.dp)
     )
-    bodyText?. let { Text(text = bodyText, modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H14_Primary) }
-    Column(modifier = Modifier.padding(top = 16.dp)) {
+    bodyTextAnnotatedString?.let {
+        Text(
+            text = it,
+            modifier = Modifier.padding(top = 8.dp),
+            style = bodyTextStyle ?: Chili.typography.H14_Primary,
+        )
+    } ?: bodyText?.let {
+        Text(
+            text = it,
+            modifier = Modifier.padding(top = 8.dp),
+            style = bodyTextStyle ?: Chili.typography.H14_Primary,
+        )
+    }
+    Column(modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)) {
         secondaryButtonText?.let { ChiliAdditionalButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onSecondaryButtonClick) }
         if (secondaryButtonText != null && primaryButtonText != null) Spacer(modifier = Modifier.height(12.dp))
         primaryButtonText?.let { ChiliPrimaryButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onPrimaryButtonClick) }

@@ -17,13 +17,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -47,12 +50,17 @@ import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
+import kg.devcats.compose.jetpack_chili.components.cards.IconSize
 import kg.devcats.compose.jetpack_chili.components.cards.InfoCard
 import kg.devcats.compose.jetpack_chili.components.cards.InfoCardButtonConfig
 import kg.devcats.compose.jetpack_chili.components.cards.InfoCardButtonType
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCard
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCard
 import kg.devcats.compose.jetpack_chili.components.cards.ProductCard
+import kg.devcats.compose.jetpack_chili.components.cards.ProgressCard
+import kg.devcats.compose.jetpack_chili.components.cards.PromoCard
+import kg.devcats.compose.jetpack_chili.components.cards.PromoStatusState
+import kg.devcats.compose.jetpack_chili.components.cards.StoriesCard
 import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCard
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCell
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
@@ -528,14 +536,18 @@ fun PreviewCards(
 
             LazyVerticalGrid (
                 columns = GridCells.Fixed(2),
-                modifier = Modifier.fillMaxWidth().height(300.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 item {
                     ShadowRoundedBox {
                         ProductCard(
-                            modifier = Modifier.height(293.dp).width(168.dp),
+                            modifier = Modifier
+                                .height(293.dp)
+                                .width(168.dp),
                             imageLink = "",
                             price = "2 090,00 c",
                             installmentPrice = "8 166,6 с x 12 мес",
@@ -550,7 +562,9 @@ fun PreviewCards(
                 item {
                     ShadowRoundedBox {
                         ProductCard(
-                            modifier = Modifier.height(293.dp).width(168.dp),
+                            modifier = Modifier
+                                .height(293.dp)
+                                .width(168.dp),
                             price = "2 090,00 c",
                             installmentPrice = "8 166,6 с x 12 мес",
                             description = "Электрочайник BEREKE BR-810 серый",
@@ -674,6 +688,187 @@ fun PreviewCards(
                     )
                 )
             )
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "StoriesCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            LazyRow {
+                item {
+                    var storiesIsViewed by remember { mutableStateOf(false) }
+                    StoriesCard(
+                        imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/125ac05b-0cbb-4bde-9da0-1f090d1fac2e",
+                        isViewed = storiesIsViewed,
+                        iconSize = IconSize.MEDIUM
+                    ) {
+                        storiesIsViewed = true
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    var storiesIsViewed by remember { mutableStateOf(false) }
+                    StoriesCard(
+                        imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/de574e23-7478-43af-b3df-b572093b818c",
+                        isViewed = storiesIsViewed,
+                        iconSize = IconSize.MEDIUM
+                    ) {
+                        storiesIsViewed = true
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    var storiesIsViewed by remember { mutableStateOf(false) }
+                    StoriesCard(
+                        imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/de574e23-7478-43af-b3df-b572093b818c",
+                        isViewed = storiesIsViewed,
+                        iconSize = IconSize.MEDIUM,
+                        isLoading = true
+                    ) {
+                        storiesIsViewed = true
+                    }
+                }
+            }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "PromoCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            LazyRow {
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "",
+                            isLoading = true
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp).clickable {
+
+                            },
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.New("Новое")
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.Active("Активный")
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.Expired("Просрочен")
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.Wait("В ожидании")
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                item {
+                    ShadowRoundedBox {
+                        PromoCard(
+                            modifier = Modifier.width(194.dp),
+                            icon = R.drawable.chili_ic_documents_green,
+                            titleText = "Рассрочка 0-0-12",
+                            promoStatusState = PromoStatusState.NoStatus
+                        )
+                    }
+                }
+            }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "ProgressCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            var progressPercent by remember { mutableIntStateOf(20) }
+            val maxSum = 100_000
+            val currentSum = (progressPercent * maxSum) / 100
+
+            ShadowRoundedBox {
+                ProgressCard(
+                    title = "$currentSum из $maxSum c",
+                    description = "Доступный объем счета",
+                    progressPercent = progressPercent
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Button(onClick = { progressPercent = 0 }) {
+                    Text("0%")
+                }
+                Button(onClick = { progressPercent = 20 }) {
+                    Text("20%")
+                }
+                Button(onClick = { progressPercent = 80 }) {
+                    Text("80%")
+                }
+                Button(onClick = { progressPercent = 100 }) {
+                    Text("100%")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                ProgressCard(
+                    title = "",
+                    description = "Доступный объем счета",
+                    progressPercent = 20,
+                    isLoading = true
+                )
+            }
         }
     }
 }

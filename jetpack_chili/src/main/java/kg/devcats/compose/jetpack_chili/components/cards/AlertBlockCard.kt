@@ -105,9 +105,9 @@ enum class AlertState {
     @Composable
     fun getIcon(): Painter {
         return when (this) {
-            Neutral -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_information)
-            Warning -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_caution)
-            Error -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_error)
+            Neutral -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chilli_ic_information)
+            Warning -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chilli_ic_caution)
+            Error -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chilli_ic_error)
         }
     }
 

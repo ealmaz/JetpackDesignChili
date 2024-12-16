@@ -8,11 +8,13 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun ChiliChooseActionBottomSheet(
+    modifier: Modifier = Modifier,
     isShown: Boolean,
     onDismissRequest: () -> Unit,
     actions: List<ChiliChooseActionBSAction>
 ) {
     ChiliBottomSheetContainer(
+        modifier = modifier,
         isShown = isShown,
         onDismissRequest = onDismissRequest,
         isCloseIconVisible = false,

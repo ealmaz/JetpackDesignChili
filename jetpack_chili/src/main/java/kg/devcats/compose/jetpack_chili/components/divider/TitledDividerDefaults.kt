@@ -22,7 +22,9 @@ object TitledDividerDefaults {
         subtitleMaxLines: Int = 2,
         notificationIcon: Painter = painterResource(R.drawable.chili_ic_notification),
         isNotificationVisible: Boolean = false,
-        isShevronIsVisible: Boolean = false
+        isShevronIsVisible: Boolean = false,
+        onContentExpanded: ((isExpanded: Boolean) -> Unit)? = null,
+        hideAbleContent: @Composable (() -> Unit)? = null
     ): TitleDividerParams {
         return TitleDividerParams(
             title = title,
@@ -33,7 +35,9 @@ object TitledDividerDefaults {
             subtitleMaxLines = subtitleMaxLines,
             notificationIcon = notificationIcon,
             isNotificationVisible = isNotificationVisible,
-            isShevronIsVisible = isShevronIsVisible
+            isShevronIsVisible = isShevronIsVisible,
+            onContentExpanded = onContentExpanded,
+            hideAbleContent = hideAbleContent
         )
     }
 
@@ -48,5 +52,7 @@ data class TitleDividerParams(
     val subtitleMaxLines: Int,
     val notificationIcon: Painter,
     val isNotificationVisible: Boolean,
-    val isShevronIsVisible: Boolean
+    val isShevronIsVisible: Boolean,
+    val onContentExpanded: ((isExpanded: Boolean) -> Unit)? = null,
+    val hideAbleContent: @Composable (() -> Unit)? = null
 )

@@ -94,6 +94,7 @@ interface ChiliColorScheme {
 
     //BottomSheet
     val bottomSheetBackground: Color
+    val bottomSheetTopIconColor: Color
 
     //Snackbar
     val snackbarBackground: Color
@@ -117,6 +118,8 @@ interface ChiliColorScheme {
     val alertErrorBg: Color
     val alertErrorContent: Color
     val alertErrorText: Color
+
+    val keyColor: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -187,6 +190,7 @@ data class ChiliLightColorScheme(
     override val animatedGradient4: Color = white_1,
 
     override val bottomSheetBackground: Color = white_1,
+    override val bottomSheetTopIconColor: Color = gray_1,
 
     override val snackbarBackground: Color = white_1,
 
@@ -207,6 +211,8 @@ data class ChiliLightColorScheme(
     override val alertErrorBg: Color = red_5,
     override val alertErrorContent: Color = red_1,
     override val alertErrorText: Color = magenta_6,
+
+    override val keyColor: Color = black_6
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -274,6 +280,7 @@ data class ChiliDarkColorScheme(
     override val animatedGradient4: Color = black_3,
 
     override val bottomSheetBackground: Color = black_2,
+    override val bottomSheetTopIconColor: Color = black_5,
 
     override val snackbarBackground: Color = black_3,
 
@@ -294,5 +301,6 @@ data class ChiliDarkColorScheme(
     override val alertErrorBg: Color = red_6,
     override val alertErrorContent: Color = red_7,
     override val alertErrorText: Color = white_1,
+    override val keyColor: Color = gray_6
 ): ChiliColorScheme
 

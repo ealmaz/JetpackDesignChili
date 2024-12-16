@@ -44,6 +44,9 @@ sealed class Screens {
     data object DividersScreen : Screens()
 
     @Serializable
+    data object NumberKeyboardScreen : Screens()
+
+    @Serializable
     data object PdfViewerNavGraph : Screens()
 }
 
