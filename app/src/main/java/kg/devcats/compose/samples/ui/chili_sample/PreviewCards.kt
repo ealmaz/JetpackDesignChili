@@ -22,9 +22,11 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -55,6 +57,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.InfoCardButtonType
 import kg.devcats.compose.jetpack_chili.components.cards.PaymentCard
 import kg.devcats.compose.jetpack_chili.components.cards.PieChartCard
 import kg.devcats.compose.jetpack_chili.components.cards.ProductCard
+import kg.devcats.compose.jetpack_chili.components.cards.ProgressCard
 import kg.devcats.compose.jetpack_chili.components.cards.PromoCard
 import kg.devcats.compose.jetpack_chili.components.cards.PromoStatusState
 import kg.devcats.compose.jetpack_chili.components.cards.StoriesCard
@@ -816,6 +819,55 @@ fun PreviewCards(
                         )
                     }
                 }
+            }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "ProgressCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            var progressPercent by remember { mutableIntStateOf(20) }
+            val maxSum = 100_000
+            val currentSum = (progressPercent * maxSum) / 100
+
+            ShadowRoundedBox {
+                ProgressCard(
+                    title = "$currentSum из $maxSum c",
+                    description = "Доступный объем счета",
+                    progressPercent = progressPercent
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Button(onClick = { progressPercent = 0 }) {
+                    Text("0%")
+                }
+                Button(onClick = { progressPercent = 20 }) {
+                    Text("20%")
+                }
+                Button(onClick = { progressPercent = 80 }) {
+                    Text("80%")
+                }
+                Button(onClick = { progressPercent = 100 }) {
+                    Text("100%")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                ProgressCard(
+                    title = "",
+                    description = "Доступный объем счета",
+                    progressPercent = 20,
+                    isLoading = true
+                )
             }
         }
     }
