@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -26,33 +27,16 @@ fun AnimatedProgressLine(
     isProgressAnimated: Boolean = true,
     progressBackgroundColor: Color = gray_2,
     progressColor: Color = orange_1,
-    progressGradientStartColor: Color? = null,
-    progressGradientCenterColor: Color? = null,
-    progressGradientEndColor: Color? = null,
+    progressGradientColors: List<Color>? = null,
 ) {
-    val animatedProgress = animateFloatAsState(
+    val animatedProgress by animateFloatAsState(
         targetValue = progressPercent.coerceIn(0, 100) / 100f,
         animationSpec = if (isProgressAnimated) tween(1000) else snap(), label = "progress"
-    ).value
+    )
 
-    val progressBrush = remember(progressGradientStartColor, progressGradientEndColor, progressGradientCenterColor) {
-        when {
-            progressGradientStartColor != null && progressGradientEndColor != null -> {
-                if (progressGradientCenterColor != null) {
-                    Brush.linearGradient(
-                        colors = listOf(
-                            progressGradientStartColor,
-                            progressGradientCenterColor,
-                            progressGradientEndColor
-                        )
-                    )
-                } else {
-                    Brush.linearGradient(
-                        colors = listOf(progressGradientStartColor, progressGradientEndColor)
-                    )
-                }
-            }
-            else -> null
+    val progressBrush = remember(progressGradientColors) {
+        progressGradientColors?.let {
+            Brush.linearGradient(colors = it)
         }
     }
 
@@ -67,7 +51,7 @@ fun AnimatedProgressLine(
 
         if (animatedProgress > 0f) {
             drawRoundRect(
-                brush = progressBrush ?: Brush.linearGradient(listOf(progressColor, progressColor)),
+                brush = progressBrush ?: SolidColor(progressColor),
                 cornerRadius = CornerRadius(cornerRadius, cornerRadius),
                 size = size.copy(width = size.width * animatedProgress, height = trackHeight.toPx())
             )

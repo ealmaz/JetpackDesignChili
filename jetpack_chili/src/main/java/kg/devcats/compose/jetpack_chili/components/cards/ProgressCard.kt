@@ -36,9 +36,7 @@ fun ProgressCard(
     isProgressAnimated: Boolean = true,
     progressBackgroundColor: Color = gray_2,
     progressColor: Color = orange_1,
-    progressGradientStartColor: Color? = null,
-    progressGradientCenterColor: Color? = null,
-    progressGradientEndColor: Color? = null,
+    progressGradientColors: List<Color>? = null,
     titleStyle: TextStyle = Chili.typography.H16_Primary,
     descriptionStyle: TextStyle = Chili.typography.H14_Value,
     isDividerVisible: Boolean = false,
@@ -79,9 +77,7 @@ fun ProgressCard(
                         isProgressAnimated = isProgressAnimated,
                         progressBackgroundColor = progressBackgroundColor,
                         progressColor = progressColor,
-                        progressGradientStartColor = progressGradientStartColor,
-                        progressGradientCenterColor = progressGradientCenterColor,
-                        progressGradientEndColor = progressGradientEndColor
+                        progressGradientColors = progressGradientColors
                     )
                 }
 
@@ -94,7 +90,7 @@ fun ProgressCard(
 }
 
 @Composable
-fun LoadingCard(modifier: Modifier = Modifier) {
+private fun LoadingCard(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.padding(12.dp)
     ) {

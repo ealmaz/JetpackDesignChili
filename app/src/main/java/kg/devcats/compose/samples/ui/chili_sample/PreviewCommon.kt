@@ -146,9 +146,7 @@ fun PreviewCommon(
         ) {
             AnimatedProgressLine(
                 progressPercent = progress,
-                progressGradientStartColor = red_1,
-                progressGradientCenterColor = green_1,
-                progressGradientEndColor = blue_1,
+                progressGradientColors = listOf(red_1, green_1, blue_1),
                 modifier = Modifier.fillMaxWidth()
             )
 
