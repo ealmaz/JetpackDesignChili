@@ -21,6 +21,8 @@ interface ChiliColorScheme {
     val surfaceBackground: Color
     val screenSecondary: Color
 
+    val warningTextColor: Color
+
     //Toolbar
     val toolbarBackground: Color
 
@@ -149,6 +151,7 @@ interface ChiliColorScheme {
 
     //PdfBackgroundColor
     val pdfBackgroundColor: Color
+    val accountChevronColor: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -161,6 +164,8 @@ data class ChiliLightColorScheme(
     override val markedText: Color = black_1,
     override val linkText: Color = magenta_1,
     override val errorText: Color = red_1,
+
+    override val warningTextColor: Color = orange_1,
 
     override val primaryIcon: Color = black_1,
 
@@ -263,7 +268,7 @@ data class ChiliLightColorScheme(
     override val toggleIconColor: Color = black_5,
     override val accountCardSubtitleColor: Color = black_7,
     override val accountCardSubtitleAccentColor: Color = folly_1,
-    override val accountCardWarningColor: Color = orange_1,
+    override val accountChevronColor: Color = black_3,
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -273,6 +278,8 @@ data class ChiliDarkColorScheme(
     override val markedText: Color = white_1,
     override val linkText: Color = magenta_1,
     override val errorText: Color = red_1,
+
+    override val warningTextColor: Color = orange_4,
 
     override val primaryIcon: Color = white_1,
 
@@ -376,6 +383,6 @@ data class ChiliDarkColorScheme(
     override val toggleIconColor: Color = gray_3,
     override val accountCardSubtitleColor: Color = gray_11,
     override val accountCardSubtitleAccentColor: Color = red_8,
-    override val accountCardWarningColor: Color = orange_4,
+    override val accountChevronColor: Color = gray_4,
 ): ChiliColorScheme
 

@@ -50,8 +50,6 @@ fun AccountCard(
     actionButtonClick: () -> Unit = {},
     onContainerClick: () -> Unit = {}
 ) {
-    var changedAccountCardState by remember { mutableStateOf(accountCardState) }
-
     val isPressed = remember { mutableStateOf(false) }
 
     Column(
@@ -66,11 +64,8 @@ fun AccountCard(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             AccountCardContent(
-                accountCardState = changedAccountCardState,
+                accountCardState = accountCardState,
                 isPressed = isPressed.value,
-                onToggleClick = { state ->
-                    changedAccountCardState = getAmountVisibilityChangedState(state)
-                },
                 actionButtonClick = actionButtonClick
             )
         }
@@ -145,7 +140,6 @@ private fun RowScope.AccountCardShimmer() {
 private fun RowScope.AccountCardContent(
     accountCardState: AccountCardState,
     isPressed: Boolean = false,
-    onToggleClick: (AccountCardState) -> Unit = {},
     actionButtonClick: () -> Unit = {}
 ) {
     when (accountCardState) {
@@ -165,36 +159,16 @@ private fun RowScope.AccountCardContent(
         }
 
         is AccountCardState.FavoritePaymentAmountAvailable -> {
+            var isToggleHiddenState by remember { mutableStateOf(accountCardState.isToggleHiddenState) }
             AccountContent(
                 title = accountCardState.title,
-                subtitle = accountCardState.subtitle,
+                subtitle = if (isToggleHiddenState) "••••••••" else accountCardState.subtitle,
                 titleAddition = accountCardState.titleAddition,
                 iconId = R.drawable.chili_ic_star,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded,
-                toggleIconId = R.drawable.chili_ic_toggle_on,
-                currencyIconId = accountCardState.currencyIconId,
+                isChevronVisible = true,
+                toggleIconId = if (isToggleHiddenState) R.drawable.chili_ic_toggle_off else R.drawable.chili_ic_toggle_on,
                 isPressed = isPressed,
-                onToggleClick = { onToggleClick.invoke(accountCardState) }
-            )
-            ActionButtonContent(
-                modifier = Modifier,
-                onClick = actionButtonClick,
-                icon = R.drawable.chili_ic_obank,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded
-            )
-        }
-
-        is AccountCardState.FavoritePaymentAmountHidden -> {
-            AccountContent(
-                title = accountCardState.title,
-                subtitle = "••••••••",
-                titleAddition = accountCardState.maskedCardNumber,
-                iconId = R.drawable.chili_ic_star,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded,
-                toggleIconId = R.drawable.chili_ic_toggle_off,
-                currencyIconId = accountCardState.currencyIconId,
-                isPressed = isPressed,
-                onToggleClick = { onToggleClick.invoke(accountCardState) }
+                onToggleClick = { isToggleHiddenState = !isToggleHiddenState }
             )
             ActionButtonContent(
                 modifier = Modifier,
@@ -256,11 +230,11 @@ private fun RowScope.AccountCardContent(
             AccountContent(
                 title = accountCardState.title,
                 subtitle = accountCardState.subtitle,
-                subtitleTextStyle = Chili.typography.H14_Primary_500.copy(color = Chili.color.accountCardWarningColor),
+                subtitleTextStyle = Chili.typography.H14_Primary_500.copy(color = Chili.color.warningTextColor),
                 titleAddition = accountCardState.maskedCardNumber,
                 iconId = R.drawable.chili_ic_star,
                 isPressed = isPressed,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded,
+                isChevronVisible = true,
             )
             ActionButtonContent(
                 modifier = Modifier,
@@ -270,14 +244,14 @@ private fun RowScope.AccountCardContent(
             )
         }
 
-        is AccountCardState.NoFavoritePaymentAmount -> {
+        is AccountCardState.FavoritePaymentUnavailable -> {
             AccountContent(
                 title = accountCardState.title,
                 subtitle = accountCardState.subtitle,
                 iconId = R.drawable.chili_ic_empty_star,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded,
+                isChevronVisible = true,
                 isPressed = isPressed,
-                subtitleTextStyle = Chili.typography.H14_Primary_500.copy(color = Chili.color.accountCardWarningColor)
+                subtitleTextStyle = Chili.typography.H14_Primary_500.copy(color = Chili.color.warningTextColor)
             )
             ActionButtonContent(
                 modifier = Modifier,
@@ -287,7 +261,7 @@ private fun RowScope.AccountCardContent(
             )
         }
 
-        is AccountCardState.ChooseNoFavoritePaymentAmount -> {
+        is AccountCardState.NoDefaultPaymentAmount -> {
             SingleLineAccountContent(
                 modifier = Modifier,
                 title = accountCardState.title,
@@ -315,11 +289,9 @@ private fun RowScope.AccountCardContent(
                     titleAddition = accountCardState.maskedCardNumberText,
                     titleAdditionTextStyle = accountCardState.maskedCardNumberTextStyle
                         ?: Chili.typography.H14.copy(color = gray_1),
-                    chevronId = accountCardState.chevronId,
+                    isChevronVisible = accountCardState.isChevronVisible,
                     toggleIconId = accountCardState.toggleIconId,
-                    currencyIconId = accountCardState.currencyIconId,
-                    isPressed = isPressed,
-                    onToggleClick = { onToggleClick.invoke(accountCardState) }
+                    isPressed = isPressed
                 )
             } else {
                 SingleLineAccountContent(
@@ -356,9 +328,8 @@ private fun AccountContent(
     @DrawableRes iconId: Int? = null,
     titleAddition: String? = null,
     titleAdditionTextStyle: TextStyle = Chili.typography.H14.copy(color = gray_1),
-    @DrawableRes chevronId: Int? = null,
+    isChevronVisible: Boolean = false,
     @DrawableRes toggleIconId: Int? = null,
-    @DrawableRes currencyIconId: Int? = null,
     isPressed: Boolean = false,
     onToggleClick: () -> Unit = {}
 ) {
@@ -396,10 +367,10 @@ private fun AccountContent(
                     style = titleAdditionTextStyle,
                 )
             }
-            chevronId?.let {
+            if (isChevronVisible) {
                 Image(
                     modifier = Modifier.size(20.dp),
-                    painter = painterResource(id = it),
+                    painter = painterResource(id = R.drawable.chili_ic_right_arrow_rounded),
                     contentDescription = null,
                 )
             }
@@ -427,13 +398,7 @@ private fun AccountContent(
                 text = subtitle,
                 style = subtitleTextStyle,
             )
-            currencyIconId?.let {
-                Image(
-                    modifier = Modifier.size(17.dp),
-                    painter = painterResource(id = it),
-                    contentDescription = null,
-                )
-            }
+
         }
     }
 }
@@ -511,35 +476,13 @@ private fun ActionButtonContent(
             )
         }
         chevronId?.let {
-            Image(
+            Icon(
+                modifier = Modifier.size(24.dp),
                 painter = painterResource(it),
                 contentDescription = null,
+                tint = Chili.color.chevronColor
             )
         }
-    }
-}
-
-private fun getAmountVisibilityChangedState(state: AccountCardState): AccountCardState {
-    return when (state) {
-        is AccountCardState.FavoritePaymentAmountAvailable -> {
-            AccountCardState.FavoritePaymentAmountHidden(
-                title = state.title,
-                subtitle = state.subtitle,
-                maskedCardNumber = state.titleAddition,
-                currencyIconId = state.currencyIconId
-            )
-        }
-
-        is AccountCardState.FavoritePaymentAmountHidden -> {
-            AccountCardState.FavoritePaymentAmountAvailable(
-                title = state.title,
-                subtitle = state.subtitle,
-                titleAddition = state.maskedCardNumber,
-                currencyIconId = state.currencyIconId
-            )
-        }
-
-        else -> state
     }
 }
 
@@ -554,14 +497,7 @@ sealed class AccountCardState {
         val title: String,
         val subtitle: String,
         val titleAddition: String,
-        @DrawableRes val currencyIconId: Int? = null
-    ) : AccountCardState()
-
-    data class FavoritePaymentAmountHidden(
-        val title: String,
-        val subtitle: String,
-        val maskedCardNumber: String,
-        @DrawableRes val currencyIconId: Int? = null
+        val isToggleHiddenState: Boolean = false
     ) : AccountCardState()
 
     data class FavoritePaymentAmountUnavailable(
@@ -578,7 +514,7 @@ sealed class AccountCardState {
         val iconId: Int? = null,
         val maskedCardNumberText: String? = null,
         val maskedCardNumberTextStyle: TextStyle? = null,
-        val chevronId: Int? = null,
+        val isChevronVisible: Boolean = false,
         val toggleIconId: Int? = null,
         val currencyIconId: Int? = null,
         val onToggleClick: () -> Unit = {},
@@ -588,11 +524,11 @@ sealed class AccountCardState {
         val actionButtonChevronId: Int? = null
     ) : AccountCardState()
 
-    data class NoFavoritePaymentAmount(val title: String, val subtitle: String) : AccountCardState()
+    data class FavoritePaymentUnavailable(val title: String, val subtitle: String) : AccountCardState()
 
     data class BankSync(val title: String) : AccountCardState()
     data class NonIdentified(val title: String) : AccountCardState()
     data class IdentificationInProcess(val title: String) : AccountCardState()
-    data class ChooseNoFavoritePaymentAmount(val title: String) : AccountCardState()
+    data class NoDefaultPaymentAmount(val title: String) : AccountCardState()
     data object Loading : AccountCardState()
 }

@@ -98,10 +98,11 @@ fun PreviewAccountCardExamples(
             AccountCard(
                 modifier = Modifier
                     .fillMaxSize(),
-                accountCardState = AccountCardState.FavoritePaymentAmountHidden(
+                accountCardState = AccountCardState.FavoritePaymentAmountAvailable(
                     title = "Карта Visa",
                     subtitle = "3 350,00 c",
-                    maskedCardNumber = "•••• 1234"
+                    titleAddition = "•••• 1234",
+                    isToggleHiddenState = true
                 )
             )
             AccountCard(
@@ -116,7 +117,7 @@ fun PreviewAccountCardExamples(
             AccountCard(
                 modifier = Modifier
                     .fillMaxSize(),
-                accountCardState = AccountCardState.NoFavoritePaymentAmount(
+                accountCardState = AccountCardState.FavoritePaymentUnavailable(
                     title = "Избранный счет",
                     subtitle = "Временно недоступен "
                 )
@@ -129,7 +130,7 @@ fun PreviewAccountCardExamples(
             AccountCard(
                 modifier = Modifier
                     .fillMaxSize(),
-                accountCardState = AccountCardState.ChooseNoFavoritePaymentAmount(
+                accountCardState = AccountCardState.NoDefaultPaymentAmount(
                     title = "Выберите счёт \nпо умолчанию ",
                 )
             )
