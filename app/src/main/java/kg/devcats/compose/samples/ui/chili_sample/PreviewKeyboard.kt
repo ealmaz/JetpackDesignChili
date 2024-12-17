@@ -1,5 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
+import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputField
 import kg.devcats.compose.jetpack_chili.components.keyboard.KeyboardKeyType
 import kg.devcats.compose.jetpack_chili.components.keyboard.NumberKeyboard
@@ -47,7 +49,7 @@ fun PreviewKeyboard(navigateUp: () -> Unit) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            ChiliInputField(
+            ChiliAmountInputField(
                 value = inputText,
                 modifier = Modifier
                     .padding(top = 16.dp)
@@ -58,13 +60,16 @@ fun PreviewKeyboard(navigateUp: () -> Unit) {
                 message = "Message",
                 placeholder = "Placeholder",
                 actionText = "Action",
+                maxLength = 5
             ) {
-                inputText = it
+               // inputText = it.toString()
             }
+
             if (isKeyboardVisible) {
                 NumberKeyboard(
                     specialSymbols = listOf('-', '/'),
                     onInputChanged = { text ->
+                        Log.d("textinput","keyboard text: $text")
                         inputText = text
                 })
             }

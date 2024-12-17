@@ -1,5 +1,6 @@
 package kg.devcats.compose.jetpack_chili.components.input_fields
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -32,6 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
+import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.AmountInputVisualTransformator
+import kg.devcats.compose.jetpack_chili.components.input_fields.utils.amountValueChange
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.ChiliTheme
 
@@ -113,6 +116,91 @@ fun ChiliInputField(
                     keyboardType = keyboardType
                 )
                 if (isClearButtonEnabled && value.text.isNotEmpty()) {
+                    InputFieldClearIcon { onValueChange(TextFieldValue()) }
+                }
+            }
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            if (message != null || error != null) {
+                Text(
+                    modifier = Modifier
+                        .weight(2f)
+                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                    style = if (error == null) Chili.typography.H14_Secondary else Chili.typography.H14_Error,
+                    text = error.takeIf { !it.isNullOrBlank() } ?: message ?: ""
+                )
+            }
+            actionText?.let {
+                Box(modifier = Modifier.weight(1f)) {
+                    ChiliComponentButton(
+                        modifier = Modifier.align(Alignment.CenterEnd),
+                        text = it,
+                        textStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
+                        enabled = true,
+                        onClick = onActionClick
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ChiliAmountInputField(
+    modifier: Modifier = Modifier,
+    value: String,
+    textStyle: TextStyle = Chili.typography.H16_Primary_500,
+    error: String? = null,
+    isClearButtonEnabled: Boolean = true,
+    placeholder: String? = null,
+    focusRequester: FocusRequester = FocusRequester(),
+    message: String? = null,
+    actionText: String? = null,
+    isInputCenteredAlign: Boolean = true,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    maxLength: Int? = null,
+    addDecimal: Boolean = true,
+    onActionClick: (() -> Unit) = {},
+    suffix: (@Composable () -> Unit)? = null,
+    onValueChange: ((TextFieldValue) -> Unit),
+) {
+    var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value, selection = TextRange(value.length))) }
+    val textFieldValue = textFieldValueState.copy(text = value)
+
+    Log.d("textstate", "textFieldValueState: ${textFieldValue.text}")
+    Column(modifier = modifier) {
+        Surface(
+            color = decideBackgroundColor(error),
+            shape = Chili.shapes.RoundedCornerShape
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                if (isClearButtonEnabled && value.isNotEmpty() && isInputCenteredAlign) {
+                    Spacer(modifier = Modifier.width(44.dp))
+                }
+                ChiliPlainInputField(
+                    modifier = Modifier.weight(1f),
+                    focusRequester = focusRequester,
+                    value = textFieldValue,
+                    onValueChange = { newTextFieldValueState ->
+                        if (newTextFieldValueState.text.length <= (maxLength ?: Int.MAX_VALUE)) {
+                            val finalText = amountValueChange(newTextFieldValueState.text, addDecimal)
+                            Log.d("textinput", "finaltext: $finalText")
+                            textFieldValueState = TextFieldValue(finalText, newTextFieldValueState.selection)
+                            onValueChange(TextFieldValue(finalText, newTextFieldValueState.selection))
+                        }
+                    },
+                    placeholder = placeholder,
+                    textStyle = textStyle,
+                    isInputCenteredAlign = isInputCenteredAlign,
+                    suffix = suffix,
+                    keyboardType = keyboardType,
+                    visualTransformation = AmountInputVisualTransformator(
+                        addDecimals = addDecimal
+                    ),
+
+                )
+                if (isClearButtonEnabled && value.isNotEmpty()) {
                     InputFieldClearIcon { onValueChange(TextFieldValue()) }
                 }
             }
