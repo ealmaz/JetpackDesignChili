@@ -46,6 +46,12 @@ sealed class Screens {
     @Serializable
     data object KeyboardNavGraph : Screens()
 
+    @Serializable
+    data object NumberKeyboardScreen : Screens()
+
+    @Serializable
+    data object PdfViewerNavGraph : Screens()
+
 }
 
 sealed class KeyboardScreens {
@@ -54,12 +60,6 @@ sealed class KeyboardScreens {
 
     @Serializable
     data object ChiliKeyboardScreen : Screens()
-
-    @Serializable
-    data object NumberKeyboardScreen : Screens()
-
-    @Serializable
-    data object PdfViewerNavGraph : Screens()
 
 
 }
