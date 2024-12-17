@@ -52,6 +52,8 @@ sealed class Screens {
     @Serializable
     data object PdfViewerNavGraph : Screens()
 
+    @Serializable
+    data object PinInputFieldScreen : Screens()
 }
 
 sealed class KeyboardScreens {
