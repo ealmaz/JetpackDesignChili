@@ -138,6 +138,12 @@ interface ChiliColorScheme {
 
     val keyColor: Color
 
+//    AccountCard
+    val toggleIconColor: Color
+    val accountCardSubtitleColor: Color
+    val accountCardSubtitleAccentColor: Color
+    val accountCardWarningColor: Color
+
     //PinKeyboard
     val pinDigitClickedBackground: Color
 
@@ -252,7 +258,12 @@ data class ChiliLightColorScheme(
 
     override val pdfBackgroundColor: Color = gray_4,
 
-    override val pinDigitClickedBackground: Color = black_1
+    override val pinDigitClickedBackground: Color = black_1,
+
+    override val toggleIconColor: Color = black_5,
+    override val accountCardSubtitleColor: Color = black_7,
+    override val accountCardSubtitleAccentColor: Color = folly_1,
+    override val accountCardWarningColor: Color = orange_1,
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -360,6 +371,11 @@ data class ChiliDarkColorScheme(
 
     override val pdfBackgroundColor: Color = black_2,
 
-    override val pinDigitClickedBackground: Color = white_1
+    override val pinDigitClickedBackground: Color = white_1,
+
+    override val toggleIconColor: Color = gray_3,
+    override val accountCardSubtitleColor: Color = gray_11,
+    override val accountCardSubtitleAccentColor: Color = red_8,
+    override val accountCardWarningColor: Color = orange_4,
 ): ChiliColorScheme
 

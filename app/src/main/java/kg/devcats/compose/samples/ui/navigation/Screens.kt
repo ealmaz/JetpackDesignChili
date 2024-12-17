@@ -66,6 +66,9 @@ sealed class KeyboardScreens {
 
     @Serializable
     data object ChiliKeyboardScreen : KeyboardScreens()
+
+    @Serializable
+    data object AccountCardExamplesScreen : Screens()
 }
 
 sealed class PdfScreens {
