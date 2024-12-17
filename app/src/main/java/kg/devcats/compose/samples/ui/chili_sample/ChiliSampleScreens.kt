@@ -124,6 +124,13 @@ fun ChiliSampleScreens(
                 .padding(top = 16.dp)) {
                 navController?.navigate(Screens.PdfViewerNavGraph.toString())
             }
+
+            ChiliPrimaryButton(text = "Keyboards", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController?.navigate(Screens.KeyboardNavGraph.toString())
+            }
+
         }
     }
 }
