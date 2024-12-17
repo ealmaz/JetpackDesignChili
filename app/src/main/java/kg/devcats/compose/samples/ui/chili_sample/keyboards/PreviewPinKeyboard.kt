@@ -32,14 +32,9 @@ fun PreviewPinKeyboard(navigateUp: () -> Unit) {
     val shouldBeCleared = remember { mutableStateOf(false) }
 
     LaunchedEffect(pinCode.value) {
-        if (pinCode.value.length >= code.length) {
-            if (pinCode.value == code) {
-                pinStatusState.value = PinStatusType.Success
-            } else {
-                pinStatusState.value = PinStatusType.Error
-            }
-        } else {
-            pinStatusState.value = PinStatusType.None
+        pinStatusState.value = when {
+            pinCode.value.length == code.length -> if (pinCode.value == code) PinStatusType.Success else PinStatusType.Error
+            else -> PinStatusType.None
         }
     }
 
@@ -80,17 +75,14 @@ fun PreviewPinKeyboard(navigateUp: () -> Unit) {
 
                 // Keyboard
                 PinKeyboard(
-                    enableInput = true,
                     actionButtonText = "Forgot?",
                     actionButtonType = ActionButtonType.TEXT,
                     onActionTextClick = {
                         Toast.makeText(context, "Action Clicked", Toast.LENGTH_SHORT).show()
                     },
                     onInputChange = { newText ->
-                        if (pinCode.value.length < 4){
-                            pinCode.value = newText
-                            shouldBeCleared.value = false
-                        }
+                        pinCode.value = newText
+                        shouldBeCleared.value = false
                     },
                     isClearInputValue = shouldBeCleared.value,
                     modifier = Modifier.padding(top = 16.dp)
