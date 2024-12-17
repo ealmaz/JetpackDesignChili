@@ -47,7 +47,8 @@ import kotlin.math.sin
 fun AccountCard(
     modifier: Modifier = Modifier,
     accountCardState: AccountCardState = AccountCardState.Loading,
-    actionButtonClick: () -> Unit = {}
+    actionButtonClick: () -> Unit = {},
+    onContainerClick: () -> Unit = {}
 ) {
     var changedAccountCardState by remember { mutableStateOf(accountCardState) }
 
@@ -55,7 +56,7 @@ fun AccountCard(
 
     Column(
         modifier = modifier
-            .setIsPressedEffect(isPressed, {  }, true),
+            .setIsPressedEffect(isPressed, onContainerClick, true),
     ) {
         Row(
             modifier = Modifier
@@ -275,6 +276,7 @@ private fun RowScope.AccountCardContent(
                 subtitle = accountCardState.subtitle,
                 iconId = R.drawable.chili_ic_empty_star,
                 chevronId = R.drawable.chili_ic_right_arrow_rounded,
+                isPressed = isPressed,
                 subtitleTextStyle = Chili.typography.H14_Primary_500.copy(color = Chili.color.accountCardWarningColor)
             )
             ActionButtonContent(
