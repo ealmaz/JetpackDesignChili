@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,21 +22,13 @@ import kg.devcats.compose.jetpack_chili.rippleClickable
 import kg.devcats.compose.jetpack_chili.setIsPressedEffect
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
-sealed class Input {
-    data class Digit(val digit: Int) : Input()
-    data object Backspace : Input()
-    data object ActionDrawable : Input()
-    data object ActionText : Input()
-}
-
 enum class ActionButtonType {
     DRAWABLE,
     TEXT
 }
 
-
 @Composable
-fun ChiliKeyboard(
+fun PinKeyboard(
     modifier: Modifier = Modifier,
     isActionButtonEnabled: Boolean = true,
     actionButtonType: ActionButtonType = ActionButtonType.DRAWABLE,
@@ -45,9 +38,17 @@ fun ChiliKeyboard(
     actionButtonPressedDrawable: Painter? = null,
     onActionDrawableClick: (() -> Unit)? = null,
     onInputChange: (String) -> Unit = {},
-    enableInput: Boolean = true
+    enableInput: Boolean = true,
+    isClearInputValue: Boolean = false
 ) {
     var inputText by remember { mutableStateOf("") }
+
+    LaunchedEffect(isClearInputValue) {
+        if (isClearInputValue) {
+            inputText = ""
+            onInputChange(inputText)
+        }
+    }
 
     val backgroundColor = Chili.color.surfaceBackground
     Column(
