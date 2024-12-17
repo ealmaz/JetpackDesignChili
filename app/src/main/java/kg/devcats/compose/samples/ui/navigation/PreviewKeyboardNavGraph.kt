@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kg.devcats.compose.samples.ui.chili_sample.keyboards.KeyboardSampleScreens
-import kg.devcats.compose.samples.ui.chili_sample.keyboards.PreviewChiliKeyboard
+import kg.devcats.compose.samples.ui.chili_sample.keyboards.PreviewPinKeyboard
 import kg.devcats.compose.samples.ui.chili_sample.keyboards.PreviewNumberKeyboard
 
 @Composable
@@ -23,7 +23,7 @@ fun PreviewKeyboardNavGraph(navController: NavController) {
             )
         }
         composable(KeyboardScreens.ChiliKeyboardScreen.toString()) {
-            PreviewChiliKeyboard { navController.navigateUp() }
+            PreviewPinKeyboard { navController.navigateUp() }
         }
         composable(Screens.NumberKeyboardScreen.toString()) {
             PreviewNumberKeyboard { navController.navigateUp() }
