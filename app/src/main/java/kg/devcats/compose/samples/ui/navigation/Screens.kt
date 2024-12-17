@@ -44,6 +44,18 @@ sealed class Screens {
     data object DividersScreen : Screens()
 
     @Serializable
+    data object KeyboardNavGraph : Screens()
+
+}
+
+sealed class KeyboardScreens {
+    @Serializable
+    data object KeyboardSampleScreens : Screens()
+
+    @Serializable
+    data object ChiliKeyboardScreen : Screens()
+
+    @Serializable
     data object NumberKeyboardScreen : Screens()
 
     @Serializable

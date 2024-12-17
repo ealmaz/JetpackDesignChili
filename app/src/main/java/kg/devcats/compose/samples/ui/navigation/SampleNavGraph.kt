@@ -70,6 +70,10 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
         composable(Screens.PdfViewerNavGraph.toString()) {
             PreviewPdfViewerNavGraph(navController = navController)
         }
+        composable(Screens.KeyboardNavGraph.toString()) {
+            PreviewKeyboardNavGraph(navController = navController)
+        }
+
     }
 
 }
