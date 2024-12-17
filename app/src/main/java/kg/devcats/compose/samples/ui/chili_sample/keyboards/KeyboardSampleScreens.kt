@@ -1,4 +1,4 @@
-package kg.devcats.compose.samples.ui.chili_sample
+package kg.devcats.compose.samples.ui.chili_sample.keyboards
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,6 +12,7 @@ import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.navigation.KeyboardScreens
+import kg.devcats.compose.samples.ui.navigation.Screens
 
 @Composable
 fun KeyboardSampleScreens(navController: NavController, navigateUp: () -> Unit) {
@@ -41,14 +42,12 @@ fun KeyboardSampleScreens(navController: NavController, navigateUp: () -> Unit) 
                 navController.navigate(KeyboardScreens.ChiliKeyboardScreen.toString())
             }
 
-            ChiliPrimaryButton(
-                text = "Another Keyboard (Заглушка)",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp)
-            ) {
-                // Добавьте навигацию для другой клавиатуры, если она появится
+            ChiliPrimaryButton(text = "Number Keyboard", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController.navigate(Screens.NumberKeyboardScreen.toString())
             }
+
         }
     }
 }

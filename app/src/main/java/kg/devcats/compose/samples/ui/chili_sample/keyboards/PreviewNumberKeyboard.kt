@@ -1,4 +1,4 @@
-package kg.devcats.compose.samples.ui.chili_sample
+package kg.devcats.compose.samples.ui.chili_sample.keyboards
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,12 +18,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.handleZero
+import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputField
 import kg.devcats.compose.jetpack_chili.components.keyboard.NumberKeyboard
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun PreviewKeyboard(navigateUp: () -> Unit) {
+fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
