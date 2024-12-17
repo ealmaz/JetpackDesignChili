@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.clickableWithoutEffect
 import kg.devcats.compose.jetpack_chili.rippleClickable
+import kg.devcats.compose.jetpack_chili.setIsAlpha
 import kg.devcats.compose.jetpack_chili.setIsPressedEffect
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
@@ -38,8 +39,9 @@ fun PinKeyboard(
     actionButtonPressedDrawable: Painter? = null,
     onActionDrawableClick: (() -> Unit)? = null,
     onInputChange: (String) -> Unit = {},
-    enableInput: Boolean = true,
-    isClearInputValue: Boolean = false
+    isEnableInput: Boolean = true,
+    isClearInputValue: Boolean = false,
+    codeMaxSize: Int = 4,
 ) {
     var inputText by remember { mutableStateOf("") }
 
@@ -50,26 +52,21 @@ fun PinKeyboard(
         }
     }
 
-    val backgroundColor = Chili.color.surfaceBackground
+    fun addDigit(digit: String) {
+        inputText += digit
+        if (inputText.length <= codeMaxSize) onInputChange(inputText)
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(backgroundColor)
+            .background(Chili.color.surfaceBackground)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        NumberRow(listOf(1, 2, 3), enableInput) { digit ->
-            inputText += digit
-            onInputChange(inputText)
-        }
-        NumberRow(listOf(4, 5, 6), enableInput) { digit ->
-            inputText += digit
-            onInputChange(inputText)
-        }
-        NumberRow(listOf(7, 8, 9), enableInput) { digit ->
-            inputText += digit
-            onInputChange(inputText)
-        }
+        NumberRow(listOf(1, 2, 3), isEnableInput) { digit -> addDigit(digit) }
+        NumberRow(listOf(4, 5, 6), isEnableInput) { digit -> addDigit(digit) }
+        NumberRow(listOf(7, 8, 9), isEnableInput) { digit -> addDigit(digit) }
 
         Row(
             modifier = Modifier
@@ -84,7 +81,7 @@ fun PinKeyboard(
                         onClick = {
                             onActionTextClick?.invoke()
                         },
-                        enabled = enableInput
+                        enabled = isEnableInput
                     )
 
                     ActionButtonType.DRAWABLE -> KeyboardIconButton(
@@ -93,7 +90,7 @@ fun PinKeyboard(
                         onClick = {
                             onActionDrawableClick?.invoke()
                         },
-                        enabled = enableInput
+                        enabled = isEnableInput
                     )
                 }
             } else {
@@ -102,11 +99,8 @@ fun PinKeyboard(
 
             KeyboardDigitButton(
                 digit = 0,
-                onClick = {
-                    inputText += "0"
-                    onInputChange(inputText)
-                },
-                enabled = enableInput
+                onClick = { addDigit("0") },
+                enabled = isEnableInput
             )
 
             KeyboardIconButton(
@@ -116,7 +110,7 @@ fun PinKeyboard(
                     inputText = inputText.dropLast(1)
                     onInputChange.invoke(inputText)
                 },
-                enabled = enableInput
+                enabled = isEnableInput
             )
         }
     }
@@ -126,10 +120,11 @@ fun PinKeyboard(
 private fun NumberRow(
     digits: List<Int>,
     enableInput: Boolean,
-    onInputChange: (String) -> Unit
+    modifier: Modifier = Modifier,
+    onInputChange: (String) -> Unit,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 32.dp),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -143,7 +138,6 @@ private fun NumberRow(
         }
     }
 }
-
 
 @Composable
 fun KeyboardDigitButton(
@@ -163,14 +157,15 @@ fun KeyboardDigitButton(
                 enabled,
                 onClick = onClick,
                 radius = 32.dp,
-                rippleColor = Chili.color.valueText
-            ),
+                rippleColor = Chili.color.pinDigitClickedBackground
+            )
+            .setIsAlpha(enabled),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = digit.toString(),
             style = Chili.typography.H28_Primary,
-            color = if (enabled) Chili.color.primaryText else Chili.color.secondaryText
+            color = Chili.color.primaryText
         )
     }
 }
@@ -188,7 +183,8 @@ fun KeyboardIconButton(
     Box(
         modifier = modifier
             .size(64.dp)
-            .setIsPressedEffect(isPressed, onClick, enabled),
+            .setIsPressedEffect(isPressed, onClick, enabled)
+            .setIsAlpha(enabled),
         contentAlignment = Alignment.Center
     ) {
         if (enabled) {
@@ -215,13 +211,14 @@ fun KeyboardTextButton(
     Box(
         modifier = modifier
             .size(64.dp)
-            .clickableWithoutEffect { if (enabled) onClick() },
+            .clickableWithoutEffect { if (enabled) onClick() }
+            .setIsAlpha(enabled),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
             style = textStyle,
-            color = if (enabled) Chili.color.primaryText else Chili.color.secondaryText
+            color = Chili.color.primaryText
         )
     }
 }

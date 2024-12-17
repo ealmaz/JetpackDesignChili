@@ -127,6 +127,9 @@ interface ChiliColorScheme {
     val lockBorderColor: Color
 
     val keyColor: Color
+
+    //PinKeyboard
+    val pinDigitClickedBackground: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -225,7 +228,9 @@ data class ChiliLightColorScheme(
     override val lockSuccessBg: Color = green_1,
     override val lockBorderColor: Color = black_4,
 
-    override val keyColor: Color = black_6
+    override val keyColor: Color = black_6,
+
+    override val pinDigitClickedBackground: Color = black_1
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -320,6 +325,8 @@ data class ChiliDarkColorScheme(
     override val lockErrorBg: Color = red_1,
     override val lockSuccessBg: Color = green_1,
     override val lockBorderColor: Color = gray_3,
-    override val keyColor: Color = gray_6
+    override val keyColor: Color = gray_6,
+
+    override val pinDigitClickedBackground: Color = white_1
 ): ChiliColorScheme
 

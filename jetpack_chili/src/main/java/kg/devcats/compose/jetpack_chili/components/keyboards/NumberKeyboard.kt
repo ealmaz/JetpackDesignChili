@@ -1,4 +1,4 @@
-package kg.devcats.compose.jetpack_chili.components.keyboard
+package kg.devcats.compose.jetpack_chili.components.keyboards
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
