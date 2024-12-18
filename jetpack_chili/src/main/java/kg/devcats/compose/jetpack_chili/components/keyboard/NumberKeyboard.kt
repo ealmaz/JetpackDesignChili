@@ -21,6 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
@@ -33,13 +35,11 @@ sealed class KeyboardKeyType {
 
 @Composable
 fun NumberKeyboard(
-    text: String = "",
-    onInputChanged: (String) -> Unit,
+    textFieldValue: TextFieldValue,
+    maxLength: Int? = null,
+    onInputChanged: (TextFieldValue) -> Unit,
     specialSymbols: List<Char> = emptyList()
 ) {
-    var inputText by remember {
-        mutableStateOf(text)
-    }
 
     var keys by remember {
         mutableStateOf(generateNumberKeys(specialSymbols))
@@ -66,12 +66,27 @@ fun NumberKeyboard(
                         }
 
                         KeyboardKeyType.Backspace -> {
-                            inputText = inputText.dropLast(1)
-                            onInputChanged.invoke(inputText)
+                            if (textFieldValue.selection.min == 0) return@KeyButton
+                            val newText = StringBuilder(textFieldValue.text)
+                            newText.deleteCharAt(textFieldValue.selection.max - 1)
+                            var selection = textFieldValue.selection
+                            if (selection.max < newText.length) {
+                                selection = TextRange(selection.max - 1)
+                            }
+                            onInputChanged.invoke(textFieldValue.copy(text = newText.toString(), selection = selection))
                         }
                         is KeyboardKeyType.Symbol -> {
-                            inputText += keyType.value
-                            onInputChanged.invoke(inputText)
+                            val newText = StringBuilder(textFieldValue.text)
+                            if (newText.length == maxLength) return@KeyButton
+                            newText.insert(textFieldValue.selection.max, keyType.value)
+
+                            var selection = textFieldValue.selection
+                            if (selection == TextRange(textFieldValue.text.length)) {
+                                selection = TextRange(textFieldValue.text.length + 1)
+                            } else {
+                                selection = TextRange(selection.max + 1)
+                            }
+                            onInputChanged.invoke(textFieldValue.copy(text = newText.toString(), selection = selection))
                         }
                         else -> {}
                     }

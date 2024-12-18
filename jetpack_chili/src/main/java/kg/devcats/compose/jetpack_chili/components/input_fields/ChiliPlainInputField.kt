@@ -1,8 +1,10 @@
 package kg.devcats.compose.jetpack_chili.components.input_fields
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
@@ -19,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,18 +42,20 @@ fun ChiliPlainInputField(
     focusRequester: FocusRequester = FocusRequester(),
     isInputCenteredAlign: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChange: (TextFieldValue) -> Unit,
 ) {
     BasicTextField(
         modifier = modifier.focusRequester(focusRequester),
         value = value,
         onValueChange = onValueChange,
-        textStyle = if(isInputCenteredAlign) textStyle.copy(textAlign = TextAlign.Center) else textStyle,
+        textStyle = if (isInputCenteredAlign) textStyle.copy(textAlign = TextAlign.Center) else textStyle,
         cursorBrush = SolidColor(Chili.color.inputFieldCursorColor),
         minLines = minLines,
         maxLines = maxLines,
         singleLine = isSingleLine,
         enabled = enabled,
+        visualTransformation = visualTransformation,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = keyboardType)
     ) { inputField ->
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = if (isInputCenteredAlign) Arrangement.Center else Arrangement.Start) {
@@ -60,7 +65,9 @@ fun ChiliPlainInputField(
                         if (isInputCenteredAlign) Alignment.Center else Alignment.CenterStart
                     ), text = placeholder, style = textStyle.copy(color = Chili.color.valueText))
                 }
-                inputField()
+                if (value.text.isNotEmpty()) {
+                    inputField()
+                }
             }
             suffix?.invoke()
         }
@@ -72,12 +79,18 @@ fun ChiliPlainInputField(
 @Composable
 fun PreviewChiliPlainInputField() {
     ChiliPlainInputField(
+        modifier = Modifier.fillMaxWidth().background(Chili.color.screenBackground),
         value = TextFieldValue(),
         placeholder = "placeHoldler",
         isSingleLine = false,
+        isInputCenteredAlign = true,
         focusRequester = FocusRequester(),
         suffix = {
-            Icon(modifier = Modifier.size(24.dp), painter = painterResource(id = R.drawable.chili_ic_documents_green), contentDescription = "")
+            Icon(
+                modifier = Modifier.size(24.dp),
+                painter = painterResource(id = R.drawable.chili_ic_documents_green),
+                contentDescription = ""
+            )
         }
     ) {
 
