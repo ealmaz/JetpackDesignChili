@@ -2,6 +2,7 @@ package kg.devcats.compose.jetpack_chili.components.pdf_viewer
 
 import android.graphics.Bitmap
 import android.net.Uri
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +27,7 @@ import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.components.pdf_viewer.manager.PdfRenderManager
 import kg.devcats.compose.jetpack_chili.components.zoomablebox.ZoomableBox
 import kg.devcats.compose.jetpack_chili.modals.dialog.ChiliDialog
+import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun PdfViewerComponent(
@@ -50,7 +52,10 @@ fun PdfViewerComponent(
         pdfRenderManager.renderPdfFile(pdfSourceCategory)
     }
 
-    Box(modifier = modifier.clipToBounds(), contentAlignment = Alignment.Center) {
+    Box(modifier = modifier
+        .clipToBounds()
+        .background(Chili.color.pdfBackgroundColor),
+        contentAlignment = Alignment.Center) {
         when (pdfState) {
             is PdfState.Loading -> {
                 ChiliLoader()
@@ -63,7 +68,7 @@ fun PdfViewerComponent(
                 ZoomableBox(
                     modifier = Modifier.matchParentSize(),
                     enabled = zoomIsEnabled,
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.TopStart
                 ) {
                     LazyColumn(
                         modifier = Modifier

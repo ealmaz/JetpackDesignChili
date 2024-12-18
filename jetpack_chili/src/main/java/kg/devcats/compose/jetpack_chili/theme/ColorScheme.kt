@@ -120,6 +120,9 @@ interface ChiliColorScheme {
     val alertErrorText: Color
 
     val keyColor: Color
+
+    //PdfBackgroundColor
+    val pdfBackgroundColor: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -212,7 +215,9 @@ data class ChiliLightColorScheme(
     override val alertErrorContent: Color = red_1,
     override val alertErrorText: Color = magenta_6,
 
-    override val keyColor: Color = black_6
+    override val keyColor: Color = black_6,
+
+    override val pdfBackgroundColor: Color = gray_4
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -301,6 +306,9 @@ data class ChiliDarkColorScheme(
     override val alertErrorBg: Color = red_6,
     override val alertErrorContent: Color = red_7,
     override val alertErrorText: Color = white_1,
-    override val keyColor: Color = gray_6
+    override val keyColor: Color = gray_6,
+
+    override val pdfBackgroundColor: Color = black_2
+
 ): ChiliColorScheme
 
