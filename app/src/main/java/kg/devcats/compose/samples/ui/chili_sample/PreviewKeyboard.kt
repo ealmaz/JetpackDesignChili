@@ -1,5 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,7 +42,7 @@ fun PreviewKeyboard(navigateUp: () -> Unit) {
         var isKeyboardVisible by remember { mutableStateOf(false) }
         val systemKeyboardController = LocalSoftwareKeyboardController.current
 
-        var inputText by remember { mutableStateOf(TextFieldValue(text = "")) }
+        var inputText by remember { mutableStateOf(TextFieldValue(text = "123")) }
         systemKeyboardController?.hide()
         Column(
             modifier = Modifier
@@ -60,17 +61,17 @@ fun PreviewKeyboard(navigateUp: () -> Unit) {
                 message = "Message",
                 placeholder = "Placeholder",
                 actionText = "Action",
-                maxLength = 5
             ) {
-               inputText = it
+                Log.d("finaltext", "onValueChange : $it")
+                inputText = it
             }
 
             if (isKeyboardVisible) {
                 NumberKeyboard(
-                    text = inputText.text,
+                    textFieldValue = inputText,
                     specialSymbols = listOf('-', '/'),
                     onInputChanged = { text ->
-                        inputText = TextFieldValue(text = text, selection = TextRange(text.length))
+                        inputText = text
                 })
             }
         }
