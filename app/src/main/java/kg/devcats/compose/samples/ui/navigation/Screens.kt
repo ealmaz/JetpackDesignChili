@@ -54,6 +54,9 @@ sealed class Screens {
 
     @Serializable
     data object PinInputFieldScreen : Screens()
+
+    @Serializable
+    data object LockScreen : Screens()
 }
 
 sealed class KeyboardScreens {
