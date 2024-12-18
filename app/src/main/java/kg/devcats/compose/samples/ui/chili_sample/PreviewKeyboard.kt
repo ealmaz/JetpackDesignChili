@@ -1,6 +1,5 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,10 +14,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
+import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.handleZero
 import kg.devcats.compose.jetpack_chili.components.keyboard.NumberKeyboard
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -42,7 +41,7 @@ fun PreviewKeyboard(navigateUp: () -> Unit) {
         var isKeyboardVisible by remember { mutableStateOf(false) }
         val systemKeyboardController = LocalSoftwareKeyboardController.current
 
-        var inputText by remember { mutableStateOf(TextFieldValue(text = "123")) }
+        var inputText by remember { mutableStateOf(TextFieldValue(text = "0")) }
         systemKeyboardController?.hide()
         Column(
             modifier = Modifier
@@ -61,17 +60,16 @@ fun PreviewKeyboard(navigateUp: () -> Unit) {
                 message = "Message",
                 placeholder = "Placeholder",
                 actionText = "Action",
-            ) {
-                Log.d("finaltext", "onValueChange : $it")
-                inputText = it
+            ) { textFieldValue ->
+                inputText = textFieldValue.handleZero(previousValue = inputText)
             }
 
             if (isKeyboardVisible) {
                 NumberKeyboard(
                     textFieldValue = inputText,
-                    specialSymbols = listOf('-', '/'),
-                    onInputChanged = { text ->
-                        inputText = text
+                    specialSymbols = listOf(','),
+                    onInputChanged = { textFieldValue ->
+                        inputText = textFieldValue.handleZero(previousValue = inputText)
                 })
             }
         }

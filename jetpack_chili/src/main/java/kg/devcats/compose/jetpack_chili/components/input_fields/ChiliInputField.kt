@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.AmountInputVisualTransformator
+import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.handleZero
 import kg.devcats.compose.jetpack_chili.components.input_fields.utils.amountValueChange
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.ChiliTheme
@@ -149,6 +150,9 @@ fun ChiliAmountInputField(
         isInputCenteredAlign = isInputCenteredAlign,
         onActionClick = onActionClick,
         onValueChange = onValueChange,
+        onClearInput = {
+            onValueChange(TextFieldValue("0", selection = TextRange(1)))
+        }
     ) {
         ChiliPlainInputField(
             modifier = Modifier.weight(1f),
@@ -157,7 +161,9 @@ fun ChiliAmountInputField(
             onValueChange = { newTextFieldValueState ->
                 if (newTextFieldValueState.text.length <= (maxLength ?: Int.MAX_VALUE)) {
                     val finalText = amountValueChange(newTextFieldValueState.text, addDecimal)
-                    onValueChange(TextFieldValue(finalText, newTextFieldValueState.selection))
+
+                    val finalValue = TextFieldValue(finalText, newTextFieldValueState.selection)
+                    onValueChange(finalValue.handleZero(value))
                 }
             },
             placeholder = placeholder,
@@ -183,6 +189,7 @@ private fun InputFieldContainer(
     isInputCenteredAlign: Boolean = true,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((TextFieldValue) -> Unit),
+    onClearInput: (() -> Unit) = { onValueChange(TextFieldValue()) },
     inputField: @Composable RowScope.() -> Unit
 ) {
     Column(modifier = modifier) {
@@ -196,7 +203,7 @@ private fun InputFieldContainer(
                 }
                 inputField()
                 if (isClearButtonEnabled && value.text.isNotEmpty()) {
-                    InputFieldClearIcon { onValueChange(TextFieldValue()) }
+                    InputFieldClearIcon { onClearInput() }
                 }
             }
         }

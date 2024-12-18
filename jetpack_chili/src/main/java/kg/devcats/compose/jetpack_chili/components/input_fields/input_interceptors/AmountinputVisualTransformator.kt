@@ -1,7 +1,9 @@
 package kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors
 
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.OffsetMapping
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import kotlin.math.min
@@ -15,6 +17,8 @@ object InputFieldDefaults {
     const val DEFAULT_INTEGER_PART = ""
     const val DEFAULT_PART_INDEX = 0
     const val CHUNK_SIZE = 3
+
+    const val ZERO = "0"
 }
 
 class AmountInputVisualTransformator(
@@ -107,5 +111,16 @@ private fun createOffsetMapping(
 
             return min(originalOffset, originalText.length)
         }
+    }
+}
+
+fun TextFieldValue.handleZero(previousValue: TextFieldValue) : TextFieldValue {
+    if (this.text.contains(InputFieldDefaults.DECIMAL_COMMA)) return this
+    return if (this.text.isBlank() || this.text == InputFieldDefaults.ZERO) {
+        TextFieldValue(InputFieldDefaults.ZERO, TextRange(1))
+    } else if (previousValue.text == InputFieldDefaults.ZERO) {
+        TextFieldValue(this.text.substring(1), selection = TextRange(1))
+    } else {
+        this
     }
 }

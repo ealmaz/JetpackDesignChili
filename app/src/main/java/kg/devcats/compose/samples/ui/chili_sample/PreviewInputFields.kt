@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputOtp
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliUneditableInputField
@@ -65,6 +66,18 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 actionText = "Action",
                 isInputCenteredAlign = false,
             ) { inputText2 = it }
+
+            var amountInput by remember { mutableStateOf(TextFieldValue("0")) }
+            ChiliAmountInputField(
+                value = amountInput,
+                modifier = Modifier.padding(top = 16.dp),
+                message = "Amount Input field",
+                actionText = "Action",
+                isInputCenteredAlign = false,
+                keyboardType = KeyboardType.Number,
+            ) {
+                amountInput = it
+            }
 
 
             val maskInterceptor = remember { MaskInputInterceptor("+996 XXX XXX XXX") }
