@@ -37,9 +37,7 @@ fun NumberKeyboard(
     onInputChanged: (String) -> Unit,
     specialSymbols: List<Char> = emptyList()
 ) {
-    var inputText by remember {
-        mutableStateOf(text)
-    }
+    var inputText = text
 
     var keys by remember {
         mutableStateOf(generateNumberKeys(specialSymbols))
