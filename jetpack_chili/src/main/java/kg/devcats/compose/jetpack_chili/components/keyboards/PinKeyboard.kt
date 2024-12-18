@@ -15,9 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.clickableWithoutEffect
+import kg.devcats.compose.jetpack_chili.components.pin.ChiliPinInputField
 import kg.devcats.compose.jetpack_chili.rippleClickable
 import kg.devcats.compose.jetpack_chili.setIsAlpha
 import kg.devcats.compose.jetpack_chili.setIsPressedEffect
@@ -25,7 +27,8 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 enum class ActionButtonType {
     DRAWABLE,
-    TEXT
+    TEXT,
+    NONE
 }
 
 @Composable
@@ -59,7 +62,7 @@ fun PinKeyboard(
 
     Column(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(Chili.color.surfaceBackground)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -74,27 +77,23 @@ fun PinKeyboard(
                 .padding(horizontal = 32.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            if (isActionButtonEnabled) {
-                when (actionButtonType) {
-                    ActionButtonType.TEXT -> KeyboardTextButton(
-                        text = actionButtonText ?: "",
-                        onClick = {
-                            onActionTextClick?.invoke()
-                        },
-                        enabled = isEnableInput
-                    )
+            when {
+                !isActionButtonEnabled || actionButtonType == ActionButtonType.NONE -> Spacer(
+                    Modifier.width(64.dp)
+                )
 
-                    ActionButtonType.DRAWABLE -> KeyboardIconButton(
-                        defaultIcon = actionButtonDefaultDrawable,
-                        pressedIcon = actionButtonPressedDrawable,
-                        onClick = {
-                            onActionDrawableClick?.invoke()
-                        },
-                        enabled = isEnableInput
-                    )
-                }
-            } else {
-                Spacer(Modifier.width(64.dp))
+                !actionButtonText.isNullOrEmpty() || actionButtonType == ActionButtonType.TEXT -> KeyboardTextButton(
+                    text = actionButtonText ?: "",
+                    onClick = { onActionTextClick?.invoke() },
+                    enabled = isEnableInput
+                )
+
+                actionButtonType == ActionButtonType.DRAWABLE -> KeyboardIconButton(
+                    defaultIcon = actionButtonDefaultDrawable,
+                    pressedIcon = actionButtonPressedDrawable,
+                    onClick = { onActionDrawableClick?.invoke() },
+                    enabled = isEnableInput
+                )
             }
 
             KeyboardDigitButton(
@@ -221,4 +220,10 @@ fun KeyboardTextButton(
             color = Chili.color.primaryText
         )
     }
+}
+
+@Preview
+@Composable
+private fun Preview() {
+    PinKeyboard()
 }

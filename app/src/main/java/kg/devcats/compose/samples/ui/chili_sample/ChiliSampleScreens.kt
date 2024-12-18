@@ -130,6 +130,12 @@ fun ChiliSampleScreens(
                 .padding(top = 16.dp)) {
                 navController?.navigate(Screens.PinInputFieldScreen.toString())
             }
+
+            ChiliPrimaryButton(text = "Lock Screen", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController?.navigate(Screens.LockScreen.toString())
+            }
         }
     }
 }
