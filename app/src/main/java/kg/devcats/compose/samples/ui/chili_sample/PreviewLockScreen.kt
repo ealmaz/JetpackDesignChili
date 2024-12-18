@@ -16,6 +16,8 @@ fun PreviewLockScreen(navigateUp: () -> Unit) {
 //        actionText = "Forgot?",
         onSuccess = {context.showToast("Success")},
         onError = {context.showToast("Error")},
-        versionText = "4.0.1"
+        versionText = "4.0.1",
+        isToolbarVisible = true,
+        navigateUp = navigateUp
     )
 }
