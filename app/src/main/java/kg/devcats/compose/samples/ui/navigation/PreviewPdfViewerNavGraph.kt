@@ -1,4 +1,4 @@
-package kg.devcats.compose.samples.ui.chili_sample
+package kg.devcats.compose.samples.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kg.devcats.compose.jetpack_chili.components.pdf_viewer.PdfSourceCategory
 import kg.devcats.compose.jetpack_chili.components.pdf_viewer.PdfViewer
-import kg.devcats.compose.samples.ui.navigation.PdfScreens
+import kg.devcats.compose.samples.ui.chili_sample.PdfSampleScreens
 
 @Composable
 fun PreviewPdfViewerNavGraph(navController: NavController) {

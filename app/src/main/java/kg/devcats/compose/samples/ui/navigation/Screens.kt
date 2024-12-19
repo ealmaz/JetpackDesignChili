@@ -1,6 +1,7 @@
 package kg.devcats.compose.samples.ui.navigation
 
 import kotlinx.serialization.Serializable
+import java.util.concurrent.locks.Lock
 
 sealed class Screens {
 
@@ -44,28 +45,56 @@ sealed class Screens {
     data object DividersScreen : Screens()
 
     @Serializable
+    data object KeyboardNavGraph : Screens()
+
+    @Serializable
     data object NumberKeyboardScreen : Screens()
 
     @Serializable
     data object PdfViewerNavGraph : Screens()
+
+    @Serializable
+    data object PinInputFieldScreen : Screens()
+
+    @Serializable
+    data object LockScreen : Screens()
+}
+
+sealed class KeyboardScreens {
+    @Serializable
+    data object KeyboardSampleScreens : KeyboardScreens()
+
+    @Serializable
+    data object ChiliKeyboardScreen : KeyboardScreens()
 }
 
 sealed class PdfScreens {
     @Serializable
-    data object PdfViewerSampleScreens : Screens()
+    data object PdfViewerSampleScreens : PdfScreens()
 
     @Serializable
-    data object PdfViewerPortraitScreen : Screens()
+    data object PdfViewerPortraitScreen : PdfScreens()
 
     @Serializable
-    data object PdfViewerAlbumScreen : Screens()
+    data object PdfViewerAlbumScreen : PdfScreens()
 
     @Serializable
-    data object PdfViewerWithShareScreen : Screens()
+    data object PdfViewerWithShareScreen : PdfScreens()
 
     @Serializable
-    data object PdfViewerWithoutZoomScreen : Screens()
+    data object PdfViewerWithoutZoomScreen : PdfScreens()
 
     @Serializable
-    data object PdfViewerOneElementScreen : Screens()
+    data object PdfViewerOneElementScreen : PdfScreens()
+}
+
+sealed class LockScreens {
+    @Serializable
+    data object PinLockSampleScreen : LockScreens()
+
+    @Serializable
+    data object CreatePinCodeScreen: LockScreens()
+
+    @Serializable
+    data object LoginPinCodeScreen : LockScreens()
 }

@@ -124,12 +124,22 @@ interface ChiliColorScheme {
     val alertErrorContent: Color
     val alertErrorText: Color
 
+    //LockBackgroundColor
+    val lockNonSelectedBg: Color
+    val lockSelectedBg: Color
+    val lockErrorBg: Color
+    val lockSuccessBg: Color
+    val lockBorderColor: Color
+
     val alertSuccessBg: Color
     val alertSuccessBorder: Color
     val alertSuccessContent: Color
     val alertSuccessText: Color
 
     val keyColor: Color
+
+    //PinKeyboard
+    val pinDigitClickedBackground: Color
 
     //PdfBackgroundColor
     val pdfBackgroundColor: Color
@@ -232,9 +242,17 @@ data class ChiliLightColorScheme(
     override val alertSuccessContent: Color = green_8,
     override val alertSuccessText: Color = black_7,
 
+    override val lockNonSelectedBg: Color = white_1,
+    override val lockSelectedBg: Color = black_1,
+    override val lockErrorBg: Color = red_1,
+    override val lockSuccessBg: Color = green_1,
+    override val lockBorderColor: Color = black_4,
+
     override val keyColor: Color = black_6,
 
-    override val pdfBackgroundColor: Color = gray_4
+    override val pdfBackgroundColor: Color = gray_4,
+
+    override val pinDigitClickedBackground: Color = black_1
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -326,6 +344,13 @@ data class ChiliDarkColorScheme(
     override val alertErrorBorder: Color = red_6,
     override val alertErrorContent: Color = red_7,
     override val alertErrorText: Color = white_1,
+
+    override val lockNonSelectedBg: Color = black_1,
+    override val lockSelectedBg: Color = white_1,
+    override val lockErrorBg: Color = red_1,
+    override val lockSuccessBg: Color = green_1,
+    override val lockBorderColor: Color = gray_3,
+
     override val alertSuccessBg: Color = green_7,
     override val alertSuccessBorder: Color = green_7,
     override val alertSuccessContent: Color = green_9,
@@ -333,7 +358,8 @@ data class ChiliDarkColorScheme(
 
     override val keyColor: Color = gray_6,
 
-    override val pdfBackgroundColor: Color = black_2
+    override val pdfBackgroundColor: Color = black_2,
 
+    override val pinDigitClickedBackground: Color = white_1
 ): ChiliColorScheme
 
