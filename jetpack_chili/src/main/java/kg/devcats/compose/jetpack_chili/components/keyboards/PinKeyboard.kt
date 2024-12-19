@@ -5,7 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,57 +19,42 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.clickableWithoutEffect
-import kg.devcats.compose.jetpack_chili.components.pin.ChiliPinInputField
 import kg.devcats.compose.jetpack_chili.rippleClickable
 import kg.devcats.compose.jetpack_chili.setIsAlpha
 import kg.devcats.compose.jetpack_chili.setIsPressedEffect
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
-enum class ActionButtonType {
-    DRAWABLE,
-    TEXT,
-    NONE
+sealed class ActionButtonType {
+    data class Drawable(val defaultDrawable: Painter, val pressedDrawable: Painter) : ActionButtonType()
+    data class Text(val text: String): ActionButtonType()
+    data object None : ActionButtonType()
 }
 
 @Composable
 fun PinKeyboard(
-    modifier: Modifier = Modifier,
-    isActionButtonEnabled: Boolean = true,
-    actionButtonType: ActionButtonType = ActionButtonType.DRAWABLE,
-    actionButtonText: String? = null,
-    onActionTextClick: (() -> Unit)? = null,
-    actionButtonDefaultDrawable: Painter? = null,
-    actionButtonPressedDrawable: Painter? = null,
-    onActionDrawableClick: (() -> Unit)? = null,
-    onInputChange: (String) -> Unit = {},
-    isEnableInput: Boolean = true,
-    isClearInputValue: Boolean = false,
-    codeMaxSize: Int = 4,
+    keyboardParams: KeyboardParams = KeyboardParams(),
+    actionButtonParams: ActionButtonParams = ActionButtonParams()
 ) {
-    var inputText by remember { mutableStateOf("") }
+    var inputText by remember(keyboardParams.textState.value) { mutableStateOf(keyboardParams.textState.value) }
+    val buttonType = remember(actionButtonParams) { actionButtonParams.buttonType }
 
-    LaunchedEffect(isClearInputValue) {
-        if (isClearInputValue) {
-            inputText = ""
-            onInputChange(inputText)
+    fun addDigit(digit: String) {
+        if (inputText.length < keyboardParams.codeMaxSize) {
+            inputText += digit
+            keyboardParams.onInputChange(inputText)
         }
     }
 
-    fun addDigit(digit: String) {
-        inputText += digit
-        if (inputText.length <= codeMaxSize) onInputChange(inputText)
-    }
-
     Column(
-        modifier = modifier
+        modifier = keyboardParams.modifier
             .fillMaxWidth()
             .background(Chili.color.surfaceBackground)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        NumberRow(listOf(1, 2, 3), isEnableInput) { digit -> addDigit(digit) }
-        NumberRow(listOf(4, 5, 6), isEnableInput) { digit -> addDigit(digit) }
-        NumberRow(listOf(7, 8, 9), isEnableInput) { digit -> addDigit(digit) }
+        NumberRow(listOf(1, 2, 3), keyboardParams.isEnableInput) { digit -> addDigit(digit) }
+        NumberRow(listOf(4, 5, 6), keyboardParams.isEnableInput) { digit -> addDigit(digit) }
+        NumberRow(listOf(7, 8, 9), keyboardParams.isEnableInput) { digit -> addDigit(digit) }
 
         Row(
             modifier = Modifier
@@ -77,29 +62,25 @@ fun PinKeyboard(
                 .padding(horizontal = 32.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            when {
-                !isActionButtonEnabled || actionButtonType == ActionButtonType.NONE -> Spacer(
-                    Modifier.width(64.dp)
+            when(buttonType) {
+                is ActionButtonType.None -> Spacer(Modifier.width(64.dp))
+                is ActionButtonType.Text -> KeyboardTextButton(
+                    text = buttonType.text,
+                    onClick = actionButtonParams.onClick,
+                    enabled = keyboardParams.isEnableInput
                 )
-
-                !actionButtonText.isNullOrEmpty() || actionButtonType == ActionButtonType.TEXT -> KeyboardTextButton(
-                    text = actionButtonText ?: "",
-                    onClick = { onActionTextClick?.invoke() },
-                    enabled = isEnableInput
-                )
-
-                actionButtonType == ActionButtonType.DRAWABLE -> KeyboardIconButton(
-                    defaultIcon = actionButtonDefaultDrawable,
-                    pressedIcon = actionButtonPressedDrawable,
-                    onClick = { onActionDrawableClick?.invoke() },
-                    enabled = isEnableInput
+                is ActionButtonType.Drawable -> KeyboardIconButton(
+                    defaultIcon = buttonType.defaultDrawable,
+                    pressedIcon = buttonType.pressedDrawable,
+                    onClick = actionButtonParams.onClick,
+                    enabled = keyboardParams.isEnableInput
                 )
             }
 
             KeyboardDigitButton(
                 digit = 0,
                 onClick = { addDigit("0") },
-                enabled = isEnableInput
+                enabled = keyboardParams.isEnableInput
             )
 
             KeyboardIconButton(
@@ -107,9 +88,9 @@ fun PinKeyboard(
                 pressedIcon = painterResource(id = R.drawable.chili_ic_remove_digit_pressed),
                 onClick = {
                     inputText = inputText.dropLast(1)
-                    onInputChange.invoke(inputText)
+                    keyboardParams.onInputChange(inputText)
                 },
-                enabled = isEnableInput
+                enabled = keyboardParams.isEnableInput
             )
         }
     }
@@ -221,6 +202,19 @@ fun KeyboardTextButton(
         )
     }
 }
+
+data class KeyboardParams(
+    val modifier: Modifier = Modifier,
+    val textState: State<String> = mutableStateOf(""),
+    val onInputChange: (String) -> Unit = {},
+    val isEnableInput: Boolean = true,
+    val codeMaxSize: Int = 4,
+)
+
+data class ActionButtonParams(
+    val buttonType: ActionButtonType = ActionButtonType.None,
+    val onClick: () -> Unit = {}
+)
 
 @Preview
 @Composable

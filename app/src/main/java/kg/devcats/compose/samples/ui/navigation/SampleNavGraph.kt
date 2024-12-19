@@ -16,7 +16,7 @@ import kg.devcats.compose.samples.ui.chili_sample.PreviewAutoScrollBanners
 import kg.devcats.compose.samples.ui.chili_sample.PreviewButtons
 import kg.devcats.compose.samples.ui.chili_sample.PreviewDialogs
 import kg.devcats.compose.samples.ui.chili_sample.PreviewDividers
-import kg.devcats.compose.samples.ui.chili_sample.PreviewLockScreen
+import kg.devcats.compose.samples.ui.chili_sample.PreviewLockScreenNavGraph
 import kg.devcats.compose.samples.ui.chili_sample.PreviewPdfViewerNavGraph
 import kg.devcats.compose.samples.ui.chili_sample.PreviewPinInput
 import kg.devcats.compose.samples.ui.chili_sample.TextAppearance
@@ -75,7 +75,7 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
             PreviewPinInput { navController.navigateUp() }
         }
         composable(Screens.LockScreen.toString()) {
-            PreviewLockScreen {navController.navigateUp()}
+            PreviewLockScreenNavGraph { navController.navigateUp()}
         }
     }
 
