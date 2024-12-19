@@ -1,10 +1,12 @@
-package kg.devcats.compose.samples.ui.chili_sample
+package kg.devcats.compose.samples.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import kg.devcats.compose.samples.ui.navigation.LockScreens
+import kg.devcats.compose.samples.ui.chili_sample.pin_lock.PreviewLoginPinScreen
+import kg.devcats.compose.samples.ui.chili_sample.pin_lock.PreviewPinCreateScreen
+import kg.devcats.compose.samples.ui.chili_sample.PinLockSampleScreen
 
 @Composable
 fun PreviewLockScreenNavGraph(navigateUp: () -> Unit) {
@@ -21,10 +23,10 @@ fun PreviewLockScreenNavGraph(navigateUp: () -> Unit) {
             )
         }
         composable(LockScreens.CreatePinCodeScreen.toString()) {
-            PinCreateScreen { pinNavController.navigateUp() }
+            PreviewPinCreateScreen { pinNavController.navigateUp() }
         }
         composable(LockScreens.LoginPinCodeScreen.toString()) {
-            LoginPinScreen { pinNavController.navigateUp() }
+            PreviewLoginPinScreen { pinNavController.navigateUp() }
         }
     }
 }

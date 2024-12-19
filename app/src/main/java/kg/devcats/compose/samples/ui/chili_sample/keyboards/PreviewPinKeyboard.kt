@@ -29,11 +29,11 @@ fun PreviewPinKeyboard(navigateUp: () -> Unit) {
     val context = LocalContext.current
     val pinCode = remember { mutableStateOf("") }
     val code = "2323"
-    val pinStatusState = remember { mutableStateOf(PinStatusType.None) }
+    val pinStatusState = remember { mutableStateOf<PinStatusType>(PinStatusType.None) }
 
     LaunchedEffect(pinCode.value) {
         pinStatusState.value = when {
-            pinCode.value.length == code.length -> if (pinCode.value == code) PinStatusType.Success else PinStatusType.Error
+            pinCode.value.length == code.length -> if (pinCode.value == code) PinStatusType.Success() else PinStatusType.Error()
             else -> PinStatusType.None
         }
     }
