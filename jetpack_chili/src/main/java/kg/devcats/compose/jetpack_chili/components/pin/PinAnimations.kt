@@ -9,12 +9,11 @@ import kotlinx.coroutines.coroutineScope
 sealed interface PinAnimations {
     class ErrorShake(
         private val strength: Float = 17f,
-        private val repeat: Int = 3,
         private val finished: () -> Unit = {}
     ) : PinAnimations {
         val xPosition = Animatable(0f)
 
-        suspend fun startAnim(animationDuration: Int = 50) {
+        suspend fun startAnim(animationDuration: Int = 50, repeat: Int = 3) {
             val shakeAnimationSpec: AnimationSpec<Float> = tween(animationDuration)
             repeat(repeat) {
                 xPosition.animateTo(-strength, shakeAnimationSpec)
@@ -29,13 +28,12 @@ sealed interface PinAnimations {
     class SuccessShake(
         private val shortStrength: Float = 10f,
         private val longStrength: Float = 15f,
-        private val repeat: Int = 1,
         private val finished: () -> Unit = {}
     ) : PinAnimations {
         val shortPosition = Animatable(0f)
         val longPosition = Animatable(0f)
 
-        suspend fun startAnim(animationDuration: Int = 200) = coroutineScope {
+        suspend fun startAnim(animationDuration: Int = 200, repeat: Int = 1) = coroutineScope {
             val shakeAnimationSpec: AnimationSpec<Float> = tween(animationDuration)
             repeat(repeat) {
                 val shortAnim = async {

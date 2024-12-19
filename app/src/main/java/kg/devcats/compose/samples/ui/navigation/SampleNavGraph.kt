@@ -16,9 +16,7 @@ import kg.devcats.compose.samples.ui.chili_sample.PreviewAutoScrollBanners
 import kg.devcats.compose.samples.ui.chili_sample.PreviewButtons
 import kg.devcats.compose.samples.ui.chili_sample.PreviewDialogs
 import kg.devcats.compose.samples.ui.chili_sample.PreviewDividers
-import kg.devcats.compose.samples.ui.chili_sample.PreviewLockScreenNavGraph
-import kg.devcats.compose.samples.ui.chili_sample.PreviewPdfViewerNavGraph
-import kg.devcats.compose.samples.ui.chili_sample.PreviewPinInput
+import kg.devcats.compose.samples.ui.chili_sample.pin_lock.PreviewPinInput
 import kg.devcats.compose.samples.ui.chili_sample.TextAppearance
 import kg.devcats.compose.samples.ui.chili_sample.Toolbars
 

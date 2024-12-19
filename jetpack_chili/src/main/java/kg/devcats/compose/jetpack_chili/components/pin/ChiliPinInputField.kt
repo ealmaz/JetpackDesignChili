@@ -35,10 +35,11 @@ fun ChiliPinInputField(
     val successShake = remember { PinAnimations.SuccessShake(finished = successAnimFinished) }
 
     LaunchedEffect(pinStatusType.value) {
-        when (pinStatusType.value) {
-            PinStatusType.Error -> errorShake.startAnim()
-            PinStatusType.Success -> successShake.startAnim()
-            else -> {
+        val statusType = pinStatusType.value
+        when (statusType) {
+            is PinStatusType.Error -> errorShake.startAnim(animationDuration = statusType.duration, repeat = statusType.repeat)
+            is PinStatusType.Success -> successShake.startAnim(animationDuration = statusType.duration, repeat = statusType.repeat)
+            is PinStatusType.None -> {
                 errorShake.reset()
                 successShake.reset()
             }
@@ -53,9 +54,9 @@ fun ChiliPinInputField(
         items(maxSize) { index ->
             val isSelected = index < pinCode.value.length
             val backgroundType: LockItemBackgroundType = when(pinStatusType.value) {
-                PinStatusType.Error -> LockItemBackgroundType.Error
-                PinStatusType.Success -> LockItemBackgroundType.Success
-                PinStatusType.None -> {
+                is PinStatusType.Error -> LockItemBackgroundType.Error
+                is PinStatusType.Success -> LockItemBackgroundType.Success
+                is PinStatusType.None -> {
                     if (isSelected) LockItemBackgroundType.Selected
                     else LockItemBackgroundType.NonSelected
                 }
