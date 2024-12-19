@@ -1,6 +1,5 @@
 package kg.devcats.compose.samples.ui.chili_sample.keyboards
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,7 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import kg.devcats.compose.jetpack_chili.components.keyboards.ActionButtonParams
 import kg.devcats.compose.jetpack_chili.components.keyboards.ActionButtonType
+import kg.devcats.compose.jetpack_chili.components.keyboards.KeyboardParams
 import kg.devcats.compose.jetpack_chili.components.keyboards.PinKeyboard
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.components.pin.ChiliPinInputField
@@ -29,7 +30,6 @@ fun PreviewPinKeyboard(navigateUp: () -> Unit) {
     val pinCode = remember { mutableStateOf("") }
     val code = "2323"
     val pinStatusState = remember { mutableStateOf(PinStatusType.None) }
-    val shouldBeCleared = remember { mutableStateOf(false) }
 
     LaunchedEffect(pinCode.value) {
         pinStatusState.value = when {
@@ -63,29 +63,24 @@ fun PreviewPinKeyboard(navigateUp: () -> Unit) {
                     pinStatusType = pinStatusState,
                     errorAnimFinished = {
                         pinCode.value = ""
-                        shouldBeCleared.value = true
                         context.showToast("Error")
                     },
                     successAnimFinished = {
                         pinCode.value = ""
-                        shouldBeCleared.value = true
                         context.showToast("Success")
                     }
                 )
 
                 // Keyboard
                 PinKeyboard(
-                    actionButtonText = "Forgot?",
-                    actionButtonType = ActionButtonType.TEXT,
-                    onActionTextClick = {
-                        Toast.makeText(context, "Action Clicked", Toast.LENGTH_SHORT).show()
-                    },
-                    onInputChange = { newText ->
-                        pinCode.value = newText
-                        shouldBeCleared.value = false
-                    },
-                    isClearInputValue = shouldBeCleared.value,
-                    modifier = Modifier.padding(top = 16.dp)
+                    keyboardParams = KeyboardParams(
+                        textState = pinCode,
+                        onInputChange = { pinCode.value = it }
+                    ),
+                    actionButtonParams = ActionButtonParams(
+                        buttonType = ActionButtonType.Text("Forgot?"),
+                        onClick = { context.showToast("Action") }
+                    )
                 )
             }
         }
