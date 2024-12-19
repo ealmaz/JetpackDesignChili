@@ -110,14 +110,24 @@ interface ChiliColorScheme {
 
     //AlertBlockCardView
     val alertNeutralBg: Color
+    val alertNeutralBorder: Color
     val alertNeutralContent: Color
     val alertNeutralText: Color
+
     val alertWarningBg: Color
+    val alertWarningBorder: Color
     val alertWarningContent: Color
     val alertWarningText: Color
+
     val alertErrorBg: Color
+    val alertErrorBorder: Color
     val alertErrorContent: Color
     val alertErrorText: Color
+
+    val alertSuccessBg: Color
+    val alertSuccessBorder: Color
+    val alertSuccessContent: Color
+    val alertSuccessText: Color
 
     val keyColor: Color
 
@@ -206,14 +216,21 @@ data class ChiliLightColorScheme(
     override val quickActionButtonDisabledTextColor: Color = gray_2,
 
     override val alertNeutralBg: Color = blue_6,
+    override val alertNeutralBorder: Color = blue_10,
     override val alertNeutralContent: Color = blue_1,
     override val alertNeutralText: Color = blue_9,
     override val alertWarningBg: Color = orange_6,
+    override val alertWarningBorder: Color = white_2,
     override val alertWarningContent: Color = orange_1,
     override val alertWarningText: Color = brown_1,
     override val alertErrorBg: Color = red_5,
+    override val alertErrorBorder: Color = purple_3,
     override val alertErrorContent: Color = red_1,
     override val alertErrorText: Color = magenta_6,
+    override val alertSuccessBg: Color = green_6,
+    override val alertSuccessBorder: Color = green_10,
+    override val alertSuccessContent: Color = green_8,
+    override val alertSuccessText: Color = black_7,
 
     override val keyColor: Color = black_6,
 
@@ -298,14 +315,22 @@ data class ChiliDarkColorScheme(
     override val quickActionButtonDisabledTextColor: Color = gray_1,
 
     override val alertNeutralBg: Color = blue_7,
+    override val alertNeutralBorder: Color = blue_11,
     override val alertNeutralContent: Color = blue_8,
     override val alertNeutralText: Color = white_1,
     override val alertWarningBg: Color = orange_7,
+    override val alertWarningBorder: Color = folly_5,
     override val alertWarningContent: Color = orange_5,
     override val alertWarningText: Color = white_1,
     override val alertErrorBg: Color = red_6,
+    override val alertErrorBorder: Color = red_6,
     override val alertErrorContent: Color = red_7,
     override val alertErrorText: Color = white_1,
+    override val alertSuccessBg: Color = green_7,
+    override val alertSuccessBorder: Color = green_7,
+    override val alertSuccessContent: Color = green_9,
+    override val alertSuccessText: Color = white_1,
+
     override val keyColor: Color = gray_6,
 
     override val pdfBackgroundColor: Color = black_2
