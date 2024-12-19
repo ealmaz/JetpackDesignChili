@@ -38,7 +38,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.cards.AccentCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertState
@@ -67,6 +70,7 @@ import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
+import kg.devcats.compose.samples.ui.navigation.Screens
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -75,7 +79,8 @@ import kotlinx.coroutines.launch
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun PreviewCards(
-    navigateUp: () -> Unit,
+    navController: NavHostController = rememberNavController(),
+    navigateUp: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -95,9 +100,12 @@ fun PreviewCards(
                 .verticalScroll(rememberScrollState())
                 .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)
         ) {
+            ChiliPrimaryButton(text = "Account card examples", modifier = Modifier.fillMaxWidth().padding(top = 32.dp, bottom = 16.dp)) {
+                navController.navigate(Screens.AccountCardExamplesScreen.toString())
+            }
 
             Text(
-                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                modifier = Modifier.padding(top = 16.dp),
                 text = "ChiliCard",
                 style = Chili.typography.H16_Primary
             )
@@ -918,5 +926,5 @@ private fun copyText(context: Context, text: String) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewCardViews() {
-    PreviewCards({})
+    PreviewCards{}
 }

@@ -9,6 +9,7 @@ import kg.devcats.compose.samples.ui.chili_sample.BottomSheetsPreview
 import kg.devcats.compose.samples.ui.chili_sample.PreviewCards
 import kg.devcats.compose.samples.ui.chili_sample.PreviewCells
 import kg.devcats.compose.samples.ui.chili_sample.ChiliSampleScreens
+import kg.devcats.compose.samples.ui.chili_sample.PreviewAccountCardExamples
 import kg.devcats.compose.samples.ui.chili_sample.PreviewCommon
 import kg.devcats.compose.samples.ui.chili_sample.PreviewInputFields
 import kg.devcats.compose.samples.ui.chili_sample.PreviewSnackbars
@@ -40,7 +41,7 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
             PreviewCells { navController.navigateUp() }
         }
         composable(Screens.CardsScreen.toString()) {
-            PreviewCards { navController.navigateUp() }
+            PreviewCards(navController) { navController.navigateUp() }
         }
         composable(Screens.BottomSheetsScreen.toString()) {
             BottomSheetsPreview { navController.navigateUp() }
@@ -75,6 +76,8 @@ fun SamplesNavGraph(navController: NavHostController = rememberNavController()) 
         composable(Screens.LockScreen.toString()) {
             PreviewLockScreenNavGraph { navController.navigateUp()}
         }
+        composable(Screens.AccountCardExamplesScreen.toString()) {
+            PreviewAccountCardExamples { navController.navigateUp() }
+        }
     }
-
 }

@@ -58,6 +58,9 @@ sealed class Screens {
 
     @Serializable
     data object LockScreen : Screens()
+
+    @Serializable
+    data object AccountCardExamplesScreen : Screens()
 }
 
 sealed class KeyboardScreens {
