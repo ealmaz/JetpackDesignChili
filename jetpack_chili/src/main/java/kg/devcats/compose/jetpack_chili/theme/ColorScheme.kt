@@ -144,7 +144,6 @@ interface ChiliColorScheme {
     val toggleIconColor: Color
     val accountCardSubtitleColor: Color
     val accountCardSubtitleAccentColor: Color
-    val accountCardWarningColor: Color
 
     //PinKeyboard
     val pinDigitClickedBackground: Color

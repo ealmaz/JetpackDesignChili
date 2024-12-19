@@ -58,6 +58,9 @@ sealed class Screens {
 
     @Serializable
     data object LockScreen : Screens()
+
+    @Serializable
+    data object AccountCardExamplesScreen : Screens()
 }
 
 sealed class KeyboardScreens {
@@ -66,9 +69,6 @@ sealed class KeyboardScreens {
 
     @Serializable
     data object ChiliKeyboardScreen : KeyboardScreens()
-
-    @Serializable
-    data object AccountCardExamplesScreen : Screens()
 }
 
 sealed class PdfScreens {
