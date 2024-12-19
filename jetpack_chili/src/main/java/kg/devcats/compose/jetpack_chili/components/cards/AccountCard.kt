@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.components.shimmer.shimmerBrush
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.setIsPressedEffect
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.gray_1
@@ -50,6 +51,81 @@ fun AccountCard(
     actionButtonClick: () -> Unit = {},
     onContainerClick: () -> Unit = {}
 ) {
+    AccountCardLayout(
+        modifier = modifier,
+        onContainerClick = onContainerClick
+    ) { isPressed ->
+        AccountCardContent(
+            accountCardState = accountCardState,
+            isPressed = isPressed,
+            actionButtonClick = actionButtonClick
+        )
+    }
+}
+
+@Composable
+fun AccountCard(
+    modifier: Modifier = Modifier,
+    title: String,
+    titleTextStyle: TextStyle = Chili.typography.H14_Primary,
+    subtitle: String? = null,
+    subtitleTextStyle: TextStyle = Chili.typography.H14_Primary_700,
+    iconId: Int? = null,
+    titleAddition: String? = null,
+    titleAdditionTextStyle: TextStyle = Chili.typography.H14.copy(color = gray_1),
+    isChevronVisible: Boolean = false,
+    isToggleIconVisible: Boolean = false,
+    isToggleHiddenState: Boolean = false,
+    actionButtonIcon: Int? = null,
+    actionButtonText: String? = null,
+    actionButtonChevronVisible: Boolean = false,
+    actionButtonClick: () -> Unit = {},
+    onContainerClick: () -> Unit = {},
+) {
+    var toggleHiddenState by remember { mutableStateOf(isToggleHiddenState) }
+    AccountCardLayout(
+        modifier = modifier,
+        onContainerClick = onContainerClick
+    ) { isPressed ->
+        if (subtitle != null) {
+            AccountContent(
+                title = title,
+                titleTextStyle = titleTextStyle,
+                subtitle = if (toggleHiddenState) "••••••••" else subtitle,
+                subtitleTextStyle = subtitleTextStyle,
+                iconId = iconId,
+                titleAddition = titleAddition,
+                titleAdditionTextStyle = titleAdditionTextStyle,
+                isChevronVisible = isChevronVisible,
+                toggleIconId = if (isToggleIconVisible && toggleHiddenState) R.drawable.chili_ic_toggle_off else if (isToggleIconVisible) R.drawable.chili_ic_toggle_on else null,
+                isPressed = isPressed,
+                onToggleClick = { toggleHiddenState = !toggleHiddenState }
+            )
+        } else {
+            SingleLineAccountContent(
+                modifier = Modifier,
+                title = title,
+                titleTextStyle = titleTextStyle,
+                iconId = iconId,
+                isPressed = isPressed
+            )
+        }
+        ActionButtonContent(
+            modifier = Modifier,
+            icon = actionButtonIcon,
+            text = actionButtonText,
+            isChevronVisible = actionButtonChevronVisible,
+            onClick = actionButtonClick,
+        )
+    }
+}
+
+@Composable
+private fun AccountCardLayout(
+    modifier: Modifier,
+    onContainerClick: () -> Unit = {},
+    content: @Composable RowScope.(Boolean) -> Unit
+) {
     val isPressed = remember { mutableStateOf(false) }
 
     Column(
@@ -63,11 +139,7 @@ fun AccountCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            AccountCardContent(
-                accountCardState = accountCardState,
-                isPressed = isPressed.value,
-                actionButtonClick = actionButtonClick
-            )
+            content(isPressed.value)
         }
         Spacer(
             modifier = Modifier
@@ -174,7 +246,7 @@ private fun RowScope.AccountCardContent(
                 modifier = Modifier,
                 onClick = actionButtonClick,
                 icon = R.drawable.chili_ic_obank,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded
+                isChevronVisible = true
             )
         }
 
@@ -190,7 +262,7 @@ private fun RowScope.AccountCardContent(
                 modifier = Modifier,
                 onClick = actionButtonClick,
                 icon = R.drawable.chili_ic_obank,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded
+                isChevronVisible = true
             )
         }
 
@@ -206,7 +278,7 @@ private fun RowScope.AccountCardContent(
                 modifier = Modifier,
                 onClick = actionButtonClick,
                 icon = R.drawable.chili_ic_obank,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded
+                isChevronVisible = true
             )
         }
 
@@ -222,7 +294,7 @@ private fun RowScope.AccountCardContent(
                 modifier = Modifier,
                 onClick = actionButtonClick,
                 icon = R.drawable.chili_ic_obank,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded
+                isChevronVisible = true
             )
         }
 
@@ -240,7 +312,7 @@ private fun RowScope.AccountCardContent(
                 modifier = Modifier,
                 onClick = actionButtonClick,
                 icon = R.drawable.chili_ic_obank,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded
+                isChevronVisible = true
             )
         }
 
@@ -257,7 +329,7 @@ private fun RowScope.AccountCardContent(
                 modifier = Modifier,
                 onClick = actionButtonClick,
                 icon = R.drawable.chili_ic_obank,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded
+                isChevronVisible = true
             )
         }
 
@@ -272,43 +344,7 @@ private fun RowScope.AccountCardContent(
                 modifier = Modifier,
                 onClick = actionButtonClick,
                 icon = R.drawable.chili_ic_obank,
-                chevronId = R.drawable.chili_ic_right_arrow_rounded
-            )
-        }
-
-        is AccountCardState.CustomState -> {
-            if (accountCardState.subtitle != null) {
-                AccountContent(
-                    title = accountCardState.title,
-                    titleTextStyle = accountCardState.titleTextStyle
-                        ?: Chili.typography.H14_Primary,
-                    subtitle = accountCardState.subtitle,
-                    subtitleTextStyle = accountCardState.subtitleTextStyle
-                        ?: Chili.typography.H14_Primary_700,
-                    iconId = accountCardState.iconId,
-                    titleAddition = accountCardState.maskedCardNumberText,
-                    titleAdditionTextStyle = accountCardState.maskedCardNumberTextStyle
-                        ?: Chili.typography.H14.copy(color = gray_1),
-                    isChevronVisible = accountCardState.isChevronVisible,
-                    toggleIconId = accountCardState.toggleIconId,
-                    isPressed = isPressed
-                )
-            } else {
-                SingleLineAccountContent(
-                    modifier = Modifier,
-                    title = accountCardState.title,
-                    titleTextStyle = accountCardState.titleTextStyle
-                        ?: Chili.typography.H14_Primary_700,
-                    iconId = accountCardState.iconId,
-                    isPressed = isPressed
-                )
-            }
-            ActionButtonContent(
-                modifier = Modifier,
-                icon = accountCardState.actionButtonIcon,
-                text = accountCardState.actionButtonText,
-                chevronId = accountCardState.actionButtonChevronId,
-                onClick = actionButtonClick,
+                isChevronVisible = true
             )
         }
 
@@ -356,7 +392,7 @@ private fun AccountContent(
                 )
             }
             Text(
-                modifier = Modifier.alpha(alpha),
+                modifier = Modifier.padding(vertical = 1.5.dp).alpha(alpha),
                 text = title,
                 style = titleTextStyle
             )
@@ -368,10 +404,11 @@ private fun AccountContent(
                 )
             }
             if (isChevronVisible) {
-                Image(
+                Icon(
                     modifier = Modifier.size(20.dp),
                     painter = painterResource(id = R.drawable.chili_ic_right_arrow_rounded),
                     contentDescription = null,
+                    tint = Chili.color.accountChevronColor
                 )
             }
         }
@@ -394,11 +431,10 @@ private fun AccountContent(
                 )
             }
             Text(
-                modifier = Modifier.alpha(alpha),
-                text = subtitle,
+                modifier = Modifier.padding(vertical = 1.5.dp).alpha(alpha),
+                text = subtitle.parseHtml(),
                 style = subtitleTextStyle,
             )
-
         }
     }
 }
@@ -444,7 +480,7 @@ private fun ActionButtonContent(
     modifier: Modifier = Modifier,
     @DrawableRes icon: Int? = null,
     text: String? = null,
-    @DrawableRes chevronId: Int? = null,
+    isChevronVisible: Boolean = false,
     onClick: () -> Unit = {}
 ) {
     Row(
@@ -475,12 +511,12 @@ private fun ActionButtonContent(
                 style = Chili.typography.H14_Primary_500,
             )
         }
-        chevronId?.let {
+        if (isChevronVisible) {
             Icon(
                 modifier = Modifier.size(24.dp),
-                painter = painterResource(it),
+                painter = painterResource(id = R.drawable.chili_ic_right_arrow_rounded),
                 contentDescription = null,
-                tint = Chili.color.chevronColor
+                tint = Chili.color.accountChevronColor
             )
         }
     }
@@ -504,24 +540,6 @@ sealed class AccountCardState {
         val title: String,
         val subtitle: String,
         val maskedCardNumber: String,
-    ) : AccountCardState()
-
-    data class CustomState(
-        val title: String,
-        val titleTextStyle: TextStyle? = null,
-        val subtitle: String? = null,
-        val subtitleTextStyle: TextStyle? = null,
-        val iconId: Int? = null,
-        val maskedCardNumberText: String? = null,
-        val maskedCardNumberTextStyle: TextStyle? = null,
-        val isChevronVisible: Boolean = false,
-        val toggleIconId: Int? = null,
-        val currencyIconId: Int? = null,
-        val onToggleClick: () -> Unit = {},
-
-        val actionButtonIcon: Int? = null,
-        val actionButtonText: String? = null,
-        val actionButtonChevronId: Int? = null
     ) : AccountCardState()
 
     data class FavoritePaymentUnavailable(val title: String, val subtitle: String) : AccountCardState()

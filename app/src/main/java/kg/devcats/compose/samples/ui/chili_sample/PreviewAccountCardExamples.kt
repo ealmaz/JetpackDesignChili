@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.cards.AccountCard
 import kg.devcats.compose.jetpack_chili.components.cards.AccountCardState
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -47,12 +48,10 @@ fun PreviewAccountCardExamples(
             AccountCard(
                 modifier = Modifier
                     .fillMaxSize(),
-                accountCardState = AccountCardState.CustomState(
-                    title = "Пройдите \nидентификацию",
-                    titleTextStyle = Chili.typography.H14_Primary_700.copy(color = Chili.color.accountCardSubtitleAccentColor),
-                    actionButtonText = "Войти",
-                    actionButtonIcon = kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_card
-                )
+                title = "Пройдите \nидентификацию",
+                titleTextStyle = Chili.typography.H14_Primary_700.copy(color = Chili.color.accountCardSubtitleAccentColor),
+                actionButtonText = "Войти",
+                actionButtonIcon = kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_card
             )
             AccountCard(
                 modifier = Modifier
@@ -91,7 +90,7 @@ fun PreviewAccountCardExamples(
                     .fillMaxSize(),
                 accountCardState = AccountCardState.FavoritePaymentAmountAvailable(
                     title = "Карта Visa",
-                    subtitle = "3 350,00 c",
+                    subtitle = "3 350,00 <u>c</u>",
                     titleAddition = "•••• 1234"
                 )
             )
@@ -100,7 +99,7 @@ fun PreviewAccountCardExamples(
                     .fillMaxSize(),
                 accountCardState = AccountCardState.FavoritePaymentAmountAvailable(
                     title = "Карта Visa",
-                    subtitle = "3 350,00 c",
+                    subtitle = "3 350,00 <u>c</u>",
                     titleAddition = "•••• 1234",
                     isToggleHiddenState = true
                 )
