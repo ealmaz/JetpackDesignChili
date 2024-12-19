@@ -30,6 +30,7 @@ val gray_10_alpha_70 = Color(0xB3C4C4C4)
 // White
 
 val white_1 = Color(0xFFFFFFFF)
+val white_2 = Color(0xFFF6F0DA)
 
 // Magenta
 
@@ -53,6 +54,7 @@ val folly_1 = Color(0xFFFF0051)
 val folly_2 = Color(0xFFE00047)
 val folly_3 = Color(0xFFFF99B9)
 val folly_4 = Color(0xFFFF0066)
+val folly_5 = Color(0xFF271600)
 
 // Green
 
@@ -61,6 +63,11 @@ val green_2 = Color(0xFF415C29)
 val green_3 = Color(0xFFD1E3C1)
 val green_4 = Color(0xFF709E47)
 val green_5 = Color(0xFF04E762)
+val green_6 = Color(0xFFE6FAD4)
+val green_7 = Color(0xFF081B00)
+val green_8 = Color(0xFF80C01B)
+val green_9 = Color(0xFF49821E)
+val green_10 = Color(0xFFDEF2CC)
 
 // Blue
 
@@ -69,10 +76,13 @@ val blue_2 = Color(0xFF026DB5)
 val blue_3 = Color(0xFFCAEDF7)
 val blue_4 = Color(0xFF52B1B7)
 val blue_5 = Color(0xFF4A90E2)
-val blue_6 = Color(0xFFEBEEF5)
+val blue_6 = Color(0xFFE4F1FF)
 val blue_7 = Color(0xFF001429)
 val blue_8 = Color(0xFF0059BB)
 val blue_9 = Color(0xFF2A4C84)
+val blue_10 = Color(0xFFDEEBF9)
+val blue_11 = Color(0xFF001227)
+
 
 // Red
 
@@ -80,7 +90,7 @@ val red_1 = Color(0xFFFF3B30)
 val red_2 = Color(0xFF1A0706)
 val red_3 = Color(0xFFFFF5F4)
 val red_4 = Color(0xFFD6232A)
-val red_5 = Color(0xFFFFEEEE)
+val red_5 = Color(0xFFFFE8E8)
 val red_6 = Color(0xFF290200)
 val red_7 = Color(0xFFBF251D)
 
@@ -90,7 +100,7 @@ val orange_1 = Color(0xFFFF9500)
 val orange_2 = Color(0xFFF76201)
 val orange_4 = Color(0xFFEB972F)
 val orange_5 = Color(0xFFD57D00)
-val orange_6 = Color(0xFFFEF9E7)
+val orange_6 = Color(0xFFFFF9E3)
 val orange_7 = Color(0xFF291800)
 
 
@@ -105,6 +115,7 @@ val cyan_2 = Color(0xFF42D8D8)
 
 val purple_1 = Color(0xFFB620E0)
 val purple_2 = Color(0xFF7D29E8)
+val purple_3 = Color(0xFFFBE4E4)
 
 // Yellow
 

@@ -487,8 +487,19 @@ fun PreviewCards(
             )
 
             AlertBlockCard(
+                modifier = Modifier.padding(bottom = 14.dp),
                 title = "Title",
                 alertState = AlertState.Error,
+                subtitle = "Subtitle",
+                buttonText = "Кнопка",
+                onButtonClick = {
+                    context.showToast("AlertBlockCard")
+                }
+            )
+
+            AlertBlockCard(
+                title = "Title",
+                alertState = AlertState.Success,
                 subtitle = "Subtitle",
                 buttonText = "Кнопка",
                 onButtonClick = {

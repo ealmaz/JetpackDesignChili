@@ -1,6 +1,7 @@
 package kg.devcats.compose.jetpack_chili.components.cards
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,6 +44,7 @@ fun AlertBlockCard(
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
             .background(alertState.getBgColor())
+            .border(1.dp, alertState.getBgBorderColor(), RoundedCornerShape(10.dp))
             .padding(12.dp)
     ) {
         Row {
@@ -60,7 +62,10 @@ fun AlertBlockCard(
                 )
             }
             Spacer(Modifier.width(8.dp))
-            Column(Modifier.weight(1f).align(Alignment.CenterVertically)) {
+            Column(
+                Modifier
+                    .weight(1f)
+                    .align(Alignment.CenterVertically)) {
                 if (!title.isNullOrEmpty()){
                     Text(
                         text = title,
@@ -100,14 +105,15 @@ fun AlertBlockCard(
 }
 
 enum class AlertState {
-    Neutral, Warning, Error;
+    Neutral, Warning, Error, Success;
 
     @Composable
     fun getIcon(): Painter {
         return when (this) {
-            Neutral -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chilli_ic_information)
-            Warning -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chilli_ic_caution)
-            Error -> painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chilli_ic_error)
+            Neutral -> painterResource(R.drawable.chilli_ic_information)
+            Warning -> painterResource(R.drawable.chilli_ic_caution)
+            Error -> painterResource(R.drawable.chilli_ic_error)
+            Success -> painterResource(R.drawable.chilli_ic_success)
         }
     }
 
@@ -117,6 +123,7 @@ enum class AlertState {
             Neutral -> Chili.color.alertNeutralText
             Warning -> Chili.color.alertWarningText
             Error -> Chili.color.alertErrorText
+            Success -> Chili.color.alertSuccessText
         }
     }
 
@@ -126,6 +133,17 @@ enum class AlertState {
             Neutral -> Chili.color.alertNeutralBg
             Warning -> Chili.color.alertWarningBg
             Error -> Chili.color.alertErrorBg
+            Success -> Chili.color.alertSuccessBg
+        }
+    }
+
+    @Composable
+    fun getBgBorderColor(): Color {
+        return when (this) {
+            Neutral -> Chili.color.alertNeutralBorder
+            Warning -> Chili.color.alertWarningBorder
+            Error -> Chili.color.alertErrorBorder
+            Success -> Chili.color.alertSuccessBorder
         }
     }
 
@@ -135,6 +153,7 @@ enum class AlertState {
             Neutral -> Chili.color.alertNeutralContent
             Warning -> Chili.color.alertWarningContent
             Error -> Chili.color.alertErrorContent
+            Success -> Chili.color.alertSuccessContent
         }
     }
 }
