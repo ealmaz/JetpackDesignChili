@@ -31,16 +31,16 @@ fun PreviewPinCreateScreen(
     var isConfirm by remember { mutableStateOf(false) }
     val pinCodeState = remember { mutableStateOf("") }
     val pinStatusState = remember { mutableStateOf<PinStatusType>(PinStatusType.None) }
-    val pinManager = remember { PinManager() }
+    val mockPinManager = remember { MockPinManager() }
 
     LaunchedEffect(pinCodeState.value) {
         if (pinCodeState.value.length >= MAX_PIN_SIZE) {
             if (!isConfirm) {
-                pinManager.savePinCode(pinCodeState.value)
+                mockPinManager.savePinCode(pinCodeState.value)
                 isConfirm = true
                 pinCodeState.value = ""
             } else {
-                pinStatusState.value = if (pinManager.checkPin(pinCodeState.value)) {
+                pinStatusState.value = if (mockPinManager.checkPin(pinCodeState.value)) {
                     PinStatusType.Success()
                 } else {
                     PinStatusType.Error()

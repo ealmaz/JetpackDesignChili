@@ -1,6 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample.pin_lock
 
-class PinManager {
+class MockPinManager {
     private var pinCode = ""
 
     fun savePinCode(pin: String) { pinCode = pin }
