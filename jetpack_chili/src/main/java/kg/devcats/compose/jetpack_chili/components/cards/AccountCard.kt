@@ -159,12 +159,12 @@ private fun RowScope.AccountCardShimmer() {
             val midX = size.width / 2
             val midY = size.height / 2
             val radius = size.minDimension / 2
-            val angle = PI / 5 // Угол между вершинами звезды (36 градусов)
-            val rotationOffset = -PI / 2 // Поворот на 45 градусов влево
+            val angle = PI / 5
+            val rotationOffset = -PI / 2
 
             for (i in 0 until 10) {
                 val r = if (i % 2 == 0) radius else radius / 2
-                val theta = angle * i - rotationOffset // Применяем поворот
+                val theta = angle * i - rotationOffset
                 val x = midX + r * cos(theta).toFloat()
                 val y = midY - r * sin(theta).toFloat()
                 if (i == 0) moveTo(x, y) else lineTo(x, y)
@@ -215,21 +215,6 @@ private fun RowScope.AccountCardContent(
     actionButtonClick: () -> Unit = {}
 ) {
     when (accountCardState) {
-        is AccountCardState.NonAuthorized -> {
-            AccountContent(
-                title = accountCardState.title,
-                titleTextStyle = Chili.typography.H16_Primary_500,
-                subtitle = accountCardState.subtitle,
-                subtitleTextStyle = Chili.typography.H14_Secondary.copy(color = Chili.color.accountCardSubtitleColor),
-                isPressed = isPressed
-            )
-            ActionButtonContent(
-                modifier = Modifier,
-                onClick = actionButtonClick,
-                text = accountCardState.actionButtonText
-            )
-        }
-
         is AccountCardState.FavoritePaymentAmountAvailable -> {
             var isToggleHiddenState by remember { mutableStateOf(accountCardState.isToggleHiddenState) }
             AccountContent(
@@ -254,7 +239,7 @@ private fun RowScope.AccountCardContent(
             SingleLineAccountContent(
                 modifier = Modifier,
                 title = accountCardState.title,
-                titleTextStyle = Chili.typography.H14_Primary_700.copy(color = Chili.color.accountCardSubtitleAccentColor),
+                titleTextStyle = Chili.typography.H14_Primary_700.copy(color = Chili.color.accentPrimaryColor),
                 iconId = R.drawable.non_identified,
                 isPressed = isPressed
             )
@@ -270,7 +255,7 @@ private fun RowScope.AccountCardContent(
             SingleLineAccountContent(
                 modifier = Modifier,
                 title = accountCardState.title,
-                titleTextStyle = Chili.typography.H14_Secondary_700.copy(color = Chili.color.accountCardSubtitleColor),
+                titleTextStyle = Chili.typography.H14_Primary_700,
                 iconId = R.drawable.ic_dentification_in_process,
                 isPressed = isPressed
             )
@@ -523,12 +508,6 @@ private fun ActionButtonContent(
 }
 
 sealed class AccountCardState {
-    data class NonAuthorized(
-        val title: String,
-        val subtitle: String,
-        val actionButtonText: String
-    ) : AccountCardState()
-
     data class FavoritePaymentAmountAvailable(
         val title: String,
         val subtitle: String,

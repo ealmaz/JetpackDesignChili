@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.cards.AccountCard
 import kg.devcats.compose.jetpack_chili.components.cards.AccountCardState
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
-import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -49,7 +48,7 @@ fun PreviewAccountCardExamples(
                 modifier = Modifier
                     .fillMaxSize(),
                 title = "Пройдите \nидентификацию",
-                titleTextStyle = Chili.typography.H14_Primary_700.copy(color = Chili.color.accountCardSubtitleAccentColor),
+                titleTextStyle = Chili.typography.H14_Primary_700.copy(color = Chili.color.accentPrimaryColor),
                 actionButtonText = "Войти",
                 actionButtonIcon = kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_card
             )
@@ -65,24 +64,6 @@ fun PreviewAccountCardExamples(
                     .fillMaxSize(),
                 accountCardState = AccountCardState.BankSync(
                     title = "Продолжить \nперенос данных",
-                )
-            )
-            AccountCard(
-                modifier = Modifier
-                    .fillMaxSize(),
-                accountCardState = AccountCardState.NonAuthorized(
-                    title = "Оплачивайте",
-                    subtitle = "Более 2000 сервисов",
-                    actionButtonText = "Войти"
-                )
-            )
-            AccountCard(
-                modifier = Modifier
-                    .fillMaxSize(),
-                accountCardState = AccountCardState.NonAuthorized(
-                    title = "Пройдите авторизацию",
-                    subtitle = "Для доступа к услугам",
-                    actionButtonText = "Войти"
                 )
             )
             AccountCard(
