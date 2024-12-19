@@ -165,6 +165,9 @@ interface ChiliColorScheme {
 
     //customDialogMaterial2BackgroundColor
     val customDialogBackgroundColor: Color
+
+    //Slider
+    val sliderInactiveTrackColor: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -294,6 +297,9 @@ data class ChiliLightColorScheme(
     override val accountChevronColor: Color = black_3,
 
     override val customDialogBackgroundColor: Color = white_1,
+
+    override val sliderInactiveTrackColor: Color = gray_3
+
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -421,5 +427,7 @@ data class ChiliDarkColorScheme(
     override val accountChevronColor: Color = gray_4,
 
     override val customDialogBackgroundColor: Color = black_3,
+
+    override val sliderInactiveTrackColor: Color = black_5
 ): ChiliColorScheme
 
