@@ -41,11 +41,12 @@ fun ChiliSlider(
     val validatedCurrentValue = currentValue.coerceIn(minValue, maxValue)
 
     val correctedValue = remember(validatedCurrentValue, minValue, maxValue, step) {
-        var v = validatedCurrentValue
-        if (v % step != 0) v = minValue
-        if (v > maxValue) v = maxValue
-        if (v < minValue) v = minValue
-        v
+        when {
+            validatedCurrentValue % step != 0 -> minValue
+            validatedCurrentValue > maxValue -> maxValue
+            validatedCurrentValue < minValue -> minValue
+            else -> validatedCurrentValue
+        }
     }
 
     var sliderValue by remember { mutableFloatStateOf(correctedValue.toFloat()) }

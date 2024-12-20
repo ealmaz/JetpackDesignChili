@@ -198,7 +198,7 @@ fun PreviewCommon(
             var currentValue1 by remember { mutableIntStateOf(5000) }
 
             ChiliSlider(
-                title = "Сумма чего-то",
+                title = "Сумма чего-то disabled",
                 minValue = 1000,
                 maxValue = 1000,
                 step = 1000,
@@ -212,7 +212,7 @@ fun PreviewCommon(
 
             ChiliSlider(
                 modifier = Modifier.padding(top = 16.dp),
-                title = "Сумма чего-то",
+                title = "Сумма чего-то normal",
                 minValue = 1000,
                 maxValue = 5000,
                 step = 1000,
