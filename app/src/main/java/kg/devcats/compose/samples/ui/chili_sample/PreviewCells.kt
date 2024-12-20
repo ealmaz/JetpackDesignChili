@@ -44,7 +44,7 @@ fun PreviewCells(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Chili.color.pdfBackgroundColor)
+            .background(Chili.color.surfaceBackground)
     ) {
         ChiliCenteredAppToolbar(
             title = "Cell",
