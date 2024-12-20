@@ -40,7 +40,6 @@ import kg.devcats.compose.jetpack_chili.theme.black_5
 import kg.devcats.compose.jetpack_chili.theme.gray_8
 import kg.devcats.compose.jetpack_chili.theme.green_3
 
-
 @Composable
 fun BottomSheetsPreview(
     navigateUp: () -> Unit,
@@ -51,20 +50,16 @@ fun BottomSheetsPreview(
         isShown = containerBSTopDrawable,
         isTopIconVisible = true,
         topIconColor = if (isSystemInDarkTheme()) black_5 else gray_8,
-        onDismissRequest = {containerBSTopDrawable = false},
-        showFullScreen = true
+        onDismissRequest = {containerBSTopDrawable = false}
     ) {
         Box(modifier = Modifier
             .background(green_3)
-            .fillMaxSize(), contentAlignment = Alignment.Center) {
-            LazyColumn(
-                modifier = Modifier.fillMaxHeight()
-            ) {
+            .fillMaxWidth(), contentAlignment = Alignment.Center) {
+            LazyColumn {
                 items(30) {
                     Text(modifier = Modifier.padding(vertical = 8.dp), text = "Bottom sheet container", style = Chili.typography.H20_Primary)
                 }
             }
-
         }
     }
 

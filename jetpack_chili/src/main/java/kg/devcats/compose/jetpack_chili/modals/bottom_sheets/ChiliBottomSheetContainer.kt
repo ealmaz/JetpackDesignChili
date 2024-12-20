@@ -52,12 +52,11 @@ fun ChiliBottomSheetContainer(
     topIconColor: Color = Chili.color.bottomSheetTopIconColor,
     bottomSheetShape: Shape = Chili.shapes.RoundedCornerShape,
     backgroundColor: Color = Chili.color.bottomSheetBackground,
-    showFullScreen: Boolean = false,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     var internalBottomSheetVisibilityState by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = showFullScreen, confirmValueChange = { hideOnSwipe })
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true, confirmValueChange = { hideOnSwipe })
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = isShown) {
@@ -83,11 +82,7 @@ fun ChiliBottomSheetContainer(
         ) {
             if (isTopIconVisible) {
                 Column(
-                    modifier = if (showFullScreen) Modifier
-                        .fillMaxHeight()
-                        .windowInsetsPadding(
-                            WindowInsets.systemBars
-                        ) else Modifier,
+                    modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Spacer(Modifier.height(8.dp))
