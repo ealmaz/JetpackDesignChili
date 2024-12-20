@@ -30,6 +30,7 @@ import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliMaterial2Switch
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
+import kg.devcats.compose.jetpack_chili.components.common.RoundedBox
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -43,7 +44,7 @@ fun PreviewCells(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Chili.color.surfaceBackground)
+            .background(Chili.color.pdfBackgroundColor)
     ) {
         ChiliCenteredAppToolbar(
             title = "Cell",
@@ -353,7 +354,7 @@ fun PreviewCells(
                 }
             }
 
-            ShadowRoundedBox(modifier = Modifier.padding(top = 16.dp)) {
+            RoundedBox (modifier = Modifier.padding(top = 16.dp)) {
                 Column {
                     ChiliCell(
                         modifier = Modifier.clickable { },
