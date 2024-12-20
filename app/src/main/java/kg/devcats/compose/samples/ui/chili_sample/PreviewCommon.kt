@@ -195,20 +195,19 @@ fun PreviewCommon(
                 style = Chili.typography.H16_Primary
             )
 
-            var currentValue1 by remember { mutableIntStateOf(5000) }
+            var initialValue1 by remember { mutableIntStateOf(5000) }
 
             ChiliSlider(
                 title = "Сумма чего-то disabled",
                 minValue = 1000,
                 maxValue = 1000,
                 step = 1000,
-                currentValue = currentValue1,
+                initialValue = initialValue1,
                 displayValueFormatter = { "$it c" },
-                onValueChange = { newVal -> currentValue1 = newVal }
+                onValueChange = { newVal -> initialValue1 = newVal }
             )
 
-            var currentValue2 by remember { mutableIntStateOf(2000) }
-
+            var initialValue2 by remember { mutableIntStateOf(2000) }
 
             ChiliSlider(
                 modifier = Modifier.padding(top = 16.dp),
@@ -216,9 +215,9 @@ fun PreviewCommon(
                 minValue = 1000,
                 maxValue = 5000,
                 step = 1000,
-                currentValue = currentValue2,
+                initialValue = initialValue2,
                 displayValueFormatter = { "$it c" },
-                onValueChange = { newVal -> currentValue2 = newVal }
+                onValueChange = { newVal -> initialValue2 = newVal }
             )
 
         }

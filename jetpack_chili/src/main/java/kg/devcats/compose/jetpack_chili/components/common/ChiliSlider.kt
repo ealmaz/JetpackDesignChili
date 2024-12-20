@@ -29,7 +29,7 @@ fun ChiliSlider(
     minValue: Int,
     maxValue: Int,
     step: Int,
-    currentValue: Int = minValue,
+    initialValue: Int = minValue,
     displayValueFormatter: (Int) -> CharSequence = { it.toString() },
     onValueChange: (Int) -> Unit,
     titleTextStyle: TextStyle = Chili.typography.H16_Primary_500,
@@ -37,14 +37,13 @@ fun ChiliSlider(
     valueTextStyle: TextStyle = Chili.typography.H16_Secondary_700,
     enabled: Boolean = true,
 ) {
-    val validatedCurrentValue = currentValue.coerceIn(minValue, maxValue)
 
-    val correctedValue = remember(validatedCurrentValue, minValue, maxValue, step) {
+    val correctedValue = remember(initialValue, minValue, maxValue, step) {
         when {
-            validatedCurrentValue % step != 0 -> minValue
-            validatedCurrentValue > maxValue -> maxValue
-            validatedCurrentValue < minValue -> minValue
-            else -> validatedCurrentValue
+            initialValue % step != 0 -> minValue
+            initialValue > maxValue -> maxValue
+            initialValue < minValue -> minValue
+            else -> initialValue
         }
     }
 
@@ -60,16 +59,20 @@ fun ChiliSlider(
     val formattedMinValue = displayValueFormatter(minValue)
     val formattedMaxValue = displayValueFormatter(maxValue)
 
-    val decrement: () -> Unit = {
-        val newVal = (sliderValue.toInt() - step).coerceIn(minValue, maxValue)
-        sliderValue = newVal.toFloat()
-        onValueChange(newVal)
+    val increment: () -> Unit = remember {
+        {
+            val newVal = (sliderValue.toInt() + step).coerceIn(minValue, maxValue)
+            sliderValue = newVal.toFloat()
+            onValueChange(newVal)
+        }
     }
 
-    val increment: () -> Unit = {
-        val newVal = (sliderValue.toInt() + step).coerceIn(minValue, maxValue)
-        sliderValue = newVal.toFloat()
-        onValueChange(newVal)
+    val decrement: () -> Unit = remember {
+        {
+            val newVal = (sliderValue.toInt() - step).coerceIn(minValue, maxValue)
+            sliderValue = newVal.toFloat()
+            onValueChange(newVal)
+        }
     }
 
     Column(
@@ -200,7 +203,7 @@ private fun Float.roundToStep(step: Int, min: Int, max: Int): Int {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewChiliSlider() {
-    var currentValue by remember { mutableIntStateOf(2000) }
+    var initialValue by remember { mutableIntStateOf(2000) }
 
     Column {
         ChiliSlider(
@@ -208,9 +211,9 @@ fun PreviewChiliSlider() {
             minValue = 1000,
             maxValue = 5000,
             step = 1000,
-            currentValue = currentValue,
+            initialValue = initialValue,
             displayValueFormatter = { "$it c" },
-            onValueChange = { newVal -> currentValue = newVal }
+            onValueChange = { newVal -> initialValue = newVal }
         )
     }
 }
