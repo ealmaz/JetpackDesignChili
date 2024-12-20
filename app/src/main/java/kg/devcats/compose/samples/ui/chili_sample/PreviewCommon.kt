@@ -212,9 +212,9 @@ fun PreviewCommon(
             ChiliSlider(
                 modifier = Modifier.padding(top = 16.dp),
                 title = "Сумма чего-то normal",
-                minValue = 1000,
-                maxValue = 5000,
-                step = 1000,
+                minValue = 0,
+                maxValue = 1000,
+                step = 200,
                 initialValue = initialValue2,
                 displayValueFormatter = { "$it c" },
                 onValueChange = { newVal -> initialValue2 = newVal }
