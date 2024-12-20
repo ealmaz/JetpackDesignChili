@@ -26,17 +26,16 @@ import kg.devcats.compose.jetpack_chili.theme.white_1
 fun ChiliSlider(
     modifier: Modifier = Modifier,
     title: String? = null,
-    minValue: Int = 0,
-    maxValue: Int = 100,
-    step: Int = 1,
-    currentValue: Int = 50,
+    minValue: Int,
+    maxValue: Int,
+    step: Int,
+    currentValue: Int = minValue,
     displayValueFormatter: (Int) -> CharSequence = { it.toString() },
     onValueChange: (Int) -> Unit,
     titleTextStyle: TextStyle = Chili.typography.H16_Primary_500,
     captionTextStyle: TextStyle = Chili.typography.H14_Secondary,
     valueTextStyle: TextStyle = Chili.typography.H16_Secondary_700,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     val validatedCurrentValue = currentValue.coerceIn(minValue, maxValue)
 
@@ -112,6 +111,7 @@ fun ChiliSlider(
                 )
             }
 
+            val interactionSource = remember { MutableInteractionSource() }
             Slider(
                 modifier = Modifier
                     .wrapContentHeight()
@@ -156,6 +156,7 @@ fun ChiliSlider(
                 } else {
                     0
                 },
+                interactionSource = interactionSource,
                 enabled = enabled && maxValue > minValue,
             )
 
