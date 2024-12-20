@@ -4,10 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -43,20 +45,26 @@ import kg.devcats.compose.jetpack_chili.theme.green_3
 fun BottomSheetsPreview(
     navigateUp: () -> Unit,
 ) {
-
     var containerBSTopDrawable by remember { mutableStateOf(false) }
 
     ChiliBottomSheetContainer(
         isShown = containerBSTopDrawable,
         isTopIconVisible = true,
         topIconColor = if (isSystemInDarkTheme()) black_5 else gray_8,
-        onDismissRequest = {containerBSTopDrawable = false}
+        onDismissRequest = {containerBSTopDrawable = false},
+        showFullScreen = true
     ) {
         Box(modifier = Modifier
             .background(green_3)
-            .fillMaxWidth()
-            .height(250.dp), contentAlignment = Alignment.Center) {
-            Text(text = "Bottom sheet container", style = Chili.typography.H20_Primary)
+            .fillMaxSize(), contentAlignment = Alignment.Center) {
+            LazyColumn(
+                modifier = Modifier.fillMaxHeight()
+            ) {
+                items(30) {
+                    Text(modifier = Modifier.padding(vertical = 8.dp), text = "Bottom sheet container", style = Chili.typography.H20_Primary)
+                }
+            }
+
         }
     }
 

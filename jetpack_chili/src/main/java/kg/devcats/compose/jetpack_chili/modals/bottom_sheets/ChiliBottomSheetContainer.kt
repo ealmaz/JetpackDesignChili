@@ -9,10 +9,14 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
@@ -48,11 +52,12 @@ fun ChiliBottomSheetContainer(
     topIconColor: Color = Chili.color.bottomSheetTopIconColor,
     bottomSheetShape: Shape = Chili.shapes.RoundedCornerShape,
     backgroundColor: Color = Chili.color.bottomSheetBackground,
+    showFullScreen: Boolean = false,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     var internalBottomSheetVisibilityState by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState(confirmValueChange = { hideOnSwipe })
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = showFullScreen, confirmValueChange = { hideOnSwipe })
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = isShown) {
@@ -77,7 +82,15 @@ fun ChiliBottomSheetContainer(
             dragHandle = null,
         ) {
             if (isTopIconVisible) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = if (showFullScreen) Modifier
+                        .fillMaxHeight()
+                        .windowInsetsPadding(
+                            WindowInsets.systemBars
+                        ) else Modifier,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Spacer(Modifier.height(8.dp))
                     Spacer(
                         modifier = Modifier
                             .height(3.dp)
