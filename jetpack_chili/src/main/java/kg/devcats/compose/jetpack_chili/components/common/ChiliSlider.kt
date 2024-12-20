@@ -38,21 +38,10 @@ fun ChiliSlider(
     enabled: Boolean = true,
 ) {
 
-    val correctedValue = remember(initialValue, minValue, maxValue, step) {
-        when {
-            initialValue % step != 0 -> minValue
-            initialValue > maxValue -> maxValue
-            initialValue < minValue -> minValue
-            else -> initialValue
-        }
-    }
-
-    var sliderValue by remember { mutableFloatStateOf(correctedValue.toFloat()) }
-
-    LaunchedEffect(correctedValue) {
-        if (sliderValue.toInt() != correctedValue) {
-            sliderValue = correctedValue.toFloat()
-        }
+    var sliderValue by remember {
+        mutableFloatStateOf(
+            initialValue.roundToStep(step, minValue, maxValue).toFloat()
+        )
     }
 
     val formattedCurrentValue = displayValueFormatter(sliderValue.toInt())
@@ -61,7 +50,7 @@ fun ChiliSlider(
 
     val increment: () -> Unit = remember {
         {
-            val newVal = (sliderValue.toInt() + step).coerceIn(minValue, maxValue)
+            val newVal = (sliderValue.toInt() + step).roundToStep(step, minValue, maxValue)
             sliderValue = newVal.toFloat()
             onValueChange(newVal)
         }
@@ -69,7 +58,7 @@ fun ChiliSlider(
 
     val decrement: () -> Unit = remember {
         {
-            val newVal = (sliderValue.toInt() - step).coerceIn(minValue, maxValue)
+            val newVal = (sliderValue.toInt() - step).roundToStep(step, minValue, maxValue)
             sliderValue = newVal.toFloat()
             onValueChange(newVal)
         }
@@ -123,7 +112,9 @@ fun ChiliSlider(
                 thumb = {
                     SliderDefaults.Thumb(
                         interactionSource = interactionSource,
-                        modifier = Modifier.size(24.dp).border(1.dp, gray_8, CircleShape),
+                        modifier = Modifier
+                            .size(24.dp)
+                            .border(1.dp, gray_8, CircleShape),
                         colors = SliderDefaults.colors(
                             thumbColor = white_1,
                         )
@@ -194,10 +185,17 @@ fun ChiliSlider(
     }
 }
 
+private fun Int.roundToStep(step: Int, min: Int, max: Int): Int {
+    return when {
+        this % step != 0 -> min
+        this > max -> max
+        this < min -> min
+        else -> this
+    }
+}
+
 private fun Float.roundToStep(step: Int, min: Int, max: Int): Int {
-    val intVal = this.toInt()
-    val clamped = intVal.coerceIn(min, max)
-    return if (clamped % step != 0) min else clamped
+    return this.toInt().roundToStep(step, min, max)
 }
 
 @Preview(showBackground = true, showSystemUi = true)
