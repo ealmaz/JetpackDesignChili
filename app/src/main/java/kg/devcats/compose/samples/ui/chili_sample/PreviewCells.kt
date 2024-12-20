@@ -28,6 +28,7 @@ import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
 import kg.devcats.compose.jetpack_chili.components.cells.ProductCell
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
+import kg.devcats.compose.jetpack_chili.components.common.ChiliMaterial2Switch
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
@@ -288,6 +289,7 @@ fun PreviewCells(
             var switchChecked2 by remember { mutableStateOf(false) }
             var switchChecked3 by remember { mutableStateOf(false) }
             var switchChecked4 by remember { mutableStateOf(false) }
+            var switchCheckedMaterial by remember { mutableStateOf(false) }
 
             ShadowRoundedBox() {
                 Column {
@@ -347,6 +349,20 @@ fun PreviewCells(
                         endFrame = {
                             ChiliSwitch(checked = switchChecked4) { switchChecked4 = it }
                         },
+                    )
+                }
+            }
+
+            ShadowRoundedBox(modifier = Modifier.padding(top = 16.dp)) {
+                Column {
+                    ChiliCell(
+                        modifier = Modifier.clickable { },
+                        title = "Material2 Switch",
+                        icon = painterResource(id = R.drawable.chili_ic_documents_green),
+                        endFrame = {
+                            ChiliMaterial2Switch(checked = switchCheckedMaterial) { switchCheckedMaterial = it }
+                        },
+                        isChevronVisible = false
                     )
                 }
             }

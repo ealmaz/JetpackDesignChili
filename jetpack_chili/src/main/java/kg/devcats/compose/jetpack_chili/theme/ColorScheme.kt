@@ -59,6 +59,16 @@ interface ChiliColorScheme {
     val switchDisabledUncheckedThumb: Color
     val switchDisabledUncheckedTrack: Color
 
+    //OldSwitch
+    val materialSwitchCheckedThumb: Color
+    val materialSwitchCheckedTrack: Color
+    val materialSwitchUncheckedThumb: Color
+    val materialSwitchUncheckedTrack: Color
+    val materialSwitchDisabledCheckedThumb: Color
+    val materialSwitchDisabledCheckedTrack: Color
+    val materialSwitchDisabledUncheckedThumb: Color
+    val materialSwitchDisabledUncheckedTrack: Color
+
     //Loader
     val loader: Color
 
@@ -193,6 +203,15 @@ data class ChiliLightColorScheme(
     override val switchDisabledUncheckedThumb: Color = white_1,
     override val switchDisabledUncheckedTrack: Color = gray_2,
 
+    override val materialSwitchCheckedThumb: Color = magenta_1,
+    override val materialSwitchCheckedTrack: Color = magenta_1_alpha_40,
+    override val materialSwitchUncheckedThumb: Color = white_1,
+    override val materialSwitchUncheckedTrack: Color = gray_2,
+    override val materialSwitchDisabledCheckedThumb: Color = white_1,
+    override val materialSwitchDisabledCheckedTrack: Color = magenta_3,
+    override val materialSwitchDisabledUncheckedThumb: Color = white_1,
+    override val materialSwitchDisabledUncheckedTrack: Color = gray_2,
+
     override val loader: Color = magenta_1,
 
     override val inputFieldBackground: Color = gray_5,
@@ -305,6 +324,15 @@ data class ChiliDarkColorScheme(
     override val switchDisabledCheckedTrack: Color = magenta_3,
     override val switchDisabledUncheckedThumb: Color = gray_3,
     override val switchDisabledUncheckedTrack: Color = gray_1,
+
+    override val materialSwitchCheckedThumb: Color = magenta_1,
+    override val materialSwitchCheckedTrack: Color = magenta_1_alpha_40,
+    override val materialSwitchUncheckedThumb: Color = white_1,
+    override val materialSwitchUncheckedTrack: Color = gray_2,
+    override val materialSwitchDisabledCheckedThumb: Color = gray_3,
+    override val materialSwitchDisabledCheckedTrack: Color = magenta_3,
+    override val materialSwitchDisabledUncheckedThumb: Color = gray_3,
+    override val materialSwitchDisabledUncheckedTrack: Color = gray_1,
 
     override val loader: Color = magenta_1,
 
