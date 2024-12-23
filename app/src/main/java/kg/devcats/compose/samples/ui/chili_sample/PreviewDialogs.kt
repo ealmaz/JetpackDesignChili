@@ -203,6 +203,8 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
         { showSimpleCustomDialog = false },
         title = "Custom Material 2 Dialog",
         message = "This is a custom material 2 dialog",
+        positiveButtonText = "OK",
+        negativeButtonText = "CANCEL",
         onConfirm = {
             Toast.makeText(context, "Confirm button clicked", Toast.LENGTH_SHORT).show()
             showSimpleCustomDialog = false

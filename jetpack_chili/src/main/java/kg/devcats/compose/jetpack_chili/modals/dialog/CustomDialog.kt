@@ -54,13 +54,13 @@ fun CustomContentDialog(
 @Composable
 fun CustomSimpleDialog(
     showDialog: Boolean,
-    onDismiss: () -> Unit,
-    title: String,
-    message: String,
-    positiveButtonText: String = "OK",
-    negativeButtonText: String = "Cancel",
+    onDismiss: () -> Unit = {},
+    title: String? = null,
+    message: String? = null,
+    positiveButtonText: String? = null,
+    negativeButtonText: String? = null,
     onConfirm: () -> Unit,
-    onCancel: () -> Unit
+    onCancel: () -> Unit = {}
 ) {
     if (showDialog) {
         Dialog(onDismissRequest = onDismiss) {
@@ -74,34 +74,41 @@ fun CustomSimpleDialog(
                     color = Chili.color.surfaceBackground,
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            text = title,
-                            style = Chili.typography.H16_Primary_500,
-                            modifier = Modifier.padding(bottom = 8.dp)
-                        )
-                        Text(
-                            text = message,
-                            style = Chili.typography.H16_Secondary,
-                            modifier = Modifier.padding(bottom = 16.dp)
-                        )
+                        title?.let {
+                            Text(
+                                text = it,
+                                style = Chili.typography.H16_Primary_500,
+                                modifier = Modifier.padding(bottom = 8.dp)
+                            )
+                        }
+                        message?.let {
+                            Text(
+                                text = it,
+                                style = Chili.typography.H16_Secondary,
+                                modifier = Modifier.padding(bottom = 16.dp)
+                            )
+                        }
                         Row(
                             horizontalArrangement = Arrangement.End,
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            TextButton(onClick = onCancel) {
-                                Text(
-                                    text = negativeButtonText,
-                                    style = Chili.typography.H14,
-                                    color = Chili.color.primaryText
-                                )
+                            negativeButtonText?.let {
+                                TextButton(onClick = onCancel) {
+                                    Text(
+                                        text = it,
+                                        style = Chili.typography.H14_Primary_500,
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(8.dp))
                             }
                             Spacer(modifier = Modifier.width(8.dp))
-                            TextButton(onClick = onConfirm) {
-                                Text(
-                                    text = positiveButtonText,
-                                    style = Chili.typography.H14,
-                                    color = Chili.color.primaryText
-                                )
+                            positiveButtonText?.let {
+                                TextButton(onClick = onConfirm) {
+                                    Text(
+                                        text = it,
+                                        style = Chili.typography.H14_Primary_500,
+                                    )
+                                }
                             }
                         }
                     }
