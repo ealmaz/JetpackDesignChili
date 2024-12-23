@@ -48,22 +48,6 @@ fun ChiliSlider(
     val formattedMinValue = displayValueFormatter(minValue)
     val formattedMaxValue = displayValueFormatter(maxValue)
 
-    val increment: () -> Unit = remember {
-        {
-            val newVal = (sliderValue.toInt() + step).roundToStep(step, minValue, maxValue)
-            sliderValue = newVal.toFloat()
-            onValueChange(newVal)
-        }
-    }
-
-    val decrement: () -> Unit = remember {
-        {
-            val newVal = (sliderValue.toInt() - step).roundToStep(step, minValue, maxValue)
-            sliderValue = newVal.toFloat()
-            onValueChange(newVal)
-        }
-    }
-
     Column(
         modifier = modifier
     ) {
@@ -93,7 +77,11 @@ fun ChiliSlider(
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
-                onClick = decrement,
+                onClick = {
+                    val newVal = (sliderValue.toInt() - step).roundToStep(step, minValue, maxValue)
+                    sliderValue = newVal.toFloat()
+                    onValueChange(newVal)
+                },
                 enabled = enabled && sliderValue.toInt() > minValue,
                 modifier = Modifier.size(28.dp)
             ) {
@@ -155,7 +143,11 @@ fun ChiliSlider(
             )
 
             IconButton(
-                onClick = increment,
+                onClick = {
+                    val newVal = (sliderValue.toInt() + step).roundToStep(step, minValue, maxValue)
+                    sliderValue = newVal.toFloat()
+                    onValueChange(newVal)
+                },
                 enabled = enabled && sliderValue.toInt() < maxValue,
                 modifier = Modifier.size(28.dp)
             ) {
