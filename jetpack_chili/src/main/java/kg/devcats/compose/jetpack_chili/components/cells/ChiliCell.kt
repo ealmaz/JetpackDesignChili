@@ -2,6 +2,7 @@ package kg.devcats.compose.jetpack_chili.components.cells
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -78,34 +79,38 @@ fun ChiliCell(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 iconUrl?.let {
-                    ShowShimmerOrContent(
-                        shimmerHeight = iconSize,
-                        shimmerWidth = iconSize,
-                        isLoading = isLoading
-                    ) {
-                        AsyncImage(
-                            model = it,
-                            contentDescription = "",
-                            modifier = Modifier
-                                .size(iconSize)
-                                .clip(Chili.shapes.RoundedCornerShape)
-                        )
+                    Box(modifier = Modifier.padding(vertical = 8.dp)) {
+                        ShowShimmerOrContent(
+                            shimmerHeight = iconSize,
+                            shimmerWidth = iconSize,
+                            isLoading = isLoading
+                        ) {
+                            AsyncImage(
+                                model = it,
+                                contentDescription = "",
+                                modifier = Modifier
+                                    .size(iconSize)
+                                    .clip(Chili.shapes.RoundedCornerShape)
+                            )
+                        }
                     }
                     Spacer(modifier = Modifier.width(iconEndMargin))
                 }
                 icon?.let {
-                    ShowShimmerOrContent(
-                        shimmerHeight = iconSize,
-                        shimmerWidth = iconSize,
-                        isLoading = isLoading
-                    ) {
-                        Image(
-                            painter = it,
-                            contentDescription = "",
-                            modifier = Modifier
-                                .size(iconSize)
-                                .clip(Chili.shapes.RoundedCornerShape)
-                        )
+                    Box(modifier = Modifier.padding(vertical = 8.dp)) {
+                        ShowShimmerOrContent(
+                            shimmerHeight = iconSize,
+                            shimmerWidth = iconSize,
+                            isLoading = isLoading
+                        ) {
+                            Image(
+                                painter = it,
+                                contentDescription = "",
+                                modifier = Modifier
+                                    .size(iconSize)
+                                    .clip(Chili.shapes.RoundedCornerShape)
+                            )
+                        }
                     }
                     Spacer(modifier = Modifier.width(iconEndMargin))
                 }
