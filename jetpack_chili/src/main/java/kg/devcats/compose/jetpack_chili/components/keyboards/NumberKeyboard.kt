@@ -35,6 +35,7 @@ sealed class KeyboardKeyType {
 
 @Composable
 fun NumberKeyboard(
+    modifier: Modifier = Modifier,
     textFieldValue: TextFieldValue,
     maxLength: Int? = null,
     onInputChanged: (TextFieldValue) -> Unit,
@@ -46,6 +47,7 @@ fun NumberKeyboard(
     }
 
     LazyVerticalGrid(
+        modifier = modifier,
         columns = GridCells.Fixed(3),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp),

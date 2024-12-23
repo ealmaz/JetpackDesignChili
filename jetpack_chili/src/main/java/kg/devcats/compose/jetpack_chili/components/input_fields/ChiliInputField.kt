@@ -44,6 +44,7 @@ fun ChiliInputField(
     modifier: Modifier = Modifier,
     value: String,
     textStyle: TextStyle = Chili.typography.H16_Primary_500,
+    inputBgColor: Color = Chili.color.inputFieldBackground,
     error: String? = null,
     isClearButtonEnabled: Boolean = true,
     placeholder: String? = null,
@@ -64,6 +65,7 @@ fun ChiliInputField(
         value = textFieldValue,
         textStyle = textStyle,
         error = error,
+        inputBgColor = inputBgColor,
         isClearButtonEnabled = isClearButtonEnabled,
         placeholder = placeholder,
         focusRequester = focusRequester,
@@ -84,6 +86,7 @@ fun ChiliInputField(
     modifier: Modifier = Modifier,
     value: TextFieldValue,
     textStyle: TextStyle = Chili.typography.H16_Primary_500,
+    inputBgColor: Color = Chili.color.inputFieldBackground,
     error: String? = null,
     isClearButtonEnabled: Boolean = true,
     placeholder: String? = null,
@@ -100,6 +103,7 @@ fun ChiliInputField(
         modifier = modifier,
         value = value,
         error = error,
+        inputBgColor = inputBgColor,
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
         actionText = actionText,
@@ -126,6 +130,7 @@ fun ChiliAmountInputField(
     modifier: Modifier = Modifier,
     value: TextFieldValue,
     textStyle: TextStyle = Chili.typography.H16_Primary_500,
+    inputBgColor: Color = Chili.color.inputFieldBackground,
     error: String? = null,
     isClearButtonEnabled: Boolean = true,
     placeholder: String? = null,
@@ -144,6 +149,7 @@ fun ChiliAmountInputField(
         modifier = modifier,
         value = value,
         error = error,
+        inputBgColor = inputBgColor,
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
         actionText = actionText,
@@ -184,6 +190,7 @@ private fun InputFieldContainer(
     value: TextFieldValue,
     error: String? = null,
     isClearButtonEnabled: Boolean = true,
+    inputBgColor: Color = Chili.color.inputFieldBackground,
     message: String? = null,
     actionText: String? = null,
     isInputCenteredAlign: Boolean = true,
@@ -194,7 +201,7 @@ private fun InputFieldContainer(
 ) {
     Column(modifier = modifier) {
         Surface(
-            color = decideBackgroundColor(error),
+            color = decideBackgroundColor(error, inputBgColor),
             shape = Chili.shapes.RoundedCornerShape
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -249,8 +256,8 @@ private fun InputFieldClearIcon(clearValue: () -> Unit) {
 }
 
 @Composable
-private fun decideBackgroundColor(error: String? = null): Color {
-    return if (error == null) Chili.color.inputFieldBackground
+private fun decideBackgroundColor(error: String? = null, inputBgColor: Color): Color {
+    return if (error == null) inputBgColor
     else Chili.color.inputFieldErrorBackground
 }
 
