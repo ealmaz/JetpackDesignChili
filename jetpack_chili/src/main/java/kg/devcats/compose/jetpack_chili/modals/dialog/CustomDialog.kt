@@ -71,7 +71,7 @@ fun CustomSimpleDialog(
             ) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = Chili.color.surfaceBackground,
+                    color = Chili.color.customDialogBackgroundColor,
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         title?.let {
