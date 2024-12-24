@@ -88,21 +88,19 @@ private suspend fun PointerInputScope.detectTransformGestures(
         onGestureStart()
         do {
             val event = awaitPointerEvent()
-            val canceled = event.changes.fastAny { it.isConsumed }
-            if (!canceled) {
-                val zoomChange = event.calculateZoom()
-                val panChange = event.calculatePan()
-                val centroid = event.calculateCentroid()
-                if (zoomChange != 1f || panChange != Offset.Zero) {
-                    onGesture(centroid, panChange, zoomChange)
-                }
-                event.changes.fastForEach {
-                    if (it.positionChanged()) {
-                        it.consume()
-                    }
+
+            val zoomChange = event.calculateZoom()
+            val panChange = event.calculatePan()
+            val centroid = event.calculateCentroid()
+            if (zoomChange != 1f || panChange != Offset.Zero) {
+                onGesture(centroid, panChange, zoomChange)
+            }
+            event.changes.fastForEach {
+                if (it.positionChanged()) {
+                    it.consume()
                 }
             }
-        } while (!canceled && event.changes.fastAny { it.pressed })
+        } while (event.changes.fastAny { it.pressed })
         onGestureEnd()
     }
 }
