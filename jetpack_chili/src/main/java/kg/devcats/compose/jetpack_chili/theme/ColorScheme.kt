@@ -73,6 +73,8 @@ interface ChiliColorScheme {
     val loader: Color
 
     //InputFiled
+    val inputFieldPrimaryBg : Color
+    val inputFieldSecondaryBg : Color
     val inputFieldBackground: Color
     val inputFieldErrorBackground: Color
     val inputFieldCursorColor: Color
@@ -217,6 +219,8 @@ data class ChiliLightColorScheme(
 
     override val loader: Color = magenta_1,
 
+    override val inputFieldPrimaryBg: Color = gray_11,
+    override val inputFieldSecondaryBg: Color = white_1,
     override val inputFieldBackground: Color = gray_5,
     override val inputFieldErrorBackground: Color = red_3,
     override val inputFieldCursorColor: Color = magenta_1,
@@ -341,6 +345,8 @@ data class ChiliDarkColorScheme(
 
     override val loader: Color = magenta_1,
 
+    override val inputFieldPrimaryBg: Color = gray_7,
+    override val inputFieldSecondaryBg: Color = gray_7,
     override val inputFieldBackground: Color = black_3,
     override val inputFieldErrorBackground: Color = red_2,
     override val inputFieldCursorColor: Color = magenta_1,
