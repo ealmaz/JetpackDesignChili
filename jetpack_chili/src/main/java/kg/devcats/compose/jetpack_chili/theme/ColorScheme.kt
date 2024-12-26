@@ -42,6 +42,9 @@ interface ChiliColorScheme {
     //ShadowContainer
     val shadowContainerContent: Color
 
+    //DatePickerControl
+    val datePickerControl: Color
+
     //Checkbox
     val checkBoxCheckedBackground: Color
     val checkBoxUncheckedBorder: Color
@@ -260,6 +263,8 @@ data class ChiliLightColorScheme(
     override val quickActionIconDefaultColor: Color = black_1,
     override val quickActionButtonDisabledTextColor: Color = gray_2,
 
+    override val datePickerControl: Color = black_5,
+
     override val alertNeutralBg: Color = blue_6,
     override val alertNeutralBorder: Color = blue_10,
     override val alertNeutralContent: Color = blue_1,
@@ -385,6 +390,8 @@ data class ChiliDarkColorScheme(
     override val quickActionIconClickedColor: Color = gray_1,
     override val quickActionIconDefaultColor: Color = white_1,
     override val quickActionButtonDisabledTextColor: Color = gray_1,
+
+    override val datePickerControl: Color = black_5,
 
     override val alertNeutralBg: Color = blue_7,
     override val alertNeutralBorder: Color = blue_11,

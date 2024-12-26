@@ -1,5 +1,6 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import kg.devcats.compose.jetpack_chili.modals.dialog.CustomContentDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.CustomSimpleDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.DialogOption
 import kg.devcats.compose.jetpack_chili.modals.dialog.LoaderDialog
+import kg.devcats.compose.jetpack_chili.modals.pickers.ChiliDatePicker
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -43,6 +45,7 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
     var showCustomContentDialog by remember { mutableStateOf(false) }
     var showLoaderDialog by remember { mutableStateOf(false) }
     var showDismissLoaderDialogOnBackPress by remember { mutableStateOf(false) }
+    var showDatePickerDialog by remember { mutableStateOf(false) }
 
     var selectedOption by remember { mutableStateOf<DialogOption<Int>?>(null) }
 
@@ -131,6 +134,14 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
                     showDismissLoaderDialogOnBackPress = false
                 }
             }
+
+            ChiliPrimaryButton(
+                text = "Custom date picker dialog", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                showDatePickerDialog = true
+            }
         }
     }
 
@@ -176,7 +187,7 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
 
     CustomContentDialog(
         showCustomContentDialog,
-        { showCustomContentDialog = false},
+        { showCustomContentDialog = false },
         content = {
             Column {
                 Text(
@@ -194,7 +205,6 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
                     Toast.makeText(context, "Dialog closed", Toast.LENGTH_SHORT).show()
                 }
             }
-
         }
     )
 
@@ -212,6 +222,19 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
         onCancel = {
             Toast.makeText(context, "Cancel button clicked", Toast.LENGTH_SHORT).show()
             showSimpleCustomDialog = false
+        }
+    )
+
+    ChiliDatePicker(showDatePickerDialog,
+        title = "Date",
+        buttonText = "Done",
+        onDateChanged = { day, month, year, date, _ ->
+            /*Handle date changes*/
+        },
+        onDismiss = { showDatePickerDialog = false },
+        onButtonClick = { day, month, year, date, _ ->
+            Log.d("DatePicker", "Selected date: $day/$month/$year")
+            showDatePickerDialog = false
         }
     )
 
