@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -57,13 +58,20 @@ fun CustomSimpleDialog(
     onDismiss: () -> Unit = {},
     title: String? = null,
     message: String? = null,
+    isCancelable: Boolean = true,
     positiveButtonText: String? = null,
     negativeButtonText: String? = null,
     onConfirm: () -> Unit,
     onCancel: () -> Unit = {}
 ) {
     if (showDialog) {
-        Dialog(onDismissRequest = onDismiss) {
+        Dialog(
+            onDismissRequest = onDismiss,
+            properties = DialogProperties(
+                dismissOnBackPress = isCancelable,
+                dismissOnClickOutside = isCancelable
+            )
+        ) {
             Box(
                 modifier = Modifier
                     .padding(16.dp)
