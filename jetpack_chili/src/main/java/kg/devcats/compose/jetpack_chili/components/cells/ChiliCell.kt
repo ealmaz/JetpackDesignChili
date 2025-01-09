@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -134,6 +135,7 @@ fun ChiliCell(
                                 .align(Alignment.Start)
                                 .padding(top = 12.dp, bottom = 4.dp),
                             maxLines = titleMaxLines,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
 
@@ -149,6 +151,7 @@ fun ChiliCell(
                                 text = it,
                                 style = subtitleStyle,
                                 maxLines = subtitleMaxLines,
+                                overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier
                                     .padding(bottom = 12.dp)
                             )
