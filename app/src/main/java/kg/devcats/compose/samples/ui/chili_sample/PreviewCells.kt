@@ -112,6 +112,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        iconUrl = "https://devminio.o.kg/media-service/AlgaMoreMenuConfigurator/light/a50317e3-98e3-4f11-97e4-6e5f0ecc6ef0"
                     )
                 }
             }
