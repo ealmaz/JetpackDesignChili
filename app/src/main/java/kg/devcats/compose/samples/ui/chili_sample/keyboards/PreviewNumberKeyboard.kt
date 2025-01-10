@@ -14,9 +14,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
+import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.InputFieldDefaults
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.handleZero
 import kg.devcats.compose.jetpack_chili.components.keyboards.NumberKeyboard
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
@@ -61,6 +64,7 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
                 message = "Message",
                 placeholder = "Placeholder",
                 actionText = "Action",
+                suffix = AnnotatedString.fromHtml("<u>c</u>")
             ) { textFieldValue ->
                 inputText = textFieldValue.handleZero(previousValue = inputText)
             }
@@ -70,7 +74,12 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
                     textFieldValue = inputText,
                     specialSymbols = listOf(','),
                     onInputChanged = { textFieldValue ->
-                        inputText = textFieldValue.handleZero(previousValue = inputText)
+                        val newTextValue = textFieldValue.handleZero(previousValue = inputText)
+                        val lenBeforeComma = newTextValue.text.substringBefore(InputFieldDefaults.DECIMAL_COMMA).length
+
+                        if (lenBeforeComma <= InputFieldDefaults.MAX_DIGITS_BEFORE_COMMA) {
+                            inputText = newTextValue
+                        }
                 })
             }
         }

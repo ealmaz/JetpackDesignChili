@@ -1,5 +1,6 @@
 package kg.devcats.compose.jetpack_chili.components.input_fields
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -24,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -34,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.AmountInputVisualTransformator
+import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.InputFieldDefaults
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.handleZero
 import kg.devcats.compose.jetpack_chili.components.input_fields.utils.amountValueChange
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -54,7 +57,6 @@ fun ChiliInputField(
     isInputCenteredAlign: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
-    suffix: (@Composable () -> Unit)? = null,
     onValueChange: ((String) -> Unit),
 ) {
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value, selection = TextRange(value.length))) }
@@ -74,7 +76,6 @@ fun ChiliInputField(
         isInputCenteredAlign = isInputCenteredAlign,
         keyboardType = keyboardType,
         onActionClick = onActionClick,
-        suffix = suffix,
         onValueChange = { newTextFieldValueState ->
             textFieldValueState = newTextFieldValueState
             onValueChange(newTextFieldValueState.text)
@@ -96,7 +97,6 @@ fun ChiliInputField(
     isInputCenteredAlign: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
-    suffix: (@Composable () -> Unit)? = null,
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
     InputFieldContainer(
@@ -119,7 +119,6 @@ fun ChiliInputField(
             placeholder = placeholder,
             textStyle = textStyle,
             isInputCenteredAlign = isInputCenteredAlign,
-            suffix = suffix,
             keyboardType = keyboardType
         )
     }
@@ -139,15 +138,15 @@ fun ChiliAmountInputField(
     actionText: String? = null,
     isInputCenteredAlign: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
-    maxLength: Int? = null,
+    maxLength: Int = Int.MAX_VALUE,
     addDecimal: Boolean = true,
+    suffix: AnnotatedString? = null,
     onActionClick: (() -> Unit) = {},
-    suffix: (@Composable () -> Unit)? = null,
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
     InputFieldContainer(
         modifier = modifier,
-        value = value,
+        value = value.copy(text = value.text + "c"),
         error = error,
         inputBgColor = inputBgColor,
         isClearButtonEnabled = isClearButtonEnabled,
@@ -165,9 +164,11 @@ fun ChiliAmountInputField(
             focusRequester = focusRequester,
             value = value,
             onValueChange = { newTextFieldValueState ->
-                if (newTextFieldValueState.text.length <= (maxLength ?: Int.MAX_VALUE)) {
-                    val finalText = amountValueChange(newTextFieldValueState.text, addDecimal)
+                Log.d("amountinput", "$newTextFieldValueState")
+                val finalText = amountValueChange(newTextFieldValueState.text, addDecimal)
+                val lenBeforeComma = finalText.substringBefore(InputFieldDefaults.DECIMAL_COMMA).length
 
+                if (lenBeforeComma <= maxLength) {
                     val finalValue = TextFieldValue(finalText, newTextFieldValueState.selection)
                     onValueChange(finalValue.handleZero(value))
                 }
@@ -175,10 +176,10 @@ fun ChiliAmountInputField(
             placeholder = placeholder,
             textStyle = textStyle,
             isInputCenteredAlign = isInputCenteredAlign,
-            suffix = suffix,
             keyboardType = keyboardType,
             visualTransformation = AmountInputVisualTransformator(
-                addDecimals = addDecimal
+                addDecimals = addDecimal,
+                suffix = suffix
             )
         )
     }

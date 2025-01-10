@@ -1,6 +1,5 @@
 package kg.devcats.compose.samples.ui.chili_sample
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,13 +15,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputOtp
@@ -138,9 +134,6 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 value = inputText8,
                 modifier = Modifier.padding(top = 16.dp),
                 isInputCenteredAlign = true,
-                suffix = {
-                    Image(painter = painterResource(id = R.drawable.chili_ic_documents_green), contentDescription = "")
-                }
             ) { inputText8 = it }
 
 

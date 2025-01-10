@@ -83,10 +83,10 @@ fun NumberKeyboard(
                             newText.insert(textFieldValue.selection.max, keyType.value)
 
                             var selection = textFieldValue.selection
-                            if (selection == TextRange(textFieldValue.text.length)) {
-                                selection = TextRange(textFieldValue.text.length + 1)
+                            selection = if (selection == TextRange(textFieldValue.text.length)) {
+                                TextRange(textFieldValue.text.length + 1)
                             } else {
-                                selection = TextRange(selection.max + 1)
+                                TextRange(selection.max + 1)
                             }
                             onInputChanged.invoke(textFieldValue.copy(text = newText.toString(), selection = selection))
                         }
