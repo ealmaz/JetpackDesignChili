@@ -46,6 +46,7 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
         val systemKeyboardController = LocalSoftwareKeyboardController.current
 
         var inputText by remember { mutableStateOf(TextFieldValue(text = "0")) }
+        var inputText2 by remember { mutableStateOf(TextFieldValue(text = "0")) }
         systemKeyboardController?.hide()
         Column(
             modifier = Modifier
@@ -53,23 +54,43 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            ChiliAmountInputField(
-                inputBgColor = Chili.color.inputFieldPrimaryBg,
-                value = inputText,
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .onFocusChanged {
-                        isKeyboardVisible = it.isFocused
-                        systemKeyboardController?.hide()
-                    },
-                message = "Message",
-                placeholder = "Placeholder",
-                actionText = "Action",
-                suffix = AnnotatedString.fromHtml("<u>c</u>"),
-                keyboardType = KeyboardType.Number,
-                maxLength = 6
-            ) { textFieldValue ->
-                inputText = textFieldValue
+            Column {
+                ChiliAmountInputField(
+                    inputBgColor = Chili.color.inputFieldPrimaryBg,
+                    value = inputText,
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .onFocusChanged {
+                            isKeyboardVisible = it.isFocused
+                            systemKeyboardController?.hide()
+                        },
+                    message = "Message",
+                    placeholder = "Placeholder",
+                    actionText = "Action",
+                    suffix = AnnotatedString.fromHtml("<u>c</u>"),
+                    keyboardType = KeyboardType.Number,
+                    maxLenBeforeComma = 6
+                ) { textFieldValue ->
+                    inputText = textFieldValue
+                }
+
+                ChiliAmountInputField(
+                    inputBgColor = Chili.color.inputFieldPrimaryBg,
+                    value = inputText2,
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .onFocusChanged {
+                            isKeyboardVisible = it.isFocused
+                            systemKeyboardController?.hide()
+                        },
+                    message = "Message",
+                    placeholder = "Placeholder",
+                    actionText = "Action",
+                    suffix = AnnotatedString.fromHtml("<u>c</u>"),
+                    keyboardType = KeyboardType.Number,
+                ) { textFieldValue ->
+                    inputText2 = textFieldValue
+                }
             }
 
             if (isKeyboardVisible) {

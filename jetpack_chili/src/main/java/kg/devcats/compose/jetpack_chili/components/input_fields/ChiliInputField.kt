@@ -138,7 +138,7 @@ fun ChiliAmountInputField(
     actionText: String? = null,
     isInputCenteredAlign: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
-    maxLength: Int = Int.MAX_VALUE,
+    maxLenBeforeComma: Int = Int.MAX_VALUE,
     addDecimal: Boolean = true,
     suffix: AnnotatedString? = null,
     onActionClick: (() -> Unit) = {},
@@ -168,7 +168,7 @@ fun ChiliAmountInputField(
                 val finalText = amountValueChange(filtered.text, addDecimal)
                 val lenBeforeComma = finalText.substringBefore(InputFieldDefaults.DECIMAL_COMMA).length
 
-                if (lenBeforeComma <= maxLength) {
+                if (lenBeforeComma <= maxLenBeforeComma) {
                     val finalValue = TextFieldValue(finalText, filtered.selection)
                     onValueChange(finalValue)
                 }
