@@ -146,7 +146,7 @@ fun ChiliAmountInputField(
 ) {
     InputFieldContainer(
         modifier = modifier,
-        value = value.copy(text = value.text + "c"),
+        value = value,
         error = error,
         inputBgColor = inputBgColor,
         isClearButtonEnabled = isClearButtonEnabled,
@@ -164,13 +164,13 @@ fun ChiliAmountInputField(
             focusRequester = focusRequester,
             value = value,
             onValueChange = { newTextFieldValueState ->
-                Log.d("amountinput", "$newTextFieldValueState")
-                val finalText = amountValueChange(newTextFieldValueState.text, addDecimal)
+                val filtered = newTextFieldValueState.handleZero(value)
+                val finalText = amountValueChange(filtered.text, addDecimal)
                 val lenBeforeComma = finalText.substringBefore(InputFieldDefaults.DECIMAL_COMMA).length
 
                 if (lenBeforeComma <= maxLength) {
-                    val finalValue = TextFieldValue(finalText, newTextFieldValueState.selection)
-                    onValueChange(finalValue.handleZero(value))
+                    val finalValue = TextFieldValue(finalText, filtered.selection)
+                    onValueChange(finalValue)
                 }
             },
             placeholder = placeholder,

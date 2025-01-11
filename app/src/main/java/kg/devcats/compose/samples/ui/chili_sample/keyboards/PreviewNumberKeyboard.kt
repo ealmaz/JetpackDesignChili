@@ -16,6 +16,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
@@ -64,9 +65,11 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
                 message = "Message",
                 placeholder = "Placeholder",
                 actionText = "Action",
-                suffix = AnnotatedString.fromHtml("<u>c</u>")
+                suffix = AnnotatedString.fromHtml("<u>c</u>"),
+                keyboardType = KeyboardType.Number,
+                maxLength = 6
             ) { textFieldValue ->
-                inputText = textFieldValue.handleZero(previousValue = inputText)
+                inputText = textFieldValue
             }
 
             if (isKeyboardVisible) {
