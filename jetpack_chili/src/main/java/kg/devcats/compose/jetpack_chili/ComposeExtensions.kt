@@ -14,6 +14,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -59,6 +60,21 @@ fun Modifier.clickableWithoutEffect(
         indication = null,
         onClick = onClick
     )
+}
+
+fun Modifier.onClickListener(
+    onClick: () -> Unit
+): Modifier {
+    return pointerInput(Unit) {
+        awaitPointerEventScope {
+            while (true) {
+                val event = awaitPointerEvent()
+                if (event.changes.any { it.pressed }) {
+                    onClick.invoke()
+                }
+            }
+        }
+    }
 }
 
 @Composable
