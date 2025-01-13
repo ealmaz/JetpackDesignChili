@@ -55,8 +55,7 @@ fun ChiliTheme(
 
     LaunchedEffect(darkTheme) {
         if (darkTheme && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val activity = view.context as? Activity
-            activity?.run {
+            (view.context as? Activity)?.run {
                 window.statusBarColor = black_1.toArgb()
                 window.navigationBarColor = black_1.toArgb()
                 WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
