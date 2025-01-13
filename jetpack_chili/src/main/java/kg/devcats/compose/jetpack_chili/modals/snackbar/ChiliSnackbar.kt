@@ -1,6 +1,7 @@
 package kg.devcats.compose.jetpack_chili.modals.snackbar
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,9 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -72,12 +71,10 @@ fun ChiliSnackBar(
             verticalAlignment = Alignment.CenterVertically
         ) {
             snackbarMessage.iconRes?.let { iconRes ->
-                Icon(
+                Image(
                     painter = painterResource(id = iconRes),
                     contentDescription = null,
-                    modifier = Modifier
-                        .size(32.dp)
-                        .padding(end = 8.dp)
+                    modifier = Modifier.size(32.dp)
                 )
             }
 
