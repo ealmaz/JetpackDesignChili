@@ -202,7 +202,7 @@ fun PreviewCommon(
                 minValue = 1000,
                 maxValue = 1000,
                 step = 1000,
-                initialValue = initialValue1,
+                value = initialValue1,
                 displayValueFormatter = { "$it c" },
                 onValueChange = { newVal -> initialValue1 = newVal }
             )
@@ -215,7 +215,7 @@ fun PreviewCommon(
                 minValue = 0,
                 maxValue = 1000,
                 step = 200,
-                initialValue = initialValue2,
+                value = initialValue2,
                 displayValueFormatter = { "$it c" },
                 onValueChange = { newVal -> initialValue2 = newVal }
             )

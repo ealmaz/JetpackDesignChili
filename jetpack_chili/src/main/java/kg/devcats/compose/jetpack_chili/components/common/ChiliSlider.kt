@@ -29,7 +29,7 @@ fun ChiliSlider(
     minValue: Int,
     maxValue: Int,
     step: Int,
-    initialValue: Int = minValue,
+    value: Int = minValue,
     displayValueFormatter: (Int) -> CharSequence = { it.toString() },
     onValueChange: (Int) -> Unit,
     titleTextStyle: TextStyle = Chili.typography.H16_Primary_500,
@@ -38,13 +38,9 @@ fun ChiliSlider(
     enabled: Boolean = true,
 ) {
 
-    var sliderValue by remember {
-        mutableFloatStateOf(
-            initialValue.roundToStep(step, minValue, maxValue).toFloat()
-        )
-    }
+    val correctedValue = value.roundToStep(step, minValue, maxValue)
 
-    val formattedCurrentValue = displayValueFormatter(sliderValue.toInt())
+    val formattedCurrentValue = displayValueFormatter(correctedValue)
     val formattedMinValue = displayValueFormatter(minValue)
     val formattedMaxValue = displayValueFormatter(maxValue)
 
@@ -78,11 +74,10 @@ fun ChiliSlider(
         ) {
             IconButton(
                 onClick = {
-                    val newVal = (sliderValue.toInt() - step).roundToStep(step, minValue, maxValue)
-                    sliderValue = newVal.toFloat()
+                    val newVal = (correctedValue - step).roundToStep(step, minValue, maxValue)
                     onValueChange(newVal)
                 },
-                enabled = enabled && sliderValue.toInt() > minValue,
+                enabled = enabled && correctedValue > minValue,
                 modifier = Modifier.size(28.dp)
             ) {
                 Image(
@@ -122,10 +117,9 @@ fun ChiliSlider(
                         )
                     )
                 },
-                value = sliderValue,
+                value = correctedValue.toFloat(),
                 onValueChange = {
                     val steppedValue = it.roundToStep(step, minValue, maxValue)
-                    sliderValue = steppedValue.toFloat()
                     onValueChange(steppedValue)
                 },
                 valueRange = if (maxValue <= minValue) {
@@ -144,11 +138,10 @@ fun ChiliSlider(
 
             IconButton(
                 onClick = {
-                    val newVal = (sliderValue.toInt() + step).roundToStep(step, minValue, maxValue)
-                    sliderValue = newVal.toFloat()
+                    val newVal = (correctedValue + step).roundToStep(step, minValue, maxValue)
                     onValueChange(newVal)
                 },
-                enabled = enabled && sliderValue.toInt() < maxValue,
+                enabled = enabled && correctedValue < maxValue,
                 modifier = Modifier.size(28.dp)
             ) {
                 Image(
@@ -201,7 +194,7 @@ fun PreviewChiliSlider() {
             minValue = 1000,
             maxValue = 5000,
             step = 1000,
-            initialValue = initialValue,
+            value = initialValue,
             displayValueFormatter = { "$it c" },
             onValueChange = { newVal -> initialValue = newVal }
         )
