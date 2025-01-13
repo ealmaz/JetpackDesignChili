@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,17 +41,11 @@ import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliChipsGroup
 import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliTextChip
 import kg.devcats.compose.jetpack_chili.components.common.chips.CustomChiliChipsGroup
 import kg.devcats.compose.jetpack_chili.components.common.chips.SimpleTextChip
-import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliChipsGroup
-import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliTextChip
-import kg.devcats.compose.jetpack_chili.components.common.chips.CustomChiliChipsGroup
-import kg.devcats.compose.jetpack_chili.components.common.chips.SimpleTextChip
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.blue_1
 import kg.devcats.compose.jetpack_chili.theme.green_1
 import kg.devcats.compose.jetpack_chili.theme.red_1
-import kg.devcats.compose.jetpack_chili.util.SelectionType
-import kg.devcats.compose.samples.ui.extension.showToast
 import kg.devcats.compose.jetpack_chili.util.SelectionType
 import kg.devcats.compose.samples.ui.extension.showToast
 
