@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,11 +37,17 @@ import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSlider
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
+import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliChipsGroup
+import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliTextChip
+import kg.devcats.compose.jetpack_chili.components.common.chips.CustomChiliChipsGroup
+import kg.devcats.compose.jetpack_chili.components.common.chips.SimpleTextChip
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.blue_1
 import kg.devcats.compose.jetpack_chili.theme.green_1
 import kg.devcats.compose.jetpack_chili.theme.red_1
+import kg.devcats.compose.jetpack_chili.util.SelectionType
+import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
 fun PreviewCommon(
@@ -220,6 +228,57 @@ fun PreviewCommon(
                 onValueChange = { newVal -> initialValue2 = newVal }
             )
 
+            Text(
+                modifier = Modifier.padding(vertical = 16.dp),
+                text = "ChiliChipsGroup",
+                style = Chili.typography.H16_Primary
+            )
+
+            val items = listOf(
+                SimpleTextChip("1", "Понедельник"),
+                SimpleTextChip("2", "Вторник"),
+                SimpleTextChip("3", "Среда"),
+                SimpleTextChip("4", "Четверг"),
+                SimpleTextChip("5", "Пятница"),
+                SimpleTextChip("6", "Суббота"),
+                SimpleTextChip("7", "Воскресенье"),
+            )
+
+            ChiliChipsGroup(
+                title = "Выберите день",
+                items = items,
+                rowPadding = PaddingValues(horizontal = 16.dp),
+                selectionType = SelectionType.MULTIPLE,
+                onSelectionChanged = { id, isSelected ->
+                    context.showToast("$id - $isSelected")
+                }
+            )
+
+            Text(
+                modifier = Modifier.padding(vertical = 16.dp),
+                text = "CustomChiliChipsGroup",
+                style = Chili.typography.H16_Primary
+            )
+
+            val selectedIds = remember { mutableStateListOf<Any>() }
+
+            CustomChiliChipsGroup(
+                title = "Выберите день",
+                items = items,
+                selectedIds = selectedIds,
+                rowPadding = PaddingValues(horizontal = 16.dp),
+                selectionType = SelectionType.SINGLE,
+                onSelectionChanged = { id, isSelected ->
+                    context.showToast("$id - $isSelected")
+                }
+            ) { item, isSelected, onClick ->
+                ChiliTextChip(
+                    text = (item as? SimpleTextChip)?.text ?: "",
+                    isSelected = isSelected
+                ) {
+                    onClick()
+                }
+            }
         }
     }
 }
