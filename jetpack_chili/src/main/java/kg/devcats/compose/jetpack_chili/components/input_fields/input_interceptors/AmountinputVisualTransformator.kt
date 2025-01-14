@@ -7,6 +7,7 @@ import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.core.text.isDigitsOnly
 import kotlin.math.min
 
 object InputFieldDefaults {
@@ -125,7 +126,8 @@ private fun createOffsetMapping(
 }
 
 fun TextFieldValue.handleZero(previousValue: TextFieldValue) : TextFieldValue {
-    if (this.text.contains(InputFieldDefaults.DECIMAL_COMMA)) return this
+    val regex = """[^a-zA-Z0-9]""".toRegex()
+    if (regex.containsMatchIn(this.text)) return this
     return if (this.text.isBlank() || this.text == InputFieldDefaults.ZERO) {
         TextFieldValue(InputFieldDefaults.ZERO, TextRange(1))
     } else if (previousValue.text == InputFieldDefaults.ZERO) {
