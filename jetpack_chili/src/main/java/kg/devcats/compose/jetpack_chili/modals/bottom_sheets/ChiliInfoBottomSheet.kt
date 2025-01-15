@@ -68,7 +68,7 @@ fun ColumnScope.ChiliInfoBottomSheetContent(
             .padding(0.dp, 16.dp, 16.dp, 16.dp)
             .size(60.dp))
         }
-        Column {
+        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
             headerText?.let {Text(text = headerText, modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H16_Primary_500) }
             bodyText?. let { Text(text = bodyText, modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H14_Primary) }
         }
