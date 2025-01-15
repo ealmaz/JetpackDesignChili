@@ -42,6 +42,9 @@ interface ChiliColorScheme {
     //ShadowContainer
     val shadowContainerContent: Color
 
+    //DatePickerControl
+    val datePickerControl: Color
+
     //Checkbox
     val checkBoxCheckedBackground: Color
     val checkBoxUncheckedBorder: Color
@@ -165,6 +168,12 @@ interface ChiliColorScheme {
 
     //customDialogMaterial2BackgroundColor
     val customDialogBackgroundColor: Color
+
+    //Slider
+    val sliderInactiveTrackColor: Color
+
+    //ChiliChipsGroup
+    val textChipUnselectedBackgroundColor: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -260,6 +269,8 @@ data class ChiliLightColorScheme(
     override val quickActionIconDefaultColor: Color = black_1,
     override val quickActionButtonDisabledTextColor: Color = gray_2,
 
+    override val datePickerControl: Color = black_5,
+
     override val alertNeutralBg: Color = blue_6,
     override val alertNeutralBorder: Color = blue_10,
     override val alertNeutralContent: Color = blue_1,
@@ -294,6 +305,10 @@ data class ChiliLightColorScheme(
     override val accountChevronColor: Color = black_3,
 
     override val customDialogBackgroundColor: Color = white_1,
+
+    override val sliderInactiveTrackColor: Color = gray_3,
+
+    override val textChipUnselectedBackgroundColor: Color = gray_5
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -386,6 +401,8 @@ data class ChiliDarkColorScheme(
     override val quickActionIconDefaultColor: Color = white_1,
     override val quickActionButtonDisabledTextColor: Color = gray_1,
 
+    override val datePickerControl: Color = black_5,
+
     override val alertNeutralBg: Color = blue_7,
     override val alertNeutralBorder: Color = blue_11,
     override val alertNeutralContent: Color = blue_8,
@@ -421,5 +438,9 @@ data class ChiliDarkColorScheme(
     override val accountChevronColor: Color = gray_4,
 
     override val customDialogBackgroundColor: Color = black_3,
+
+    override val sliderInactiveTrackColor: Color = black_5,
+
+    override val textChipUnselectedBackgroundColor: Color = black_4
 ): ChiliColorScheme
 

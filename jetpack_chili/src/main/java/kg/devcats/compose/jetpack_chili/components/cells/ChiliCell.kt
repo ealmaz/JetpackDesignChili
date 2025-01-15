@@ -23,10 +23,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ChiliChevron
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
@@ -85,12 +86,16 @@ fun ChiliCell(
                             shimmerWidth = iconSize,
                             isLoading = isLoading
                         ) {
-                            AsyncImage(
-                                model = it,
+                            Image(
+                                painter = rememberAsyncImagePainter(
+                                    model = it,
+                                    placeholder = painterResource(R.drawable.chili_ic_stub),
+                                    error = painterResource(R.drawable.chili_ic_stub)
+                                ),
                                 contentDescription = "",
                                 modifier = Modifier
                                     .size(iconSize)
-                                    .clip(Chili.shapes.RoundedCornerShape)
+                                    .clip(Chili.shapes.RoundedCornerShape),
                             )
                         }
                     }
@@ -130,6 +135,7 @@ fun ChiliCell(
                                 .align(Alignment.Start)
                                 .padding(top = 12.dp, bottom = 4.dp),
                             maxLines = titleMaxLines,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
 
@@ -145,6 +151,7 @@ fun ChiliCell(
                                 text = it,
                                 style = subtitleStyle,
                                 maxLines = subtitleMaxLines,
+                                overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier
                                     .padding(bottom = 12.dp)
                             )

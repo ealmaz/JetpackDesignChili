@@ -10,6 +10,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 fun ChiliChooseActionBottomSheet(
     modifier: Modifier = Modifier,
     isShown: Boolean,
+    hideOnSwipe: Boolean = false,
     onDismissRequest: () -> Unit,
     actions: List<ChiliChooseActionBSAction>
 ) {
@@ -18,7 +19,7 @@ fun ChiliChooseActionBottomSheet(
         isShown = isShown,
         onDismissRequest = onDismissRequest,
         isCloseIconVisible = false,
-        hideOnSwipe = false,
+        hideOnSwipe = hideOnSwipe,
     ) {
         actions.forEachIndexed { index, item ->
             if (index == actions.lastIndex) ChiliSecondaryButton(modifier = Modifier.fillMaxWidth(), text = item.title, onClick = item.onClick)
