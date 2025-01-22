@@ -19,7 +19,6 @@ import androidx.compose.material3.ripple
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -35,7 +34,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 @Composable
 fun ChiliCenteredAppToolbar(
     modifier: Modifier = Modifier,
-    navigationIcon: Painter = painterResource(id = R.drawable.cmp_chili_ic_back_arrow_rounded),
+    navigationIcon: Painter = painterResource(id = R.drawable.chili4_ic_back_arrow_rounded),
     isNavigationIconVisible: Boolean = true,
     onNavigationIconClick: () -> Unit = {},
     startFrame: (@Composable RowScope.() -> Unit)? = null,

@@ -15,7 +15,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 fun ChiliChevron(modifier: Modifier = Modifier) {
     Image(
         modifier = modifier.size(32.dp),
-        painter = painterResource(id = R.drawable.chili_ic_chevron),
+        painter = painterResource(id = R.drawable.chili4_ic_chevron),
         contentDescription = "",
         colorFilter = ColorFilter.tint(Chili.color.chevronColor)
     )
