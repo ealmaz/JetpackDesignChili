@@ -41,7 +41,7 @@ fun ChiliSearchAppToolbar(
     onSearchQueryChange: (TextFieldValue) -> Unit = {},
     onSearchModeChange: (Boolean) -> Unit = {},
     placeholder: String? = null,
-    navigationIcon: Painter = painterResource(id = R.drawable.chili_ic_back_arrow_rounded),
+    navigationIcon: Painter = painterResource(id = R.drawable.cmp_chili_ic_back_arrow_rounded),
     isNavigationIconVisible: Boolean = true,
     onNavigationIconClick: () -> Unit = {},
     title: String = "",
@@ -120,7 +120,7 @@ fun ChiliSearchAppToolbar(
                         }
                     } else {
                         IconButton(
-                            painter = painterResource(id = R.drawable.chili_ic_search),
+                            painter = painterResource(id = R.drawable.cmp_jp_chili_ic_search),
                             contentDescription = "Search",
                             onClick = { onSearchModeChange(true) }
                         )
