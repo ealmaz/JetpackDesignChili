@@ -56,7 +56,7 @@ fun ChiliUneditableInputField(
             )
 
             Icon(
-                painter = painterResource(R.drawable.chili_ic_chevron),
+                painter = painterResource(R.drawable.chili4_ic_chevron),
                 contentDescription = null,
                 tint = gray_1.copy(alpha = 0.5f)
             )
