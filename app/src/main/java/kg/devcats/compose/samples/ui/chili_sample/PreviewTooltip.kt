@@ -54,7 +54,7 @@ fun PreviewTooltip(
 
         if (isTooltipVisible.value)
         Tooltip(
-            text = "Ваши бонусные карты",
+            tooltipText = "Ваши бонусные карты",
             onDismiss = {
                 coroutineScope.launch {
                     delay(500)

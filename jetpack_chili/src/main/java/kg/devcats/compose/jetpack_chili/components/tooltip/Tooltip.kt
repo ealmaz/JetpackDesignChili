@@ -17,9 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.theme.Chili
-
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,7 +25,8 @@ import androidx.compose.runtime.setValue
 
 @Composable
 fun Tooltip(
-    text: String,
+    tooltipText: String,
+    tooltipAlignment: Alignment = Alignment.BottomCenter,
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit = {}
 ) {
@@ -52,7 +51,7 @@ fun Tooltip(
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = modifier.align(Alignment.TopCenter)
+                modifier = modifier.align(tooltipAlignment)
             ) {
                 Row(
                     modifier = Modifier
@@ -62,7 +61,7 @@ fun Tooltip(
                         )
                 ) {
                     Text(
-                        text = text,
+                        text = tooltipText,
                         color = Color.Black,
                         modifier = Modifier.padding(12.dp),
                         style = Chili.typography.H15_Primary_500
