@@ -61,6 +61,9 @@ sealed class Screens {
 
     @Serializable
     data object AccountCardExamplesScreen : Screens()
+
+    @Serializable
+    data object TooltipScreen : Screens()
 }
 
 sealed class KeyboardScreens {

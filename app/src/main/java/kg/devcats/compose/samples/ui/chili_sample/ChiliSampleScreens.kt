@@ -136,6 +136,12 @@ fun ChiliSampleScreens(
                 .padding(top = 16.dp)) {
                 navController?.navigate(Screens.LockScreen.toString())
             }
+
+            ChiliPrimaryButton(text = "Tooltip", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController?.navigate(Screens.TooltipScreen.toString())
+            }
         }
     }
 }
