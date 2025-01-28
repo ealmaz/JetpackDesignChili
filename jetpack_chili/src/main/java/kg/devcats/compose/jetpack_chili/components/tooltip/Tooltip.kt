@@ -29,14 +29,13 @@ import androidx.compose.runtime.setValue
 fun Tooltip(
     text: String,
     modifier: Modifier = Modifier,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit = {}
 ) {
     val background = Color.White
     var isTooltipVisible by remember { mutableStateOf(true) }
 
     AnimatedVisibility(
         visible = isTooltipVisible,
-        enter = fadeIn(),
         exit = fadeOut(),
     ) {
         Box(
