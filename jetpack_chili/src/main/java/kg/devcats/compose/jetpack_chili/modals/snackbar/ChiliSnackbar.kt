@@ -123,7 +123,7 @@ fun ChiliSnackBar(
                 modifier = Modifier
                     .weight(1f)
                     .padding(horizontal = 8.dp, vertical = 6.dp),
-                style = Chili.typography.H14_Primary_500
+                style = Chili.typography.H14_Primary
             )
 
             snackbarMessage.actionText?.let { actionText ->
@@ -137,7 +137,8 @@ fun ChiliSnackBar(
                     ) {
                     Text(
                         text = actionText,
-                        color = Chili.color.buttonComponentText
+                        color = Chili.color.buttonComponentText,
+                        style = Chili.typography.H14
                     )
                 }
             }
