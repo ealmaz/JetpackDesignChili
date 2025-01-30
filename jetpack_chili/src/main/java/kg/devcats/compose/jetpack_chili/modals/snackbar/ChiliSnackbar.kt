@@ -37,14 +37,20 @@ fun ChiliSnackBar(
     modifier: Modifier = Modifier,
     cornerRadius: Dp = 12.dp
 ) {
-    var remainingTime by remember { mutableLongStateOf(snackbarMessage.snackbarDurationMillis / 1000) }
+    var remainingTime by remember {
+        mutableLongStateOf(
+            (snackbarMessage.progressDurationMillis
+                ?: snackbarMessage.snackbarDurationMillis) / 1000
+        )
+    }
     val scope = rememberCoroutineScope()
 
-    if (snackbarMessage.type != SnackbarType.LOADER) {
-        LaunchedEffect(snackbarMessage.snackbarDurationMillis) {
-            delay(snackbarMessage.snackbarDurationMillis)
-            snackbarMessage.onDismiss?.invoke()
-        }
+    LaunchedEffect(
+        snackbarMessage.progressDurationMillis ?: snackbarMessage.snackbarDurationMillis
+    ) {
+        delay(snackbarMessage.progressDurationMillis ?: snackbarMessage.snackbarDurationMillis)
+        snackbarMessage.onDismiss?.invoke()
+        SnackbarManager.dismissSnackbar()
     }
 
     if (snackbarMessage.type == SnackbarType.TIMER && snackbarMessage.progressDurationMillis != null) {
@@ -67,40 +73,46 @@ fun ChiliSnackBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = if(snackbarMessage.type != SnackbarType.TIMER) 12.dp else 4.dp),
+                .padding(
+                    horizontal = 12.dp,
+                    vertical = if (snackbarMessage.type != SnackbarType.TIMER) 12.dp else 4.dp
+                ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             snackbarMessage.iconRes?.let { iconRes ->
                 Image(
                     painter = painterResource(id = iconRes),
                     contentDescription = null,
-                    modifier = Modifier.size(32.dp)
+                    modifier = Modifier.size(28.dp)
                 )
             }
 
             if (snackbarMessage.type == SnackbarType.LOADER) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        .size(32.dp)
+                        .size(28.dp)
                         .align(Alignment.CenterVertically),
                     strokeWidth = 2.dp
                 )
             } else if (snackbarMessage.type == SnackbarType.TIMER && snackbarMessage.progressDurationMillis != null) {
                 Box(
                     modifier = Modifier
-                        .size(32.dp)
+                        .size(28.dp)
                         .align(Alignment.CenterVertically),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator(
                         progress = { remainingTime / (snackbarMessage.progressDurationMillis / 1000f) },
                         modifier = Modifier.size(32.dp),
-                        strokeWidth = 2.dp
+                        color = Chili.color.snackbarIndeterminateColor,
+                        trackColor = Chili.color.snackbarBackground,
+                        strokeWidth = 1.dp
                     )
                     if (remainingTime > 0) {
                         Text(
                             text = "$remainingTime",
-                            modifier = Modifier.align(Alignment.Center)
+                            modifier = Modifier.align(Alignment.Center),
+                            style = Chili.typography.H14_Primary
                         )
                     }
                 }
@@ -111,7 +123,7 @@ fun ChiliSnackBar(
                 modifier = Modifier
                     .weight(1f)
                     .padding(horizontal = 8.dp, vertical = 6.dp),
-                style = Chili.typography.H16_Primary
+                style = Chili.typography.H14_Primary_500
             )
 
             snackbarMessage.actionText?.let { actionText ->

@@ -76,7 +76,7 @@ fun PreviewSnackbars(navigateUp: () -> Unit) {
                     scope.showTimerSnackbar(
                         "Timer snackbar",
                         "Cancel",
-                        5000L,
+                        10000L,
                         onTimerExpire = {
                             Toast.makeText(context, "Timer ended", Toast.LENGTH_SHORT).show()
                         },

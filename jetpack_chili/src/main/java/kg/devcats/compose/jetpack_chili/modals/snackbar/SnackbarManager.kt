@@ -1,6 +1,7 @@
 package kg.devcats.compose.jetpack_chili.modals.snackbar
 
 import androidx.annotation.DrawableRes
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -67,11 +68,12 @@ object SnackbarManager {
         )
     }
 
-    fun CoroutineScope.showLoaderSnackbar(message: String) {
+    fun CoroutineScope.showLoaderSnackbar(message: String, duration: Long = 3000) {
         showSnackbar(
             SnackbarMessage(
                 message = message,
                 type = SnackbarType.LOADER,
+                snackbarDurationMillis = duration
             )
         )
     }
@@ -88,6 +90,7 @@ object SnackbarManager {
                 message = message,
                 type = SnackbarType.TIMER,
                 progressDurationMillis = timerDurationMillis,
+                snackbarDurationMillis = timerDurationMillis,
                 actionText = actionText,
                 onActionClick = onActionClick,
                 onDismiss = onTimerExpire
@@ -100,7 +103,8 @@ object SnackbarManager {
         alignment.value = snackbarMessage.alignment
         launch {
             snackbarHostState.showSnackbar(
-                message = snackbarMessage.message
+                message = snackbarMessage.message,
+                duration = SnackbarDuration.Indefinite
             )
         }
     }
