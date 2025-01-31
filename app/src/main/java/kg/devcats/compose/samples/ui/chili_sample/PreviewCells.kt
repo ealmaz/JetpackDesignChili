@@ -2,6 +2,7 @@ package kg.devcats.compose.samples.ui.chili_sample
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,6 +35,7 @@ import kg.devcats.compose.jetpack_chili.components.common.CircledBadgeText
 import kg.devcats.compose.jetpack_chili.components.common.RoundedBox
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
+import kg.devcats.compose.jetpack_chili.setRoundedShapeByPosition
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
 
@@ -110,6 +112,44 @@ fun PreviewCells(
                     )
                     ChiliCell(
                         modifier = Modifier.clickable { },
+                        title = "Заголовок",
+                    )
+                }
+            }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "Rounded corner modifier",
+                style = Chili.typography.H16_Primary
+            )
+
+            Box(modifier = Modifier.background(Chili.color.screenBackground)) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    ChiliCell(
+                        modifier = Modifier.setRoundedShapeByPosition(true, true).clickable { },
+                        title = "Заголовок",
+                        isDividerVisible = false,
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    ChiliCell(
+                        modifier = Modifier.setRoundedShapeByPosition(isFirst = true).clickable { },
+                        title = "Заголовок",
+                        isDividerVisible = true,
+                    )
+                    ChiliCell(
+                        modifier = Modifier.setRoundedShapeByPosition().clickable { },
+                        title = "Заголовок",
+                        isDividerVisible = true,
+                    )
+                    ChiliCell(
+                        modifier = Modifier.setRoundedShapeByPosition().clickable { },
+                        title = "Заголовок",
+                        isDividerVisible = true,
+                    )
+                    ChiliCell(
+                        modifier = Modifier.setRoundedShapeByPosition(isLast = true).clickable { },
                         title = "Заголовок",
                     )
                 }

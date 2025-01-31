@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
@@ -81,4 +82,15 @@ fun Modifier.rippleClickable(
 @Composable
 fun Modifier.setIsAlpha(enabled: Boolean, alpha: Float = 0.5f): Modifier {
     return alpha(if (enabled) 1f else alpha)
+}
+
+@Composable
+fun Modifier.setRoundedShapeByPosition(isFirst: Boolean = false, isLast: Boolean = false): Modifier {
+    val shape = when {
+        isFirst && isLast -> Chili.shapes.RoundedCornerShape
+        isFirst -> Chili.shapes.RoundedTopCornerShape
+        isLast ->  Chili.shapes.RoundedBottomCornerShape
+        else -> Chili.shapes.CornerNone
+    }
+    return clip(shape)
 }
