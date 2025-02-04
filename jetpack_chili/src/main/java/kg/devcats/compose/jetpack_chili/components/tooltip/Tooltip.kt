@@ -36,7 +36,7 @@ fun Tooltip(
         visible = isTooltipVisible,
         exit = fadeOut()
     ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
+        Box(modifier = Modifier.fillMaxSize()) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = modifier.align(tooltipAlignment)
