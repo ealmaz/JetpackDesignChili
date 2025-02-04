@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
@@ -55,7 +56,7 @@ fun PreviewTooltip(
         if (isTooltipVisible.value)
         Tooltip(
             tooltipText = "Ваши бонусные карты",
-            onDismiss = {
+            onClosed = {
                 coroutineScope.launch {
                     delay(500)
                     isTooltipVisible.value = false
