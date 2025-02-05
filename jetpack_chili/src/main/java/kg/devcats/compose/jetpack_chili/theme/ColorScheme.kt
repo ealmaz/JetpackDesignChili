@@ -21,6 +21,10 @@ interface ChiliColorScheme {
     val surfaceBackground: Color
     val screenSecondary: Color
 
+    // ContentBackground
+    val contentPrimary: Color
+    val contentSecondary: Color
+
     val accentPrimaryColor: Color
     val warningTextColor: Color
 
@@ -195,6 +199,10 @@ data class ChiliLightColorScheme(
     override val screenBackground: Color = gray_4,
     override val surfaceBackground: Color = white_1,
     override val screenSecondary: Color = gray_9,
+
+    override val contentPrimary: Color = white_1,
+    override val contentSecondary: Color = gray_5,
+
     override val toolbarBackground: Color = white_1,
     override val dividerColor: Color = gray_6,
     override val chevronColor: Color = black_7,
@@ -328,6 +336,10 @@ data class ChiliDarkColorScheme(
     override val screenBackground: Color = black_2,
     override val surfaceBackground: Color = black_1,
     override val screenSecondary: Color = black_1,
+
+    override val contentPrimary: Color = black_3,
+    override val contentSecondary: Color = black_4,
+
     override val toolbarBackground: Color = black_3,
     override val dividerColor: Color = black_4,
     override val chevronColor: Color = gray_4,

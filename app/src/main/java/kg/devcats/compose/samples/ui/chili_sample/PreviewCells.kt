@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.cells.DetailedInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliAdditionalInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
 import kg.devcats.compose.jetpack_chili.components.cells.ProductCell
@@ -577,6 +578,33 @@ fun PreviewCells(
                     title = "Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки",
                     subtitle = "Подзаголовок, Подзаголовок, Подзаголовок, Подзаголовок, Подзаголовок, ",
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Column(modifier = Modifier.background(Chili.color.screenSecondary).padding(16.dp)) {
+                DetailedInfoCell(
+                    icon = painterResource(R.drawable.chili_ic_documents_green),
+                    title = "USDT (TRC20)",
+                    subTitle = "Достигнут лимит",
+                    value = "- 500,00 с",
+                    subValue = "44 500,00 с ",
+                    additionalText = "Ожидает зачисления: 10 500,00 c",
+                    caption = "09:42",
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                DetailedInfoCell(
+                    icon = painterResource(R.drawable.chili_ic_documents_green),
+                    title = "USDT (TRC20)",
+                    subTitle = "Достигнут лимит",
+                    value = "- 500,00 с",
+                    subValue = "44 500,00 с ",
+                    additionalText = "Ожидает зачисления: 10 500,00 c",
+                    caption = "09:42",
+                    isLoading = true,
                 )
             }
         }
