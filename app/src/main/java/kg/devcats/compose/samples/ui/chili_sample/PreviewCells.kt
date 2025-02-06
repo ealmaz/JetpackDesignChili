@@ -27,6 +27,8 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.cells.DetailedInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliAdditionalInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
+import kg.devcats.compose.jetpack_chili.components.cells.DoubleCell
+import kg.devcats.compose.jetpack_chili.components.cells.DoubleCellItemParams
 import kg.devcats.compose.jetpack_chili.components.cells.ProductCell
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
@@ -605,6 +607,38 @@ fun PreviewCells(
                     additionalText = "Ожидает зачисления: 10 500,00 c",
                     caption = "09:42",
                     isLoading = true,
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Column(modifier = Modifier.background(Chili.color.screenSecondary).padding(16.dp)) {
+                DoubleCell(
+                    DoubleCellItemParams.getDefaultParams(
+                        title = "Заговолок",
+                        subtitle = "Подзаголовок",
+                        icon = painterResource(R.drawable.chili_ic_documents_green)
+                    ),
+                    DoubleCellItemParams.getDefaultParams(
+                        title = "Заговолок",
+                        subtitle = "Подзаголовок",
+                        additionalText = "За ужин",
+                        icon = painterResource(R.drawable.chili_ic_documents_green)
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                DoubleCell(
+                    DoubleCellItemParams.getDefaultParams(
+                        title = "Кошелек О!Деньги",
+                        icon = painterResource(R.drawable.chili_ic_documents_green)
+                    ),
+                    DoubleCellItemParams.getDefaultParams(
+                        title = "BTC в сети Bitcoin",
+                        subtitle = "0,053718",
+                        icon = painterResource(R.drawable.chili_ic_documents_green)
+                    )
                 )
             }
         }
