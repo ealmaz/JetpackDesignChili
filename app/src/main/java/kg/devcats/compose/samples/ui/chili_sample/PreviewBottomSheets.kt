@@ -127,7 +127,7 @@ fun BottomSheetsPreview(
     var infoBottomSheetState by remember { mutableStateOf(false) }
 
     ChiliInfoBottomSheet(
-        modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 16.dp),
+        modifier = Modifier,
         isShown = infoBottomSheetState,
         icon = painterResource(id = R.drawable.chili_ic_documents_green),
         bodyText = "Описание содержит до 113 символов, что очень приятно, потому что теперь можно написать его аж в целых три строки и развернуть любую мысль ",
