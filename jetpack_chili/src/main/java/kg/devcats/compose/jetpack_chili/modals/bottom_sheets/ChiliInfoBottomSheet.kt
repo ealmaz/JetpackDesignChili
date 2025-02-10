@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +30,7 @@ fun ChiliInfoBottomSheet(
     icon: Painter? = null,
     headerText: String? = null,
     bodyText: String? = null,
+    shape: Shape = Chili.shapes.RoundedCornerShape,
     secondaryButtonText: String? = null,
     onSecondaryButtonClick: (() -> Unit) = {},
     primaryButtonText: String? = null,
@@ -38,6 +40,7 @@ fun ChiliInfoBottomSheet(
     ChiliBottomSheetContainer(
         modifier = modifier,
         isShown = isShown,
+        bottomSheetShape = shape,
         onDismissRequest = onDismissRequest
     ) {
         ChiliInfoBottomSheetContent(
