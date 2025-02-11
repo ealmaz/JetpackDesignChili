@@ -1,5 +1,6 @@
 package kg.devcats.compose.jetpack_chili.components.input_fields
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,7 +27,7 @@ import kg.devcats.compose.jetpack_chili.theme.gray_1
 
 @Composable
 fun ChiliUneditableInputField(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
     textStyle: TextStyle = Chili.typography.H20_Primary_500,
@@ -34,16 +35,23 @@ fun ChiliUneditableInputField(
     textPadding: PaddingValues = PaddingValues(vertical = 12.dp, horizontal = 16.dp),
     maxLines: Int = 1,
     endIcon: Painter? = painterResource(R.drawable.chili4_ic_chevron),
-    onClick: () -> Unit
+    onClick: (() -> Unit)? = null
 ) {
     val textState by remember(text) { mutableStateOf(text) }
     val hintState by remember(hint) { mutableStateOf(hint) }
 
+    val clickableModifier = if (onClick != null) {
+        Modifier.clickable { onClick() }
+    } else {
+        Modifier
+    }
+
     Surface(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .then(clickableModifier),
         shape = Chili.shapes.RoundedCornerShape,
-        color = Chili.color.inputFieldBackground,
-        onClick = onClick
+        color = Chili.color.inputFieldBackground
     ) {
         Row(
             Modifier.padding(textPadding),
@@ -59,7 +67,7 @@ fun ChiliUneditableInputField(
                 overflow = TextOverflow.Ellipsis
             )
 
-            if(endIcon != null) {
+            if (endIcon != null) {
                 Icon(
                     painter = endIcon,
                     contentDescription = null,
@@ -77,13 +85,13 @@ private fun PreviewValue() {
         modifier = Modifier.padding(top = 16.dp),
         text = "Chili Uneditable Input Field",
         endIcon = null,
-        onClick = {}
+        onClick = null
     )
 }
 
 @Preview
 @Composable
-private fun PreviewHint() {
+private fun PreviewWithClick() {
     ChiliUneditableInputField(
         modifier = Modifier.padding(top = 16.dp),
         hint = "Chili Uneditable Input Field",
