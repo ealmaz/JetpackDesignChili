@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
@@ -85,9 +86,12 @@ fun AgreementCell(
 
 @Composable
 fun ClickableLinkText(
+    modifier: Modifier = Modifier,
     title: String,
     linkColor: Color = Chili.color.linkText,
-    action: (url: String) -> (Unit)
+    action: (url: String) -> (Unit),
+    style: TextStyle = Chili.typography.H14_Primary,
+    linkFontSize: TextUnit = TextUnit(14f, TextUnitType.Sp)
 ) {
     val spannedText = HtmlCompat.fromHtml(title, HtmlCompat.FROM_HTML_MODE_LEGACY)
     val annotatedString = buildAnnotatedString {
@@ -106,7 +110,7 @@ fun ClickableLinkText(
             )
 
             addStyle(
-                style = SpanStyle(color = linkColor, textDecoration = TextDecoration.Underline, fontSize = TextUnit(14f, TextUnitType.Sp)),
+                style = SpanStyle(color = linkColor, textDecoration = TextDecoration.Underline, fontSize = linkFontSize),
                 start = start,
                 end = end
             )
@@ -114,12 +118,13 @@ fun ClickableLinkText(
     }
 
     ClickableText(
-        style = Chili.typography.H14_Primary,
+        style = style,
         text = annotatedString,
         onClick = { offset ->
             annotatedString.getStringAnnotations(tag = "URL", start = offset, end = offset).firstOrNull()?.let { annotation ->
                 action(annotation.item)
             }
-        }
+        },
+        modifier = modifier
     )
 }
