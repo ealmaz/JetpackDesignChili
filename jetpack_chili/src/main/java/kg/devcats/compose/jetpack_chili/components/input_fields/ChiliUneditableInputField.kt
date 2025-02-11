@@ -1,5 +1,6 @@
 package kg.devcats.compose.jetpack_chili.components.input_fields
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -29,7 +31,9 @@ fun ChiliUneditableInputField(
     hint: String = "",
     textStyle: TextStyle = Chili.typography.H20_Primary_500,
     textAlign: TextAlign = TextAlign.Unspecified,
+    textPadding: PaddingValues = PaddingValues(vertical = 12.dp, horizontal = 16.dp),
     maxLines: Int = 1,
+    endIcon: Painter? = painterResource(R.drawable.chili4_ic_chevron),
     onClick: () -> Unit
 ) {
     val textState by remember(text) { mutableStateOf(text) }
@@ -42,7 +46,7 @@ fun ChiliUneditableInputField(
         onClick = onClick
     ) {
         Row(
-            Modifier.padding(vertical = 12.dp, horizontal = 16.dp),
+            Modifier.padding(textPadding),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -55,11 +59,13 @@ fun ChiliUneditableInputField(
                 overflow = TextOverflow.Ellipsis
             )
 
-            Icon(
-                painter = painterResource(R.drawable.chili4_ic_chevron),
-                contentDescription = null,
-                tint = gray_1.copy(alpha = 0.5f)
-            )
+            if(endIcon != null) {
+                Icon(
+                    painter = endIcon,
+                    contentDescription = null,
+                    tint = gray_1.copy(alpha = 0.5f)
+                )
+            }
         }
     }
 }
@@ -70,6 +76,7 @@ private fun PreviewValue() {
     ChiliUneditableInputField(
         modifier = Modifier.padding(top = 16.dp),
         text = "Chili Uneditable Input Field",
+        endIcon = null,
         onClick = {}
     )
 }
