@@ -62,7 +62,7 @@ fun Modifier.clickableWithoutEffect(
     )
 }
 
-fun Modifier.onClickListener(
+fun Modifier.onPressListener(
     onClick: () -> Unit
 ): Modifier {
     return pointerInput(Unit) {

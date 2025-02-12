@@ -7,12 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
@@ -24,6 +26,7 @@ import kg.devcats.compose.jetpack_chili.components.input_fields.input_intercepto
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.handleZero
 import kg.devcats.compose.jetpack_chili.components.keyboards.NumberKeyboard
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
+import kg.devcats.compose.jetpack_chili.onPressListener
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -45,9 +48,14 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
         var isKeyboardVisible by remember { mutableStateOf(false) }
         val systemKeyboardController = LocalSoftwareKeyboardController.current
 
+        val focusManager = LocalFocusManager.current
+
         var inputText by remember { mutableStateOf(TextFieldValue(text = "0")) }
         var inputText2 by remember { mutableStateOf(TextFieldValue(text = "0")) }
-        systemKeyboardController?.hide()
+        LaunchedEffect(Unit) {
+            systemKeyboardController?.hide()
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -60,8 +68,13 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
                     value = inputText,
                     modifier = Modifier
                         .padding(top = 16.dp)
+                        .onPressListener {
+                            focusManager.clearFocus()
+                        }
                         .onFocusChanged {
-                            isKeyboardVisible = it.isFocused
+                            if (it.isFocused) {
+                                isKeyboardVisible = it.isFocused
+                            }
                             systemKeyboardController?.hide()
                         },
                     message = "Message",
@@ -86,7 +99,7 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
                     message = "Message",
                     placeholder = "Placeholder",
                     actionText = "Action",
-                    suffix = AnnotatedString.fromHtml("<u>c</u>"),
+                    suffix = AnnotatedString.fromHtml("<u>b</u>"),
                     keyboardType = KeyboardType.Number,
                 ) { textFieldValue ->
                     inputText2 = textFieldValue
