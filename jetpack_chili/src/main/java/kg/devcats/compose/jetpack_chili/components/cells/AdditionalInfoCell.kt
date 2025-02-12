@@ -1,5 +1,6 @@
 package kg.devcats.compose.jetpack_chili.components.cells
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -15,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.shimmer.ShowShimmerOrContent
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 
@@ -33,6 +35,9 @@ fun ChiliAdditionalInfoCell(
     iconUrl: String? = null,
     iconSize: Dp = 32.dp,
     onClick: (() -> Unit)? = null,
+    containerPaddingValues: PaddingValues? = null,
+    additionalInfoTextPaddingValues: PaddingValues = PaddingValues(end = 4.dp),
+    additionalInfoTextWeight: Float? = null,
     additionalInfo: String? = null,
     additionalInfoStyle: TextStyle = Chili.typography.H16_Value,
     additionalEndIcon: Painter? = null,
@@ -53,6 +58,7 @@ fun ChiliAdditionalInfoCell(
         iconUrl = iconUrl,
         iconSize = iconSize,
         onClick = onClick,
+        containerPaddingValues = containerPaddingValues,
         isLoading = isLoading,
         endFrame = {
             additionalInfo?.let {
@@ -63,10 +69,13 @@ fun ChiliAdditionalInfoCell(
                     shimmerWidth = 46.dp
                 ) {
                     Text(
-                        text = it,
+                        text = it.parseHtml(),
                         style = additionalInfoStyle,
                         modifier = Modifier
-                            .padding(end = 4.dp)
+                            .padding(additionalInfoTextPaddingValues)
+                            .run {
+                                additionalInfoTextWeight?.takeIf { it > 0 }?.let { weight(it) } ?: this
+                            }
                     )
                 }
             }

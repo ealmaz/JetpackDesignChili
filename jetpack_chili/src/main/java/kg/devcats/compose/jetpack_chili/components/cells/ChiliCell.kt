@@ -2,9 +2,12 @@ package kg.devcats.compose.jetpack_chili.components.cells
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -48,8 +51,9 @@ fun ChiliCell(
     icon: Painter? = null,
     iconUrl: String? = null,
     iconSize: Dp = 32.dp,
+    containerPaddingValues: PaddingValues? = null,
     containerBackgroundColor: Color = Chili.color.cellViewBackground,
-    endFrame: @Composable (() -> Unit)? = null,
+    endFrame: (@Composable RowScope.() -> Unit)? = null,
     onClick: (() -> Unit)? = null,
     isLoading: Boolean = false,
 ) {
@@ -68,7 +72,10 @@ fun ChiliCell(
         Column(
             modifier = Modifier
                 .heightIn(min = 48.dp)
-                .padding(start = 12.dp)
+                .run {
+                    containerPaddingValues?.let { padding(it) } ?: padding(start = 12.dp)
+                },
+            verticalArrangement = Arrangement.Center
         ) {
             Row(
                 modifier = Modifier
@@ -160,7 +167,7 @@ fun ChiliCell(
                     } ?: run { Spacer(modifier = Modifier.height(8.dp)) }
                 }
 
-                endFrame?.invoke()
+                endFrame?.invoke(this)
                 if (isChevronVisible) ChiliChevron()
             }
             if (isDividerVisible) Divider(

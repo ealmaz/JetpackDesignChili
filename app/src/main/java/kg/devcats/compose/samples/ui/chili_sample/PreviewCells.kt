@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
@@ -274,15 +276,36 @@ fun PreviewCells(
                         isLoading = true
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
-
                     ChiliAdditionalInfoCell(
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                        isChevronVisible = true,
-                        additionalInfo = "Additional text",
-                        additionalInfoStyle = Chili.typography.H14_Value
+                        additionalInfo = "Additional 1212 <u>c</u>",
+                        additionalInfoStyle = Chili.typography.H14_Value,
+                        isDividerVisible = true
+                    )
+
+                    ChiliAdditionalInfoCell(
+                        modifier = Modifier.fillMaxWidth(),
+                        title = "Заголовок",
+                        titleStyle = Chili.typography.H16_Value,
+                        titleMaxLines = 3,
+                        additionalInfo = "Подзаголовок Под Подзаголовок Под Подзаголовок",
+                        additionalInfoStyle = Chili.typography.H16_Marked.copy(textAlign = TextAlign.End),
+                        additionalInfoTextWeight = 1f,
+                        isDividerVisible = true
+                    )
+
+                    ChiliAdditionalInfoCell(
+                        modifier = Modifier.fillMaxWidth(),
+                        title = "Заголовок",
+                        titleStyle = Chili.typography.H16_Value,
+                        titleMaxLines = 3,
+                        additionalInfo = "Подзаголовок Под Подзаголовок Под Подзаголовок Подзаголовок ",
+                        additionalInfoStyle = Chili.typography.H16_Marked.copy(textAlign = TextAlign.End),
+                        additionalInfoTextWeight = 1f,
+                        containerPaddingValues = PaddingValues(start = 8.dp),
+                        additionalInfoTextPaddingValues = PaddingValues(start = 4.dp, top = 8.dp, bottom = 8.dp),
                     )
                 }
             }
