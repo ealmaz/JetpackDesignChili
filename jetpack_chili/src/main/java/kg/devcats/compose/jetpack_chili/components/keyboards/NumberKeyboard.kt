@@ -36,10 +36,8 @@ sealed class KeyboardKeyType {
 @Composable
 fun NumberKeyboard(
     modifier: Modifier = Modifier,
-    textFieldValue: TextFieldValue,
-    maxLength: Int? = null,
-    onInputChanged: (TextFieldValue) -> Unit,
-    specialSymbols: List<Char> = emptyList()
+    specialSymbols: List<Char> = emptyList(),
+    onKeyClick: (KeyboardKeyType) -> Unit
 ) {
 
     var keys by remember {
@@ -68,27 +66,10 @@ fun NumberKeyboard(
                         }
 
                         KeyboardKeyType.Backspace -> {
-                            if (textFieldValue.selection.min == 0) return@KeyButton
-                            val newText = StringBuilder(textFieldValue.text)
-                            newText.deleteCharAt(textFieldValue.selection.max - 1)
-                            var selection = textFieldValue.selection
-                            if (selection.max < newText.length) {
-                                selection = TextRange(selection.max - 1)
-                            }
-                            onInputChanged.invoke(textFieldValue.copy(text = newText.toString(), selection = selection))
+                            onKeyClick.invoke(keyType)
                         }
                         is KeyboardKeyType.Symbol -> {
-                            val newText = StringBuilder(textFieldValue.text)
-                            if (newText.length == maxLength) return@KeyButton
-                            newText.insert(textFieldValue.selection.max, keyType.value)
-
-                            var selection = textFieldValue.selection
-                            selection = if (selection == TextRange(textFieldValue.text.length)) {
-                                TextRange(textFieldValue.text.length + 1)
-                            } else {
-                                TextRange(selection.max + 1)
-                            }
-                            onInputChanged.invoke(textFieldValue.copy(text = newText.toString(), selection = selection))
+                            onKeyClick.invoke(keyType)
                         }
                         else -> {}
                     }
