@@ -33,6 +33,7 @@ import kg.devcats.compose.jetpack_chili.components.common.AgreementCell
 import kg.devcats.compose.jetpack_chili.components.common.AnimatedProgressLine
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
+import kg.devcats.compose.jetpack_chili.components.common.ChiliLinearProgressIndicator
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSlider
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
@@ -44,7 +45,9 @@ import kg.devcats.compose.jetpack_chili.components.common.chips.SimpleTextChip
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.blue_1
+import kg.devcats.compose.jetpack_chili.theme.gray_11
 import kg.devcats.compose.jetpack_chili.theme.green_1
+import kg.devcats.compose.jetpack_chili.theme.green_8
 import kg.devcats.compose.jetpack_chili.theme.red_1
 import kg.devcats.compose.jetpack_chili.util.SelectionType
 import kg.devcats.compose.samples.ui.extension.showToast
@@ -226,6 +229,20 @@ fun PreviewCommon(
                 value = initialValue2,
                 displayValueFormatter = { "$it c" },
                 onValueChange = { newVal -> initialValue2 = newVal }
+            )
+
+            Text(
+                modifier = Modifier.padding(vertical = 16.dp),
+                text = "ChiliLinearProgressIndicator",
+                style = Chili.typography.H16_Primary
+            )
+
+            ChiliLinearProgressIndicator(
+                modifier = Modifier.fillMaxWidth(),
+                steps = remember { mutableIntStateOf(6) },
+                currentStep = remember { mutableIntStateOf(3) },
+                trackColor = gray_11,
+                color = green_8
             )
 
             Text(
