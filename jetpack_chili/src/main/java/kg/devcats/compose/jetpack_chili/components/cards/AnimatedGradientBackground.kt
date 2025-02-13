@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kotlin.math.cos
@@ -14,14 +15,15 @@ import kotlin.math.sin
 @Composable
 fun AnimatedGradientBackground(
     modifier: Modifier = Modifier,
-    isAnimating: Boolean = true
-) {
-    val colors = if (isAnimating) listOf(
+    isAnimating: Boolean = true,
+    animatedColors: List<Color> = listOf(
         Chili.color.animatedGradient1,
         Chili.color.animatedGradient2,
         Chili.color.animatedGradient3,
         Chili.color.animatedGradient4
-    ) else listOf(
+    ),
+) {
+    val colors = if (isAnimating) animatedColors else listOf(
         Chili.color.cardViewBackground,
         Chili.color.cardViewBackground,
         Chili.color.cardViewBackground,
