@@ -239,8 +239,8 @@ fun PreviewCommon(
 
             ChiliLinearProgressIndicator(
                 modifier = Modifier.fillMaxWidth(),
-                steps = remember { mutableIntStateOf(6) },
-                currentStep = remember { mutableIntStateOf(3) },
+                steps = 6,
+                currentStep = 3,
                 trackColor = gray_11,
                 color = green_8
             )

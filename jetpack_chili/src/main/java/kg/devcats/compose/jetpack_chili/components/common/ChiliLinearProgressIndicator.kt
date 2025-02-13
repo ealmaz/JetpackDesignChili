@@ -24,9 +24,9 @@ import kg.devcats.compose.jetpack_chili.theme.green_8
 @Composable
 fun ChiliLinearProgressIndicator(
     modifier: Modifier = Modifier,
-    steps: State<Int>,
+    steps: Int,
     heightProgressBar: Dp = 6.dp,
-    currentStep: State<Int> = remember { mutableIntStateOf(0) },
+    currentStep: Int = 0,
     trackColor: Color = gray_11,
     color: Color = green_8
 ) {
@@ -35,12 +35,12 @@ fun ChiliLinearProgressIndicator(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        repeat(steps.value) { step ->
+        repeat(steps) { step ->
             Box(
                 modifier = Modifier
                     .fillMaxHeight()
                     .weight(1f)
-                    .background(if (step < currentStep.value) color else trackColor, CircleShape)
+                    .background(if (step < currentStep) color else trackColor, CircleShape)
             )
         }
     }
@@ -51,8 +51,8 @@ fun ChiliLinearProgressIndicator(
 private fun Preview() {
     ChiliLinearProgressIndicator(
         modifier = Modifier.fillMaxWidth(),
-        steps = remember { mutableIntStateOf(6) },
-        currentStep = remember { mutableIntStateOf(4) },
+        steps = 6,
+        currentStep = 3,
         trackColor = gray_11,
         color = green_8
     )
