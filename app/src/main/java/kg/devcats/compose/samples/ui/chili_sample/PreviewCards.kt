@@ -901,7 +901,7 @@ fun PreviewCards(
                 ReferralTaskCard(
                     title = "Пополнить кошелёк, счёт или карту",
                     subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
-                    icon = R.drawable.chili_ic_documents_green,
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
                     isFriend = false,
                     status = ReferralTaskStatus.Loading
                 )
@@ -913,7 +913,7 @@ fun PreviewCards(
                 ReferralTaskCard(
                     title = "Пополнить кошелёк, счёт или карту",
                     subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
-                    icon = R.drawable.chili_ic_documents_green,
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
                     isFriend = false,
                     status = ReferralTaskStatus.Completed(
                         detailInfoText = "Выполнено"
@@ -927,7 +927,7 @@ fun PreviewCards(
                 ReferralTaskCard(
                     title = "Пополнить кошелёк, счёт \u2028или карту",
                     subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
-                    icon = R.drawable.chili_ic_documents_green,
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
                     isFriend = false,
                     status = ReferralTaskStatus.Available(
                         actionButtonText = "Подробнее",
@@ -943,7 +943,7 @@ fun PreviewCards(
                 ReferralTaskCard(
                     title = "Пополнить кошелёк, счёт \u2028или карту",
                     subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
-                    icon = R.drawable.chili_ic_documents_green,
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
                     isFriend = false,
                     status = ReferralTaskStatus.Unavailable(
                         detailInfoText = "Недоступно",
@@ -957,7 +957,7 @@ fun PreviewCards(
                 ReferralTaskCard(
                     title = "Пополнить кошелёк, счёт \u2028или карту",
                     subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
-                    icon = R.drawable.chili_ic_documents_green,
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
                     isFriend = true,
                     status = ReferralTaskStatus.Loading
                 )
@@ -969,7 +969,7 @@ fun PreviewCards(
                 ReferralTaskCard(
                     title = "Пополнить кошелёк, счёт \u2028или карту",
                     subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
-                    icon = R.drawable.chili_ic_documents_green,
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
                     isFriend = true,
                     status = ReferralTaskStatus.Available(
                         actionButtonText = "Отправить другу",
@@ -986,7 +986,7 @@ fun PreviewCards(
                 ReferralTaskCard(
                     title = "Пополнить кошелёк, счёт \u2028или карту",
                     subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
-                    icon = R.drawable.chili_ic_documents_green,
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
                     isFriend = true,
                     status = ReferralTaskStatus.Completed(
                         detailInfoText = "Выполнено",

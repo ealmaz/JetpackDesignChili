@@ -1,21 +1,22 @@
 package kg.devcats.compose.jetpack_chili.components.cards
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
@@ -27,19 +28,22 @@ import kg.devcats.compose.jetpack_chili.theme.gray_1
 fun ReferralTaskCard(
     modifier: Modifier = Modifier,
     title: String,
-    subtitle: String,
-    @DrawableRes icon: Int?,
+    subtitle: String?,
+    iconUrl: String,
     isFriend: Boolean,
     status: ReferralTaskStatus,
 ) {
     if (status is ReferralTaskStatus.Loading) {
-        LoadingContent(isFriend = isFriend)
+        LoadingContent(
+            modifier = modifier,
+            isFriend = isFriend
+        )
     } else {
         TaskContent(
             modifier = modifier,
             title = title,
             subtitle = subtitle,
-            icon = icon,
+            iconUrl = iconUrl,
             isFriend = isFriend,
             status = status
         )
@@ -86,8 +90,8 @@ private fun LoadingContent(modifier: Modifier = Modifier, isFriend: Boolean) {
 private fun TaskContent(
     modifier: Modifier,
     title: String,
-    subtitle: String,
-    @DrawableRes icon: Int?,
+    subtitle: String?,
+    iconUrl: String?,
     isFriend: Boolean,
     status: ReferralTaskStatus,
 ) {
@@ -107,49 +111,117 @@ private fun TaskContent(
                 text = title,
                 style = Chili.typography.H16_Primary_500
             )
-            val style =
-                if (status is ReferralTaskStatus.Unavailable) Chili.typography.H12.copy(color = gray_1)
-                else Chili.typography.H12_Secondary
-            Text(
-                modifier = Modifier.padding(top = 4.dp),
-                text = subtitle,
-                style = style
-            )
-
+            subtitle?.let {
+                val style =
+                    if (status is ReferralTaskStatus.Unavailable) Chili.typography.H12.copy(color = gray_1)
+                    else Chili.typography.H12_Secondary
+                Text(
+                    modifier = Modifier.padding(top = 4.dp),
+                    text = subtitle,
+                    style = style
+                )
+            }
             DetailInformationContent(
                 modifier = Modifier.padding(top = 12.dp),
                 isFriend = isFriend,
                 status = status
             )
         }
-        val size = if (isFriend) 32.dp else 48.dp
-        val resultIcon = getResultIcon(icon, isFriend, status is ReferralTaskStatus.Completed)
-        resultIcon?.let {
-            Image(
-                modifier = Modifier.size(size),
-                painter = painterResource(it),
-                contentDescription = null
-            )
-        }
-    }
-}
-
-private fun getResultIcon(icon: Int?, isFriend: Boolean, isCompleted: Boolean): Int? {
-    return when {
-        isFriend && isCompleted -> R.drawable.chili_ic_checked_checkbox_round
-        isFriend && !isCompleted -> R.drawable.chili_ic_checkbox_round
-        else -> icon
+        IconContent(isFriend, status is ReferralTaskStatus.Completed, iconUrl)
     }
 }
 
 @Composable
-private fun ColumnScope.DetailInformationContent(
+fun IconContent(isFriend: Boolean, isCompleted: Boolean, iconUrl: String?) {
+    if (isFriend) {
+        val resultIcon =
+            if (isCompleted) R.drawable.chili_ic_checked_checkbox_round else R.drawable.chili_ic_checkbox_round
+        Image(
+            modifier = Modifier.size(32.dp),
+            painter = painterResource(resultIcon),
+            contentDescription = null
+        )
+    } else {
+        AsyncImage(
+            model = iconUrl,
+            modifier = Modifier
+                .clip(RoundedCornerShape(12.dp))
+                .size(48.dp),
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
+private fun DetailInformationContent(
     modifier: Modifier = Modifier,
     isFriend: Boolean,
     status: ReferralTaskStatus,
 ) {
-    when {
-        isFriend && status is ReferralTaskStatus.Completed -> {
+    if (isFriend) {
+        InvitingDetailInformation(modifier, status)
+    } else {
+        InvitedDetailInformation(modifier, status)
+    }
+}
+
+@Composable
+fun InvitedDetailInformation(modifier: Modifier, status: ReferralTaskStatus) {
+    when (status) {
+        is ReferralTaskStatus.Unavailable -> {
+            Row(
+                modifier = modifier,
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    modifier = Modifier.size(20.dp),
+                    painter = painterResource(R.drawable.chilli_ic_lock),
+                    contentDescription = null
+                )
+                Text(
+                    modifier = Modifier.padding(start = 4.dp),
+                    text = status.detailInfoText,
+                    style = Chili.typography.H14.copy(color = gray_1)
+                )
+            }
+        }
+
+        is ReferralTaskStatus.Available -> {
+            ChiliPrimaryButton(
+                modifier = modifier,
+                text = status.actionButtonText,
+                onClick = status.onActionClick
+            )
+        }
+
+        is ReferralTaskStatus.Completed -> {
+            Row(
+                modifier = modifier,
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    modifier = Modifier.size(20.dp),
+                    painter = painterResource(R.drawable.chili_ic_checked_checkbox_round),
+                    contentDescription = null
+                )
+                Text(
+                    modifier = Modifier.padding(start = 4.dp),
+                    text = status.detailInfoText,
+                    style = Chili.typography.H14.copy(color = Chili.color.alertSuccessContent)
+                )
+            }
+        }
+
+        else -> {}
+    }
+}
+
+@Composable
+fun InvitingDetailInformation(modifier: Modifier, status: ReferralTaskStatus) {
+    when (status) {
+        is ReferralTaskStatus.Completed -> {
             Text(
                 modifier = modifier,
                 text = status.detailInfoText,
@@ -157,7 +229,7 @@ private fun ColumnScope.DetailInformationContent(
             )
         }
 
-        isFriend && status is ReferralTaskStatus.Available -> {
+        is ReferralTaskStatus.Available -> {
             Row(
                 modifier = modifier,
                 horizontalArrangement = Arrangement.Start,
@@ -177,51 +249,7 @@ private fun ColumnScope.DetailInformationContent(
             }
         }
 
-        status is ReferralTaskStatus.Unavailable -> {
-            Row(
-                modifier = modifier,
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    modifier = Modifier.size(20.dp),
-                    painter = painterResource(R.drawable.chilli_ic_lock),
-                    contentDescription = null
-                )
-                Text(
-                    modifier = Modifier.padding(start = 4.dp),
-                    text = status.detailInfoText,
-                    style = Chili.typography.H14.copy(color = gray_1)
-                )
-            }
-        }
-
-        status is ReferralTaskStatus.Available -> {
-            ChiliPrimaryButton(
-                modifier = modifier,
-                text = status.actionButtonText,
-                onClick = status.onActionClick
-            )
-        }
-
-        status is ReferralTaskStatus.Completed -> {
-            Row(
-                modifier = modifier,
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    modifier = Modifier.size(20.dp),
-                    painter = painterResource(R.drawable.chili_ic_checked_checkbox_round),
-                    contentDescription = null
-                )
-                Text(
-                    modifier = Modifier.padding(start = 4.dp),
-                    text = status.detailInfoText,
-                    style = Chili.typography.H14.copy(color = Chili.color.referralTaskSuccessText)
-                )
-            }
-        }
+        else -> {}
     }
 }
 
