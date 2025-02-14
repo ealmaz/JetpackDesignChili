@@ -63,6 +63,8 @@ import kg.devcats.compose.jetpack_chili.components.cards.ProductCard
 import kg.devcats.compose.jetpack_chili.components.cards.ProgressCard
 import kg.devcats.compose.jetpack_chili.components.cards.PromoCard
 import kg.devcats.compose.jetpack_chili.components.cards.PromoStatusState
+import kg.devcats.compose.jetpack_chili.components.cards.ReferralTaskCard
+import kg.devcats.compose.jetpack_chili.components.cards.ReferralTaskStatus
 import kg.devcats.compose.jetpack_chili.components.cards.StoriesCard
 import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCard
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCell
@@ -886,6 +888,109 @@ fun PreviewCards(
                     description = "Доступный объем счета",
                     progressPercent = 20,
                     isLoading = true
+                )
+            }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "ReferralTaskCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            ShadowRoundedBox {
+                ReferralTaskCard(
+                    title = "Пополнить кошелёк, счёт или карту",
+                    subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
+                    isFriend = false,
+                    status = ReferralTaskStatus.Loading
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                ReferralTaskCard(
+                    title = "Пополнить кошелёк, счёт или карту",
+                    subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
+                    isFriend = false,
+                    status = ReferralTaskStatus.Completed(
+                        detailInfoText = "Выполнено"
+                    )
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                ReferralTaskCard(
+                    title = "Пополнить кошелёк, счёт \u2028или карту",
+                    subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
+                    isFriend = false,
+                    status = ReferralTaskStatus.Available(
+                        actionButtonText = "Подробнее",
+                        onActionClick = {},
+                        detailInfoTextClick = {}
+                    )
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                ReferralTaskCard(
+                    title = "Пополнить кошелёк, счёт \u2028или карту",
+                    subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
+                    isFriend = false,
+                    status = ReferralTaskStatus.Unavailable(
+                        detailInfoText = "Недоступно",
+                    )
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                ReferralTaskCard(
+                    title = "Пополнить кошелёк, счёт \u2028или карту",
+                    subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
+                    isFriend = true,
+                    status = ReferralTaskStatus.Loading
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                ReferralTaskCard(
+                    title = "Пополнить кошелёк, счёт \u2028или карту",
+                    subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
+                    isFriend = true,
+                    status = ReferralTaskStatus.Available(
+                        actionButtonText = "Отправить другу",
+                        detailInfoText = "Подробнее",
+                        onActionClick = {},
+                        detailInfoTextClick = {}
+                    )
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                ReferralTaskCard(
+                    title = "Пополнить кошелёк, счёт \u2028или карту",
+                    subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
+                    iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
+                    isFriend = true,
+                    status = ReferralTaskStatus.Completed(
+                        detailInfoText = "Выполнено",
+                    )
                 )
             }
         }
