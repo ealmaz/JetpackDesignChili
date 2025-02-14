@@ -121,11 +121,11 @@ private fun TaskContent(
                     style = style
                 )
             }
-            DetailInformationContent(
-                modifier = Modifier.padding(top = 12.dp),
-                isFriend = isFriend,
-                status = status
-            )
+            if (isFriend) {
+                InvitingDetailInformation(Modifier.padding(top = 12.dp), status)
+            } else {
+                InvitedDetailInformation(Modifier.padding(top = 12.dp), status)
+            }
         }
         IconContent(isFriend, status is ReferralTaskStatus.Completed, iconUrl)
     }
@@ -149,19 +149,6 @@ fun IconContent(isFriend: Boolean, isCompleted: Boolean, iconUrl: String?) {
                 .size(48.dp),
             contentDescription = null
         )
-    }
-}
-
-@Composable
-private fun DetailInformationContent(
-    modifier: Modifier = Modifier,
-    isFriend: Boolean,
-    status: ReferralTaskStatus,
-) {
-    if (isFriend) {
-        InvitingDetailInformation(modifier, status)
-    } else {
-        InvitedDetailInformation(modifier, status)
     }
 }
 
