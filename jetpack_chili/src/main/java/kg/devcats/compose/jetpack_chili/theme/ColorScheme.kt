@@ -179,6 +179,9 @@ interface ChiliColorScheme {
 
     //ChiliChipsGroup
     val textChipUnselectedBackgroundColor: Color
+
+//    ReferralTask
+    val referralTaskSuccessText: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -318,7 +321,9 @@ data class ChiliLightColorScheme(
 
     override val sliderInactiveTrackColor: Color = gray_3,
 
-    override val textChipUnselectedBackgroundColor: Color = gray_5
+    override val textChipUnselectedBackgroundColor: Color = gray_5,
+
+    override val referralTaskSuccessText: Color = green_8,
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -456,6 +461,8 @@ data class ChiliDarkColorScheme(
 
     override val sliderInactiveTrackColor: Color = black_5,
 
-    override val textChipUnselectedBackgroundColor: Color = black_4
+    override val textChipUnselectedBackgroundColor: Color = black_4,
+
+    override val referralTaskSuccessText: Color = green_11,
 ): ChiliColorScheme
 
