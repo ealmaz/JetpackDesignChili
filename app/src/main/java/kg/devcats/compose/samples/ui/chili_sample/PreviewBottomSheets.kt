@@ -33,6 +33,7 @@ import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliChooseActionBS
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliChooseActionBottomSheet
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailActionsBottomSheet
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailBottomSheet
+import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailedInfoBottomSheet
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliInfoBottomSheet
 import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -153,6 +154,19 @@ fun BottomSheetsPreview(
         )
     )
 
+    var detailedInfoBottomSheetState by remember { mutableStateOf(false) }
+
+    ChiliDetailedInfoBottomSheet(
+        isShown = detailedInfoBottomSheetState,
+        icon = painterResource(id = R.drawable.chili_ic_documents_green),
+        headerText = "Заголовок содержит в себе до 60 символов и может быть в 2 строки",
+        subtitleText = "Подзаголовок содержит до 113 символов, что очень приятно, потому что теперь можно написать его аж в целых три строки и развернуть любую мысль ",
+        descriptionText = "Описание содержит до 113 символов, что очень приятно, потому что теперь можно написать его аж в целых три строки и развернуть любую мысль ",
+        onPrimaryButtonClick = { detailedInfoBottomSheetState = false },
+        primaryButtonText = "Понятно",
+        onDismissRequest = { detailedInfoBottomSheetState = false }
+    )
+
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.screenBackground)) {
@@ -184,6 +198,9 @@ fun BottomSheetsPreview(
             ChiliPrimaryButton(text = "Choose action", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 8.dp)) { chooseAction = true }
+            ChiliPrimaryButton(text = "Detailed info bottom sheet", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)) { detailedInfoBottomSheetState = true }
         }
     }
 }
