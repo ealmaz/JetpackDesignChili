@@ -60,9 +60,7 @@ fun ChiliPlainInputField(
                         if (isInputCenteredAlign) Alignment.Center else Alignment.CenterStart
                     ), text = placeholder, style = textStyle.copy(color = Chili.color.valueText))
                 }
-                if (value.text.isNotEmpty()) {
-                    inputField()
-                }
+                inputField()
             }
         }
     }
