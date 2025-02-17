@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,7 +22,7 @@ import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun ChiliDetailedInfoBottomSheet(
+fun ChiliDetailedDescriptionBottomSheet(
     modifier: Modifier = Modifier,
     isShown: Boolean,
     headerText: String? = null,
@@ -43,7 +42,7 @@ fun ChiliDetailedInfoBottomSheet(
         bottomSheetShape = Chili.shapes.RoundedTopCornerShape,
         closeIcon = painterResource(id = R.drawable.chili_ic_close)
     ) {
-        ChiliDetailedInfoBottomSheetContent(
+        ChiliDetailedDescriptionBottomSheetContent(
             icon = icon,
             headerText = headerText,
             subtitleText = subtitleText,
@@ -55,7 +54,7 @@ fun ChiliDetailedInfoBottomSheet(
 }
 
 @Composable
-fun ColumnScope.ChiliDetailedInfoBottomSheetContent(
+fun ColumnScope.ChiliDetailedDescriptionBottomSheetContent(
     icon: Painter? = null,
     headerText: String? = null,
     subtitleText: String? = null,
@@ -119,9 +118,9 @@ fun ColumnScope.ChiliDetailedInfoBottomSheetContent(
 
 @Preview
 @Composable
-fun PreviewChiliDetailedInfoBottomSheet() {
+fun PreviewChiliDetailedDescriptionBottomSheet() {
     Column {
-        ChiliDetailedInfoBottomSheetContent(
+        ChiliDetailedDescriptionBottomSheetContent(
             icon = painterResource(id = R.drawable.chili_ic_documents_green),
             headerText = "Заголовок содержит в себе до 60 символов и может быть в 2 строки",
             subtitleText = "Подзаголовок содержит до 113 символов, что очень приятно, потому что теперь можно написать его аж в целых три строки и развернуть любую мысль ",

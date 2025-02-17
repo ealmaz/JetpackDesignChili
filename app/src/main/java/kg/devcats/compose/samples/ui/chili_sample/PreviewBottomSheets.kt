@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -33,7 +32,7 @@ import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliChooseActionBS
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliChooseActionBottomSheet
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailActionsBottomSheet
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailBottomSheet
-import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailedInfoBottomSheet
+import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliDetailedDescriptionBottomSheet
 import kg.devcats.compose.jetpack_chili.modals.bottom_sheets.ChiliInfoBottomSheet
 import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -156,7 +155,7 @@ fun BottomSheetsPreview(
 
     var detailedInfoBottomSheetState by remember { mutableStateOf(false) }
 
-    ChiliDetailedInfoBottomSheet(
+    ChiliDetailedDescriptionBottomSheet(
         isShown = detailedInfoBottomSheetState,
         icon = painterResource(id = R.drawable.chili_ic_documents_green),
         headerText = "Заголовок содержит в себе до 60 символов и может быть в 2 строки",
