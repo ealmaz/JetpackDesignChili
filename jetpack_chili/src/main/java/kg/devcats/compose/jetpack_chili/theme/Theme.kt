@@ -32,6 +32,9 @@ private val materialLightColorScheme = lightColorScheme(
 private val chiliDefaultLightColorScheme = ChiliLightColorScheme()
 private val chiliDefaultDarkColorScheme = ChiliDarkColorScheme()
 
+private val chiliLightColorPairScheme = ChiliLightColorPairScheme()
+private val chiliDarkColorPairScheme = ChiliDarkColorPairScheme()
+
 private val chiliDefaultLightTypography = ChiliTypography(chiliDefaultLightColorScheme)
 private val chiliDefaultDarkTypography = ChiliTypography(chiliDefaultDarkColorScheme)
 
@@ -51,6 +54,11 @@ fun ChiliTheme(
         else -> chiliDefaultLightColorScheme
     }
 
+    val chiliColorPairScheme = when {
+        darkTheme -> chiliDarkColorPairScheme
+        else -> chiliLightColorPairScheme
+    }
+
     val view = LocalView.current
 
     LaunchedEffect(darkTheme) {
@@ -67,6 +75,7 @@ fun ChiliTheme(
     CompositionLocalProvider(
         LocalChiliTypography provides if (darkTheme) chiliDefaultDarkTypography else chiliDefaultLightTypography,
         LocalChiliColorScheme provides chiliColorScheme,
+        LocalChiliColorPairScheme provides chiliColorPairScheme,
         LocalChiliThemeAttributes provides ChiliThemeAttributes,
         LocalChiliShapes provides Chili.shapes
     ) {
@@ -132,6 +141,11 @@ object Chili {
         @Composable
         @ReadOnlyComposable
         get() = LocalChiliColorScheme.current
+
+    val colorPair: ChiliColorPairScheme
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalChiliColorPairScheme.current
 
     val shapes: ChiliShapes
         @Composable
