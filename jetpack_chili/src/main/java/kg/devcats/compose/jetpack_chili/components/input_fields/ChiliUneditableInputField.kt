@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -34,6 +35,7 @@ fun ChiliUneditableInputField(
     textAlign: TextAlign = TextAlign.Unspecified,
     textPadding: PaddingValues = PaddingValues(vertical = 12.dp, horizontal = 16.dp),
     maxLines: Int = 1,
+    backgroundColor: Color = Chili.color.inputFieldBackground,
     endIcon: Painter? = painterResource(R.drawable.chili4_ic_chevron),
     onClick: (() -> Unit)? = null
 ) {
@@ -51,7 +53,7 @@ fun ChiliUneditableInputField(
             .fillMaxWidth()
             .then(clickableModifier),
         shape = Chili.shapes.RoundedCornerShape,
-        color = Chili.color.inputFieldBackground
+        color = backgroundColor
     ) {
         Row(
             Modifier.padding(textPadding),
