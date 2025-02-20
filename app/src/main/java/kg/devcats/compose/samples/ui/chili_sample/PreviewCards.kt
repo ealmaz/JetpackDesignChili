@@ -53,6 +53,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
+import kg.devcats.compose.jetpack_chili.components.cards.ExpandableCard
 import kg.devcats.compose.jetpack_chili.components.cards.IconSize
 import kg.devcats.compose.jetpack_chili.components.cards.InfoCard
 import kg.devcats.compose.jetpack_chili.components.cards.InfoCardButtonConfig
@@ -991,6 +992,24 @@ fun PreviewCards(
                     status = ReferralTaskStatus.Completed(
                         detailInfoText = "Выполнено",
                     )
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            var isExpanded by remember { mutableStateOf(true) }
+
+            ShadowRoundedBox {
+                ExpandableCard(
+                    title = "Title",
+                    subtitle = "Subtitle",
+                    isExpanded = isExpanded,
+                    onExpandChange = { isExpanded = it },
+                    expandedContent = {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text("Expanded content")
+                        }
+                    }
                 )
             }
         }

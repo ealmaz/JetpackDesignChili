@@ -53,6 +53,7 @@ fun ChiliCell(
     iconSize: Dp = 32.dp,
     containerPaddingValues: PaddingValues? = null,
     containerBackgroundColor: Color = Chili.color.cellViewBackground,
+    startFrame: (@Composable RowScope.() -> Unit)? = null,
     endFrame: (@Composable RowScope.() -> Unit)? = null,
     onClick: (() -> Unit)? = null,
     isLoading: Boolean = false,
@@ -86,6 +87,8 @@ fun ChiliCell(
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
+                startFrame?.invoke(this)
+
                 iconUrl?.let {
                     Box(modifier = Modifier.padding(vertical = 8.dp)) {
                         ShowShimmerOrContent(
