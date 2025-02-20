@@ -1,5 +1,6 @@
 package kg.devcats.compose.jetpack_chili
 
+import android.os.SystemClock
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -19,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import java.util.concurrent.atomic.AtomicLong
 
 @Composable
 fun pixelsToDp(pixels: Int) = with(LocalDensity.current) { pixels.toDp() }
@@ -93,4 +95,32 @@ fun Modifier.setRoundedShapeByPosition(isFirst: Boolean = false, isLast: Boolean
         else -> Chili.shapes.CornerNone
     }
     return clip(shape)
+}
+
+private val lastClickTime = AtomicLong(0L)
+
+fun Modifier.singleClickable(
+    debounceTime: Long = 1000L,
+    onClick: () -> Unit
+): Modifier {
+    return this.clickable {
+        val now = SystemClock.uptimeMillis()
+        if (now - lastClickTime.get() > debounceTime) {
+            lastClickTime.set(now)
+            onClick()
+        }
+    }
+}
+
+// For Buttons
+
+fun singleClickable(
+    debounceTime: Long = 1000L,
+    onClick: () -> Unit
+) {
+    val now = SystemClock.uptimeMillis()
+    if (now - lastClickTime.get() > debounceTime) {
+        lastClickTime.set(now)
+        onClick()
+    }
 }
