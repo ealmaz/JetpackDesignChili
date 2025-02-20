@@ -44,7 +44,6 @@ fun ExpandableCard(
     cardStartFrame: (@Composable () -> Unit)? = null,
     expandedContent: @Composable () -> Unit
 ) {
-
     val rotationAngle by animateFloatAsState(
         targetValue = if (isExpanded) 180f else 0f,
         label = ""
@@ -55,42 +54,17 @@ fun ExpandableCard(
         color = Chili.color.cardViewBackground,
     ) {
         Column {
-
-            Row(
-                modifier = Modifier
-                    .clickable { onExpandChange?.invoke(!isExpanded) }
-                    .padding(horizontal = 12.dp, vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                cardStartFrame?.invoke()
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = title,
-                        style = titleTextStyle,
-                        maxLines = titleMaxLines,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    if (!subtitle.isNullOrEmpty()) {
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = subtitle,
-                            style = subtitleTextStyle,
-                            maxLines = subtitleMaxLines,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                }
-
-                Icon(
-                    painter = painterResource(R.drawable.chili4_ic_chevron_down),
-                    contentDescription = null,
-                    modifier = Modifier.rotate(rotationAngle),
-                    tint = Chili.color.chevronColor
-                )
-            }
+            ExpandableCardHeader(
+                title = title,
+                subtitle = subtitle,
+                titleTextStyle = titleTextStyle,
+                subtitleTextStyle = subtitleTextStyle,
+                titleMaxLines = titleMaxLines,
+                subtitleMaxLines = subtitleMaxLines,
+                cardStartFrame = cardStartFrame,
+                rotationAngle = rotationAngle,
+                onClick = { onExpandChange?.invoke(!isExpanded) }
+            )
 
             AnimatedVisibility(visible = isExpanded) {
                 Column {
@@ -99,6 +73,55 @@ fun ExpandableCard(
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ExpandableCardHeader(
+    title: String,
+    subtitle: String?,
+    titleTextStyle: TextStyle,
+    subtitleTextStyle: TextStyle,
+    titleMaxLines: Int,
+    subtitleMaxLines: Int,
+    cardStartFrame: (@Composable () -> Unit)?,
+    rotationAngle: Float,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .clickable { onClick() }
+            .padding(horizontal = 12.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        cardStartFrame?.invoke()
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = title,
+                style = titleTextStyle,
+                maxLines = titleMaxLines,
+                overflow = TextOverflow.Ellipsis
+            )
+            if (!subtitle.isNullOrEmpty()) {
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = subtitle,
+                    style = subtitleTextStyle,
+                    maxLines = subtitleMaxLines,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
+
+        Icon(
+            painter = painterResource(R.drawable.chili4_ic_chevron_down),
+            contentDescription = null,
+            modifier = Modifier.rotate(rotationAngle),
+            tint = Chili.color.chevronColor
+        )
     }
 }
 
