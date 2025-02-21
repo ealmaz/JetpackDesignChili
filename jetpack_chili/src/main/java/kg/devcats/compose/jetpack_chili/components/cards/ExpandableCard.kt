@@ -4,11 +4,11 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
@@ -41,6 +41,7 @@ fun ExpandableCard(
     subtitleTextStyle: TextStyle = Chili.typography.H12_Secondary,
     titleMaxLines: Int = 1,
     subtitleMaxLines: Int = 1,
+    headerPaddingValues: PaddingValues = PaddingValues(12.dp),
     cardStartFrame: (@Composable () -> Unit)? = null,
     expandedContent: @Composable () -> Unit
 ) {
@@ -61,6 +62,7 @@ fun ExpandableCard(
                 subtitleTextStyle = subtitleTextStyle,
                 titleMaxLines = titleMaxLines,
                 subtitleMaxLines = subtitleMaxLines,
+                headerPaddingValues = headerPaddingValues,
                 cardStartFrame = cardStartFrame,
                 rotationAngle = rotationAngle,
                 onClick = { onExpandChange?.invoke(!isExpanded) }
@@ -85,18 +87,17 @@ private fun ExpandableCardHeader(
     titleMaxLines: Int,
     subtitleMaxLines: Int,
     cardStartFrame: (@Composable () -> Unit)?,
+    headerPaddingValues: PaddingValues,
     rotationAngle: Float,
     onClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
             .clickable { onClick() }
-            .padding(horizontal = 12.dp, vertical = 12.dp),
+            .padding(headerPaddingValues),
         verticalAlignment = Alignment.CenterVertically
     ) {
         cardStartFrame?.invoke()
-
-        Spacer(modifier = Modifier.width(8.dp))
 
         Column(modifier = Modifier.weight(1f)) {
             Text(
@@ -134,7 +135,7 @@ fun ExpandableCardPreview() {
         isExpanded = isExpanded,
         onExpandChange = { isExpanded = it },
         expandedContent = {
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier.padding(12.dp)) {
                 Text("Expanded content")
             }
         }
