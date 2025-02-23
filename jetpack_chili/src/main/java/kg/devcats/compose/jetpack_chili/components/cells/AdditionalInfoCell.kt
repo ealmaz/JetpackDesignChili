@@ -1,6 +1,7 @@
 package kg.devcats.compose.jetpack_chili.components.cells
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -42,6 +43,7 @@ fun ChiliAdditionalInfoCell(
     additionalInfoStyle: TextStyle = Chili.typography.H16_Value,
     additionalEndIcon: Painter? = null,
     additionalEndIconSize: Dp = 18.dp,
+    startFrame: (@Composable RowScope.() -> Unit)? = null,
     isLoading: Boolean = false
 ) {
     ChiliCell(
@@ -60,6 +62,7 @@ fun ChiliAdditionalInfoCell(
         onClick = onClick,
         containerPaddingValues = containerPaddingValues,
         isLoading = isLoading,
+        startFrame = startFrame,
         endFrame = {
             additionalInfo?.let {
                 ShowShimmerOrContent(
