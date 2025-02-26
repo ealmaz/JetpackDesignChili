@@ -1,6 +1,5 @@
 package kg.devcats.compose.jetpack_chili.components.keyboards
 
-import android.view.inputmethod.CorrectionInfo
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputConnection
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +19,7 @@ import kotlinx.coroutines.awaitCancellation
 fun NumberKeyboardFrame(
     modifier: Modifier = Modifier,
     specialSymbols: List<Char> = emptyList(),
+    isKeyboardVisible: Boolean = false,
     content: @Composable () -> Unit,
 ) {
 
@@ -34,18 +34,20 @@ fun NumberKeyboardFrame(
 
         Column(modifier = modifier, verticalArrangement = Arrangement.SpaceBetween) {
             content.invoke()
-            NumberKeyboard(
-                modifier = Modifier,
-                specialSymbols = specialSymbols
-            ) {
-                when (it) {
-                    KeyboardKeyType.Backspace -> {
-                        inputConnection?.deleteSurroundingText(1, 0)
+            if (isKeyboardVisible) {
+                NumberKeyboard(
+                    modifier = Modifier,
+                    specialSymbols = specialSymbols
+                ) {
+                    when (it) {
+                        KeyboardKeyType.Backspace -> {
+                            inputConnection?.deleteSurroundingText(1, 0)
+                        }
+                        is KeyboardKeyType.Symbol -> {
+                            inputConnection?.commitText(it.value.toString(), 1)
+                        }
+                        else -> {}
                     }
-                    is KeyboardKeyType.Symbol -> {
-                        inputConnection?.commitText(it.value.toString(), 1)
-                    }
-                    else -> {}
                 }
             }
         }
