@@ -69,6 +69,8 @@ val green_7 = Color(0xFF081B00)
 val green_8 = Color(0xFF80C01B)
 val green_9 = Color(0xFF49821E)
 val green_10 = Color(0xFFDEF2CC)
+val green_11 = Color(0xFFE5F4D8)
+val green_12 = Color(0xFF1E2D06)
 
 // Blue
 
@@ -104,6 +106,8 @@ val orange_4 = Color(0xFFEB972F)
 val orange_5 = Color(0xFFD57D00)
 val orange_6 = Color(0xFFFFF9E3)
 val orange_7 = Color(0xFF291800)
+val orange_8 = Color(0xFFFFF4E5)
+val orange_9 = Color(0xFF221607)
 
 
 val orange_1_alpha_10 = Color(0x1AFF9500)
