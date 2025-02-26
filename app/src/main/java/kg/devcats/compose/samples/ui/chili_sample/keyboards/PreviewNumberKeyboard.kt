@@ -11,11 +11,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import kg.devcats.compose.jetpack_chili.components.buttons.ChiliLoaderButton
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
 import kg.devcats.compose.jetpack_chili.components.keyboards.NumberKeyboardFrame
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
@@ -36,10 +38,12 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
             onNavigationIconClick = {
                 navigateUp.invoke()
             })
+        var isKeyboardVisible by remember { mutableStateOf(false) }
 
         NumberKeyboardFrame(
             modifier = Modifier.weight(1f),
-            specialSymbols = listOf(',', '&')
+            specialSymbols = listOf(',', '&'),
+            isKeyboardVisible = isKeyboardVisible
         ) {
             var inputText by remember { mutableStateOf(TextFieldValue(text = "0")) }
             var inputText2 by remember { mutableStateOf(TextFieldValue(text = "0")) }
@@ -48,7 +52,14 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
                 ChiliAmountInputField(
                     inputBgColor = Chili.color.inputFieldPrimaryBg,
                     value = inputText,
-                    modifier = Modifier.padding(top = 16.dp),
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .onFocusChanged {
+                            if (it.isFocused) {
+                                isKeyboardVisible = true
+                            }
+                        }
+                    ,
                     message = "Message",
                     placeholder = "Placeholder",
                     actionText = "Action",
@@ -70,6 +81,9 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
                     keyboardType = KeyboardType.Number,
                 ) { textFieldValue ->
                     inputText2 = textFieldValue
+                }
+                ChiliLoaderButton(text = "Изменить видимость кнопки") {
+                    isKeyboardVisible = !isKeyboardVisible
                 }
             }
         }
