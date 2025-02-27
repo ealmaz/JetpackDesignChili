@@ -1,6 +1,5 @@
 package kg.devcats.compose.jetpack_chili.components.input_fields
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -54,6 +53,7 @@ fun ChiliInputField(
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
     actionText: String? = null,
+    inputMask: String? = null,
     isInputCenteredAlign: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
@@ -72,6 +72,7 @@ fun ChiliInputField(
         placeholder = placeholder,
         focusRequester = focusRequester,
         message = message,
+        inputMask = inputMask,
         actionText = actionText,
         isInputCenteredAlign = isInputCenteredAlign,
         keyboardType = keyboardType,
@@ -93,6 +94,7 @@ fun ChiliInputField(
     placeholder: String? = null,
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
+    inputMask: String? = null,
     actionText: String? = null,
     isInputCenteredAlign: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -107,6 +109,7 @@ fun ChiliInputField(
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
         actionText = actionText,
+        inputMask = inputMask,
         isInputCenteredAlign = isInputCenteredAlign,
         onActionClick = onActionClick,
         onValueChange = onValueChange,
@@ -194,6 +197,7 @@ private fun InputFieldContainer(
     inputBgColor: Color = Chili.color.inputFieldBackground,
     message: String? = null,
     actionText: String? = null,
+    inputMask: String? = null,
     isInputCenteredAlign: Boolean = true,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((TextFieldValue) -> Unit),
@@ -207,10 +211,11 @@ private fun InputFieldContainer(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 if (isClearButtonEnabled && value.text.isNotEmpty() && isInputCenteredAlign) {
-                    Spacer(modifier = Modifier.width(44.dp))
+                    val spacerWidth = if (value.text != inputMask) 44.dp else 0.dp
+                    Spacer(modifier = Modifier.width(spacerWidth))
                 }
                 inputField()
-                if (isClearButtonEnabled && value.text.isNotEmpty()) {
+                if (isClearButtonEnabled && value.text.isNotEmpty() && value.text != inputMask) {
                     InputFieldClearIcon { onClearInput() }
                 }
             }
