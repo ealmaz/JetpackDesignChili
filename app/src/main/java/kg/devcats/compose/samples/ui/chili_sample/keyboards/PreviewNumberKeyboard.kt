@@ -71,9 +71,16 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
                 }
 
                 ChiliAmountInputField(
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .onFocusChanged {
+                            if (it.isFocused) {
+                                isKeyboardVisible = true
+                            }
+                        }
+                    ,
                     inputBgColor = Chili.color.inputFieldPrimaryBg,
                     value = inputText2,
-                    modifier = Modifier.padding(top = 16.dp),
                     message = "Message",
                     placeholder = "Placeholder",
                     actionText = "Action",
