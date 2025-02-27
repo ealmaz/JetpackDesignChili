@@ -99,6 +99,10 @@ object SnackbarManager {
     }
 
     private fun CoroutineScope.showSnackbar(snackbarMessage: SnackbarMessage) {
+        if (isAnySnackbarShowing()) {
+            dismissSnackbar()
+        }
+
         _currentSnackbarMessage = snackbarMessage
         alignment.value = snackbarMessage.alignment
         launch {
@@ -106,12 +110,18 @@ object SnackbarManager {
                 message = snackbarMessage.message,
                 duration = SnackbarDuration.Indefinite
             )
+        }.invokeOnCompletion {
+            snackbarMessage.onDismiss?.invoke()
         }
     }
 
     fun dismissSnackbar() {
         _currentSnackbarMessage = null
         snackbarHostState.currentSnackbarData?.dismiss()
+    }
+
+    private fun isAnySnackbarShowing(): Boolean {
+        return snackbarHostState.currentSnackbarData != null
     }
 }
 
