@@ -4,12 +4,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
@@ -20,6 +22,8 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 @Composable
 fun CatalogCard(
     modifier: Modifier = Modifier,
+    titleStyle: TextStyle = Chili.typography.H14_Primary,
+    titleMaxLines: Int = 2,
     title: String,
     icon: Painter? = null,
     onClick: (() -> Unit)? = null,
@@ -31,25 +35,33 @@ fun CatalogCard(
             color = Chili.color.cardViewBackground,
             contentColor = Color.Unspecified,
             modifier = modifier
-                .padding(12.dp),
+                .padding(start = 12.dp, end = 12.dp, top = 8.dp, bottom = 16.dp),
         ) {
             Column {
                 Shimmer(height = 32.dp, width = 32.dp)
                 Spacer(modifier = Modifier.height(8.dp))
                 Shimmer(
-                    modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
-                    height = 8.dp,
-                    width = 68.dp
+                    height = 6.dp,
+                    width = 96.dp
+                )
+                Shimmer(
+                    modifier = Modifier.padding(top = 8.dp),
+                    height = 6.dp,
+                    width = 60.dp
                 )
             }
         }
     } else {
         ChiliCard(
-            modifier = modifier.padding(12.dp),
             title = title,
             icon = icon,
+            titleStyle = titleStyle,
+            titleMaxLines = titleMaxLines,
             onClick = onClick,
-            titleStyle = Chili.typography.H16_Primary_500
+            modifier = modifier
+                .padding(start = 12.dp, top = 8.dp)
+                .sizeIn(minHeight = 84.dp)
+
         )
     }
 }
