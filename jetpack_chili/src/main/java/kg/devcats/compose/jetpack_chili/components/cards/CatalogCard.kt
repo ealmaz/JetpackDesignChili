@@ -3,6 +3,7 @@ package kg.devcats.compose.jetpack_chili.components.cards
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.Surface
@@ -35,6 +36,7 @@ fun CatalogCard(
             color = Chili.color.cardViewBackground,
             contentColor = Color.Unspecified,
             modifier = modifier
+                .height(90.dp)
                 .padding(start = 12.dp, end = 12.dp, top = 8.dp, bottom = 16.dp),
         ) {
             Column {
@@ -60,7 +62,7 @@ fun CatalogCard(
             onClick = onClick,
             modifier = modifier
                 .padding(start = 12.dp, top = 8.dp)
-                .sizeIn(minHeight = 84.dp)
+                .heightIn(84.dp)
 
         )
     }
