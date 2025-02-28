@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -57,6 +58,7 @@ fun ChiliInputField(
     actionText: String? = null,
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
+    inputFieldPaddingValues: PaddingValues = PaddingValues(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
     startFrame: @Composable (() -> Unit)? = null,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -79,6 +81,7 @@ fun ChiliInputField(
         message = message,
         actionText = actionText,
         isInputCenteredAlign = isInputCenteredAlign,
+        inputFieldPaddingValues = inputFieldPaddingValues,
         startFrame = startFrame,
         clearIcon = clearIcon,
         keyboardType = keyboardType,
@@ -103,6 +106,7 @@ fun ChiliInputField(
     isInputFieldEmpty: Boolean? = null,
     actionText: String? = null,
     isInputCenteredAlign: Boolean = true,
+    inputFieldPaddingValues: PaddingValues = PaddingValues(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
     startFrame: @Composable (() -> Unit)? = null,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -132,6 +136,7 @@ fun ChiliInputField(
             placeholder = placeholder,
             textStyle = textStyle,
             isInputCenteredAlign = isInputCenteredAlign,
+            inputFieldPaddingValues = inputFieldPaddingValues,
             keyboardType = keyboardType
         )
     }

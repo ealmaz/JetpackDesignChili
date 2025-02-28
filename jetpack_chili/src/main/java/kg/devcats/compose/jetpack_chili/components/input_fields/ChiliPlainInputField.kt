@@ -3,6 +3,7 @@ package kg.devcats.compose.jetpack_chili.components.input_fields
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -36,6 +37,7 @@ fun ChiliPlainInputField(
     placeholder: String? = null,
     focusRequester: FocusRequester = FocusRequester(),
     isInputCenteredAlign: Boolean = true,
+    inputFieldPaddingValues: PaddingValues = PaddingValues(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
     keyboardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChange: (TextFieldValue) -> Unit,
@@ -54,7 +56,7 @@ fun ChiliPlainInputField(
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = keyboardType)
     ) { inputField ->
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = if (isInputCenteredAlign) Arrangement.Center else Arrangement.Start) {
-            Box(modifier = Modifier.padding(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp)) {
+            Box(modifier = Modifier.padding(inputFieldPaddingValues)) {
                 if (value.text.isEmpty() && !(placeholder.isNullOrBlank())) {
                     Text(modifier = Modifier.align(
                         if (isInputCenteredAlign) Alignment.Center else Alignment.CenterStart

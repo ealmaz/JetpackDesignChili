@@ -2,6 +2,7 @@ package kg.devcats.compose.samples.ui.chili_sample
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -136,6 +137,7 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 value = inputText10,
                 modifier = Modifier.padding(top = 16.dp),
                 isInputCenteredAlign = false,
+                inputFieldPaddingValues = PaddingValues(all = 8.dp),
                 clearIcon = painterResource(id = kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_close_dark_gray),
                 startFrame = {
                     Spacer(modifier = Modifier.width(8.dp))
