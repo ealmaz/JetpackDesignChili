@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
@@ -23,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextRange
@@ -55,6 +57,8 @@ fun ChiliInputField(
     actionText: String? = null,
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
+    startFrame: @Composable (() -> Unit)? = null,
+    clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((String) -> Unit),
@@ -75,6 +79,8 @@ fun ChiliInputField(
         message = message,
         actionText = actionText,
         isInputCenteredAlign = isInputCenteredAlign,
+        startFrame = startFrame,
+        clearIcon = clearIcon,
         keyboardType = keyboardType,
         onActionClick = onActionClick,
         onValueChange = { newTextFieldValueState ->
@@ -97,6 +103,8 @@ fun ChiliInputField(
     isInputFieldEmpty: Boolean? = null,
     actionText: String? = null,
     isInputCenteredAlign: Boolean = true,
+    startFrame: @Composable (() -> Unit)? = null,
+    clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((TextFieldValue) -> Unit),
@@ -111,6 +119,8 @@ fun ChiliInputField(
         message = message,
         actionText = actionText,
         isInputCenteredAlign = isInputCenteredAlign,
+        clearIcon = clearIcon,
+        startFrame = startFrame,
         onActionClick = onActionClick,
         onValueChange = onValueChange,
     ) {
@@ -141,6 +151,8 @@ fun ChiliAmountInputField(
     actionText: String? = null,
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
+    startFrame: @Composable (() -> Unit)? = null,
+    clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
     keyboardType: KeyboardType = KeyboardType.Text,
     maxLenBeforeComma: Int = Int.MAX_VALUE,
     addDecimal: Boolean = true,
@@ -157,6 +169,8 @@ fun ChiliAmountInputField(
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
         actionText = actionText,
+        startFrame = startFrame,
+        clearIcon = clearIcon,
         isInputCenteredAlign = isInputCenteredAlign,
         onActionClick = onActionClick,
         onValueChange = onValueChange,
@@ -201,6 +215,8 @@ private fun InputFieldContainer(
     actionText: String? = null,
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
+    clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
+    startFrame: @Composable (() -> Unit)? = null,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((TextFieldValue) -> Unit),
     onClearInput: (() -> Unit) = { onValueChange(TextFieldValue()) },
@@ -217,12 +233,16 @@ private fun InputFieldContainer(
             shape = Chili.shapes.RoundedCornerShape
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                if (isClearButtonEnabled && !isValueEmpty && isInputCenteredAlign) {
-                    Spacer(modifier = Modifier.width(44.dp))
+                when {
+                    startFrame != null -> startFrame()
+                    isClearButtonEnabled && !isValueEmpty && isInputCenteredAlign ->
+                        Spacer(modifier = Modifier.width(44.dp))
                 }
+
                 inputField()
+
                 if (isClearButtonEnabled && !isValueEmpty) {
-                    InputFieldClearIcon { onClearInput() }
+                    InputFieldClearIcon(clearIcon = clearIcon) { onClearInput() }
                 }
             }
         }
@@ -253,9 +273,9 @@ private fun InputFieldContainer(
 }
 
 @Composable
-private fun InputFieldClearIcon(clearValue: () -> Unit) {
+private fun InputFieldClearIcon(clearIcon: Painter, clearValue: () -> Unit) {
     Image(
-        painter = painterResource(id = R.drawable.chili_ic_circle_clear),
+        painter = clearIcon,
         contentDescription = "clear",
         modifier = Modifier
             .padding(end = 14.dp, start = 8.dp)
@@ -280,9 +300,17 @@ fun PreviewInputField() {
         ChiliInputField(
             modifier = Modifier.fillMaxWidth(),
             value = TextFieldValue("Hello"),
+            isInputCenteredAlign = false,
+            startFrame = {
+                Icon(
+                    modifier = Modifier.padding(start = 8.dp),
+                    painter = painterResource(id = R.drawable.chili4_ic_search),
+                    contentDescription = ""
+                )
+            },
             message = "Message",
-            actionText = "Action") {
-
+            actionText = "Action"
+        ) {
         }
     }
 }

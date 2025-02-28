@@ -2,12 +2,16 @@ package kg.devcats.compose.samples.ui.chili_sample
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +31,7 @@ import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliUneditableI
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.MaskInputInterceptor
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.R
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
@@ -124,6 +130,20 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 modifier = Modifier.padding(top = 16.dp),
                 isInputCenteredAlign = false,
             ) { inputText6 = it }
+
+            var inputText10 by remember { mutableStateOf("Search...") }
+            ChiliInputField(
+                value = inputText10,
+                modifier = Modifier.padding(top = 16.dp),
+                isInputCenteredAlign = false,
+                clearIcon = painterResource(id = kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_close_dark_gray),
+                startFrame = {
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(
+                        painter = painterResource(id = kg.devcats.compose.jetpack_chili.R.drawable.chili4_ic_search),
+                        contentDescription = "")
+                }
+            ) { inputText10 = it }
 
             var inputText7 by remember { mutableStateOf("Prefilled value") }
             ChiliInputField(
