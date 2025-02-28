@@ -76,14 +76,18 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
             }
 
 
-            val maskInterceptor = remember { MaskInputInterceptor("+996 XXX XXX XXX") }
+            val inputMask1 = "+996 XXX XXX XXX"
+            val maskInterceptor = remember { MaskInputInterceptor(inputMask1) }
             var inputText3 by remember { mutableStateOf(maskInterceptor.intercept(TextFieldValue())) }
 
             ChiliInputField(
                 value = inputText3,
                 modifier = Modifier.padding(top = 16.dp),
+                isInputFieldEmpty = inputText3.text == inputMask1,
                 keyboardType = KeyboardType.Number,
-            ) { inputText3 = maskInterceptor.intercept(it) }
+            ) {
+                inputText3 = maskInterceptor.intercept(it)
+            }
 
             val maskInterceptor2 = remember { MaskInputInterceptor("XX XX - XX / XX : XX POST XX") }
             var inputText4 by remember { mutableStateOf(maskInterceptor2.intercept(TextFieldValue())) }
