@@ -2,9 +2,9 @@ package kg.devcats.compose.samples.ui.chili_sample.keyboards
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,73 +25,82 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Chili.color.surfaceBackground)
-            .imePadding()
+
+    var isKeyboardVisible by remember { mutableStateOf(false) }
+
+    val scrollState = rememberScrollState()
+
+    NumberKeyboardFrame(
+        specialSymbols = listOf(',', '&'),
+        isKeyboardVisible = isKeyboardVisible,
+        keyboardModifier = Modifier
+            .background(Chili.color.accentPrimaryColor)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        topBar = {
+            ChiliCenteredAppToolbar(
+                title = "NumberKeyboard",
+                isDividerVisible = true,
+                isNavigationIconVisible = true,
+                onNavigationIconClick = {
+                    navigateUp.invoke()
+                }
+            )
+        }
     ) {
-        ChiliCenteredAppToolbar(
-            title = "NumberKeyboard",
-            isDividerVisible = true,
-            isNavigationIconVisible = true,
-            onNavigationIconClick = {
-                navigateUp.invoke()
-            })
-        var isKeyboardVisible by remember { mutableStateOf(false) }
 
-        NumberKeyboardFrame(
-            modifier = Modifier.weight(1f),
-            specialSymbols = listOf(',', '&'),
-            isKeyboardVisible = isKeyboardVisible
+
+        var inputText by remember { mutableStateOf(TextFieldValue(text = "0")) }
+        var inputText2 by remember { mutableStateOf(TextFieldValue(text = "0")) }
+
+        Column(
+            modifier = Modifier
+                .padding(it)
+                .verticalScroll(scrollState)
         ) {
-            var inputText by remember { mutableStateOf(TextFieldValue(text = "0")) }
-            var inputText2 by remember { mutableStateOf(TextFieldValue(text = "0")) }
-
-            Column {
-                ChiliAmountInputField(
-                    inputBgColor = Chili.color.inputFieldPrimaryBg,
-                    value = inputText,
-                    modifier = Modifier
-                        .padding(top = 16.dp)
-                        .onFocusChanged {
-                            if (it.isFocused) {
-                                isKeyboardVisible = true
-                            }
+            ChiliAmountInputField(
+                inputBgColor = Chili.color.inputFieldPrimaryBg,
+                value = inputText,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .onFocusChanged {
+                        if (it.isFocused) {
+                            isKeyboardVisible = true
                         }
-                    ,
-                    message = "Message",
-                    placeholder = "Placeholder",
-                    actionText = "Action",
-                    suffix = AnnotatedString.fromHtml("<u>c</u>"),
-                    keyboardType = KeyboardType.Number,
-                    maxLenBeforeComma = 6
-                ) { textFieldValue ->
-                    inputText = textFieldValue
-                }
+                    },
+                message = "Message",
+                placeholder = "Placeholder",
+                actionText = "Action",
+                suffix = AnnotatedString.fromHtml("<u>c</u>"),
+                keyboardType = KeyboardType.Number,
+                maxLenBeforeComma = 6
+            ) { textFieldValue ->
+                inputText = textFieldValue
+            }
 
-                ChiliAmountInputField(
-                    modifier = Modifier
-                        .padding(top = 16.dp)
-                        .onFocusChanged {
-                            if (it.isFocused) {
-                                isKeyboardVisible = true
-                            }
+            ChiliAmountInputField(
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .onFocusChanged {
+                        if (it.isFocused) {
+                            isKeyboardVisible = true
                         }
-                    ,
-                    inputBgColor = Chili.color.inputFieldPrimaryBg,
-                    value = inputText2,
-                    message = "Message",
-                    placeholder = "Placeholder",
-                    actionText = "Action",
-                    suffix = AnnotatedString.fromHtml("<u>b</u>"),
-                    keyboardType = KeyboardType.Number,
-                ) { textFieldValue ->
-                    inputText2 = textFieldValue
-                }
-                ChiliLoaderButton(text = "Изменить видимость кнопки") {
-                    isKeyboardVisible = !isKeyboardVisible
-                }
+                    },
+                inputBgColor = Chili.color.inputFieldPrimaryBg,
+                value = inputText2,
+                message = "Message",
+                placeholder = "Placeholder",
+                actionText = "Action",
+                suffix = AnnotatedString.fromHtml("<u>b</u>"),
+                keyboardType = KeyboardType.Number,
+            ) { textFieldValue ->
+                inputText2 = textFieldValue
+            }
+
+            ChiliLoaderButton(
+                modifier = Modifier.padding(top = 8.dp),
+                text = "Изменить видимость кнопки "
+            ) {
+                isKeyboardVisible = !isKeyboardVisible
             }
         }
     }
