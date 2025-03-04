@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save_or_share">Save or send</string>
+    <string name="error_pdf_loading">Failed to load the PDF file</string>
+    <string name="ok">OK</string>
+
+</resources>

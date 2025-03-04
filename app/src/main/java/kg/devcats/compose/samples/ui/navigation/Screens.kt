@@ -1,7 +1,6 @@
 package kg.devcats.compose.samples.ui.navigation
 
 import kotlinx.serialization.Serializable
-import java.util.concurrent.locks.Lock
 
 sealed class Screens {
 
@@ -92,6 +91,12 @@ sealed class PdfScreens {
 
     @Serializable
     data object PdfViewerOneElementScreen : PdfScreens()
+
+    @Serializable
+    data object ActionButtonPdfViewerScreenMultiPages : PdfScreens()
+
+    @Serializable
+    data object ActionButtonPdfViewerScreenOnePage : PdfScreens()
 }
 
 sealed class LockScreens {

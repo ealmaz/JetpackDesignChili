@@ -21,3 +21,19 @@ fun Context.shareFile(uri: Uri, fileType: String, title: String) {
     }
     startActivity(Intent.createChooser(shareIntent, title))
 }
+
+fun Context.sharePdfFile(uri: Uri, title: String? = null) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "application/pdf"
+
+        val contentUri = FileProvider.getUriForFile(
+            this@sharePdfFile,
+            "${packageName}.fileprovider",
+            uri.toFile()
+        )
+
+        putExtra(Intent.EXTRA_STREAM, contentUri)
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    }
+    startActivity(Intent.createChooser(shareIntent, title))
+}

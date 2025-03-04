@@ -15,7 +15,6 @@ import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.navigation.PdfScreens
-import kg.devcats.compose.samples.ui.navigation.Screens
 
 @Composable
 fun PdfSampleScreens(navController: NavController, navigateUp: () -> Unit) {
@@ -74,6 +73,22 @@ fun PdfSampleScreens(navController: NavController, navigateUp: () -> Unit) {
                     .padding(top = 16.dp)
             ) {
                 navController.navigate(PdfScreens.PdfViewerOneElementScreen.toString())
+            }
+
+            ChiliPrimaryButton(
+                text = "PdfViewer with Action Button Multi Pages", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                navController.navigate(PdfScreens.ActionButtonPdfViewerScreenMultiPages.toString())
+            }
+
+            ChiliPrimaryButton(
+                text = "PdfViewer with Action Button One Page", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                navController.navigate(PdfScreens.ActionButtonPdfViewerScreenOnePage.toString())
             }
         }
     }

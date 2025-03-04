@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save_or_share">Сохранить или поделиться</string>
+    <string name="error_pdf_loading">Не удалось загрузить PDF файл</string>
+    <string name="ok">ОК</string>
+
+</resources>
