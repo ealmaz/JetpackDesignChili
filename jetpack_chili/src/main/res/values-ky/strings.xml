@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save_or_share">Сактоо же бөлүшүү</string>
+    <string name="error_pdf_loading">PDF файлды жүктөө мүмкүн болгон жок</string>
+    <string name="ok">Макул</string>
+
+</resources>

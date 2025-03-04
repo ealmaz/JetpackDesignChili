@@ -1,12 +1,15 @@
 package kg.devcats.compose.samples.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.pdf_viewer.PdfSourceCategory
 import kg.devcats.compose.jetpack_chili.components.pdf_viewer.PdfViewer
+import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.chili_sample.PdfSampleScreens
 
 @Composable
@@ -22,8 +25,6 @@ fun PreviewPdfViewerNavGraph(navController: NavController) {
                 title = "PdfViewer Portrait",
                 onNavigationIconClick = pdfNavController::navigateUp,
                 pdfSourceCategory = PdfSourceCategory.Remote("https://www.akchabulak.kg/storage/documents/ru/Oferta.pdf"),
-                errorPdfLoadText = "Не удалось загрузить PDF файл",
-                closeDialogButtonText = "Ок",
             )
         }
         composable(PdfScreens.PdfViewerAlbumScreen.toString()) {
@@ -31,18 +32,14 @@ fun PreviewPdfViewerNavGraph(navController: NavController) {
                 title = "PdfViewer Album",
                 onNavigationIconClick = pdfNavController::navigateUp,
                 pdfSourceCategory = PdfSourceCategory.Remote("https://fiu.gov.kg/uploads/65e953b2c33b7.pdf"),
-                errorPdfLoadText = "Не удалось загрузить PDF файл",
-                closeDialogButtonText = "Ок",
             )
         }
         composable(PdfScreens.PdfViewerWithShareScreen.toString()) {
             PdfViewer(
                 title = "PdfViewer With Share",
                 onNavigationIconClick = pdfNavController::navigateUp,
-                shareIsVisible = true,
+                toolbarShareIsVisible = true,
                 pdfSourceCategory = PdfSourceCategory.Remote("https://www.akchabulak.kg/storage/documents/ru/Oferta.pdf"),
-                errorPdfLoadText = "Не удалось загрузить PDF файл",
-                closeDialogButtonText = "Ок",
                 shareTitle = "Share"
             )
         }
@@ -50,10 +47,8 @@ fun PreviewPdfViewerNavGraph(navController: NavController) {
             PdfViewer(
                 title = "PdfViewer Without Zoom",
                 onNavigationIconClick = pdfNavController::navigateUp,
-                shareIsVisible = true,
+                toolbarShareIsVisible = true,
                 pdfSourceCategory = PdfSourceCategory.Remote("https://fiu.gov.kg/uploads/65e953b2c33b7.pdf"),
-                errorPdfLoadText = "Не удалось загрузить PDF файл",
-                closeDialogButtonText = "Ок",
                 shareTitle = "Share",
                 zoomIsEnabled = false
             )
@@ -62,11 +57,28 @@ fun PreviewPdfViewerNavGraph(navController: NavController) {
             PdfViewer(
                 title = "PdfViewer One Element",
                 onNavigationIconClick = pdfNavController::navigateUp,
-                shareIsVisible = true,
+                toolbarShareIsVisible = true,
                 pdfSourceCategory = PdfSourceCategory.Remote("https://dengi.kg/upload/Limits_ru.pdf"),
-                errorPdfLoadText = "Не удалось загрузить PDF файл",
-                closeDialogButtonText = "Ок",
-                shareTitle = "Share"
+            )
+        }
+        composable(PdfScreens.ActionButtonPdfViewerScreenMultiPages.toString()) {
+            PdfViewer(
+                onNavigationIconClick = pdfNavController::navigateUp,
+                pdfSourceCategory = PdfSourceCategory.Remote("https://www.akchabulak.kg/storage/documents/ru/Oferta.pdf"),
+                navigationIcon = painterResource(R.drawable.chili_ic_close),
+                toolbarBackgroundColor = Chili.color.pdfBackgroundColor,
+                isDividerVisible = false,
+                buttonShareIsVisible = true,
+            )
+        }
+        composable(PdfScreens.ActionButtonPdfViewerScreenOnePage.toString()) {
+            PdfViewer(
+                onNavigationIconClick = pdfNavController::navigateUp,
+                pdfSourceCategory = PdfSourceCategory.Remote("https://dengi.kg/upload/Limits_ru.pdf"),
+                isDividerVisible = false,
+                toolbarBackgroundColor = Chili.color.pdfBackgroundColor,
+                navigationIcon = painterResource(R.drawable.chili_ic_close),
+                buttonShareIsVisible = true,
             )
         }
     }
