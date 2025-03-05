@@ -64,7 +64,7 @@ class MaskInputInterceptor(newMask: String) {
 
 
 
-    private fun clearMaskSymbols(text: String): String {
+    fun clearMaskSymbols(text: String): String {
         return text.filter { it != representation }
     }
 
