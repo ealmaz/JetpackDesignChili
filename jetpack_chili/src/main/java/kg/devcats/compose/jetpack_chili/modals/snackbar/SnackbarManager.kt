@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 object SnackbarManager {
     val snackbarHostState = SnackbarHostState()
@@ -110,8 +111,10 @@ object SnackbarManager {
                 message = snackbarMessage.message,
                 duration = SnackbarDuration.Indefinite
             )
-        }.invokeOnCompletion {
-            snackbarMessage.onDismiss?.invoke()
+        }.invokeOnCompletion { throwable ->
+            if (throwable is CancellationException) {
+                snackbarMessage.onDismiss?.invoke()
+            }
         }
     }
 
