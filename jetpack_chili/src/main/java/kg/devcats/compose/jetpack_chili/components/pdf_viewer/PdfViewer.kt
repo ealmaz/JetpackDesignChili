@@ -35,7 +35,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 fun PdfViewer(
     modifier: Modifier = Modifier,
     title: String = "",
-    toolbarShareIsVisible: Boolean = false,
+    shareIsVisible: Boolean = false,
     shareTitle: String? = null,
     isDividerVisible: Boolean = true,
     isNavigationIconVisible: Boolean = true,
@@ -65,7 +65,7 @@ fun PdfViewer(
                 endFrame = {
                     AnimatedVisibility(
                         modifier = Modifier.padding(end = 16.dp),
-                        visible = toolbarShareIsVisible && (pdfUri != Uri.EMPTY)
+                        visible = shareIsVisible && (pdfUri != Uri.EMPTY)
                     ) {
                         Image(
                             modifier = Modifier.clickable { context.sharePdfFile(pdfUri, shareTitle) },

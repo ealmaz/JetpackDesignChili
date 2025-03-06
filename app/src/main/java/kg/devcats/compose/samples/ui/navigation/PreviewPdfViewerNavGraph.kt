@@ -38,7 +38,7 @@ fun PreviewPdfViewerNavGraph(navController: NavController) {
             PdfViewer(
                 title = "PdfViewer With Share",
                 onNavigationIconClick = pdfNavController::navigateUp,
-                toolbarShareIsVisible = true,
+                shareIsVisible = true,
                 pdfSourceCategory = PdfSourceCategory.Remote("https://www.akchabulak.kg/storage/documents/ru/Oferta.pdf"),
                 shareTitle = "Share"
             )
@@ -47,7 +47,7 @@ fun PreviewPdfViewerNavGraph(navController: NavController) {
             PdfViewer(
                 title = "PdfViewer Without Zoom",
                 onNavigationIconClick = pdfNavController::navigateUp,
-                toolbarShareIsVisible = true,
+                shareIsVisible = true,
                 pdfSourceCategory = PdfSourceCategory.Remote("https://fiu.gov.kg/uploads/65e953b2c33b7.pdf"),
                 shareTitle = "Share",
                 zoomIsEnabled = false
@@ -57,7 +57,7 @@ fun PreviewPdfViewerNavGraph(navController: NavController) {
             PdfViewer(
                 title = "PdfViewer One Element",
                 onNavigationIconClick = pdfNavController::navigateUp,
-                toolbarShareIsVisible = true,
+                shareIsVisible = true,
                 pdfSourceCategory = PdfSourceCategory.Remote("https://dengi.kg/upload/Limits_ru.pdf"),
             )
         }
