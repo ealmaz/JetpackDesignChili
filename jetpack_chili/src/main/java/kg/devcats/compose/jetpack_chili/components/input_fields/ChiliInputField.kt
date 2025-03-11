@@ -55,7 +55,11 @@ fun ChiliInputField(
     placeholder: String? = null,
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
+    messageWeight: Float = 2f,
     actionText: String? = null,
+    actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
+    actionEnabledTextColor: Color = Chili.color.buttonComponentText,
+    actionDisabledTextColor: Color = Chili.color.buttonComponentDisabledText,
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
     inputFieldPaddingValues: PaddingValues = PaddingValues(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
@@ -79,7 +83,11 @@ fun ChiliInputField(
         focusRequester = focusRequester,
         isInputFieldEmpty = isInputFieldEmpty,
         message = message,
+        messageWeight = messageWeight,
         actionText = actionText,
+        actionTextStyle = actionTextStyle,
+        actionEnabledTextColor = actionEnabledTextColor,
+        actionDisabledTextColor = actionDisabledTextColor,
         isInputCenteredAlign = isInputCenteredAlign,
         inputFieldPaddingValues = inputFieldPaddingValues,
         startFrame = startFrame,
@@ -103,8 +111,12 @@ fun ChiliInputField(
     placeholder: String? = null,
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
+    messageWeight: Float = 2f,
     isInputFieldEmpty: Boolean? = null,
     actionText: String? = null,
+    actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
+    actionEnabledTextColor: Color = Chili.color.buttonComponentText,
+    actionDisabledTextColor: Color = Chili.color.buttonComponentDisabledText,
     isInputCenteredAlign: Boolean = true,
     inputFieldPaddingValues: PaddingValues = PaddingValues(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
     startFrame: @Composable (() -> Unit)? = null,
@@ -121,7 +133,11 @@ fun ChiliInputField(
         inputBgColor = inputBgColor,
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
+        messageWeight = messageWeight,
         actionText = actionText,
+        actionTextStyle = actionTextStyle,
+        actionEnabledTextColor = actionEnabledTextColor,
+        actionDisabledTextColor = actionDisabledTextColor,
         isInputCenteredAlign = isInputCenteredAlign,
         clearIcon = clearIcon,
         startFrame = startFrame,
@@ -154,6 +170,7 @@ fun ChiliAmountInputField(
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
     actionText: String? = null,
+    actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
     startFrame: @Composable (() -> Unit)? = null,
@@ -174,6 +191,7 @@ fun ChiliAmountInputField(
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
         actionText = actionText,
+        actionTextStyle = actionTextStyle,
         startFrame = startFrame,
         clearIcon = clearIcon,
         isInputCenteredAlign = isInputCenteredAlign,
@@ -217,7 +235,11 @@ private fun InputFieldContainer(
     isClearButtonEnabled: Boolean = true,
     inputBgColor: Color = Chili.color.inputFieldBackground,
     message: String? = null,
+    messageWeight: Float = 2f,
     actionText: String? = null,
+    actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
+    actionEnabledTextColor: Color = Chili.color.buttonComponentText,
+    actionDisabledTextColor: Color = Chili.color.buttonComponentDisabledText,
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
@@ -256,19 +278,23 @@ private fun InputFieldContainer(
             if (message != null || error != null) {
                 Text(
                     modifier = Modifier
-                        .weight(2f)
+                        .weight(messageWeight)
                         .padding(horizontal = 12.dp, vertical = 8.dp),
                     style = if (error == null) Chili.typography.H14_Secondary else Chili.typography.H14_Error,
                     text = error.takeIf { !it.isNullOrBlank() } ?: message ?: ""
                 )
             }
             actionText?.let {
-                Box(modifier = Modifier.weight(1f)) {
+                Box(modifier = Modifier
+                    .weight(1f)
+                ) {
                     ChiliComponentButton(
                         modifier = Modifier.align(Alignment.CenterEnd),
                         text = it,
-                        textStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
+                        textStyle = actionTextStyle,
                         enabled = true,
+                        enabledTextColor = actionEnabledTextColor,
+                        disabledTextColor = actionDisabledTextColor,
                         onClick = onActionClick
                     )
                 }
