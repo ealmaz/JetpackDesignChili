@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,6 +21,8 @@ fun ChiliComponentButton(
     text: String,
     textStyle: TextStyle = Chili.typography.H16,
     enabled: Boolean = true,
+    enabledTextColor: Color = Chili.color.buttonComponentText,
+    disabledTextColor: Color = Chili.color.buttonComponentDisabledText,
     onClick: () -> Unit
 ) {
     Box(
@@ -32,7 +35,7 @@ fun ChiliComponentButton(
             modifier = Modifier.padding(8.dp),
             text = text,
             style = textStyle,
-            color = if (enabled) Chili.color.buttonComponentText else Chili.color.buttonComponentDisabledText
+            color = if (enabled) enabledTextColor else disabledTextColor
         )
     }
 }

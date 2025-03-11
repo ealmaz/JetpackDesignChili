@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputOtp
-import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliSmsOtpInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliUneditableInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.MaskInputInterceptor
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
@@ -179,12 +178,14 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
             Spacer(Modifier.height(16.dp))
 
             var smsValue by remember { mutableStateOf("") }
-            ChiliSmsOtpInputField(
+            ChiliInputField(
                 value = smsValue,
                 placeholder = "Код из SMS",
                 actionText = "Повторить через 01:59",
                 actionTextStyle = Chili.typography.H16_Value,
-                error = "Неверный код",
+                actionEnabledTextColor = Chili.color.valueText,
+                keyboardType = KeyboardType.Number,
+                messageWeight = 1f,
                 onValueChange = { smsValue = it }
             )
 
