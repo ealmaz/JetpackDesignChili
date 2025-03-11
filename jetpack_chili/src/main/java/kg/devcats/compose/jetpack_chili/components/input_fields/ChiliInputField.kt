@@ -304,7 +304,7 @@ private fun InputFieldContainer(
 }
 
 @Composable
-internal fun InputFieldClearIcon(clearIcon: Painter, clearValue: () -> Unit) {
+private fun InputFieldClearIcon(clearIcon: Painter, clearValue: () -> Unit) {
     Image(
         painter = clearIcon,
         contentDescription = "clear",
@@ -319,7 +319,7 @@ internal fun InputFieldClearIcon(clearIcon: Painter, clearValue: () -> Unit) {
 }
 
 @Composable
-internal fun decideBackgroundColor(error: String? = null, inputBgColor: Color): Color {
+private fun decideBackgroundColor(error: String? = null, inputBgColor: Color): Color {
     return if (error == null) inputBgColor
     else Chili.color.inputFieldErrorBackground
 }
