@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -28,11 +28,11 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputOtp
+import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliSmsOtpInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliUneditableInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.MaskInputInterceptor
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
-import kg.devcats.compose.samples.R
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
@@ -165,6 +165,28 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
 
             var errorState by remember { mutableStateOf<String?>(null) }
 
+
+            ChiliInputOtp(
+                modifier = Modifier.padding(top = 32.dp, bottom = 32.dp),
+                action = "Some action",
+                message = "Some message",
+                error = errorState
+            ) {
+                if (it == "123456") errorState = "Error"
+                else errorState = null
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            var smsValue by remember { mutableStateOf("") }
+            ChiliSmsOtpInputField(
+                value = smsValue,
+                placeholder = "Код из SMS",
+                actionText = "Повторить через 01:59",
+                actionTextStyle = Chili.typography.H16_Value,
+                error = "Неверный код",
+                onValueChange = { smsValue = it }
+            )
 
             ChiliInputOtp(
                 modifier = Modifier.padding(top = 32.dp, bottom = 32.dp),

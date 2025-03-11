@@ -56,6 +56,7 @@ fun ChiliInputField(
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
     actionText: String? = null,
+    actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
     inputFieldPaddingValues: PaddingValues = PaddingValues(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
@@ -80,6 +81,7 @@ fun ChiliInputField(
         isInputFieldEmpty = isInputFieldEmpty,
         message = message,
         actionText = actionText,
+        actionTextStyle = actionTextStyle,
         isInputCenteredAlign = isInputCenteredAlign,
         inputFieldPaddingValues = inputFieldPaddingValues,
         startFrame = startFrame,
@@ -105,6 +107,7 @@ fun ChiliInputField(
     message: String? = null,
     isInputFieldEmpty: Boolean? = null,
     actionText: String? = null,
+    actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
     isInputCenteredAlign: Boolean = true,
     inputFieldPaddingValues: PaddingValues = PaddingValues(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
     startFrame: @Composable (() -> Unit)? = null,
@@ -122,6 +125,7 @@ fun ChiliInputField(
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
         actionText = actionText,
+        actionTextStyle = actionTextStyle,
         isInputCenteredAlign = isInputCenteredAlign,
         clearIcon = clearIcon,
         startFrame = startFrame,
@@ -154,6 +158,7 @@ fun ChiliAmountInputField(
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
     actionText: String? = null,
+    actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
     startFrame: @Composable (() -> Unit)? = null,
@@ -174,6 +179,7 @@ fun ChiliAmountInputField(
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
         actionText = actionText,
+        actionTextStyle = actionTextStyle,
         startFrame = startFrame,
         clearIcon = clearIcon,
         isInputCenteredAlign = isInputCenteredAlign,
@@ -218,6 +224,7 @@ private fun InputFieldContainer(
     inputBgColor: Color = Chili.color.inputFieldBackground,
     message: String? = null,
     actionText: String? = null,
+    actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
@@ -267,7 +274,7 @@ private fun InputFieldContainer(
                     ChiliComponentButton(
                         modifier = Modifier.align(Alignment.CenterEnd),
                         text = it,
-                        textStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
+                        textStyle = actionTextStyle,
                         enabled = true,
                         onClick = onActionClick
                     )
@@ -278,7 +285,7 @@ private fun InputFieldContainer(
 }
 
 @Composable
-private fun InputFieldClearIcon(clearIcon: Painter, clearValue: () -> Unit) {
+internal fun InputFieldClearIcon(clearIcon: Painter, clearValue: () -> Unit) {
     Image(
         painter = clearIcon,
         contentDescription = "clear",
@@ -293,7 +300,7 @@ private fun InputFieldClearIcon(clearIcon: Painter, clearValue: () -> Unit) {
 }
 
 @Composable
-private fun decideBackgroundColor(error: String? = null, inputBgColor: Color): Color {
+internal fun decideBackgroundColor(error: String? = null, inputBgColor: Color): Color {
     return if (error == null) inputBgColor
     else Chili.color.inputFieldErrorBackground
 }
