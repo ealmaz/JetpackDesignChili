@@ -50,6 +50,8 @@ fun ChiliCell(
     isChevronVisible: Boolean = true,
     icon: Painter? = null,
     iconUrl: String? = null,
+    placeholderIcon : Painter = painterResource(R.drawable.chili_ic_stub),
+    errorIcon: Painter = painterResource(R.drawable.chili_ic_stub),
     iconSize: Dp = 32.dp,
     containerPaddingValues: PaddingValues? = null,
     containerBackgroundColor: Color = Chili.color.cellViewBackground,
@@ -99,8 +101,8 @@ fun ChiliCell(
                             Image(
                                 painter = rememberAsyncImagePainter(
                                     model = it,
-                                    placeholder = painterResource(R.drawable.chili_ic_stub),
-                                    error = painterResource(R.drawable.chili_ic_stub)
+                                    placeholder = placeholderIcon,
+                                    error = errorIcon
                                 ),
                                 contentDescription = "",
                                 modifier = Modifier
