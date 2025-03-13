@@ -8,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -36,6 +37,7 @@ fun ChiliAdditionalInfoCell(
     iconUrl: String? = null,
     iconSize: Dp = 32.dp,
     onClick: (() -> Unit)? = null,
+    containerBackgroundColor: Color = Chili.color.cellViewBackground,
     containerPaddingValues: PaddingValues? = null,
     additionalInfoTextPaddingValues: PaddingValues = PaddingValues(end = 4.dp),
     additionalInfoTextWeight: Float? = null,
@@ -60,6 +62,7 @@ fun ChiliAdditionalInfoCell(
         iconUrl = iconUrl,
         iconSize = iconSize,
         onClick = onClick,
+        containerBackgroundColor = containerBackgroundColor,
         containerPaddingValues = containerPaddingValues,
         isLoading = isLoading,
         startFrame = startFrame,
