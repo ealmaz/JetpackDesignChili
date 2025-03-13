@@ -263,7 +263,7 @@ fun PreviewCells(
                 style = Chili.typography.H16_Primary
             )
 
-            ShadowRoundedBox() {
+            ShadowRoundedBox {
                 Column {
                     ChiliAdditionalInfoCell(
                         title = "Заголовок",
@@ -273,7 +273,8 @@ fun PreviewCells(
                         isDividerVisible = true,
                         additionalInfo = "Additional text",
                         additionalInfoStyle = Chili.typography.H14_Value,
-                        isLoading = true
+                        isLoading = true,
+                        containerBackgroundColor = Chili.color.alertErrorBg
                     )
 
                     ChiliAdditionalInfoCell(
