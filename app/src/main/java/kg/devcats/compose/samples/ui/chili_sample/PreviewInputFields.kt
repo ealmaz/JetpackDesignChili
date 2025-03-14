@@ -182,12 +182,12 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 value = smsValue,
                 placeholder = "Код из SMS",
                 actionText = "Повторить через 01:59",
+                isActionEnabled = false,
                 actionTextStyle = Chili.typography.H16_Value,
-                actionEnabledTextColor = Chili.color.valueText,
+                actionDisabledTextColor = Chili.color.valueText,
                 keyboardType = KeyboardType.Number,
                 messageWeight = 1f,
                 onValueChange = { smsValue = it },
-                onActionClick = null
             )
 
             ChiliInputOtp(
