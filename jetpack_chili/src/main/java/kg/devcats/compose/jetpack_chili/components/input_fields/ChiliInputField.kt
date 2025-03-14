@@ -66,7 +66,7 @@ fun ChiliInputField(
     startFrame: @Composable (() -> Unit)? = null,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
     keyboardType: KeyboardType = KeyboardType.Text,
-    onActionClick: (() -> Unit) = {},
+    onActionClick: (() -> Unit)? = {},
     onValueChange: ((String) -> Unit),
 ) {
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value, selection = TextRange(value.length))) }
@@ -122,7 +122,7 @@ fun ChiliInputField(
     startFrame: @Composable (() -> Unit)? = null,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
     keyboardType: KeyboardType = KeyboardType.Text,
-    onActionClick: (() -> Unit) = {},
+    onActionClick: (() -> Unit)? = {},
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
     InputFieldContainer(
@@ -244,7 +244,7 @@ private fun InputFieldContainer(
     isInputCenteredAlign: Boolean = true,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
     startFrame: @Composable (() -> Unit)? = null,
-    onActionClick: (() -> Unit) = {},
+    onActionClick: (() -> Unit)? = {},
     onValueChange: ((TextFieldValue) -> Unit),
     onClearInput: (() -> Unit) = { onValueChange(TextFieldValue()) },
     inputField: @Composable RowScope.() -> Unit

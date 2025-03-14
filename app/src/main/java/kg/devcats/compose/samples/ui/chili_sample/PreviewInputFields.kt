@@ -186,7 +186,8 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 actionEnabledTextColor = Chili.color.valueText,
                 keyboardType = KeyboardType.Number,
                 messageWeight = 1f,
-                onValueChange = { smsValue = it }
+                onValueChange = { smsValue = it },
+                onActionClick = null
             )
 
             ChiliInputOtp(

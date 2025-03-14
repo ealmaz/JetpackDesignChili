@@ -23,13 +23,13 @@ fun ChiliComponentButton(
     enabled: Boolean = true,
     enabledTextColor: Color = Chili.color.buttonComponentText,
     disabledTextColor: Color = Chili.color.buttonComponentDisabledText,
-    onClick: () -> Unit
+    onClick: (() -> Unit)? = {}
 ) {
     Box(
         modifier = modifier
             .clip(Chili.shapes.RoundedCornerShape)
             .background(Chili.color.buttonComponentContainer)
-            .clickable(enabled = enabled, onClick = onClick)
+            .let { if (onClick != null) it.clickable(enabled = enabled, onClick = onClick) else it }
     ) {
         Text(
             modifier = Modifier.padding(8.dp),
