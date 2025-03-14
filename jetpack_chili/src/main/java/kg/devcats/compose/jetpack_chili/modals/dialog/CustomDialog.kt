@@ -59,6 +59,7 @@ fun CustomSimpleDialog(
     title: String? = null,
     message: String? = null,
     isCancelable: Boolean = true,
+    usePlatformDefaultWidth: Boolean = true,
     positiveButtonText: String? = null,
     negativeButtonText: String? = null,
     onConfirm: () -> Unit,
@@ -68,6 +69,7 @@ fun CustomSimpleDialog(
         Dialog(
             onDismissRequest = onDismiss,
             properties = DialogProperties(
+                usePlatformDefaultWidth = usePlatformDefaultWidth,
                 dismissOnBackPress = isCancelable,
                 dismissOnClickOutside = isCancelable
             )
