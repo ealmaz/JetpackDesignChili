@@ -53,6 +53,14 @@ fun PinLockSampleScreen(navController: NavController, navigateUp: () -> Unit) {
                 ) {
                     navController.navigate(LockScreens.LoginPinCodeScreen.toString())
                 }
+
+                ChiliPrimaryButton(
+                    text = "Custom Pin", modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
+                ) {
+                    navController.navigate(LockScreens.CustomPinCodeScreen.toString())
+                }
             }
         }
     )

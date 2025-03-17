@@ -24,6 +24,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 fun ChiliPinInputField(
     modifier: Modifier = Modifier,
     lockItemModifier: Modifier = Modifier,
+    pinItemConfig: PinItemConfig = PinItemConfig.create(),
     maxSize: Int = 4,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(18.dp),
     pinCode: State<String> = mutableStateOf(""),
@@ -64,6 +65,7 @@ fun ChiliPinInputField(
 
             PinIndicator(
                 modifier = lockItemModifier.pinAnimation(successShake, index),
+                pinItemConfig = pinItemConfig,
                 backgroundType = backgroundType
             )
         }
@@ -73,23 +75,24 @@ fun ChiliPinInputField(
 @Composable
 private fun PinIndicator(
     modifier: Modifier = Modifier,
+    pinItemConfig: PinItemConfig = PinItemConfig.create(),
     backgroundType: LockItemBackgroundType = LockItemBackgroundType.NonSelected
 ) {
     val color = animateColorAsState(
-        backgroundType.getColor(),
+        backgroundType.getColor(pinItemConfig),
         label = ""
     )
     val animateBorder = animateDpAsState(
-        if (backgroundType == LockItemBackgroundType.NonSelected) 2.dp
+        if (backgroundType == LockItemBackgroundType.NonSelected) pinItemConfig.borderWidth
         else (-1).dp,
         label = ""
     )
 
     Box(
         modifier = modifier
-            .size(14.dp)
+            .size(pinItemConfig.size)
             .background(color.value, CircleShape)
-            .border(animateBorder.value, Chili.color.lockBorderColor, CircleShape)
+            .border(animateBorder.value, pinItemConfig.borderColor, CircleShape)
     )
 }
 

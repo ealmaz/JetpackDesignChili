@@ -108,4 +108,7 @@ sealed class LockScreens {
 
     @Serializable
     data object LoginPinCodeScreen : LockScreens()
+
+    @Serializable
+    data object CustomPinCodeScreen : LockScreens()
 }

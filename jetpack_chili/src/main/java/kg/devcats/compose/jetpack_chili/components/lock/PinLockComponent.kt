@@ -24,7 +24,8 @@ fun PinInputComponent(
     successAnimFinished: () -> Unit = {},
     codeMaxSize: Int = 4,
     keyboardParams: KeyboardParams = KeyboardParams(),
-    actionButtonParams: ActionButtonParams = ActionButtonParams()
+    actionButtonParams: ActionButtonParams = ActionButtonParams(),
+    rightActionButtonParams: ActionButtonParams = ActionButtonParams()
 ) {
     Column(
         modifier = modifier,
@@ -45,7 +46,8 @@ fun PinInputComponent(
                 textState = pinCodeState,
                 codeMaxSize = codeMaxSize
             ),
-            actionButtonParams = actionButtonParams
+            leftActionButtonParams = actionButtonParams,
+            rightActionButtonParams = rightActionButtonParams
         )
     }
 }
