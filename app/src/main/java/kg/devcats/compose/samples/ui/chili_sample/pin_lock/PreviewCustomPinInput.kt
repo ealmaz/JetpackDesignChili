@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -113,9 +114,11 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                     )
                 )
 
+                Spacer(Modifier.weight(1f))
+
                 PinKeyboard(
                     modifier = Modifier
-                        .heightIn(400.dp, 420.dp)
+                        .heightIn(400.dp, 450.dp)
                         .padding(top = 40.dp, bottom = 26.dp),
                     keyboardParams = KeyboardParams(
                         modifier = Modifier.weight(1f),
