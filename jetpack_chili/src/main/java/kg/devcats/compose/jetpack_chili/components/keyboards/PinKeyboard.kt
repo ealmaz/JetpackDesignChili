@@ -27,6 +27,7 @@ import kg.devcats.compose.jetpack_chili.setIsPressedEffect
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 sealed class ActionButtonType {
+    data object None : ActionButtonType()
     data class Drawable(val defaultDrawable: Painter, val pressedDrawable: Painter) : ActionButtonType()
     data class Text(
         val text: String,
@@ -46,7 +47,6 @@ sealed class ActionButtonType {
             )
         }
     }
-    data object None : ActionButtonType()
 }
 
 @Composable
@@ -79,7 +79,7 @@ fun PinKeyboard(
         }
 
         Row(
-            modifier = Modifier
+            modifier = keyboardParams.modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp),
             horizontalArrangement = Arrangement.SpaceBetween

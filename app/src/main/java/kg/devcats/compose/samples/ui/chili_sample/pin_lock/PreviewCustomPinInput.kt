@@ -4,8 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,7 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -80,52 +80,60 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    modifier = Modifier.padding(top = 30.dp),
+                    modifier = Modifier.padding(top = 30.dp).fillMaxWidth(),
                     painter = painterResource(R.drawable.ic_esi),
-                    contentDescription = null
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit
                 )
 
                 Spacer(Modifier.weight(1f))
 
-                Text(
-                    modifier = Modifier.padding(top = 35.dp),
-                    text = "Придумайте пин-код",
-                    style = Chili.typography.H20_Secondary
-                )
-
-                ChiliPinInputField(
-                    modifier = Modifier.padding(top = 12.dp),
-                    lockItemModifier = Modifier.size(19.dp),
-                    pinCode = pinCodeState,
-                    pinStatusType = pinStatusState,
-                    maxSize = 4,
-                    errorAnimFinished = {
-                        pinCodeState.value = ""
-                    },
-                    successAnimFinished = {
-                        pinCodeState.value = ""
-                        navigateUp()
-                    },
-                    pinItemConfig = PinItemConfig.create(
-                        size = 19.dp,
-                        borderWidth = 1.dp,
-                        borderColor = black_7,
-                        selectedColor = blue_1
+                Column(
+                    modifier = Modifier.padding(top = 35.dp).fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        modifier = Modifier.padding(horizontal = 40.dp),
+                        text = "Введите пин-код",
+                        style = Chili.typography.H20_Secondary,
+                        maxLines = 2,
+                        minLines = 2
                     )
-                )
+
+                    ChiliPinInputField(
+                        modifier = Modifier.padding(top = 12.dp),
+                        lockItemModifier = Modifier.size(19.dp),
+                        pinCode = pinCodeState,
+                        pinStatusType = pinStatusState,
+                        maxSize = 4,
+                        errorAnimFinished = {
+                            pinCodeState.value = ""
+                        },
+                        successAnimFinished = {
+                            pinCodeState.value = ""
+                            navigateUp()
+                        },
+                        pinItemConfig = PinItemConfig.create(
+                            size = 19.dp,
+                            borderWidth = 1.dp,
+                            borderColor = black_7,
+                            selectedColor = blue_1
+                        )
+                    )
+                }
 
                 Spacer(Modifier.weight(1f))
 
                 PinKeyboard(
                     modifier = Modifier
-                        .heightIn(400.dp, 450.dp)
-                        .padding(top = 40.dp, bottom = 26.dp),
+                        .padding(top = 40.dp)
+                        .heightIn(400.dp, 420.dp),
                     keyboardParams = KeyboardParams(
                         modifier = Modifier.weight(1f),
                         textState = pinCodeState,
                         digitTextStyle = Chili.typography.H32_Primary.copy(
                             fontFamily = FontFamily(Font(R.font.museo_regular)),
-                            fontSize = 38.sp
+                            fontSize = 42.sp
                         ),
                         digitTextColor = Color(0xFF36424B),
                         codeMaxSize = 4,
@@ -139,7 +147,7 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                             ),
                             textColor = Color(0xFF36424B)
                         )
-                    ),
+                    )
                 )
 
                 Text(
