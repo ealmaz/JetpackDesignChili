@@ -19,9 +19,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kg.devcats.compose.jetpack_chili.components.keyboards.ActionButtonParams
@@ -41,6 +43,7 @@ import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
 fun PreviewCustomPinInput(navigateUp: () -> Unit) {
+    val context = LocalContext.current
     val pinCodeState = remember { mutableStateOf("") }
     val pinStatusState = remember { mutableStateOf<PinStatusType>(PinStatusType.None) }
     val mockPinManager = remember { MockPinManager() }
@@ -131,22 +134,21 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                     keyboardParams = KeyboardParams(
                         modifier = Modifier.weight(1f),
                         textState = pinCodeState,
-                        digitTextStyle = Chili.typography.H32_Primary.copy(
-                            fontFamily = FontFamily(Font(R.font.museo_regular)),
-                            fontSize = 42.sp
+                        digitTextStyle = Chili.typography.H42_Primary.copy(
+                            fontFamily = FontFamily(Font(R.font.museo_regular))
                         ),
                         digitTextColor = Color(0xFF36424B),
                         codeMaxSize = 4,
                         onInputChange = { pinCodeState.value = it }
                     ),
                     leftActionButtonParams = ActionButtonParams(
-                        ActionButtonType.Text.create(
+                        buttonType = ActionButtonType.Text(
                             text = "Выйти",
-                            textStyle = Chili.typography.H18_Value.copy(
+                            textStyle = Chili.typography.H18_Primary.copy(
                                 fontFamily = FontFamily(Font(R.font.museo_regular))
-                            ),
-                            textColor = Color(0xFF36424B)
-                        )
+                            )
+                        ),
+                        onClick = { context.showToast("Action") }
                     )
                 )
 
@@ -159,4 +161,10 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
             }
         }
     )
+}
+
+@Preview
+@Composable
+private fun Preview() {
+    PreviewCustomPinInput {  }
 }

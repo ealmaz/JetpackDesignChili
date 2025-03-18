@@ -17,6 +17,8 @@ internal fun ActionButton(
             type = actionButtonParams.buttonType,
             onClick = actionButtonParams.onClick,
             enabled = keyboardParams.isEnableInput,
+            textColor = keyboardParams.digitTextColor,
+            textStyle = actionButtonParams.buttonType.textStyle,
             modifier = modifier
         )
         is ActionButtonType.Drawable -> KeyboardIconButton(

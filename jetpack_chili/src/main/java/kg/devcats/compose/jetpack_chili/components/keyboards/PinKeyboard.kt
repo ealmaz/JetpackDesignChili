@@ -1,6 +1,7 @@
 package kg.devcats.compose.jetpack_chili.components.keyboards
 
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -29,24 +30,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 sealed class ActionButtonType {
     data object None : ActionButtonType()
     data class Drawable(val defaultDrawable: Painter, val pressedDrawable: Painter) : ActionButtonType()
-    data class Text(
-        val text: String,
-        val textStyle: TextStyle,
-        val textColor: Color
-    ): ActionButtonType() {
-        companion object {
-            @Composable
-            fun create(
-                text: String,
-                textStyle: TextStyle = Chili.typography.H16_Primary,
-                textColor: Color = Chili.color.primaryText
-            ) = Text(
-                text = text,
-                textStyle = textStyle,
-                textColor = textColor
-            )
-        }
-    }
+    data class Text(val text: String, val textStyle: TextStyle? = null): ActionButtonType()
 }
 
 @Composable
@@ -213,8 +197,15 @@ fun KeyboardTextButton(
     type: ActionButtonType.Text,
     onClick: () -> Unit,
     enabled: Boolean = true,
+    textStyle: TextStyle? = null,
+    textColor: Color? = null,
     modifier: Modifier = Modifier
 ) {
+    val colorState = animateColorAsState(
+        targetValue = if (enabled) textColor ?: Chili.color.primaryText else Chili.color.secondaryText,
+        label = ""
+    )
+
     Box(
         modifier = modifier
             .sizeIn(minWidth = 64.dp, minHeight = 64.dp)
@@ -224,8 +215,8 @@ fun KeyboardTextButton(
     ) {
         Text(
             text = type.text,
-            style = type.textStyle,
-            color = type.textColor
+            style = textStyle ?: Chili.typography.H16_Primary,
+            color = colorState.value
         )
     }
 }

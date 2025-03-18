@@ -87,7 +87,7 @@ fun PreviewLoginPinScreen(navigateUp: () -> Unit) {
                         onInputChange = { text -> pinCodeState.value = text }
                     ),
                     actionButtonParams = ActionButtonParams(
-                        buttonType = ActionButtonType.Text.create(text = "Забыли?"),
+                        buttonType = ActionButtonType.Text(text = "Забыли?"),
                         onClick = { context.showToast("Action") }
                     ),
                     errorAnimFinished = {
