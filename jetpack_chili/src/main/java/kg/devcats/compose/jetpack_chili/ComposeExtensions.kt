@@ -115,6 +115,10 @@ fun Modifier.setRoundedShapeByPosition(isFirst: Boolean = false, isLast: Boolean
 
 private val lastClickTime = AtomicLong(0L)
 
+fun resetClickTimer() {
+    lastClickTime.set(0L)
+}
+
 fun Modifier.singleClickable(
     debounceTime: Long = 1000L,
     onClick: () -> Unit
@@ -129,7 +133,6 @@ fun Modifier.singleClickable(
 }
 
 // For Buttons
-
 fun singleClickable(
     debounceTime: Long = 1000L,
     onClick: () -> Unit

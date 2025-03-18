@@ -56,6 +56,7 @@ fun ChiliInputField(
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
     messageWeight: Float = 2f,
+    messagePaddingValues: PaddingValues = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
     actionText: String? = null,
     isActionEnabled: Boolean = true,
     actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
@@ -85,6 +86,7 @@ fun ChiliInputField(
         isInputFieldEmpty = isInputFieldEmpty,
         message = message,
         messageWeight = messageWeight,
+        messagePaddingValues = messagePaddingValues,
         actionText = actionText,
         isActionEnabled = isActionEnabled,
         actionTextStyle = actionTextStyle,
@@ -114,6 +116,7 @@ fun ChiliInputField(
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
     messageWeight: Float = 2f,
+    messagePaddingValues: PaddingValues = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
     isInputFieldEmpty: Boolean? = null,
     actionText: String? = null,
     isActionEnabled: Boolean = true,
@@ -137,6 +140,7 @@ fun ChiliInputField(
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
         messageWeight = messageWeight,
+        messagePaddingValues = messagePaddingValues,
         actionText = actionText,
         isActionEnabled = isActionEnabled,
         actionTextStyle = actionTextStyle,
@@ -173,6 +177,7 @@ fun ChiliAmountInputField(
     placeholder: String? = null,
     focusRequester: FocusRequester = FocusRequester(),
     message: String? = null,
+    messagePaddingValues: PaddingValues = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
     actionText: String? = null,
     isActionEnabled: Boolean = true,
     actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
@@ -195,6 +200,7 @@ fun ChiliAmountInputField(
         inputBgColor = inputBgColor,
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
+        messagePaddingValues = messagePaddingValues,
         actionText = actionText,
         isActionEnabled = isActionEnabled,
         actionTextStyle = actionTextStyle,
@@ -242,6 +248,7 @@ private fun InputFieldContainer(
     inputBgColor: Color = Chili.color.inputFieldBackground,
     message: String? = null,
     messageWeight: Float = 2f,
+    messagePaddingValues: PaddingValues = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
     actionText: String? = null,
     actionTextStyle: TextStyle = Chili.typography.H16.copy(textAlign = TextAlign.End),
     isActionEnabled: Boolean = true,
@@ -286,7 +293,7 @@ private fun InputFieldContainer(
                 Text(
                     modifier = Modifier
                         .weight(messageWeight)
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                        .padding(messagePaddingValues),
                     style = if (error == null) Chili.typography.H14_Secondary else Chili.typography.H14_Error,
                     text = error.takeIf { !it.isNullOrBlank() } ?: message ?: ""
                 )
