@@ -67,6 +67,8 @@ fun ChiliInputField(
     inputFieldPaddingValues: PaddingValues = PaddingValues(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
     startFrame: @Composable (() -> Unit)? = null,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
+    rightActionIcon: Painter? = null,
+    onRightActionIconClick: (() -> Unit) = {},
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((String) -> Unit),
@@ -96,6 +98,8 @@ fun ChiliInputField(
         inputFieldPaddingValues = inputFieldPaddingValues,
         startFrame = startFrame,
         clearIcon = clearIcon,
+        rightActionIcon = rightActionIcon,
+        onRightActionIconClick = onRightActionIconClick,
         keyboardType = keyboardType,
         onActionClick = onActionClick,
         onValueChange = { newTextFieldValueState ->
@@ -127,6 +131,8 @@ fun ChiliInputField(
     inputFieldPaddingValues: PaddingValues = PaddingValues(start = 14.dp, top = 14.dp, end = 8.dp, bottom = 14.dp),
     startFrame: @Composable (() -> Unit)? = null,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
+    rightActionIcon: Painter? = null,
+    onRightActionIconClick: (() -> Unit) = {},
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((TextFieldValue) -> Unit),
@@ -147,6 +153,8 @@ fun ChiliInputField(
         actionEnabledTextColor = actionEnabledTextColor,
         actionDisabledTextColor = actionDisabledTextColor,
         isInputCenteredAlign = isInputCenteredAlign,
+        rightActionIcon = rightActionIcon,
+        onRightActionIconClick = onRightActionIconClick,
         clearIcon = clearIcon,
         startFrame = startFrame,
         onActionClick = onActionClick,
@@ -257,6 +265,8 @@ private fun InputFieldContainer(
     isInputFieldEmpty: Boolean? = null,
     isInputCenteredAlign: Boolean = true,
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
+    rightActionIcon: Painter? = null,
+    onRightActionIconClick: (() -> Unit) = {},
     startFrame: @Composable (() -> Unit)? = null,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((TextFieldValue) -> Unit),
@@ -278,9 +288,16 @@ private fun InputFieldContainer(
                     startFrame != null -> startFrame()
                     isClearButtonEnabled && !isValueEmpty && isInputCenteredAlign ->
                         Spacer(modifier = Modifier.width(44.dp))
+
+                    rightActionIcon != null && isInputCenteredAlign ->
+                        Spacer(modifier = Modifier.width(44.dp))
                 }
 
                 inputField()
+
+                rightActionIcon?.takeIf { isValueEmpty }?.let {
+                    InputFieldRightActionIcon(actionIcon = it) { onRightActionIconClick() }
+                }
 
                 if (isClearButtonEnabled && !isValueEmpty) {
                     InputFieldClearIcon(clearIcon = clearIcon) { onClearInput() }
@@ -328,6 +345,21 @@ private fun InputFieldClearIcon(clearIcon: Painter, clearValue: () -> Unit) {
                 interactionSource = remember { MutableInteractionSource() },
                 indication = ripple(bounded = false),
                 onClick = clearValue
+            )
+    )
+}
+
+@Composable
+private fun InputFieldRightActionIcon(actionIcon: Painter, rightActionClick: () -> Unit) {
+    Image(
+        painter = actionIcon,
+        contentDescription = "right action",
+        modifier = Modifier
+            .padding(end = 8.dp, start = 4.dp)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = ripple(bounded = false),
+                onClick = rightActionClick
             )
     )
 }

@@ -65,6 +65,8 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 modifier = Modifier.padding(top = 16.dp),
                 message = "Message",
                 placeholder = "Placeholder",
+                onRightActionIconClick = {},
+                rightActionIcon = painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_contact),
                 actionText = "Action",
                 isInputCenteredAlign = false,
             ) { inputText2 = it }
@@ -89,6 +91,8 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
             ChiliInputField(
                 value = inputText3,
                 modifier = Modifier.padding(top = 16.dp),
+                onRightActionIconClick = {},
+                rightActionIcon = painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_contact),
                 isInputFieldEmpty = inputText3.text == inputMask1,
                 keyboardType = KeyboardType.Number,
             ) {
