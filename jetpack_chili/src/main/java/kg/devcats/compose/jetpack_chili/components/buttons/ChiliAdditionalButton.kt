@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -30,13 +31,15 @@ fun ChiliAdditionalButton(
     endIconPainter: Painter? = null,
     endIconContentDescription: String? = null,
     endIconModifier: Modifier = Modifier,
+    enabledBackgroundColor: Color = Chili.color.buttonAdditionalContainer,
+    disabledBackgroundColor: Color = Chili.color.buttonAdditionalDisabledContainer,
     onClick: () -> Unit
 ) {
 
     Box(
         modifier = modifier
             .clip(Chili.shapes.RoundedCornerShape)
-            .background(if (enabled) Chili.color.buttonAdditionalContainer else Chili.color.buttonAdditionalDisabledContainer)
+            .background(if (enabled) enabledBackgroundColor else disabledBackgroundColor)
             .clickable(enabled = enabled, onClick = onClick)
             .padding(horizontal = 24.dp),
         contentAlignment = Alignment.Center
