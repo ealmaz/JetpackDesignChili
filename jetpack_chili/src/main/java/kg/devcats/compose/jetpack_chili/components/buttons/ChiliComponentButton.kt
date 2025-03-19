@@ -4,7 +4,6 @@ package kg.devcats.compose.jetpack_chili.components.buttons
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,7 +23,6 @@ fun ChiliComponentButton(
     enabled: Boolean = true,
     enabledTextColor: Color = Chili.color.buttonComponentText,
     disabledTextColor: Color = Chili.color.buttonComponentDisabledText,
-    paddingValues: PaddingValues = PaddingValues(8.dp),
     onClick: () -> Unit
 ) {
     Box(
@@ -34,7 +32,7 @@ fun ChiliComponentButton(
             .clickable(enabled = enabled, onClick = onClick)
     ) {
         Text(
-            modifier = Modifier.padding(paddingValues),
+            modifier = Modifier.padding(top = 7.dp, bottom = 6.dp, start = 12.dp, end = 16.dp),
             text = text,
             style = textStyle,
             color = if (enabled) enabledTextColor else disabledTextColor
