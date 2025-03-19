@@ -189,6 +189,7 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 isActionEnabled = false,
                 actionTextStyle = Chili.typography.H16_Value,
                 actionDisabledTextColor = Chili.color.valueText,
+                actionPaddingValues = PaddingValues(top = 8.dp, bottom = 8.dp, start = 8.dp, end = 16.dp),
                 keyboardType = KeyboardType.Number,
                 messageWeight = 1f,
                 onValueChange = { smsValue = it },
