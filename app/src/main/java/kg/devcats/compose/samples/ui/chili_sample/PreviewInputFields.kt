@@ -245,6 +245,15 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
                 text = "Chili Uneditable Input Field Max",
                 onClick = { context.showToast("Chili Uneditable Input Field") }
             )
+
+            var isErrorState by remember { mutableStateOf(true) }
+            ChiliUneditableInputField(
+                modifier = Modifier.padding(top = 16.dp),
+                hint = if (isErrorState) "Click me to hide error state" else "Click me to show error state" ,
+                error = "Check that the data is entered correctly".takeIf { isErrorState },
+                message = "The data is entered correctly",
+                onClick = { isErrorState = !isErrorState }
+            )
         }
     }
 }

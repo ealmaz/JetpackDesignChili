@@ -365,7 +365,7 @@ private fun InputFieldRightActionIcon(actionIcon: Painter, rightActionClick: () 
 }
 
 @Composable
-private fun decideBackgroundColor(error: String? = null, inputBgColor: Color): Color {
+internal fun decideBackgroundColor(error: String? = null, inputBgColor: Color): Color {
     return if (error == null) inputBgColor
     else Chili.color.inputFieldErrorBackground
 }
