@@ -32,7 +32,7 @@ fun ChiliComponentButton(
             .clickable(enabled = enabled, onClick = onClick)
     ) {
         Text(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(top = 7.dp, bottom = 6.dp, start = 12.dp, end = 16.dp),
             text = text,
             style = textStyle,
             color = if (enabled) enabledTextColor else disabledTextColor
