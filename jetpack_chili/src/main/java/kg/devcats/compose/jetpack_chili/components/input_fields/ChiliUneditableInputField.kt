@@ -1,6 +1,7 @@
 package kg.devcats.compose.jetpack_chili.components.input_fields
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,6 +32,9 @@ fun ChiliUneditableInputField(
     modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
+    error: String? = null,
+    message: String? = null,
+    messagePaddingValues: PaddingValues = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
     textStyle: TextStyle = Chili.typography.H20_Primary_500,
     textAlign: TextAlign = TextAlign.Unspecified,
     textPadding: PaddingValues = PaddingValues(vertical = 12.dp, horizontal = 16.dp),
@@ -48,34 +52,44 @@ fun ChiliUneditableInputField(
         Modifier
     }
 
-    Surface(
-        modifier = modifier
-            .fillMaxWidth()
-            .then(clickableModifier),
-        shape = Chili.shapes.RoundedCornerShape,
-        color = backgroundColor
-    ) {
-        Row(
-            Modifier.padding(textPadding),
-            verticalAlignment = Alignment.CenterVertically
+    Column(modifier = modifier) {
+        Surface(
+            modifier = modifier
+                .fillMaxWidth()
+                .then(clickableModifier),
+            shape = Chili.shapes.RoundedCornerShape,
+            color = decideBackgroundColor(error, backgroundColor)
         ) {
-            Text(
-                modifier = Modifier.weight(1f),
-                text = textState.ifEmpty { hintState },
-                style = textStyle,
-                color = if (textState.isNotEmpty()) Chili.color.markedText else Chili.color.valueText,
-                textAlign = textAlign,
-                maxLines = maxLines,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            if (endIcon != null) {
-                Icon(
-                    painter = endIcon,
-                    contentDescription = null,
-                    tint = gray_1.copy(alpha = 0.5f)
+            Row(
+                Modifier.padding(textPadding),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = textState.ifEmpty { hintState },
+                    style = textStyle,
+                    color = if (textState.isNotEmpty()) Chili.color.markedText else Chili.color.valueText,
+                    textAlign = textAlign,
+                    maxLines = maxLines,
+                    overflow = TextOverflow.Ellipsis
                 )
+
+                if (endIcon != null) {
+                    Icon(
+                        painter = endIcon,
+                        contentDescription = null,
+                        tint = gray_1.copy(alpha = 0.5f)
+                    )
+                }
             }
+        }
+
+        if (message != null || error != null) {
+            Text(
+                modifier = Modifier.padding(messagePaddingValues),
+                style = if (error == null) Chili.typography.H14_Secondary else Chili.typography.H14_Error,
+                text = error.takeIf { !it.isNullOrBlank() } ?: message ?: ""
+            )
         }
     }
 }
