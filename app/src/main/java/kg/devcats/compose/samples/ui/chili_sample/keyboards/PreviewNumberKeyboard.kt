@@ -34,7 +34,7 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
         specialSymbols = listOf(',', '&'),
         isKeyboardVisible = isKeyboardVisible,
         keyboardModifier = Modifier
-            .background(Chili.color.accentPrimaryColor)
+            .background(Chili.color.surfaceBackground)
             .padding(horizontal = 16.dp, vertical = 8.dp),
         topBar = {
             ChiliCenteredAppToolbar(

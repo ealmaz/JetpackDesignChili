@@ -23,7 +23,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kg.devcats.compose.jetpack_chili.rippleClickable
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 sealed class KeyboardKeyType {
@@ -134,8 +136,8 @@ fun KeyButton(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(5.dp))
-            .background(Chili.color.buttonAdditionalContainer)
-            .clickable(enabled = isEnabled, onClick = { onKeyClick.invoke(key) })
+            .background(Chili.color.keyboardBackgroundColor)
+            .rippleClickable (enabled = isEnabled, radius = Dp.Unspecified) { onKeyClick.invoke(key) }
             .padding(horizontal = 24.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -168,10 +170,10 @@ fun KeyButton(
 fun BoxScope.TextKeyButton(text: String = "") {
     Text(
         modifier = Modifier
-            .padding(vertical = 16.dp)
+            .padding(vertical = 10.dp)
             .align(Alignment.Center),
         text = text,
-        style = Chili.typography.H20,
+        style = Chili.typography.H28,
         color = Chili.color.keyColor
     )
 }
@@ -180,7 +182,7 @@ fun BoxScope.TextKeyButton(text: String = "") {
 fun BoxScope.DrawableKeyButton(resId: Int) {
     Icon(
         modifier = Modifier
-            .padding(vertical = 16.dp)
+            .padding(vertical = 14.dp)
             .align(Alignment.Center),
         painter = painterResource(id = resId),
         contentDescription = null,

@@ -163,6 +163,7 @@ interface ChiliColorScheme {
     val alertSuccessText: Color
 
     val keyColor: Color
+    val keyboardBackgroundColor: Color
 
 //    AccountCard
     val toggleIconColor: Color
@@ -316,7 +317,8 @@ data class ChiliLightColorScheme(
     override val lockSuccessBg: Color = green_1,
     override val lockBorderColor: Color = black_4,
 
-    override val keyColor: Color = black_6,
+    override val keyColor: Color = black_2,
+    override val keyboardBackgroundColor: Color = gray_4,
 
     override val pdfBackgroundColor: Color = gray_4,
 
@@ -462,7 +464,8 @@ data class ChiliDarkColorScheme(
     override val alertSuccessContent: Color = green_9,
     override val alertSuccessText: Color = white_1,
 
-    override val keyColor: Color = gray_6,
+    override val keyColor: Color = gray_3,
+    override val keyboardBackgroundColor: Color = black_3,
 
     override val pdfBackgroundColor: Color = black_2,
 
