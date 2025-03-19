@@ -102,6 +102,9 @@ interface ChiliColorScheme {
     val buttonSecondaryText: Color
     val buttonSecondaryDisabledText: Color
 
+    //Figma secondary button
+    val buttonSecondaryBackground: Color
+
     //Additional button
     val buttonAdditionalContainer: Color
     val buttonAdditionalDisabledContainer: Color
@@ -262,6 +265,8 @@ data class ChiliLightColorScheme(
     override val buttonSecondaryText: Color = blue_1,
     override val buttonSecondaryDisabledText: Color = blue_1_alpha_50,
 
+    override val buttonSecondaryBackground: Color = gray_3,
+
     override val buttonAdditionalContainer: Color = gray_5,
     override val buttonAdditionalDisabledContainer: Color = gray_5,
     override val buttonAdditionalText: Color = black_1,
@@ -404,6 +409,8 @@ data class ChiliDarkColorScheme(
     override val buttonSecondaryContainer: Color = Color.Transparent,
     override val buttonSecondaryText: Color = blue_1,
     override val buttonSecondaryDisabledText: Color = blue_1_alpha_50,
+
+    override val buttonSecondaryBackground: Color = black_7,
 
     override val buttonAdditionalContainer: Color = black_5,
     override val buttonAdditionalDisabledContainer: Color = black_5,

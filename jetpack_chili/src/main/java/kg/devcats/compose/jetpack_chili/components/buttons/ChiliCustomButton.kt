@@ -3,6 +3,7 @@ package kg.devcats.compose.jetpack_chili.components.buttons
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,4 +28,24 @@ fun ChiliCustomButton(
     ) {
         Text(text = text, style = Chili.typography.H14_Primary_500, color = Chili.color.buttonPrimaryText)
     }
+}
+
+@Composable
+fun primaryButtonColors(): ButtonColors {
+    return ButtonDefaults.buttonColors(
+        containerColor = Chili.color.buttonPrimaryContainer,
+        contentColor = Chili.color.buttonPrimaryText,
+        disabledContainerColor = Chili.color.buttonPrimaryDisabledContainer,
+        disabledContentColor = Chili.color.buttonPrimaryText,
+    )
+}
+
+@Composable
+fun secondaryButtonColors() : ButtonColors {
+    return ButtonDefaults.buttonColors(
+        containerColor = Chili.color.buttonSecondaryBackground,
+        contentColor = Chili.color.primaryText,
+        disabledContainerColor = Chili.color.buttonSecondaryBackground,
+        disabledContentColor = Chili.color.primaryText,
+    )
 }

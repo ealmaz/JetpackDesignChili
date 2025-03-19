@@ -33,16 +33,6 @@ fun ChiliPrimaryButton(
     }
 }
 
-@Composable
-fun primaryButtonColors(): ButtonColors {
-    return ButtonDefaults.buttonColors(
-        containerColor = Chili.color.buttonPrimaryContainer,
-        contentColor = Chili.color.buttonPrimaryText,
-        disabledContainerColor = Chili.color.buttonPrimaryDisabledContainer,
-        disabledContentColor = Chili.color.buttonPrimaryText,
-    )
-}
-
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewChiliPrimaryButton() {
