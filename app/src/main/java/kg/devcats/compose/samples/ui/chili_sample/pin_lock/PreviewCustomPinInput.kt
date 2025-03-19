@@ -134,9 +134,7 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                     keyboardParams = KeyboardParams(
                         modifier = Modifier.weight(1f),
                         textState = pinCodeState,
-                        digitTextStyle = Chili.typography.H42_Primary.copy(
-                            fontFamily = FontFamily(Font(R.font.museo_regular))
-                        ),
+                        digitTextStyle = Chili.typography.H42_Primary,
                         digitTextColor = Color(0xFF36424B),
                         codeMaxSize = 4,
                         onInputChange = { pinCodeState.value = it }
@@ -144,9 +142,7 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                     leftActionButtonParams = ActionButtonParams(
                         buttonType = ActionButtonType.Text(
                             text = "Выйти",
-                            textStyle = Chili.typography.H18_Primary.copy(
-                                fontFamily = FontFamily(Font(R.font.museo_regular))
-                            )
+                            textStyle = Chili.typography.H18_Primary
                         ),
                         onClick = { context.showToast("Action") }
                     )
