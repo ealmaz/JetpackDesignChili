@@ -9,6 +9,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,8 +22,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,6 +36,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -46,6 +50,8 @@ import kg.devcats.compose.jetpack_chili.components.cards.AccentCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertState
 import kg.devcats.compose.jetpack_chili.components.cards.AnimatedBorderCard
+import kg.devcats.compose.jetpack_chili.components.cards.AnimatedGradientBackground
+import kg.devcats.compose.jetpack_chili.components.cards.AnimatedSweepGradientBackground
 import kg.devcats.compose.jetpack_chili.components.cards.BalanceCard
 import kg.devcats.compose.jetpack_chili.components.cards.BankCard
 import kg.devcats.compose.jetpack_chili.components.cards.BankCardFieldState
@@ -68,10 +74,12 @@ import kg.devcats.compose.jetpack_chili.components.cards.ReferralTaskCard
 import kg.devcats.compose.jetpack_chili.components.cards.ReferralTaskStatus
 import kg.devcats.compose.jetpack_chili.components.cards.StoriesCard
 import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCard
+import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCell
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.jetpack_chili.theme.magenta_1
 import kg.devcats.compose.samples.ui.extension.showToast
 import kg.devcats.compose.samples.ui.navigation.Screens
 import kotlinx.coroutines.delay
@@ -103,7 +111,9 @@ fun PreviewCards(
                 .verticalScroll(rememberScrollState())
                 .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)
         ) {
-            ChiliPrimaryButton(text = "Account card examples", modifier = Modifier.fillMaxWidth().padding(top = 32.dp, bottom = 16.dp)) {
+            ChiliPrimaryButton(text = "Account card examples", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 32.dp, bottom = 16.dp)) {
                 navController.navigate(Screens.AccountCardExamplesScreen.toString())
             }
 
@@ -406,6 +416,44 @@ fun PreviewCards(
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "AnimatedGradientBackground",
+                style = Chili.typography.H16_Primary
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+            Surface(
+                color = Chili.color.cellViewBackground,
+                shape = Chili.shapes.RoundedCornerShape
+            ) {
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                    .clip(Chili.shapes.RoundedCornerShape)) {
+                    val colors = listOf(
+                        magenta_1, Color(0xFFFF88C6), Color(0xFFAAD0FF)
+                    )
+                    AnimatedSweepGradientBackground(
+                        modifier = Modifier.fillMaxSize(),
+                        colors = colors,
+                        animationDuration = 2000,
+                        animationEnabled = false
+                    )
+                    Box(modifier = Modifier
+                        .padding(2.dp)
+                        .clip(RoundedCornerShape(10.dp))) {
+                        ChiliCell(
+                            title = "Title",
+                            icon = painterResource(id = R.drawable.chili_ic_documents_green),
+                            onClick = {
+
+                            },
+                        )
+                    }
+                }
+            }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
                 text = "AccentCard",
                 style = Chili.typography.H16_Primary
             )
@@ -464,7 +512,7 @@ fun PreviewCards(
                     ),
                     title = "MultiiconedCell title",
                     additionalInfo = "Весь список",
-                    isLoading = true,
+                    isLoading = false,
                     onAdditionalInfoClick = {
                         Toast.makeText(context, "Additional info clicked", Toast.LENGTH_SHORT).show()
                     }
@@ -780,9 +828,11 @@ fun PreviewCards(
                 item {
                     ShadowRoundedBox {
                         PromoCard(
-                            modifier = Modifier.width(194.dp).clickable {
+                            modifier = Modifier
+                                .width(194.dp)
+                                .clickable {
 
-                            },
+                                },
                             icon = R.drawable.chili_ic_documents_green,
                             titleText = "Рассрочка 0-0-12",
                             promoStatusState = PromoStatusState.New("Новое")
