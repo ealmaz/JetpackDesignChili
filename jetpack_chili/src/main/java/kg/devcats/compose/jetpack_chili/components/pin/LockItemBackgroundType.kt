@@ -11,9 +11,9 @@ enum class LockItemBackgroundType {
 }
 
 @Composable
-fun LockItemBackgroundType.getColor() = when(this) {
-    LockItemBackgroundType.Error -> Chili.color.lockErrorBg
-    LockItemBackgroundType.Success -> Chili.color.lockSuccessBg
-    LockItemBackgroundType.Selected -> Chili.color.lockSelectedBg
-    LockItemBackgroundType.NonSelected -> Chili.color.lockNonSelectedBg
+fun LockItemBackgroundType.getColor(pinItemConfig: PinItemConfig? = null) = when(this) {
+    LockItemBackgroundType.Error -> pinItemConfig?.errorColor ?: Chili.color.lockErrorBg
+    LockItemBackgroundType.Success -> pinItemConfig?.successColor ?: Chili.color.lockSuccessBg
+    LockItemBackgroundType.Selected -> pinItemConfig?.selectedColor ?: Chili.color.lockSelectedBg
+    LockItemBackgroundType.NonSelected -> pinItemConfig?.nonSelectedColor ?: Chili.color.lockNonSelectedBg
 }

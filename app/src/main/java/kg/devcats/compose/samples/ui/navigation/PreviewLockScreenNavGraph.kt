@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import kg.devcats.compose.samples.ui.chili_sample.pin_lock.PreviewLoginPinScreen
 import kg.devcats.compose.samples.ui.chili_sample.pin_lock.PreviewPinCreateScreen
 import kg.devcats.compose.samples.ui.chili_sample.PinLockSampleScreen
+import kg.devcats.compose.samples.ui.chili_sample.pin_lock.PreviewCustomPinInput
 
 @Composable
 fun PreviewLockScreenNavGraph(navigateUp: () -> Unit) {
@@ -27,6 +28,9 @@ fun PreviewLockScreenNavGraph(navigateUp: () -> Unit) {
         }
         composable(LockScreens.LoginPinCodeScreen.toString()) {
             PreviewLoginPinScreen { pinNavController.navigateUp() }
+        }
+        composable(LockScreens.CustomPinCodeScreen.toString()) {
+            PreviewCustomPinInput { pinNavController.navigateUp() }
         }
     }
 }

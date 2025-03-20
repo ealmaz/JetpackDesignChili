@@ -77,7 +77,7 @@ fun PreviewPinKeyboard(navigateUp: () -> Unit) {
                         textState = pinCode,
                         onInputChange = { pinCode.value = it }
                     ),
-                    actionButtonParams = ActionButtonParams(
+                    leftActionButtonParams = ActionButtonParams(
                         buttonType = ActionButtonType.Text("Forgot?"),
                         onClick = { context.showToast("Action") }
                     )
