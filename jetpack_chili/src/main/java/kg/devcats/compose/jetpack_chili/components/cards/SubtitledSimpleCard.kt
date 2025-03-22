@@ -134,6 +134,16 @@ private fun IconOrEmoji(
     iconUrl: String?
 ) {
     when {
+        emoji != null -> {
+            Box(modifier = Modifier.size(32.dp)) {
+                Text(
+                    text = emoji,
+                    style = Chili.typography.H24,
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+        }
+
         iconUrl != null -> {
             AsyncImage(
                 model = iconUrl,
@@ -150,16 +160,6 @@ private fun IconOrEmoji(
                 contentDescription = "Icon",
                 modifier = Modifier.size(32.dp)
             )
-        }
-
-        emoji != null -> {
-            Box(modifier = Modifier.size(32.dp)) {
-                Text(
-                    text = emoji,
-                    style = Chili.typography.H24,
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
         }
     }
 
