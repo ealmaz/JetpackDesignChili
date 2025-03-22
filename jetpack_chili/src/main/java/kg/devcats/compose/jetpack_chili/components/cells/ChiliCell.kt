@@ -48,6 +48,7 @@ fun ChiliCell(
     subtitleMaxLines: Int = 3,
     isDividerVisible: Boolean = false,
     isChevronVisible: Boolean = true,
+    chevronTintColor: Color = Chili.color.chevronColor,
     icon: Painter? = null,
     iconUrl: String? = null,
     placeholderIcon : Painter = painterResource(R.drawable.chili_ic_stub),
@@ -173,7 +174,7 @@ fun ChiliCell(
                 }
 
                 endFrame?.invoke(this)
-                if (isChevronVisible) ChiliChevron()
+                if (isChevronVisible) ChiliChevron(chevronTintColor = chevronTintColor)
             }
             if (isDividerVisible) Divider(
                 modifier = Modifier.then(

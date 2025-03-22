@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -12,12 +13,15 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
-fun ChiliChevron(modifier: Modifier = Modifier) {
+fun ChiliChevron(
+    modifier: Modifier = Modifier,
+    chevronTintColor: Color = Chili.color.chevronColor
+) {
     Image(
         modifier = modifier.size(32.dp),
         painter = painterResource(id = R.drawable.chili4_ic_chevron),
         contentDescription = "",
-        colorFilter = ColorFilter.tint(Chili.color.chevronColor)
+        colorFilter = ColorFilter.tint(chevronTintColor)
     )
 }
 
