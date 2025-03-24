@@ -26,7 +26,8 @@ fun BonusTag(
     text: String,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    onClick: () -> Unit = {}) {
+    onClick: (() -> Unit)? = null
+) {
     val enabledColor = if (enabled) Color.White.copy(alpha = 0f) else Color.White.copy(alpha = 0.5f)
     val alphaForDisableState = if (enabled) 1f else 0.5f
     Box(modifier = modifier
@@ -36,7 +37,11 @@ fun BonusTag(
                 contentScale = ContentScale.FillWidth
             )
         .background(enabledColor)
-        .clickable { if (enabled) onClick.invoke() }, contentAlignment = Alignment.CenterStart) {
+        .run {
+            if (onClick != null && enabled) clickable { onClick.invoke() }
+            else this
+        }
+        ,contentAlignment = Alignment.CenterStart) {
         Row(modifier = Modifier.padding(start = 8.dp, end = 4.dp, top = 4.dp, bottom = 4.dp), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 modifier = Modifier.padding(end = 2.dp),
