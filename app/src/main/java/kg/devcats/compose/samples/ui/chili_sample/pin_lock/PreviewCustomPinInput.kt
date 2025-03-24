@@ -4,9 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
@@ -67,10 +67,12 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
+        containerColor = Chili.colorPair.c_FFFFFF_051127,
         topBar = {
             ChiliCenteredAppToolbar(
                 navigationIcon = painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili4_ic_back_arrow_rounded),
                 onNavigationIconClick = navigateUp,
+                backgroundColor = Color.Transparent,
                 title = ""
             )
         },
@@ -79,7 +81,7 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(contentPadding)
-                    .background(Chili.color.surfaceBackground),
+                    .background(Color.Transparent),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
@@ -92,15 +94,14 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                 Spacer(Modifier.weight(1f))
 
                 Column(
-                    modifier = Modifier.padding(top = 35.dp).fillMaxWidth(),
+                    modifier = Modifier.padding(top = 40.dp).fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        modifier = Modifier.padding(horizontal = 40.dp),
+                        modifier = Modifier.padding(start = 40.dp, end = 40.dp, bottom = 20.dp),
                         text = "Введите пин-код",
-                        style = Chili.typography.H20_Secondary,
+                        style = Chili.typography.H22_Primary,
                         maxLines = 2,
-                        minLines = 2
                     )
 
                     ChiliPinInputField(
@@ -119,8 +120,9 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                         pinItemConfig = PinItemConfig.create(
                             size = 19.dp,
                             borderWidth = 1.dp,
-                            borderColor = black_7,
-                            selectedColor = blue_1
+                            borderColor = Chili.colorPair.c_36424B_FFFFFF,
+                            selectedColor = Chili.colorPair.c_1560BD_FFFFFF,
+                            nonSelectedColor = Color.Transparent
                         )
                     )
                 }
@@ -130,12 +132,11 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                 PinKeyboard(
                     modifier = Modifier
                         .padding(top = 40.dp)
-                        .heightIn(400.dp, 420.dp),
+                        .fillMaxHeight(0.8f),
                     keyboardParams = KeyboardParams(
                         modifier = Modifier.weight(1f),
                         textState = pinCodeState,
                         digitTextStyle = Chili.typography.H42_Primary,
-                        digitTextColor = Color(0xFF36424B),
                         codeMaxSize = 4,
                         onInputChange = { pinCodeState.value = it }
                     ),
@@ -145,6 +146,12 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                             textStyle = Chili.typography.H18_Primary
                         ),
                         onClick = { context.showToast("Action") }
+                    ),
+                    rightActionButtonParams = ActionButtonParams(
+                        buttonType = ActionButtonType.Drawable(
+                            defaultDrawable = painterResource(R.drawable.ic_finger_print),
+                            pressedDrawable = painterResource(R.drawable.ic_finger_print)
+                        )
                     )
                 )
 
@@ -152,7 +159,7 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                     modifier = Modifier.padding(bottom = 40.dp),
                     text = "Забыли пин-код?",
                     style = Chili.typography.H16_Primary,
-                    color = blue_1
+                    color = Chili.colorPair.c_1560BD_FFFFFF
                 )
             }
         }

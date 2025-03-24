@@ -42,7 +42,6 @@ fun PinKeyboard(
 ) {
     var inputText by remember(keyboardParams.textState.value) { mutableStateOf(keyboardParams.textState.value) }
     val digitTextStyle = keyboardParams.digitTextStyle ?: Chili.typography.H28_Primary
-    val digitTextColor = keyboardParams.digitTextColor ?: Chili.color.primaryText
 
     fun addDigit(digit: String) {
         if (inputText.length < keyboardParams.codeMaxSize) {
@@ -54,12 +53,11 @@ fun PinKeyboard(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(Chili.color.surfaceBackground)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         (1..9).chunked(3).forEach { row ->
-            NumberRow(row, keyboardParams.isEnableInput, digitTextStyle, digitTextColor, keyboardParams.modifier) { addDigit(it) }
+            NumberRow(row, keyboardParams.isEnableInput, digitTextStyle, keyboardParams.modifier) { addDigit(it) }
         }
 
         Row(
@@ -76,7 +74,6 @@ fun PinKeyboard(
             KeyboardDigitButton(
                 digit = 0,
                 digitTextStyle = digitTextStyle,
-                digitTextColor = digitTextColor,
                 onClick = { addDigit("0") },
                 enabled = keyboardParams.isEnableInput
             )
@@ -93,7 +90,6 @@ fun PinKeyboard(
                 )
             } else {
                 ActionButton(
-                    modifier = Modifier.weight(1f),
                     actionButtonParams = rightActionButtonParams,
                     keyboardParams = keyboardParams
                 )
@@ -107,7 +103,6 @@ private fun NumberRow(
     digits: List<Int>,
     enableInput: Boolean,
     digitTextStyle: TextStyle = Chili.typography.H28_Primary,
-    digitTextColor: Color = Chili.color.primaryText,
     modifier: Modifier = Modifier,
     onInputChange: (String) -> Unit,
 ) {
@@ -121,7 +116,6 @@ private fun NumberRow(
             KeyboardDigitButton(
                 digit = digit,
                 digitTextStyle = digitTextStyle,
-                digitTextColor = digitTextColor,
                 onClick = { onInputChange(digit.toString()) },
                 enabled = enableInput
             )
@@ -134,17 +128,12 @@ fun KeyboardDigitButton(
     digit: Int,
     onClick: () -> Unit,
     digitTextStyle: TextStyle = Chili.typography.H28_Primary,
-    digitTextColor: Color = Chili.color.primaryText,
     enabled: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
             .sizeIn(minWidth = 64.dp, minHeight = 64.dp)
-            .background(
-                color = if (enabled) Chili.color.surfaceBackground else Chili.color.dividerColor,
-                shape = Chili.shapes.Circle
-            )
             .rippleClickable(
                 enabled,
                 onClick = onClick,
@@ -156,8 +145,7 @@ fun KeyboardDigitButton(
     ) {
         Text(
             text = digit.toString(),
-            style = digitTextStyle,
-            color = digitTextColor
+            style = digitTextStyle
         )
     }
 }
@@ -173,7 +161,7 @@ fun KeyboardIconButton(
     val isPressed = remember { mutableStateOf(false) }
 
     Box(
-        modifier = modifier
+        modifier = Modifier
             .sizeIn(minWidth = 64.dp, minHeight = 64.dp)
             .setIsPressedEffect(isPressed, onClick, enabled)
             .setIsAlpha(enabled),
@@ -185,7 +173,7 @@ fun KeyboardIconButton(
                 Image(
                     painter = it,
                     contentDescription = null,
-                    modifier = Modifier.size(width = 30.dp, height = 24.dp)
+                    modifier = modifier.sizeIn(minWidth = 30.dp, minHeight = 24.dp)
                 )
             }
         }
@@ -226,7 +214,6 @@ data class KeyboardParams(
     val textState: State<String> = mutableStateOf(""),
     val onInputChange: (String) -> Unit = {},
     var digitTextStyle: TextStyle? = null,
-    var digitTextColor: Color? = null,
     val isEnableInput: Boolean = true,
     val codeMaxSize: Int = 4,
     @DrawableRes val clearIconButtonDefault: Int? = null,
@@ -234,6 +221,7 @@ data class KeyboardParams(
 )
 
 data class ActionButtonParams(
+    val modifier: Modifier = Modifier,
     val buttonType: ActionButtonType = ActionButtonType.None,
     val onClick: () -> Unit = {}
 )

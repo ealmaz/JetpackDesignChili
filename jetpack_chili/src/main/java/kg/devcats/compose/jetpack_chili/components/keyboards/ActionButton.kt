@@ -1,7 +1,7 @@
 package kg.devcats.compose.jetpack_chili.components.keyboards
 
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -17,7 +17,6 @@ internal fun ActionButton(
             type = actionButtonParams.buttonType,
             onClick = actionButtonParams.onClick,
             enabled = keyboardParams.isEnableInput,
-            textColor = keyboardParams.digitTextColor,
             textStyle = actionButtonParams.buttonType.textStyle,
             modifier = modifier
         )
@@ -28,6 +27,6 @@ internal fun ActionButton(
             enabled = keyboardParams.isEnableInput,
             modifier = modifier
         )
-        else -> Spacer(modifier.width(64.dp))
+        else -> Spacer(modifier.widthIn(min = 64.dp))
     }
 }
