@@ -67,7 +67,7 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
-        containerColor = Chili.color.tundukBgColor,
+        containerColor = Chili.colorPair.c_FFFFFF_051127,
         topBar = {
             ChiliCenteredAppToolbar(
                 navigationIcon = painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili4_ic_back_arrow_rounded),
@@ -120,8 +120,8 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                         pinItemConfig = PinItemConfig.create(
                             size = 19.dp,
                             borderWidth = 1.dp,
-                            borderColor = Chili.color.tundukActionTitle,
-                            selectedColor = Chili.color.tundukTitleTextColor,
+                            borderColor = Chili.colorPair.c_36424B_FFFFFF,
+                            selectedColor = Chili.colorPair.c_1560BD_FFFFFF,
                             nonSelectedColor = Color.Transparent
                         )
                     )
@@ -159,7 +159,7 @@ fun PreviewCustomPinInput(navigateUp: () -> Unit) {
                     modifier = Modifier.padding(bottom = 40.dp),
                     text = "Забыли пин-код?",
                     style = Chili.typography.H16_Primary,
-                    color = Chili.color.tundukTitleTextColor
+                    color = Chili.colorPair.c_1560BD_FFFFFF
                 )
             }
         }
