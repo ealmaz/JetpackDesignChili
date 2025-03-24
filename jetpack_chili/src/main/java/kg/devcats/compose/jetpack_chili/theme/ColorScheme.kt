@@ -186,6 +186,22 @@ interface ChiliColorScheme {
     val statusWarningBg: Color
 
     val statusErrorBg: Color
+
+    //Tunduk
+    val tundukTitleTextColor: Color
+    val tundukSubtitleTextColor: Color
+    val tundukSecondaryTextColor: Color
+    val tundukInputHintTextColor: Color
+    val tundukInputBorderColor: Color
+    val tundukInputTextColor: Color
+    val tundukInputBgColor: Color
+    val tundukBgColor: Color
+    val tundukButtonBorderColor: Color
+    val tundukOtpInputColor: Color
+    val tundukCriteriaValid: Color
+    val tundukCriteriaInvalid: Color
+    val tundukForgotPasswordTextColor: Color
+    val tundukActionTitle: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -332,6 +348,22 @@ data class ChiliLightColorScheme(
     override val statusWarningBg: Color = orange_8,
 
     override val statusErrorBg: Color = red_3,
+
+    //Tunduk
+    override val tundukTitleTextColor: Color = Color(0xFF1560BD),
+    override val tundukSubtitleTextColor: Color = Color(0xFF727D8D),
+    override val tundukSecondaryTextColor: Color = Color(0xFF041326),
+    override val tundukInputHintTextColor: Color = Color(0xFF617796),
+    override val tundukInputBorderColor: Color = Color(0x0D617796),
+    override val tundukInputTextColor: Color = Color(0xFF617796),
+    override val tundukInputBgColor: Color = Color(0xFFFFFFFF),
+    override val tundukBgColor: Color = Color(0xFFFFFFFF),
+    override val tundukButtonBorderColor: Color = Color(0xFF1560BD),
+    override val tundukOtpInputColor: Color = Color(0xFF041326),
+    override val tundukCriteriaValid: Color = Color(0xFF1EA31E),
+    override val tundukCriteriaInvalid: Color = Color(0xFFFF0000),
+    override val tundukForgotPasswordTextColor: Color = Color(0xFFCC030C18),
+    override val tundukActionTitle: Color = Color(0xFF36424B),
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -476,4 +508,20 @@ data class ChiliDarkColorScheme(
     override val statusWarningBg: Color = orange_9,
 
     override val statusErrorBg: Color = red_2,
+
+    //Tunduk
+    override val tundukTitleTextColor: Color = Color(0xFFFFFFFF),
+    override val tundukSubtitleTextColor: Color = Color(0xCCFFFFFF),
+    override val tundukSecondaryTextColor: Color = Color(0xFFFFFFFF),
+    override val tundukInputHintTextColor: Color = Color(0xFFFFFFFF),
+    override val tundukInputBorderColor: Color = Color(0x0D617796),
+    override val tundukInputTextColor: Color = Color(0xFFFFFFFF),
+    override val tundukInputBgColor: Color = Color(0x1AFFFFFF),
+    override val tundukBgColor: Color = Color(0xFF051127),
+    override val tundukButtonBorderColor: Color = Color(0xFFFFFFFF),
+    override val tundukOtpInputColor: Color = Color(0xFFFFFFFF),
+    override val tundukCriteriaValid: Color = Color(0xFF7BCD7B),
+    override val tundukCriteriaInvalid: Color = Color(0xFFD36767),
+    override val tundukForgotPasswordTextColor: Color = Color(0xCC617796),
+    override val tundukActionTitle: Color = Color(0xFFFFFFFF),
 ): ChiliColorScheme
