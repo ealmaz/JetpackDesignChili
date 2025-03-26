@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
@@ -96,7 +97,10 @@ private fun ContentCard(
     emoji: String?,
 ) {
     Row(
-        modifier = Modifier.padding(12.dp),
+        modifier = Modifier.padding(
+            horizontal = 12.dp,
+            vertical = if (subtitle != null) 8.dp else 12.dp
+        ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (icon != null || emoji != null || iconUrl != null) {
