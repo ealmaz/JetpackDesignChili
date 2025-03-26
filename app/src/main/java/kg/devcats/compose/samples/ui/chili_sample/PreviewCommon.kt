@@ -37,6 +37,7 @@ import kg.devcats.compose.jetpack_chili.components.common.ChiliLinearProgressInd
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSlider
 import kg.devcats.compose.jetpack_chili.components.common.ChiliSwitch
+import kg.devcats.compose.jetpack_chili.components.common.ChiliTabs
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliChipsGroup
 import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliTextChip
@@ -295,6 +296,24 @@ fun PreviewCommon(
                 ) {
                     onClick()
                 }
+            }
+
+            Spacer(modifier = Modifier.height(64.dp))
+            Text("Chili tabs")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            val selectedTab = remember { mutableStateOf(0) }
+
+            ChiliTabs(items = listOf("Open", "Closed", "Free"), selectedIndex = selectedTab.value) {
+                selectedTab.value = it
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            val selectedTab2 = remember { mutableStateOf(0) }
+
+            ChiliTabs(items = listOf("Open", "Closed"), selectedIndex = selectedTab2.value) {
+                selectedTab2.value = it
             }
         }
     }
