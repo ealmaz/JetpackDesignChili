@@ -142,6 +142,13 @@ fun ChiliSampleScreens(
                 .padding(top = 16.dp)) {
                 navController?.navigate(Screens.TooltipScreen.toString())
             }
+
+            ChiliPrimaryButton(text = "Pull To Refresh", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)) {
+                navController?.navigate(Screens.PullToRefreshScreen.toString())
+            }
+
         }
     }
 }

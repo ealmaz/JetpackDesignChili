@@ -63,6 +63,9 @@ sealed class Screens {
 
     @Serializable
     data object TooltipScreen : Screens()
+
+    @Serializable
+    data object PullToRefreshScreen : Screens()
 }
 
 sealed class KeyboardScreens {
