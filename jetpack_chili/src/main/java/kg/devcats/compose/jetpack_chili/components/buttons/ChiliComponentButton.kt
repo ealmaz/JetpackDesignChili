@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,6 +24,7 @@ fun ChiliComponentButton(
     enabled: Boolean = true,
     enabledTextColor: Color = Chili.color.buttonComponentText,
     disabledTextColor: Color = Chili.color.buttonComponentDisabledText,
+    textAlignment: Alignment = Alignment.Center,
     onClick: () -> Unit
 ) {
     Box(
@@ -32,7 +34,9 @@ fun ChiliComponentButton(
             .clickable(enabled = enabled, onClick = onClick)
     ) {
         Text(
-            modifier = Modifier.padding(top = 7.dp, bottom = 6.dp, start = 12.dp, end = 16.dp),
+            modifier = Modifier
+                .padding(top = 7.dp, bottom = 6.dp, start = 12.dp, end = 16.dp)
+                .align(alignment = textAlignment),
             text = text,
             style = textStyle,
             color = if (enabled) enabledTextColor else disabledTextColor
