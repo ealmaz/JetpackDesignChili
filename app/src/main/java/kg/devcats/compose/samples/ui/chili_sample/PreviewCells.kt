@@ -20,12 +20,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.buttons.ChiliDoubledButtons
 import kg.devcats.compose.jetpack_chili.components.cells.DetailedInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliAdditionalInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
@@ -664,6 +666,13 @@ fun PreviewCells(
                         icon = painterResource(R.drawable.chili_ic_documents_green)
                     )
                 )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Column(modifier = Modifier.clip(Chili.shapes.RoundedCornerShape).background(Chili.color.cellViewBackground)) {
+                    DetailedInfoCell(icon = painterResource(R.drawable.chili_ic_documents_green), title = "Double buttons", value = "6 200 c", subTitle = "Below this cell")
+                    ChiliDoubledButtons(startButtonText = "Продлить", endButtonText = "Погасить")
+                }
             }
         }
     }
