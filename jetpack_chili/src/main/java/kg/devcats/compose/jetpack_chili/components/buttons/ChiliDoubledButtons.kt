@@ -16,6 +16,7 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,6 +32,11 @@ fun ChiliDoubledButtons(
     endButtonTextRes: Int? = null,
     onStartButtonClick: (() -> Unit)? = null,
     onEndButtonClick: (() -> Unit)? = null,
+    enabledTextColor: Color = Chili.color.buttonComponentText,
+    disabledTextColor: Color = Chili.color.buttonComponentDisabledText,
+    enabled: Boolean = true,
+    startButtonEnabled: Boolean = true,
+    endButtonEnabled: Boolean = true
 ) {
     Column(modifier = modifier) {
         HorizontalDivider(thickness = 0.5.dp, color = Chili.color.dividerColor)
@@ -39,7 +45,7 @@ fun ChiliDoubledButtons(
                 modifier = Modifier
                     .wrapContentHeight()
                     .weight(1f)
-                    .clickable { onStartButtonClick?.invoke() }
+                    .clickable(enabled = enabled && startButtonEnabled) { onStartButtonClick?.invoke() }
                     .padding(12.dp),
                 contentAlignment = Alignment.Center
             ) {
@@ -47,6 +53,7 @@ fun ChiliDoubledButtons(
                     modifier = modifier.wrapContentSize(),
                     text = startButtonTextRes?.let { stringResource(it) } ?: startButtonText ?: "",
                     style = Chili.typography.H16_Action,
+                    color = if (enabled && startButtonEnabled) enabledTextColor else disabledTextColor,
                     textAlign = TextAlign.Center
                 )
             }
@@ -55,7 +62,7 @@ fun ChiliDoubledButtons(
                 modifier = Modifier
                     .wrapContentHeight()
                     .weight(1f)
-                    .clickable { onEndButtonClick?.invoke() }
+                    .clickable(enabled = enabled && endButtonEnabled) { onEndButtonClick?.invoke() }
                     .padding(12.dp),
                 contentAlignment = Alignment.Center
             ) {
@@ -63,6 +70,7 @@ fun ChiliDoubledButtons(
                     modifier = modifier.wrapContentSize(),
                     text =  endButtonTextRes?.let { stringResource(it) } ?: endButtonText ?: "",
                     style = Chili.typography.H16_Action_500,
+                    color = if (enabled && endButtonEnabled) enabledTextColor else disabledTextColor,
                     textAlign = TextAlign.Center
                 )
             }
@@ -76,6 +84,6 @@ fun ChiliDoubledButtons(
 fun ChiliDoubledButtonPreview() {
     ChiliDoubledButtons(
         startButtonText = "Продлить",
-        endButtonText = "Погасить"
+        endButtonText = "Погасить",
     )
 }
