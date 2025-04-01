@@ -21,6 +21,7 @@ import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
 import kg.devcats.compose.jetpack_chili.components.common.ChiliChevron
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -89,7 +90,7 @@ fun BalanceCard(
                                     modifier = Modifier.clip(Chili.shapes.RoundedCornerShape)
                                 )
                             }
-                            Text(text = it, style = Chili.typography.H16_Primary_500)
+                            Text(text = it.parseHtml(), style = Chili.typography.H16_Primary_500)
                         }
                     }
                 }

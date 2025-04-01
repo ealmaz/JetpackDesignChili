@@ -616,9 +616,9 @@ fun PreviewCells(
                     icon = painterResource(R.drawable.chili_ic_documents_green),
                     title = "USDT (TRC20)",
                     subTitle = "Достигнут лимит",
-                    value = "- 500,00 с",
-                    subValue = "44 500,00 с ",
-                    additionalText = "Ожидает зачисления: 10 500,00 c",
+                    value = "- 500,00 <u>с</u>",
+                    subValue = "44 500,00 ",
+                    additionalText = "Ожидает зачисления: 10 500,00 <u>с</u>",
                     caption = "09:42",
                 )
 

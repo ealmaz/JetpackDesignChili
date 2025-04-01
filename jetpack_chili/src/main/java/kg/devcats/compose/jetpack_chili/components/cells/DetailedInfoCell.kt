@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.RoundedBox
 import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -66,7 +67,7 @@ fun DetailedInfoCell(
                         Spacer(modifier = Modifier.width(8.dp))
                     }
                     Text(modifier = Modifier.weight(1f), text = title, style = titleStyle, maxLines = 2, overflow = TextOverflow.Ellipsis)
-                    value?.let { Text(text = value, style = valueStyle) }
+                    value?.let { Text(text = value.parseHtml(), style = valueStyle) }
                 }
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.End) {
                     subTitle?.let {
@@ -77,7 +78,7 @@ fun DetailedInfoCell(
                     subValue?.let {
                         Text(modifier = Modifier
                             .padding(top = 8.dp)
-                            .weight(1f), text = subValue, style = subValueStyle, textAlign = TextAlign.End)
+                            .weight(1f), text = subValue.parseHtml(), style = subValueStyle, textAlign = TextAlign.End)
                     }
                 }
                 additionalText?.let {
@@ -87,7 +88,7 @@ fun DetailedInfoCell(
                             .clip(RoundedCornerShape(8.dp))
                             .background(Chili.color.contentSecondary)
                             .padding(8.dp),
-                        text = it,
+                        text = it.parseHtml(),
                         style = additionalTextStyle
                     )
                 }
@@ -166,7 +167,7 @@ fun DetailedInfoCellPreview() {
             icon = painterResource(R.drawable.chili_ic_documents_green),
             title = "USDT (TRC20)",
             subTitle = "Достигнут лимит",
-            value = "- 500,00 с",
+            value = "- 500,00 <u>с</u>",
             subValue = "44 500,00 с ",
             additionalText = "Ожидает зачисления: 10 500,00 c",
             caption = "09:42",
