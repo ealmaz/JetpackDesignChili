@@ -3,6 +3,7 @@ package kg.devcats.compose.jetpack_chili.modals.bottom_sheets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliSecondaryButton
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
@@ -22,14 +23,26 @@ fun ChiliChooseActionBottomSheet(
         hideOnSwipe = hideOnSwipe,
     ) {
         actions.forEachIndexed { index, item ->
-            if (index == actions.lastIndex) ChiliSecondaryButton(modifier = Modifier.fillMaxWidth(), text = item.title, onClick = item.onClick)
-            else ChiliSecondaryButton(modifier = Modifier.fillMaxWidth(), text = item.title, onClick = item.onClick, textColor = Chili.color.primaryText)
-
+            if (index == actions.lastIndex) {
+                ChiliSecondaryButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = item.title,
+                    onClick = item.onClick,
+                    textColor = item.titleColor ?: Chili.color.buttonComponentText
+                )
+            }
+            else ChiliSecondaryButton(
+                modifier = Modifier.fillMaxWidth(),
+                text = item.title,
+                onClick = item.onClick,
+                textColor = item.titleColor ?: Chili.color.primaryText
+            )
         }
     }
 }
 
 data class ChiliChooseActionBSAction(
     val title: String,
+    val titleColor: Color? = null,
     val onClick: () -> Unit
 )

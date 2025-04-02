@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -145,7 +146,7 @@ fun BottomSheetsPreview(
         isShown = chooseAction,
         onDismissRequest = {chooseAction = false},
         actions = listOf(
-            ChiliChooseActionBSAction("Сегодня") { chooseAction = false },
+            ChiliChooseActionBSAction("Сегодня", Chili.color.errorText) { chooseAction = false },
             ChiliChooseActionBSAction("За последюнюю неделю") { chooseAction = false },
             ChiliChooseActionBSAction("За последний месяц") { chooseAction = false },
             ChiliChooseActionBSAction("Выбрать период") { chooseAction = false },
