@@ -9,9 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +28,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.buttons.ButtonSize
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliAdditionalButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliCustomButton
@@ -53,6 +57,7 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
             .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)) {
 
             var isLoading by remember { mutableStateOf(false) }
+            var isLoadingPrimary by remember { mutableStateOf(false) }
 
             ChiliLoaderButton(text = "Loader button", modifier = Modifier
                 .fillMaxWidth()
@@ -66,7 +71,62 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
 
-            ChiliPrimaryButton(text = "Primary button", modifier = Modifier.fillMaxWidth()) {}
+            Text(text = "Primary buttons and their states", modifier = Modifier.fillMaxWidth())
+
+            ChiliPrimaryButton(
+                icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+                text = "Primary button c url", isLoading = isLoadingPrimary,
+                modifier = Modifier.fillMaxWidth()
+                    .padding(top = 8.dp)
+            ) {
+                isLoadingPrimary = !isLoadingPrimary
+            }
+            ChiliPrimaryButton(
+                text = "Primary button c drawable res",
+                isLoading = isLoadingPrimary,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp)
+            ) {
+                isLoadingPrimary = !isLoadingPrimary
+            }
+            ChiliPrimaryButton(
+                icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+                text = "Small btn, url icon",
+                isLoading = isLoadingPrimary,
+                buttonSize = ButtonSize.SMALL,
+                modifier = Modifier
+                    .width(150.dp)
+                    .padding(top = 8.dp)
+
+            ) {
+                isLoadingPrimary = !isLoadingPrimary
+            }
+            ChiliPrimaryButton(
+                icon = R.drawable.chili_ic_documents_green,
+                text = "Small btn, drawable",
+                isLoading = isLoadingPrimary,
+                buttonSize = ButtonSize.SMALL,
+                modifier = Modifier
+                    .width(150.dp)
+                    .padding(top = 8.dp)
+
+            ) {
+                isLoadingPrimary = !isLoadingPrimary
+            }
+
+            ChiliPrimaryButton(
+                text = "Small btn w/o icon",
+                isLoading = isLoadingPrimary,
+                buttonSize = ButtonSize.SMALL,
+                modifier = Modifier
+                    .width(150.dp)
+                    .padding(top = 8.dp)
+
+            ) {
+                isLoadingPrimary = !isLoadingPrimary
+            }
+
             ChiliPrimaryButton(text = "Primary button", modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 8.dp), enabled = false) {}
@@ -129,8 +189,12 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Box (modifier = Modifier.background(Chili.color.screenBackground).padding(16.dp)){
-                Column(modifier = Modifier.clip(Chili.shapes.RoundedCornerShape).background(Chili.color.cellViewBackground)) {
+            Box (modifier = Modifier
+                .background(Chili.color.screenBackground)
+                .padding(16.dp)){
+                Column(modifier = Modifier
+                    .clip(Chili.shapes.RoundedCornerShape)
+                    .background(Chili.color.cellViewBackground)) {
                     DetailedInfoCell(icon = painterResource(R.drawable.chili_ic_documents_green), title = "Double buttons", value = "6 200 c", subTitle = "Below this cell")
                     ChiliDoubledButtons(startButtonText = "Продлить", endButtonText = "Погасить")
                 }
