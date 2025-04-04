@@ -42,6 +42,7 @@ fun ExpandableCard(
     titleMaxLines: Int = 1,
     subtitleMaxLines: Int = 1,
     headerPaddingValues: PaddingValues = PaddingValues(12.dp),
+    isDividerVisible: Boolean = true,
     cardStartFrame: (@Composable () -> Unit)? = null,
     expandedContent: @Composable () -> Unit
 ) {
@@ -70,7 +71,7 @@ fun ExpandableCard(
 
             AnimatedVisibility(visible = isExpanded) {
                 Column {
-                    HorizontalDivider()
+                    if (isDividerVisible) HorizontalDivider()
                     expandedContent()
                 }
             }
