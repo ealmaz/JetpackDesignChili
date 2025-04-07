@@ -49,8 +49,7 @@ fun BottomSheetsPreview(
 
     ChiliBottomSheetContainer(
         isShown = containerBSTopDrawable,
-        isTopIconVisible = true,
-        topIconColor = if (isSystemInDarkTheme()) black_5 else gray_8,
+        isTopInnerIconVisible = true,
         onDismissRequest = {containerBSTopDrawable = false}
     ) {
         Box(modifier = Modifier
@@ -68,6 +67,7 @@ fun BottomSheetsPreview(
 
     ChiliBottomSheetContainer(
         isShown = containerBS,
+        isTopInnerIconVisible = true,
         onDismissRequest = {containerBS = false}
     ) {
         Box(modifier = Modifier
