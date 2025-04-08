@@ -52,7 +52,7 @@ fun ChiliBottomSheetContainer(
     topIconColor: Color = Chili.color.bottomSheetTopIconColor,
     bottomSheetShape: Shape = Chili.shapes.RoundedTopCornerShape,
     backgroundColor: Color = Chili.color.bottomSheetBackground,
-    closeIcon: Painter = painterResource(id = R.drawable.chili_ic_close),
+    closeIcon: Painter = painterResource(id = R.drawable.chili_ic_close_32),
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
