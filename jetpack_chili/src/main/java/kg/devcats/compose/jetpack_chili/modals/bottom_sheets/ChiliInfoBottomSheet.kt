@@ -25,7 +25,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun ChiliInfoBottomSheet(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     isShown: Boolean,
     icon: Painter? = null,
     headerText: String? = null,

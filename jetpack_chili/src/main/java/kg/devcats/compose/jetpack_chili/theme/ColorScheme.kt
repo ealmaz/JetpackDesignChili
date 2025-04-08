@@ -436,8 +436,8 @@ data class ChiliDarkColorScheme(
     override val animatedGradient3: Color = gray_1,
     override val animatedGradient4: Color = black_3,
 
-    override val bottomSheetBackground: Color = black_2,
-    override val bottomSheetTopIconColor: Color = black_5,
+    override val bottomSheetBackground: Color = black_3,
+    override val bottomSheetTopIconColor: Color = gray_1,
 
     override val snackbarBackground: Color = black_3,
     override val snackbarIndeterminateColor: Color = gray_3,

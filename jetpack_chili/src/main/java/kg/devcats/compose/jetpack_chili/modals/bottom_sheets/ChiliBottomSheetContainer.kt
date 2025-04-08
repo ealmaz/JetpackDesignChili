@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -51,9 +50,9 @@ fun ChiliBottomSheetContainer(
     isTopIconVisible: Boolean = false,
     isTopInnerIconVisible: Boolean = false,
     topIconColor: Color = Chili.color.bottomSheetTopIconColor,
-    bottomSheetShape: Shape = Chili.shapes.RoundedCornerShape,
+    bottomSheetShape: Shape = Chili.shapes.RoundedTopCornerShape,
     backgroundColor: Color = Chili.color.bottomSheetBackground,
-    closeIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
+    closeIcon: Painter = painterResource(id = R.drawable.chili_ic_close),
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -178,7 +177,7 @@ private fun BoxScope.ChiliBottomSheetCloseIcon(
         contentDescription = "",
         modifier = Modifier
             .align(Alignment.CenterEnd)
-            .padding(8.dp)
+            .padding(top = 12.dp, end = 12.dp, bottom = 8.dp)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = ripple(bounded = false),
