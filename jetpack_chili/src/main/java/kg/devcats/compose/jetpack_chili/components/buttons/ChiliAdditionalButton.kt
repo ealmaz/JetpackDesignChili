@@ -1,8 +1,10 @@
 package kg.devcats.compose.jetpack_chili.components.buttons
 
-
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
-import kg.devcats.compose.jetpack_chili.rippleClickable
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -45,23 +45,18 @@ fun ChiliAdditionalButton(
     buttonSize: ButtonSize = ButtonSize.REGULAR,
     onClick: () -> Unit
 ) {
-    Button(
+    Box(
         modifier = modifier
-            .rippleClickable(
-                enabled = enabled,
-                rippleColor = Color.Red,
-                onClick = onClick,
-                bounded = true
-            ),
-        onClick = onClick,
-        enabled = enabled,
-        shape = Chili.shapes.RoundedCornerShape,
-        contentPadding = PaddingValues(
-            horizontal = buttonSize.horizontalPadding,
-        ),
-        colors = additionalBtnColors().copy(
-            contentColor = if (enabled) enabledBackgroundColor else disabledBackgroundColor
-        )
+            .clip(Chili.shapes.RoundedCornerShape)
+            .clickable(
+                enabled = enabled && !isLoading,
+                onClick = onClick
+            )
+            .background(
+                if (enabled) enabledBackgroundColor else disabledBackgroundColor
+            )
+            .padding(PaddingValues(horizontal = buttonSize.horizontalPadding)),
+        contentAlignment = Alignment.Center
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -100,12 +95,7 @@ fun ChiliAdditionalButton(
             )
             endIconPainter?.let {
                 Image(
-                    modifier = endIconModifier
-                        .rippleClickable(
-                        enabled = enabled,
-                        rippleColor = Color.Red,
-                        onClick = onClick
-                    ),
+                    modifier = endIconModifier,
                     painter = endIconPainter,
                     contentDescription = endIconContentDescription ?: ""
                 )
