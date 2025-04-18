@@ -292,6 +292,7 @@ fun AdditionalButtons() {
             isLoading = !isLoading
         }
         ChiliAdditionalButton(
+            startIcon = R.drawable.chili_ic_documents_green,
             text = "Additional button c drawable res",
             isLoading = isLoading,
             modifier = Modifier
