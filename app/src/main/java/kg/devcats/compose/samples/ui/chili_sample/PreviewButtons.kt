@@ -70,20 +70,16 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
 
             Text(text = "Primary buttons and their states", modifier = Modifier.fillMaxWidth())
-
             PrimaryButtons()
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
 
-            ChiliSecondaryButton(text = "Secondary button", modifier = Modifier.fillMaxWidth()) {}
-            ChiliSecondaryButton(text = "Secondary button", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp), enabled = false) {}
+            Text(text = "Secondary buttons and their states", modifier = Modifier.fillMaxWidth())
+            SecondaryButtons()
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
 
             Text(text = "Additional buttons and their states", modifier = Modifier.fillMaxWidth())
-
             AdditionalButtons()
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
@@ -154,6 +150,7 @@ fun PrimaryButtons() {
             isLoadingPrimary = !isLoadingPrimary
         }
         ChiliPrimaryButton(
+            icon = R.drawable.chili_ic_documents_green,
             text = "Primary button c drawable res",
             isLoading = isLoadingPrimary,
             modifier = Modifier
@@ -202,6 +199,82 @@ fun PrimaryButtons() {
         ChiliPrimaryButton(text = "Primary button", modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp), enabled = false) {}
+
+        ChiliComponentButton(text = "Stop loader", modifier = Modifier.align(Alignment.End)) {
+            isLoadingPrimary = false
+        }
+    }
+}
+
+@Composable
+fun SecondaryButtons() {
+    var isLoading by remember { mutableStateOf(false) }
+
+    Column {
+        ChiliSecondaryButton(
+            icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+            text = "Secondary button c url", isLoading = isLoading,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
+            isLoading = !isLoading
+        }
+        ChiliSecondaryButton(
+            icon = R.drawable.chili_ic_documents_green,
+            text = "Secondary button c drawable res",
+            isLoading = isLoading,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
+            isLoading = !isLoading
+        }
+        ChiliSecondaryButton(
+            icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+            text = "Small btn, url icon",
+            isLoading = isLoading,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoading = !isLoading
+        }
+        ChiliSecondaryButton(
+            icon = R.drawable.chili_ic_documents_green,
+            text = "Small btn, drawable",
+            isLoading = isLoading,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoading = !isLoading
+        }
+
+        ChiliSecondaryButton(
+            text = "Small btn w/o icon",
+            isLoading = isLoading,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoading = !isLoading
+        }
+
+        ChiliSecondaryButton(
+            text = "Secondary button", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp), enabled = false) {}
+
+        ChiliComponentButton(text = "Stop loader", modifier = Modifier.align(Alignment.End)) {
+            isLoading = false
+        }
     }
 }
 
@@ -275,6 +348,10 @@ fun AdditionalButtons() {
             endIconPainter = painterResource(id = R.drawable.chili_ic_documents_green),
             endIconModifier = Modifier.padding(start = 8.dp)
         ) {}
+
+        ChiliComponentButton(text = "Stop loader", modifier = Modifier.align(Alignment.End)) {
+            isLoading = false
+        }
     }
 }
 
