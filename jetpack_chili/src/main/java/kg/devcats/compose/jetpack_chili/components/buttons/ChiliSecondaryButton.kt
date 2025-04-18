@@ -33,6 +33,7 @@ fun ChiliSecondaryButton(
     text: String,
     textStyle: TextStyle = Chili.typography.H14_Primary_500,
     enabled: Boolean = true,
+    rippleColor: Color = Chili.color.buttonSecondaryText,
     textColor: Color = if (enabled) Chili.color.buttonSecondaryText else Chili.color.disabledText,
     icon: Any? = null,
     isLoading: Boolean = false,
@@ -44,7 +45,7 @@ fun ChiliSecondaryButton(
             .clip(Chili.shapes.RoundedCornerShape)
             .rippleClickable(
                 enabled = enabled && !isLoading,
-                rippleColor = Chili.color.buttonSecondaryText,
+                rippleColor = rippleColor,
                 onClick = onClick,
                 bounded = true,
                 radius = Dp.Unspecified

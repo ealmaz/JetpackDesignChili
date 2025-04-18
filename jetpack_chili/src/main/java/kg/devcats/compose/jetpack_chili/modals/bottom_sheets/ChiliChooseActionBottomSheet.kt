@@ -28,6 +28,7 @@ fun ChiliChooseActionBottomSheet(
                     modifier = Modifier.fillMaxWidth(),
                     text = item.title,
                     onClick = item.onClick,
+                    rippleColor = Chili.color.secondaryText,
                     textColor = item.titleColor ?: Chili.color.buttonComponentText
                 )
             }
@@ -35,6 +36,7 @@ fun ChiliChooseActionBottomSheet(
                 modifier = Modifier.fillMaxWidth(),
                 text = item.title,
                 onClick = item.onClick,
+                rippleColor = Chili.color.secondaryText,
                 textColor = item.titleColor ?: Chili.color.primaryText
             )
         }
