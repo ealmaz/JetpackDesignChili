@@ -2,12 +2,15 @@ package kg.devcats.compose.jetpack_chili.components.buttons
 
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,10 +20,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kg.devcats.compose.jetpack_chili.theme.Chili
+import coil.compose.rememberAsyncImagePainter
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
+import kg.devcats.compose.jetpack_chili.rippleClickable
+import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun ChiliAdditionalButton(
@@ -33,30 +40,78 @@ fun ChiliAdditionalButton(
     endIconModifier: Modifier = Modifier,
     enabledBackgroundColor: Color = Chili.color.buttonAdditionalContainer,
     disabledBackgroundColor: Color = Chili.color.buttonAdditionalDisabledContainer,
+    startIcon: Any? = null,
+    isLoading: Boolean = false,
+    buttonSize: ButtonSize = ButtonSize.REGULAR,
     onClick: () -> Unit
 ) {
-
-    Box(
+    Button(
         modifier = modifier
-            .clip(Chili.shapes.RoundedCornerShape)
-            .background(if (enabled) enabledBackgroundColor else disabledBackgroundColor)
-            .clickable(enabled = enabled, onClick = onClick)
-            .padding(horizontal = 24.dp),
-        contentAlignment = Alignment.Center
+            .rippleClickable(
+                enabled = enabled,
+                rippleColor = Color.Red,
+                onClick = onClick,
+                bounded = true
+            ),
+        onClick = onClick,
+        enabled = enabled,
+        shape = Chili.shapes.RoundedCornerShape,
+        contentPadding = PaddingValues(
+            horizontal = buttonSize.horizontalPadding,
+        ),
+        colors = additionalBtnColors().copy(
+            contentColor = if (enabled) enabledBackgroundColor else disabledBackgroundColor
+        )
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            if (isLoading) {
+                ChiliLoader(
+                    modifier = Modifier
+                        .padding(vertical = 10.dp)
+                        .size(buttonSize.iconSize)
+                        .align(Alignment.CenterVertically)
+                    ,
+                    color = Chili.color.chevronColor,
+                    strokeWidth = 2.dp
+                )
+            } else {
+                startIcon?.let {
+                    Image(
+                        painter = rememberAsyncImagePainter(model = it),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .padding(vertical = 10.dp)
+                            .size(buttonSize.iconSize)
+                            .clip(Chili.shapes.RoundedCornerShape),
+                    )
+                    Spacer(modifier = Modifier.width(buttonSize.iconPadding))
+                }
+            }
             Text(
-                modifier = Modifier.padding(vertical = 16.dp,),
-                text = text,
+                modifier = Modifier.padding(vertical = buttonSize.verticalPadding),
+                text = if (isLoading) "" else text,
+                maxLines = 1,
                 style = textStyle,
-                color = if (enabled) Chili.color.buttonAdditionalText else Chili.color.buttonAdditionalDisabledText
+                color = if (enabled) Chili.color.buttonAdditionalText else Chili.color.buttonAdditionalDisabledText,
+                overflow = TextOverflow.Ellipsis
             )
             endIconPainter?.let {
-                Image(modifier = endIconModifier, painter = endIconPainter, contentDescription = endIconContentDescription ?: "")
+                Image(
+                    modifier = endIconModifier
+                        .rippleClickable(
+                        enabled = enabled,
+                        rippleColor = Color.Red,
+                        onClick = onClick
+                    ),
+                    painter = endIconPainter,
+                    contentDescription = endIconContentDescription ?: ""
+                )
             }
         }
     }
-
 }
 
 @Preview(showBackground = false, showSystemUi = false)

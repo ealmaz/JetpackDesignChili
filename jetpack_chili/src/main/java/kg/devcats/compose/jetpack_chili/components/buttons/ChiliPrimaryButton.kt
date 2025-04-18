@@ -19,10 +19,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
+import kg.devcats.compose.jetpack_chili.rippleClickable
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -36,7 +36,13 @@ fun ChiliPrimaryButton(
     onClick: () -> Unit
 ) {
     Button(
-        modifier = modifier,
+        modifier = modifier
+            .rippleClickable(
+                enabled = enabled,
+                rippleColor = Color.Red,
+                onClick = onClick,
+                bounded = true
+            ),
         onClick = onClick,
         enabled = enabled,
         shape = Chili.shapes.RoundedCornerShape,
@@ -57,6 +63,7 @@ fun ChiliPrimaryButton(
                         .align(Alignment.CenterVertically)
                     ,
                     color = Color.White,
+                    strokeWidth = 2.dp
                 )
             } else {
                 icon?.let {
@@ -81,16 +88,6 @@ fun ChiliPrimaryButton(
             )
         }
     }
-}
-
-enum class ButtonSize(
-    val verticalPadding: Dp,
-    val horizontalPadding: Dp,
-    val iconSize : Dp,
-    val iconPadding: Dp
-) {
-    REGULAR(verticalPadding = 16.dp, horizontalPadding = 16.dp, iconSize = 24.dp, iconPadding = 8.dp),
-    SMALL(verticalPadding = 12.dp, horizontalPadding = 8.dp, iconSize = 20.dp, iconPadding = 6.dp),
 }
 
 @Preview(showBackground = true, showSystemUi = true)
