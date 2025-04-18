@@ -28,29 +28,6 @@ fun primaryButtonColors(): ButtonColors {
 }
 
 @Composable
-fun ripplePrimaryBtnColors() : ButtonColors {
-    return ButtonDefaults.buttonColors(
-        containerColor = Chili.color.buttonPrimaryRipple,
-        contentColor = Chili.color.buttonPrimaryText
-    )
-}
-
-@Composable
-fun additionalBtnColors() : ButtonColors {
-    return ButtonDefaults.buttonColors(
-        containerColor = Chili.color.buttonAdditionalContainer,
-        contentColor = Chili.color.buttonAdditionalText,
-        disabledContainerColor = Chili.color.buttonAdditionalDisabledContainer,
-        disabledContentColor = Chili.color.buttonAdditionalDisabledText
-    )
-}
-
-@Composable
-fun rippleAdditionalBtnColors() : ButtonColors {
-    return ButtonDefaults.buttonColors(containerColor = Chili.color.buttonAdditionalRipple)
-}
-
-@Composable
 fun secondaryButtonColors() : ButtonColors {
     return ButtonDefaults.buttonColors(
         containerColor = Chili.color.buttonSecondaryBackground,
