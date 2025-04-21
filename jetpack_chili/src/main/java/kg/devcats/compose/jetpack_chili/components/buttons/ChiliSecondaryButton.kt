@@ -2,6 +2,8 @@ package kg.devcats.compose.jetpack_chili.components.buttons
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,6 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +30,7 @@ import coil.compose.rememberAsyncImagePainter
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.rippleClickable
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.jetpack_chili.theme.blue_1_alpha_50
 
 @Composable
 fun ChiliSecondaryButton(
@@ -33,13 +38,23 @@ fun ChiliSecondaryButton(
     text: String,
     textStyle: TextStyle = Chili.typography.H14_Primary_500,
     enabled: Boolean = true,
-    rippleColor: Color = Chili.color.buttonSecondaryText,
+    rippleColor: Color = Chili.color.buttonSecondaryRipple,
     textColor: Color = if (enabled) Chili.color.buttonSecondaryText else Chili.color.disabledText,
+    pressedTextColor: Color = blue_1_alpha_50,
     icon: Any? = null,
     isLoading: Boolean = false,
     buttonSize: ButtonSize = ButtonSize.REGULAR,
     onClick: () -> Unit
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+
+    val currentTextColor = when {
+        !enabled -> Chili.color.disabledText
+        isPressed -> pressedTextColor
+        else -> textColor
+    }
+
     Box(
         modifier = modifier
             .clip(Chili.shapes.RoundedCornerShape)
@@ -48,13 +63,11 @@ fun ChiliSecondaryButton(
                 rippleColor = rippleColor,
                 onClick = onClick,
                 bounded = true,
-                radius = Dp.Unspecified
+                radius = Dp.Unspecified,
+                interactionSource = interactionSource
             )
             .background(Chili.color.buttonSecondaryContainer)
-            .padding(PaddingValues(
-                horizontal = buttonSize.horizontalPadding
-            ))
-        ,
+            .padding(PaddingValues(horizontal = buttonSize.horizontalPadding)),
         contentAlignment = Alignment.Center
     ) {
         Row(
@@ -66,8 +79,7 @@ fun ChiliSecondaryButton(
                     modifier = Modifier
                         .padding(vertical = 10.dp)
                         .size(buttonSize.iconSize)
-                        .align(Alignment.CenterVertically)
-                    ,
+                        .align(Alignment.CenterVertically),
                     color = Chili.color.buttonSecondaryText,
                     strokeWidth = 2.dp
                 )
@@ -89,7 +101,7 @@ fun ChiliSecondaryButton(
                 text = if (isLoading) "" else text,
                 maxLines = 1,
                 style = textStyle,
-                color = textColor,
+                color = currentTextColor,
                 overflow = TextOverflow.Ellipsis
             )
         }

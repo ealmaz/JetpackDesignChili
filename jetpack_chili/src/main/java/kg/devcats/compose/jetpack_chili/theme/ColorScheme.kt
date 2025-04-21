@@ -116,7 +116,6 @@ interface ChiliColorScheme {
     val buttonAdditionalDisabledContainer: Color
     val buttonAdditionalText: Color
     val buttonAdditionalDisabledText: Color
-    val buttonAdditionalRipple: Color
 
     //Animated Gradient
     val animatedGradient1: Color
@@ -291,7 +290,6 @@ data class ChiliLightColorScheme(
     override val buttonAdditionalDisabledContainer: Color = gray_3,
     override val buttonAdditionalText: Color = black_1,
     override val buttonAdditionalDisabledText: Color = gray_1_alpha_50,
-    override val buttonAdditionalRipple: Color = gray_12,
 
     override val animatedGradient1: Color = magenta_1,
     override val animatedGradient2: Color = magenta_3,
@@ -442,7 +440,7 @@ data class ChiliDarkColorScheme(
     override val buttonSecondaryContainer: Color = Color.Transparent,
     override val buttonSecondaryText: Color = blue_1,
     override val buttonSecondaryDisabledText: Color = blue_1_alpha_50,
-    override val buttonSecondaryRipple: Color = blue_13,
+    override val buttonSecondaryRipple: Color = blue_1_alpha_50,
 
     override val buttonSecondaryBackground: Color = black_7,
 
@@ -450,7 +448,6 @@ data class ChiliDarkColorScheme(
     override val buttonAdditionalDisabledContainer: Color = black_7,
     override val buttonAdditionalText: Color = white_1,
     override val buttonAdditionalDisabledText: Color = gray_1_alpha_50,
-    override val buttonAdditionalRipple: Color = gray_1,
 
     override val animatedGradient1: Color = white_1,
     override val animatedGradient2: Color = gray_2,
