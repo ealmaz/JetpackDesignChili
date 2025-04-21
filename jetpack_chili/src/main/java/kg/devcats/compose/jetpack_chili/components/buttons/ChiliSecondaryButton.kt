@@ -30,7 +30,6 @@ import coil.compose.rememberAsyncImagePainter
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 import kg.devcats.compose.jetpack_chili.rippleClickable
 import kg.devcats.compose.jetpack_chili.theme.Chili
-import kg.devcats.compose.jetpack_chili.theme.blue_1_alpha_50
 
 @Composable
 fun ChiliSecondaryButton(
