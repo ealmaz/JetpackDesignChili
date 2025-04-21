@@ -40,7 +40,7 @@ fun ChiliSecondaryButton(
     enabled: Boolean = true,
     rippleColor: Color = Chili.color.buttonSecondaryRipple,
     textColor: Color = if (enabled) Chili.color.buttonSecondaryText else Chili.color.disabledText,
-    pressedTextColor: Color = blue_1_alpha_50,
+    pressedTextColor: Color = textColor.copy(alpha = 0.5f),
     icon: Any? = null,
     isLoading: Boolean = false,
     buttonSize: ButtonSize = ButtonSize.REGULAR,
