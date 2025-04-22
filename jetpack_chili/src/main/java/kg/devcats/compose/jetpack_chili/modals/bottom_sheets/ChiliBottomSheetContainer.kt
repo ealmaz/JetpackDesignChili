@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,6 +54,7 @@ fun ChiliBottomSheetContainer(
     bottomSheetShape: Shape = Chili.shapes.RoundedTopCornerShape,
     backgroundColor: Color = Chili.color.bottomSheetBackground,
     closeIcon: Painter = painterResource(id = R.drawable.chili_ic_close_32),
+    contentPaddingValues: PaddingValues = PaddingValues(16.dp, 0.dp, 16.dp, 0.dp),
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -104,6 +106,7 @@ fun ChiliBottomSheetContainer(
                         isCloseIconVisible = isCloseIconVisible,
                         shape = bottomSheetShape,
                         backgroundColor = backgroundColor,
+                        paddingValues = contentPaddingValues,
                         closeIcon = closeIcon,
                         onDismissRequest = onDismissRequest,
                         content = content
@@ -117,6 +120,7 @@ fun ChiliBottomSheetContainer(
                     topIconColor = topIconColor,
                     shape = bottomSheetShape,
                     backgroundColor = backgroundColor,
+                    paddingValues = contentPaddingValues,
                     closeIcon = closeIcon,
                     onDismissRequest = onDismissRequest,
                     content = content
@@ -134,6 +138,7 @@ fun BottomSheetContent(
     topIconColor: Color = Chili.color.bottomSheetTopIconColor,
     shape: Shape = Chili.shapes.RoundedCornerShape,
     backgroundColor: Color = Chili.color.bottomSheetBackground,
+    paddingValues: PaddingValues = PaddingValues(16.dp, 0.dp, 16.dp, 0.dp),
     closeIcon: Painter,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
@@ -160,9 +165,10 @@ fun BottomSheetContent(
                 if (isCloseIconVisible) ChiliBottomSheetCloseIcon(onDismissRequest, closeIcon = closeIcon)
             }
             if (!isCloseIconVisible) Spacer(modifier = Modifier.height(8.dp))
-            Column(modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 0.dp)) {
-                content.invoke(this)
-            }
+            Column(
+                modifier = Modifier.padding(paddingValues),
+                content = { content.invoke(this) }
+            )
         }
     }
 }
