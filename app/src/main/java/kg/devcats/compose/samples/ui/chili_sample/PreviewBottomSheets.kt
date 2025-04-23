@@ -131,7 +131,7 @@ fun BottomSheetsPreview(
         modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 16.dp),
         isShown = infoBottomSheetState,
         icon = painterResource(id = R.drawable.chili_ic_documents_green),
-        bodyText = "Описание содержит до 113 символов, что очень приятно, потому что теперь можно написать его аж в целых три строки и развернуть любую мысль ",
+        bodyText = "New Описание содержит до 113 символов, что очень приятно, потому что теперь можно написать его аж в целых три строки и развернуть любую мысль <u>500</u> ",
         secondaryButtonText = "Ясно",
         onPrimaryButtonClick = { infoBottomSheetState = false },
         onSecondaryButtonClick = { infoBottomSheetState = false },

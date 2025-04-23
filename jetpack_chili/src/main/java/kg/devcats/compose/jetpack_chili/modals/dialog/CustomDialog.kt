@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -93,7 +94,7 @@ fun CustomSimpleDialog(
                         }
                         message?.let {
                             Text(
-                                text = it,
+                                text = it.parseHtml(),
                                 style = Chili.typography.H16_Secondary,
                                 modifier = Modifier.padding(bottom = 16.dp)
                             )

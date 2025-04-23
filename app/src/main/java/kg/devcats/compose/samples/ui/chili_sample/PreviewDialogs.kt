@@ -212,7 +212,7 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
         showSimpleCustomDialog,
         { showSimpleCustomDialog = false },
         title = "Custom Material 2 Dialog",
-        message = "This is a custom material 2 dialog",
+        message = "This is a custom material 2\n\n dialog 500<u>c</u>",
         positiveButtonText = "OK",
         negativeButtonText = "CANCEL",
         onConfirm = {

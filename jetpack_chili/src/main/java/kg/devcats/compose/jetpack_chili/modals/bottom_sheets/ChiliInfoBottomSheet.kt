@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliAdditionalButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -72,8 +73,8 @@ fun ColumnScope.ChiliInfoBottomSheetContent(
             .size(60.dp))
         }
         Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-            headerText?.let {Text(text = headerText, modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H16_Primary_500) }
-            bodyText?. let { Text(text = bodyText, modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H14_Primary) }
+            headerText?.let {Text(text = headerText.parseHtml(), modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H16_Primary_500) }
+            bodyText?. let { Text(text = bodyText.parseHtml(), modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H14_Primary) }
         }
     }
     Column(modifier = Modifier.padding(vertical = 16.dp)) {
