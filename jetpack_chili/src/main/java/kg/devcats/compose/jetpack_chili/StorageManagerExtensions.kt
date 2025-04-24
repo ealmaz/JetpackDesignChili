@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.content.FileProvider
 import androidx.core.net.toFile
+import java.io.File
 
 fun Context.shareFile(uri: Uri, fileType: String, title: String) {
     val shareIntent = Intent(Intent.ACTION_SEND).apply {
@@ -23,13 +24,20 @@ fun Context.shareFile(uri: Uri, fileType: String, title: String) {
 }
 
 fun Context.sharePdfFile(uri: Uri, title: String? = null) {
+    val originalFile = uri.toFile()
+    val targetFile =
+        if (originalFile.extension.equals("pdf", ignoreCase = true))
+            originalFile
+        else
+            originalFile.copyTo(File(cacheDir, "${originalFile.name}.pdf"), overwrite = true)
+
     val shareIntent = Intent(Intent.ACTION_SEND).apply {
         type = "application/pdf"
 
         val contentUri = FileProvider.getUriForFile(
             this@sharePdfFile,
             "${packageName}.fileprovider",
-            uri.toFile()
+            targetFile
         )
 
         putExtra(Intent.EXTRA_STREAM, contentUri)
