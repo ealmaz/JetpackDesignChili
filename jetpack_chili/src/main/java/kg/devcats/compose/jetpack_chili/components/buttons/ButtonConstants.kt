@@ -13,7 +13,7 @@ enum class ButtonSize(
     val iconSize : Dp,
     val iconPadding: Dp
 ) {
-    REGULAR(verticalPadding = 16.dp, horizontalPadding = 16.dp, iconSize = 24.dp, iconPadding = 8.dp),
+    REGULAR(verticalPadding = 14.dp, horizontalPadding = 16.dp, iconSize = 24.dp, iconPadding = 8.dp),
     SMALL(verticalPadding = 12.dp, horizontalPadding = 8.dp, iconSize = 20.dp, iconPadding = 6.dp),
 }
 
