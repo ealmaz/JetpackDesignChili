@@ -84,7 +84,8 @@ object SnackbarManager {
         actionText: String,
         timerDurationMillis: Long,
         onTimerExpire: () -> Unit,
-        onActionClick: (() -> Unit)
+        onActionClick: (() -> Unit),
+        alignment: Alignment = Alignment.BottomCenter
     ) {
         showSnackbar(
             SnackbarMessage(
@@ -94,7 +95,8 @@ object SnackbarManager {
                 snackbarDurationMillis = timerDurationMillis,
                 actionText = actionText,
                 onActionClick = onActionClick,
-                onDismiss = onTimerExpire
+                onDismiss = onTimerExpire,
+                alignment = alignment
             )
         )
     }
