@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -29,7 +30,7 @@ fun ChiliPrimaryButton(
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp),
         colors = primaryButtonColors()
     ) {
-        Text(text = text, style = Chili.typography.H14_Primary_500, color = Chili.color.buttonPrimaryText)
+        Text(text = text.parseHtml(), style = Chili.typography.H14_Primary_500, color = Chili.color.buttonPrimaryText)
     }
 }
 

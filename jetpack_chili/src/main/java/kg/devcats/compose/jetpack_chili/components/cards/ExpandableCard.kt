@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -102,7 +103,7 @@ private fun ExpandableCardHeader(
 
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = title,
+                text = title.parseHtml(),
                 style = titleTextStyle,
                 maxLines = titleMaxLines,
                 overflow = TextOverflow.Ellipsis
@@ -110,7 +111,7 @@ private fun ExpandableCardHeader(
             if (!subtitle.isNullOrEmpty()) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = subtitle,
+                    text = subtitle.parseHtml(),
                     style = subtitleTextStyle,
                     maxLines = subtitleMaxLines,
                     overflow = TextOverflow.Ellipsis
