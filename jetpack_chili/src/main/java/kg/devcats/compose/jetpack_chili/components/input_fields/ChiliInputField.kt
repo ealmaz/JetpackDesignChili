@@ -32,6 +32,7 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -70,6 +71,7 @@ fun ChiliInputField(
     rightActionIcon: Painter? = null,
     onRightActionIconClick: (() -> Unit) = {},
     keyboardType: KeyboardType = KeyboardType.Text,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((String) -> Unit),
 ) {
@@ -101,6 +103,7 @@ fun ChiliInputField(
         rightActionIcon = rightActionIcon,
         onRightActionIconClick = onRightActionIconClick,
         keyboardType = keyboardType,
+        visualTransformation = visualTransformation,
         onActionClick = onActionClick,
         onValueChange = { newTextFieldValueState ->
             textFieldValueState = newTextFieldValueState
@@ -134,6 +137,7 @@ fun ChiliInputField(
     rightActionIcon: Painter? = null,
     onRightActionIconClick: (() -> Unit) = {},
     keyboardType: KeyboardType = KeyboardType.Text,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
@@ -169,7 +173,8 @@ fun ChiliInputField(
             textStyle = textStyle,
             isInputCenteredAlign = isInputCenteredAlign,
             inputFieldPaddingValues = inputFieldPaddingValues,
-            keyboardType = keyboardType
+            keyboardType = keyboardType,
+            visualTransformation = visualTransformation
         )
     }
 }
