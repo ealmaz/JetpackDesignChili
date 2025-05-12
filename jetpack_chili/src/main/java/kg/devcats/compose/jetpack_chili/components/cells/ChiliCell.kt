@@ -35,6 +35,7 @@ import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.ChiliChevron
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.shimmer.ShowShimmerOrContent
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -142,7 +143,7 @@ fun ChiliCell(
                         isLoading = isLoading
                     ) {
                         Text(
-                            text = title,
+                            text = title.parseHtml(),
                             style = titleStyle,
                             modifier = Modifier
                                 .align(Alignment.Start)
@@ -161,7 +162,7 @@ fun ChiliCell(
                             isLoading = isLoading
                         ) {
                             Text(
-                                text = it,
+                                text = it.parseHtml(),
                                 style = subtitleStyle,
                                 maxLines = subtitleMaxLines,
                                 overflow = TextOverflow.Ellipsis,
