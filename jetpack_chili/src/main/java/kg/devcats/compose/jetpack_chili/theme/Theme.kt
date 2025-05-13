@@ -40,6 +40,7 @@ private val chiliDefaultDarkTypography = ChiliTypography(chiliDefaultDarkColorSc
 
 @Composable
 fun ChiliTheme(
+    edgeToEdgeEnabled: Boolean = false,
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
@@ -64,8 +65,8 @@ fun ChiliTheme(
     LaunchedEffect(darkTheme) {
         if (darkTheme && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             (view.context as? Activity)?.run {
-                window.statusBarColor = black_1.toArgb()
-                window.navigationBarColor = black_1.toArgb()
+                if (!edgeToEdgeEnabled) window.statusBarColor = black_1.toArgb()
+                if (!edgeToEdgeEnabled) window.navigationBarColor = black_1.toArgb()
                 WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
                 WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = false
             }
