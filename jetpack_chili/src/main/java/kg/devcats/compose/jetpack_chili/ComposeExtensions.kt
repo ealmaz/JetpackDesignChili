@@ -85,9 +85,9 @@ fun Modifier.rippleClickable(
     rippleColor: Color = Chili.color.keyColor,
     bounded: Boolean = false,
     radius: Dp = 32.dp,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit
 ): Modifier {
-    val interactionSource = remember { MutableInteractionSource() }
     return clickable(
         interactionSource = interactionSource,
         indication = if (enabled) ripple(
