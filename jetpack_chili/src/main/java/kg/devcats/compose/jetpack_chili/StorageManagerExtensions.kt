@@ -29,7 +29,7 @@ fun Context.sharePdfFile(uri: Uri, title: String? = null) {
         if (originalFile.extension.equals("pdf", ignoreCase = true))
             originalFile
         else
-            originalFile.copyTo(File(cacheDir, "${originalFile.name}.pdf"), overwrite = true)
+            originalFile.copyTo(File(cacheDir, "${originalFile.nameWithoutExtension}.pdf"), overwrite = true)
 
     val shareIntent = Intent(Intent.ACTION_SEND).apply {
         type = "application/pdf"
