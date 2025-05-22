@@ -37,7 +37,7 @@ fun SubtitledSimpleCard(
     title: String,
     subtitle: String? = null,
     titleStyle: TextStyle = Chili.typography.H16_Primary,
-    subtitleStyle: TextStyle = Chili.typography.H12_Secondary,
+    subtitleStyle: TextStyle = Chili.typography.H14_Secondary,
     icon: Painter? = null,
     iconUrl: String? = null,
     secondaryIcon: Painter? = null,

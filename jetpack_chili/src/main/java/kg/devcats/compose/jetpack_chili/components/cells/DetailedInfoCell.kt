@@ -46,7 +46,7 @@ fun DetailedInfoCell(
     additionalText: String? = null,
     caption: String? = null,
     titleStyle: TextStyle = Chili.typography.H16_Primary,
-    subTitleStyle: TextStyle = Chili.typography.H12_Secondary,
+    subTitleStyle: TextStyle = Chili.typography.H14_Secondary,
     valueStyle: TextStyle = Chili.typography.H16_Primary,
     subValueStyle: TextStyle = Chili.typography.H12_Value,
     additionalTextStyle: TextStyle = Chili.typography.H12_Secondary,

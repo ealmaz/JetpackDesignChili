@@ -38,7 +38,7 @@ fun ChiliCard(
     subtitle: String? = null,
     titleStyle: TextStyle = Chili.typography.H16_Primary,
     titlePaddingValues: PaddingValues = PaddingValues(top = 4.dp, end = 8.dp),
-    subtitleStyle: TextStyle = Chili.typography.H12_Secondary,
+    subtitleStyle: TextStyle = Chili.typography.H14_Secondary,
     titleMaxLines: Int = 1,
     subtitleMaxLines: Int = 1,
     icon: Painter? = null,
