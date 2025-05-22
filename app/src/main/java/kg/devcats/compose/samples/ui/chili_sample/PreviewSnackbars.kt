@@ -20,12 +20,13 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.modals.snackbar.ChiliSnackbarHost
+import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showBottomSnackbar
 import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showColorSnackbar
 import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showIconSnackbar
 import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showLoaderSnackbar
 import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showSimpleSnackbar
 import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showTimerSnackbar
-import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showTopSnackbar
+import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showWarningSnackbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.SampleToolbarMenu
 
@@ -115,13 +116,23 @@ fun PreviewSnackbars(navigateUp: () -> Unit) {
                 }
 
                 ChiliPrimaryButton(
-                    text = "Top snackbar", modifier = Modifier
+                    text = "Bottom snackbar", modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 16.dp)
                 ) {
-                    scope.showTopSnackbar(
+                    scope.showBottomSnackbar(
                         "Завтра, 12.05.2022 будет списана абонентская плата 223 с у номера +996700000999",
                         iconRes = kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_documents_green
+                    )
+                }
+
+                ChiliPrimaryButton(
+                    text = "Warning snackbar", modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
+                ) {
+                    scope.showWarningSnackbar(
+                        "ACHTUNG ACHTUNG",
                     )
                 }
             }
