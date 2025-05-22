@@ -23,10 +23,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.jetpack_chili.theme.white_1
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -62,10 +64,15 @@ fun ChiliSnackBar(
         }
     }
 
+    val backgroundColor = when(snackbarMessage.type) {
+        SnackbarType.WARNING -> Chili.color.snackbarWarningBackgound
+        else -> Chili.color.snackbarBackground
+    }
+
     Card(
         shape = RoundedCornerShape(cornerRadius),
         colors = CardDefaults.cardColors(
-            containerColor = snackbarMessage.backgroundColor ?: Chili.color.snackbarBackground
+            containerColor = snackbarMessage.backgroundColor ?: backgroundColor
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -83,15 +90,16 @@ fun ChiliSnackBar(
                 Image(
                     painter = painterResource(id = iconRes),
                     contentDescription = null,
-                    modifier = Modifier.size(28.dp)
+                    modifier = Modifier.size(24.dp)
                 )
             }
 
             if (snackbarMessage.type == SnackbarType.LOADER) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        .size(28.dp)
+                        .size(24.dp)
                         .align(Alignment.CenterVertically),
+                    color = white_1,
                     strokeWidth = 2.dp
                 )
             } else if (snackbarMessage.type == SnackbarType.TIMER && snackbarMessage.progressDurationMillis != null) {
@@ -103,7 +111,7 @@ fun ChiliSnackBar(
                 ) {
                     CircularProgressIndicator(
                         progress = { remainingTime / (snackbarMessage.progressDurationMillis / 1000f) },
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(24.dp),
                         color = Chili.color.snackbarIndeterminateColor,
                         trackColor = Chili.color.snackbarBackground,
                         strokeWidth = 1.dp
@@ -112,7 +120,7 @@ fun ChiliSnackBar(
                         Text(
                             text = "$remainingTime",
                             modifier = Modifier.align(Alignment.Center),
-                            style = Chili.typography.H14_Primary
+                            style = Chili.typography.H12_Primary.copy(color = white_1)
                         )
                     }
                 }
@@ -122,8 +130,11 @@ fun ChiliSnackBar(
                 text = snackbarMessage.message,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(horizontal = 8.dp, vertical = 6.dp),
-                style = Chili.typography.H14_Primary
+                    .padding(horizontal = 12.dp),
+                style = Chili.typography.H16_Primary_500,
+                color = Chili.color.snackbarText,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
             )
 
             snackbarMessage.actionText?.let { actionText ->
@@ -137,8 +148,8 @@ fun ChiliSnackBar(
                     ) {
                     Text(
                         text = actionText,
-                        color = Chili.color.buttonComponentText,
-                        style = Chili.typography.H14
+                        color = Chili.color.snackbarActionText,
+                        style = Chili.typography.H16_Primary_500
                     )
                 }
             }
