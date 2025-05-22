@@ -1,5 +1,6 @@
 package kg.devcats.compose.jetpack_chili.modals.bottom_sheets
 
+import android.text.Spanned
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -17,8 +18,10 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
+import kg.devcats.compose.jetpack_chili.extensions.toAnnotatedString
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -28,7 +31,9 @@ fun ChiliDetailedDescriptionBottomSheet(
     headerText: String? = null,
     subtitleText: String? = null,
     descriptionText: String? = null,
+    descriptionTextSpanned: Spanned? = null,
     icon: Painter? = null,
+    iconUrl: String? = null,
     primaryButtonText: String? = null,
     onPrimaryButtonClick: (() -> Unit) = {},
     onDismissRequest: () -> Unit
@@ -44,8 +49,10 @@ fun ChiliDetailedDescriptionBottomSheet(
     ) {
         ChiliDetailedDescriptionBottomSheetContent(
             icon = icon,
+            iconUrl = iconUrl,
             headerText = headerText,
             subtitleText = subtitleText,
+            descriptionTextSpanned = descriptionTextSpanned,
             descriptionText = descriptionText,
             primaryButtonText = primaryButtonText,
             onPrimaryButtonClick = onPrimaryButtonClick
@@ -56,9 +63,11 @@ fun ChiliDetailedDescriptionBottomSheet(
 @Composable
 fun ColumnScope.ChiliDetailedDescriptionBottomSheetContent(
     icon: Painter? = null,
+    iconUrl: String? = null,
     headerText: String? = null,
     subtitleText: String? = null,
     descriptionText: String? = null,
+    descriptionTextSpanned: Spanned? = null,
     primaryButtonText: String? = null,
     onPrimaryButtonClick: (() -> Unit) = {},
 ) {
@@ -93,6 +102,14 @@ fun ColumnScope.ChiliDetailedDescriptionBottomSheetContent(
             )
 
             Spacer(modifier = Modifier.size(8.dp))
+        } ?: iconUrl?.let {
+            AsyncImage(
+                model = it,
+                modifier = Modifier
+                    .size(32.dp),
+                contentDescription = null
+            )
+            Spacer(modifier = Modifier.size(8.dp))
         }
 
         descriptionText?.let {
@@ -100,8 +117,12 @@ fun ColumnScope.ChiliDetailedDescriptionBottomSheetContent(
                 text = descriptionText,
                 style = Chili.typography.H16_Primary_500
             )
+        } ?: descriptionTextSpanned?.let {
+            Text(
+                text = descriptionTextSpanned.toAnnotatedString(),
+                style = Chili.typography.H16_Primary_500
+            )
         }
-
     }
 
     Row(modifier = Modifier.padding(top = 20.dp, bottom = 16.dp)) {
