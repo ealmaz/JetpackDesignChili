@@ -16,6 +16,7 @@ interface ChiliColorPairScheme {
     val c_727D8D_CCFFFFFF: Color
     val c_FFFFFF_1AFFFFFF: Color
     val c_CC030C18_CC617796: Color
+    val c_FFFFFF_F5F5F5: Color
 }
 
 val LocalChiliColorPairScheme = compositionLocalOf<ChiliColorPairScheme> { ChiliLightColorPairScheme() }
@@ -34,6 +35,7 @@ data class ChiliLightColorPairScheme(
     override val c_727D8D_CCFFFFFF: Color = Color(0xFF727D8D),
     override val c_FFFFFF_1AFFFFFF: Color = Color(0xFFFFFFFF),
     override val c_CC030C18_CC617796: Color = Color(0xCC030C18),
+    override val c_FFFFFF_F5F5F5: Color = Color(0xFFFFFFFF),
 ) : ChiliColorPairScheme
 
 data class ChiliDarkColorPairScheme(
@@ -49,4 +51,5 @@ data class ChiliDarkColorPairScheme(
     override val c_727D8D_CCFFFFFF: Color = Color(0xCCFFFFFF),
     override val c_FFFFFF_1AFFFFFF: Color = Color(0x1AFFFFFF),
     override val c_CC030C18_CC617796: Color = Color(0xCC617796),
+    override val c_FFFFFF_F5F5F5: Color = Color(0xFFF5F5F5),
 ) : ChiliColorPairScheme
