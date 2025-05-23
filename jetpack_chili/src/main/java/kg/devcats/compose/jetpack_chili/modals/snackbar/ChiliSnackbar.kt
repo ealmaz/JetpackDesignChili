@@ -126,7 +126,8 @@ fun ChiliSnackBar(
                         Text(
                             text = "$remainingTime",
                             modifier = Modifier.align(Alignment.Center),
-                            style = Chili.typography.H12_Primary.copy(color = white_1)
+                            style = Chili.typography.H12_Primary,
+                            color = Chili.color.snackbarText,
                         )
                     }
                 }
