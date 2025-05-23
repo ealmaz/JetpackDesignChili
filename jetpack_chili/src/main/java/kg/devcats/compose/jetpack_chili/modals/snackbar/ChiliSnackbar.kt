@@ -14,9 +14,11 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -27,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -37,28 +40,31 @@ fun ChiliSnackBar(
     modifier: Modifier = Modifier,
     cornerRadius: Dp = 12.dp
 ) {
+    val snackbarScope = rememberCoroutineScope()
+    var timerJob by remember { mutableStateOf<Job?>(null) }
     var remainingTime by remember {
         mutableLongStateOf(
             (snackbarMessage.progressDurationMillis
                 ?: snackbarMessage.snackbarDurationMillis) / 1000
         )
     }
-    val scope = rememberCoroutineScope()
-
-    LaunchedEffect(
-        snackbarMessage.progressDurationMillis ?: snackbarMessage.snackbarDurationMillis
-    ) {
-        delay(snackbarMessage.progressDurationMillis ?: snackbarMessage.snackbarDurationMillis)
-        snackbarMessage.onDismiss?.invoke()
-        SnackbarManager.dismissSnackbar()
-    }
 
     if (snackbarMessage.type == SnackbarType.TIMER && snackbarMessage.progressDurationMillis != null) {
-        scope.launch {
-            while (remainingTime > 0) {
-                delay(1000L)
-                remainingTime -= 1
+        LaunchedEffect(Unit) {
+            timerJob = snackbarScope.launch {
+                while (remainingTime > 0) {
+                    delay(1000L)
+                    remainingTime -= 1
+                }
+                snackbarMessage.onDismiss?.invoke()
+                SnackbarManager.dismissSnackbar()
             }
+        }
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            timerJob?.cancel()
         }
     }
 
