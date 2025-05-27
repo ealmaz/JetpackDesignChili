@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,8 @@ fun ChiliPrimaryButton(
     icon: Any? = null,
     isLoading: Boolean = false,
     buttonSize: ButtonSize = ButtonSize.REGULAR,
+    textStyle: TextStyle = Chili.typography.H14_Primary_500,
+    textColor: Color = Chili.color.buttonPrimaryText,
     onClick: () -> Unit
 ) {
     Box(
@@ -80,8 +83,8 @@ fun ChiliPrimaryButton(
                 modifier = Modifier.padding(vertical = buttonSize.verticalPadding),
                 text = if (isLoading) "" else text,
                 maxLines = 1,
-                style = Chili.typography.H14_Primary_500,
-                color = Chili.color.buttonPrimaryText,
+                style = textStyle,
+                color = textColor,
                 overflow = TextOverflow.Ellipsis
             )
         }

@@ -40,6 +40,7 @@ fun ChiliAdditionalButton(
     endIconModifier: Modifier = Modifier,
     enabledBackgroundColor: Color = Chili.color.buttonAdditionalContainer,
     disabledBackgroundColor: Color = Chili.color.buttonAdditionalDisabledContainer,
+    textColor: Color = if (enabled) Chili.color.buttonAdditionalText else Chili.color.buttonAdditionalDisabledText,
     startIcon: Any? = null,
     isLoading: Boolean = false,
     buttonSize: ButtonSize = ButtonSize.REGULAR,
@@ -90,7 +91,7 @@ fun ChiliAdditionalButton(
                 text = if (isLoading) "" else text,
                 maxLines = 1,
                 style = textStyle,
-                color = if (enabled) Chili.color.buttonAdditionalText else Chili.color.buttonAdditionalDisabledText,
+                color = textColor,
                 overflow = TextOverflow.Ellipsis
             )
             endIconPainter?.let {
