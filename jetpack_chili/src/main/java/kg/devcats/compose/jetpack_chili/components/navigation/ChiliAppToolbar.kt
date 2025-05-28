@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
@@ -39,7 +40,8 @@ fun ChiliAppToolbar(
     title: String,
     backgroundColor: Color = Chili.color.toolbarBackground,
     endFrame: (@Composable RowScope.() -> Unit)? = null,
-    isDividerVisible: Boolean = false
+    isDividerVisible: Boolean = false,
+    titleStyle: TextStyle = Chili.typography.H16_Primary_500,
 ) {
 
     Surface(modifier = modifier, color = backgroundColor) {
@@ -69,7 +71,7 @@ fun ChiliAppToolbar(
                         .padding(vertical = 18.dp)
                         .weight(1f),
                     text = title,
-                    style = Chili.typography.H16_Primary_500
+                    style = titleStyle
                 )
 
                 endFrame?.let {
