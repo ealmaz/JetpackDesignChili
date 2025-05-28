@@ -78,16 +78,14 @@ fun ChiliCell(
             modifier = Modifier
                 .heightIn(min = 48.dp)
                 .run {
-                    containerPaddingValues?.let { padding(it) } ?: padding(start = 12.dp)
+                    containerPaddingValues?.let { padding(it) }
+                        ?: padding(start = 12.dp, end = if (isChevronVisible) 8.dp else 12.dp)
                 },
             verticalArrangement = Arrangement.Center
         ) {
             Row(
                 modifier = Modifier
                     .padding(vertical = 2.dp)
-                    .then(
-                        Modifier.padding(end = if (isChevronVisible) 8.dp else 12.dp)
-                    )
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
