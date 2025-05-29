@@ -198,6 +198,7 @@ fun ChiliAmountInputField(
     maxLenAfterComma: Int = InputFieldDefaults.MAX_DIGITS_AFTER_COMMA,
     addDecimal: Boolean = true,
     suffix: AnnotatedString? = null,
+    enabled: Boolean = true,
     onActionClick: (() -> Unit) = {},
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
@@ -237,6 +238,7 @@ fun ChiliAmountInputField(
                 }
             },
             placeholder = placeholder,
+            enabled = enabled,
             textStyle = textStyle,
             isInputCenteredAlign = isInputCenteredAlign,
             keyboardType = keyboardType,

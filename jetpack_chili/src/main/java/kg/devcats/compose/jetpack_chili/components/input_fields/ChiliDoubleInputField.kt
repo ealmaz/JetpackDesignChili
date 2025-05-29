@@ -33,6 +33,8 @@ fun ChiliDoubleInputField(
     secondFieldMaxLengthBeforeComma: Int = Int.MAX_VALUE,
     secondFieldMaxLengthAfterComma: Int = 2,
     fieldBackgroundColor: Color = Chili.color.inputFieldBackground,
+    isFirstFieldEnabled: Boolean = true,
+    isSecondFieldEnabled: Boolean = true,
     firstFieldValue: TextFieldValue,
     secondFieldValue: TextFieldValue,
     onInputOnFirstField: (TextFieldValue) -> Unit,
@@ -51,6 +53,7 @@ fun ChiliDoubleInputField(
                 maxLenAfterComma = firstFieldMaxLengthAfterComma,
                 onValueChange = onInputOnFirstField,
                 isClearButtonEnabled = false,
+                enabled = isFirstFieldEnabled,
             )
             Spacer(modifier = Modifier.width(8.dp))
             ChiliAmountInputField(
@@ -63,6 +66,7 @@ fun ChiliDoubleInputField(
                 maxLenAfterComma = secondFieldMaxLengthAfterComma,
                 onValueChange = onInputOnSecondField,
                 isClearButtonEnabled = false,
+                enabled = isSecondFieldEnabled,
             )
         }
         if (!errorMessage.isNullOrBlank()) {
