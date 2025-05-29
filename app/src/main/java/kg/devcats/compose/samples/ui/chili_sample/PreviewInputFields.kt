@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,16 +22,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliAmountInputField
+import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliDoubleInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliInputOtp
 import kg.devcats.compose.jetpack_chili.components.input_fields.ChiliUneditableInputField
 import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.MaskInputInterceptor
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.samples.ui.extension.showToast
 
@@ -82,6 +87,58 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
             ) {
                 amountInput = it
             }
+
+            ChiliAmountInputField(
+                inputBgColor = Chili.color.inputFieldPrimaryBg,
+                value = amountInput,
+                modifier = Modifier
+                    .padding(top = 16.dp),
+                message = "Message",
+                placeholder = "Placeholder",
+                actionText = "Action",
+                suffix = AnnotatedString.fromHtml("<u>c</u>"),
+                keyboardType = KeyboardType.Number,
+                maxLenBeforeComma = 6
+            ) { textFieldValue ->
+                amountInput = textFieldValue
+            }
+
+            Text("DoubleInputField")
+            Spacer(modifier = Modifier.height(16.dp))
+
+            var doubleInputFieldValue1 by remember { mutableStateOf(TextFieldValue("0")) }
+            var doubleInputFieldValue2 by remember { mutableStateOf(TextFieldValue("0")) }
+            ChiliDoubleInputField(
+                message = "В этом месяце можно продать на 87 000,00 c",
+                firstFieldValue = doubleInputFieldValue1,
+                secondFieldValue = doubleInputFieldValue2,
+                firstFieldSuffix = "<u>c</u>".parseHtml(),
+                secondFieldSuffix = "BTC".parseHtml(),
+                firstFieldMaxLengthAfterComma = 6,
+                secondFieldMaxLengthAfterComma = 6,
+                onInputOnFirstField = {
+                    doubleInputFieldValue1 = it
+                },
+                onInputOnSecondField = {
+                    doubleInputFieldValue2 = it
+                }
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+
+            var doubleErrorInputFieldValue1 by remember { mutableStateOf(TextFieldValue("0")) }
+            var doubleErrorInputFieldValue2 by remember { mutableStateOf(TextFieldValue("0")) }
+
+            ChiliDoubleInputField(
+                message = "В этом месяце можно продать на 87 000,00 c",
+                firstFieldValue = doubleErrorInputFieldValue1,
+                secondFieldValue = doubleErrorInputFieldValue2,
+                firstFieldSuffix = "<u>c</u>".parseHtml(),
+                firstFieldMaxLengthAfterComma = 6,
+                secondFieldMaxLengthAfterComma = 6,
+                errorMessage = "Минимальный объём покупки 4 000,00с",
+                onInputOnFirstField = {doubleErrorInputFieldValue1 = it},
+                onInputOnSecondField = {doubleErrorInputFieldValue2 = it}
+            )
 
 
             val inputMask1 = "+996 XXX XXX XXX"

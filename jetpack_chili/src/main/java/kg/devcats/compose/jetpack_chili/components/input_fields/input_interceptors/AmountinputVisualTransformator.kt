@@ -7,7 +7,7 @@ import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.core.text.isDigitsOnly
+import kg.devcats.compose.jetpack_chili.components.input_fields.input_interceptors.InputFieldDefaults.MAX_DIGITS_AFTER_COMMA
 import kotlin.math.min
 
 object InputFieldDefaults {
@@ -26,7 +26,8 @@ object InputFieldDefaults {
 
 class AmountInputVisualTransformator(
     private val addDecimals: Boolean = true,
-    private val suffix: AnnotatedString? = null
+    private val suffix: AnnotatedString? = null,
+    private val maxDigitsAfterComma: Int = MAX_DIGITS_AFTER_COMMA
 ) : VisualTransformation {
     override fun filter(text: AnnotatedString): TransformedText {
         val inputText = text.text
@@ -42,7 +43,7 @@ class AmountInputVisualTransformator(
                    InputFieldDefaults.DEFAULT_INTEGER_PART
                 }
             )
-        val decimalPart = formatDecimalPart(parts)
+        val decimalPart = formatDecimalPart(parts, maxDigitsAfterComma = maxDigitsAfterComma)
 
         val formattedText = buildFormattedText(integerPart, decimalPart, addDecimals, text)
         val annotatedString = if (suffix.isNullOrEmpty()) {
@@ -65,8 +66,8 @@ private fun formatIntegerPart(integerPart: String): String = integerPart
     .joinToString(InputFieldDefaults.SPACE.toString())
     .reversed()
 
-private fun formatDecimalPart(parts: List<String>): String = if (parts.size > 1) {
-    parts[1].take(InputFieldDefaults.MAX_DIGITS_AFTER_COMMA)
+private fun formatDecimalPart(parts: List<String>, maxDigitsAfterComma: Int): String = if (parts.size > 1) {
+    parts[1].take(maxDigitsAfterComma)
 } else {
     InputFieldDefaults.DEFAULT_INTEGER_PART
 }

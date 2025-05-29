@@ -195,6 +195,7 @@ fun ChiliAmountInputField(
     clearIcon: Painter = painterResource(id = R.drawable.chili_ic_circle_clear),
     keyboardType: KeyboardType = KeyboardType.Text,
     maxLenBeforeComma: Int = Int.MAX_VALUE,
+    maxLenAfterComma: Int = InputFieldDefaults.MAX_DIGITS_AFTER_COMMA,
     addDecimal: Boolean = true,
     suffix: AnnotatedString? = null,
     onActionClick: (() -> Unit) = {},
@@ -227,7 +228,7 @@ fun ChiliAmountInputField(
             value = value,
             onValueChange = { newTextFieldValueState ->
                 val filtered = newTextFieldValueState.handleZero(value)
-                val finalText = amountValueChange(filtered.text, addDecimal)
+                val finalText = amountValueChange(filtered.text, maxDigitAfterComma = maxLenAfterComma, addDecimal)
                 val lenBeforeComma = finalText.substringBefore(InputFieldDefaults.DECIMAL_COMMA).length
 
                 if (lenBeforeComma <= maxLenBeforeComma) {
@@ -241,7 +242,8 @@ fun ChiliAmountInputField(
             keyboardType = keyboardType,
             visualTransformation = AmountInputVisualTransformator(
                 addDecimals = addDecimal,
-                suffix = suffix
+                suffix = suffix,
+                maxDigitsAfterComma = maxLenAfterComma,
             )
         )
     }
