@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.traceEventEnd
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,6 +29,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
@@ -44,6 +46,7 @@ fun ExpandableCard(
     subtitleMaxLines: Int = 1,
     headerPaddingValues: PaddingValues = PaddingValues(12.dp),
     isDividerVisible: Boolean = true,
+    isLoading: Boolean = false,
     cardStartFrame: (@Composable () -> Unit)? = null,
     expandedContent: @Composable () -> Unit
 ) {
@@ -67,6 +70,7 @@ fun ExpandableCard(
                 headerPaddingValues = headerPaddingValues,
                 cardStartFrame = cardStartFrame,
                 rotationAngle = rotationAngle,
+                isLoading = isLoading,
                 onClick = { onExpandChange?.invoke(!isExpanded) }
             )
 
@@ -91,7 +95,8 @@ private fun ExpandableCardHeader(
     cardStartFrame: (@Composable () -> Unit)?,
     headerPaddingValues: PaddingValues,
     rotationAngle: Float,
-    onClick: () -> Unit
+    isLoading: Boolean,
+    onClick: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -102,20 +107,30 @@ private fun ExpandableCardHeader(
         cardStartFrame?.invoke()
 
         Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = title.parseHtml(),
-                style = titleTextStyle,
-                maxLines = titleMaxLines,
-                overflow = TextOverflow.Ellipsis
-            )
-            if (!subtitle.isNullOrEmpty()) {
-                Spacer(modifier = Modifier.height(4.dp))
+            if (isLoading) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Shimmer(height = 6.dp, width = 160.dp)
+                if (!subtitle.isNullOrEmpty()) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Shimmer(height = 6.dp, width = 80.dp)
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+            } else {
                 Text(
-                    text = subtitle.parseHtml(),
-                    style = subtitleTextStyle,
-                    maxLines = subtitleMaxLines,
+                    text = title.parseHtml(),
+                    style = titleTextStyle,
+                    maxLines = titleMaxLines,
                     overflow = TextOverflow.Ellipsis
                 )
+                if (!subtitle.isNullOrEmpty()) {
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = subtitle.parseHtml(),
+                        style = subtitleTextStyle,
+                        maxLines = subtitleMaxLines,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         }
 
@@ -133,7 +148,9 @@ private fun ExpandableCardHeader(
 fun ExpandableCardPreview() {
     var isExpanded by remember { mutableStateOf(true) }
     ExpandableCard(
+        isLoading = false,
         title = "Title",
+        subtitle = "subtitle",
         isExpanded = isExpanded,
         onExpandChange = { isExpanded = it },
         expandedContent = {

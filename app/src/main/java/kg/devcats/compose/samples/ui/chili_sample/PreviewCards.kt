@@ -1012,6 +1012,25 @@ fun PreviewCards(
                     }
                 )
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            var isExpanded2 by remember { mutableStateOf(true) }
+
+            ShadowRoundedBox {
+                ExpandableCard(
+                    isLoading = true,
+                    title = "Title",
+                    subtitle = "Subtitle",
+                    isExpanded = isExpanded2,
+                    onExpandChange = { isExpanded2 = it },
+                    expandedContent = {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text("Expanded content")
+                        }
+                    }
+                )
+            }
         }
     }
 }
