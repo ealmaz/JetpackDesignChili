@@ -22,6 +22,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun ChiliDoubleInputField(
+    modifier: Modifier = Modifier,
     errorMessage: String? = null,
     message: String? = null,
     messageStyle: TextStyle = Chili.typography.H12_Secondary,
@@ -41,7 +42,7 @@ fun ChiliDoubleInputField(
     onInputOnSecondField: (TextFieldValue) -> Unit,
 ) {
     val fieldColor = if (errorMessage == null) fieldBackgroundColor else Chili.color.inputFieldErrorBackground
-    Column {
+    Column(modifier = modifier) {
         Row {
             ChiliAmountInputField(
                 inputBgColor = fieldColor,
@@ -72,13 +73,13 @@ fun ChiliDoubleInputField(
         if (!errorMessage.isNullOrBlank()) {
             Text(
                 modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp),
-                text = errorMessage,
+                text = errorMessage.parseHtml(),
                 style = messageStyle.copy(color = Chili.color.errorText)
             )
         } else if (!message.isNullOrBlank()) {
             Text(
                 modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp),
-                text = message,
+                text = message.parseHtml(),
                 style = messageStyle
             )
         }
