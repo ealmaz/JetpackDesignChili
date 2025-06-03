@@ -36,6 +36,8 @@ fun ChiliDoubleInputField(
     fieldBackgroundColor: Color = Chili.color.inputFieldBackground,
     isFirstFieldEnabled: Boolean = true,
     isSecondFieldEnabled: Boolean = true,
+    firstFieldTextStyle: TextStyle = Chili.typography.H16_Primary_500,
+    secondFieldTextStyle: TextStyle = Chili.typography.H16_Primary_500,
     firstFieldValue: TextFieldValue,
     secondFieldValue: TextFieldValue,
     onInputOnFirstField: (TextFieldValue) -> Unit,
@@ -55,6 +57,7 @@ fun ChiliDoubleInputField(
                 onValueChange = onInputOnFirstField,
                 isClearButtonEnabled = false,
                 enabled = isFirstFieldEnabled,
+                textStyle = firstFieldTextStyle
             )
             Spacer(modifier = Modifier.width(8.dp))
             ChiliAmountInputField(
@@ -68,6 +71,7 @@ fun ChiliDoubleInputField(
                 onValueChange = onInputOnSecondField,
                 isClearButtonEnabled = false,
                 enabled = isSecondFieldEnabled,
+                textStyle = secondFieldTextStyle
             )
         }
         if (!errorMessage.isNullOrBlank()) {
