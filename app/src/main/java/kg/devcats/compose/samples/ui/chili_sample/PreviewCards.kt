@@ -21,6 +21,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -33,14 +34,18 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.cards.AccentCard
 import kg.devcats.compose.jetpack_chili.components.cards.AlertBlockCard
@@ -51,6 +56,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.BankCard
 import kg.devcats.compose.jetpack_chili.components.cards.BankCardFieldState
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
+import kg.devcats.compose.jetpack_chili.components.cards.AdditionalContentInfoCard
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
 import kg.devcats.compose.jetpack_chili.components.cards.ExpandableCard
@@ -1030,6 +1036,89 @@ fun PreviewCards(
                         }
                     }
                 )
+            }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "AdditionalContentInfoCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            val buttonTextStyle: TextStyle = Chili.typography.H14_Secondary
+            val buttonShape: Shape = remember { RoundedCornerShape(20.dp) }
+            val buttonBackgroundColor: Color = Chili.color.contentSecondary
+
+            ShadowRoundedBox {
+                AdditionalContentInfoCard(
+                    title = "Заголовок",
+                    subTitle = "Подзаголовок",
+                ) {
+                    ChiliComponentButton(
+                        modifier = Modifier
+                            .clip(buttonShape)
+                            .background(buttonBackgroundColor),
+                        text = "Подробнее",
+                        textStyle = buttonTextStyle,
+                        enabledTextColor = buttonTextStyle.color) {}
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                AdditionalContentInfoCard(
+                    title = "Оплачивайте покупки через QR  или в каталоге",
+                    icon = painterResource(R.drawable.chilli_ic_bonus),
+                ) {
+                    ChiliComponentButton(
+                        modifier = Modifier
+                            .clip(buttonShape)
+                            .background(buttonBackgroundColor),
+                        text = "Подробнее",
+                        textStyle = buttonTextStyle,
+                        enabledTextColor = buttonTextStyle.color) {}
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    ChiliComponentButton(
+                        modifier = Modifier
+                            .clip(buttonShape)
+                            .background(buttonBackgroundColor),
+                        text = "Подробнее",
+                        textStyle = buttonTextStyle,
+                        enabledTextColor = buttonTextStyle.color) {}
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                AdditionalContentInfoCard(
+                    title = "Оплачивайте покупки через QR  или в каталоге",
+                    iconUrl = "",
+                    icon = painterResource(R.drawable.chilli_ic_bonus)
+                ) {
+                    ChiliComponentButton(
+                        modifier = Modifier
+                            .clip(buttonShape)
+                            .background(buttonBackgroundColor),
+                        text = "Оплачивайте покупки через QR или в каталоге",
+                        textStyle = buttonTextStyle,
+                        enabledTextColor = buttonTextStyle.color) {}
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ShadowRoundedBox {
+                AdditionalContentInfoCard(
+                    title = "Оплачивайте покупки через QR  или в каталоге",
+                    iconUrl = "ytt"
+                ) {
+                    ChiliComponentButton(
+                        modifier = Modifier
+                            .clip(buttonShape)
+                            .background(buttonBackgroundColor),
+                        text = "Оплачивайте покупки через QR или в каталоге",
+                        textStyle = buttonTextStyle,
+                        enabledTextColor = buttonTextStyle.color) {}
+                }
             }
         }
     }
