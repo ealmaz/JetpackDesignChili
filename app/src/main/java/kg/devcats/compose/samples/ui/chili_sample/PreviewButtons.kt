@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.buttons.ButtonSize
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliAdditionalButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliCustomButton
@@ -66,29 +69,18 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
 
-            ChiliPrimaryButton(text = "Primary button", modifier = Modifier.fillMaxWidth()) {}
-            ChiliPrimaryButton(text = "Primary button", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp), enabled = false) {}
+            Text(text = "Primary buttons and their states", modifier = Modifier.fillMaxWidth())
+            PrimaryButtons()
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
 
-            ChiliSecondaryButton(text = "Secondary button", modifier = Modifier.fillMaxWidth()) {}
-            ChiliSecondaryButton(text = "Secondary button", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp), enabled = false) {}
+            Text(text = "Secondary buttons and their states", modifier = Modifier.fillMaxWidth())
+            SecondaryButtons()
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
 
-            ChiliAdditionalButton(text = "Additional button", modifier = Modifier.fillMaxWidth()) {}
-            ChiliAdditionalButton(text = "Additional button", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp), enabled = false) {}
-
-            ChiliAdditionalButton(text = "Additional button with icon", modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp), endIconPainter = painterResource(
-                id = R.drawable.chili_ic_documents_green), endIconModifier = Modifier.padding(start = 8.dp)) {}
+            Text(text = "Additional buttons and their states", modifier = Modifier.fillMaxWidth())
+            AdditionalButtons()
 
             Divider(Modifier.padding(top = 16.dp, bottom = 16.dp))
 
@@ -129,12 +121,237 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Box (modifier = Modifier.background(Chili.color.screenBackground).padding(16.dp)){
-                Column(modifier = Modifier.clip(Chili.shapes.RoundedCornerShape).background(Chili.color.cellViewBackground)) {
+            Box (modifier = Modifier
+                .background(Chili.color.screenBackground)
+                .padding(16.dp)){
+                Column(modifier = Modifier
+                    .clip(Chili.shapes.RoundedCornerShape)
+                    .background(Chili.color.cellViewBackground)) {
                     DetailedInfoCell(icon = painterResource(R.drawable.chili_ic_documents_green), title = "Double buttons", value = "6 200 c", subTitle = "Below this cell")
                     ChiliDoubledButtons(startButtonText = "Продлить", endButtonText = "Погасить")
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun PrimaryButtons() {
+    var isLoadingPrimary by remember { mutableStateOf(false) }
+
+    Column {
+        ChiliPrimaryButton(
+            icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+            text = "Primary button c url", isLoading = isLoadingPrimary,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
+            isLoadingPrimary = !isLoadingPrimary
+        }
+        ChiliPrimaryButton(
+            icon = R.drawable.chili_ic_documents_green,
+            text = "Primary button c drawable res",
+            isLoading = isLoadingPrimary,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
+            isLoadingPrimary = !isLoadingPrimary
+        }
+        ChiliPrimaryButton(
+            icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+            text = "Small btn, url icon",
+            isLoading = isLoadingPrimary,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoadingPrimary = !isLoadingPrimary
+        }
+        ChiliPrimaryButton(
+            icon = R.drawable.chili_ic_documents_green,
+            text = "Small btn, drawable",
+            isLoading = isLoadingPrimary,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoadingPrimary = !isLoadingPrimary
+        }
+
+        ChiliPrimaryButton(
+            text = "Small btn w/o icon",
+            isLoading = isLoadingPrimary,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoadingPrimary = !isLoadingPrimary
+        }
+
+        ChiliPrimaryButton(text = "Primary button", modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp), enabled = false) {}
+
+        ChiliComponentButton(text = "Stop loader", modifier = Modifier.align(Alignment.End)) {
+            isLoadingPrimary = false
+        }
+    }
+}
+
+@Composable
+fun SecondaryButtons() {
+    var isLoading by remember { mutableStateOf(false) }
+
+    Column {
+        ChiliSecondaryButton(
+            icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+            text = "Secondary button c url", isLoading = isLoading,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
+            isLoading = !isLoading
+        }
+        ChiliSecondaryButton(
+            icon = R.drawable.chili_ic_documents_green,
+            text = "Secondary button c drawable res",
+            isLoading = isLoading,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
+            isLoading = !isLoading
+        }
+        ChiliSecondaryButton(
+            icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+            text = "Small btn, url icon",
+            isLoading = isLoading,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoading = !isLoading
+        }
+        ChiliSecondaryButton(
+            icon = R.drawable.chili_ic_documents_green,
+            text = "Small btn, drawable",
+            isLoading = isLoading,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoading = !isLoading
+        }
+
+        ChiliSecondaryButton(
+            text = "Small btn w/o icon",
+            isLoading = isLoading,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoading = !isLoading
+        }
+
+        ChiliSecondaryButton(
+            text = "Secondary button", modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp), enabled = false) {}
+
+        ChiliComponentButton(text = "Stop loader", modifier = Modifier.align(Alignment.End)) {
+            isLoading = false
+        }
+    }
+}
+
+@Composable
+fun AdditionalButtons() {
+    var isLoading by remember { mutableStateOf(false) }
+    Column {
+        ChiliAdditionalButton(
+            startIcon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+            text = "Additional button c url", isLoading = isLoading,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
+            isLoading = !isLoading
+        }
+        ChiliAdditionalButton(
+            startIcon = R.drawable.chili_ic_documents_green,
+            text = "Additional button c drawable res",
+            isLoading = isLoading,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
+            isLoading = !isLoading
+        }
+        ChiliAdditionalButton(
+            startIcon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
+            text = "Small btn, url icon",
+            isLoading = isLoading,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoading = !isLoading
+        }
+        ChiliAdditionalButton(
+            startIcon = R.drawable.chili_ic_documents_green,
+            text = "Small btn, drawable",
+            isLoading = isLoading,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoading = !isLoading
+        }
+
+        ChiliAdditionalButton(
+            text = "Small btn w/o icon",
+            isLoading = isLoading,
+            buttonSize = ButtonSize.SMALL,
+            modifier = Modifier
+                .width(150.dp)
+                .padding(top = 8.dp)
+
+        ) {
+            isLoading = !isLoading
+        }
+
+        ChiliAdditionalButton(text = "Additional button", modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp),
+            enabled = false) {}
+
+        ChiliAdditionalButton(text = "Additional button with end icon", modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp),
+            endIconPainter = painterResource(id = R.drawable.chili_ic_documents_green),
+            endIconModifier = Modifier.padding(start = 8.dp)
+        ) {}
+
+        ChiliComponentButton(text = "Stop loader", modifier = Modifier.align(Alignment.End)) {
+            isLoading = false
         }
     }
 }
