@@ -1,6 +1,5 @@
 package kg.devcats.compose.samples.ui.chili_sample.keyboards
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -31,10 +30,10 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
     val scrollState = rememberScrollState()
 
     NumberKeyboardFrame(
+        backgroundColor = Chili.color.surfaceBackground,
         specialSymbols = listOf(',', '&'),
         isKeyboardVisible = isKeyboardVisible,
         keyboardModifier = Modifier
-            .background(Chili.color.surfaceBackground)
             .padding(horizontal = 16.dp, vertical = 8.dp),
         topBar = {
             ChiliCenteredAppToolbar(
@@ -47,8 +46,6 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
             )
         }
     ) {
-
-
         var inputText by remember { mutableStateOf(TextFieldValue(text = "0")) }
         var inputText2 by remember { mutableStateOf(TextFieldValue(text = "0")) }
 

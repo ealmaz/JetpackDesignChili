@@ -14,7 +14,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.InterceptPlatformTextInput
+import kg.devcats.compose.jetpack_chili.theme.Chili
 import kotlinx.coroutines.awaitCancellation
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -25,6 +27,7 @@ fun NumberKeyboardFrame(
     specialSymbols: List<Char> = emptyList(),
     isKeyboardVisible: Boolean = false,
     snackbarHost: @Composable (SnackbarHostState) -> Unit = { SnackbarHost(it) },
+    backgroundColor: Color = Chili.color.surfaceBackground,
     topBar: @Composable () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
@@ -41,6 +44,7 @@ fun NumberKeyboardFrame(
         Scaffold(
             modifier = modifier,
             snackbarHost = snackbarHost,
+            backgroundColor = backgroundColor,
             content = {
                 content.invoke(it)
             },
