@@ -34,6 +34,7 @@ import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
 import kg.devcats.compose.jetpack_chili.components.cells.DoubleCell
 import kg.devcats.compose.jetpack_chili.components.cells.DoubleCellItemParams
 import kg.devcats.compose.jetpack_chili.components.cells.ProductCell
+import kg.devcats.compose.jetpack_chili.components.common.AdvancedShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.common.ChiliCheckBox
 import kg.devcats.compose.jetpack_chili.components.common.ChiliMaterial2Switch
@@ -76,7 +77,7 @@ fun PreviewCells(
                 style = Chili.typography.H16_Primary
             )
 
-            ShadowRoundedBox() {
+            AdvancedShadowRoundedBox {
                 Column {
                     ChiliCell(
                         modifier = Modifier.clickable { },

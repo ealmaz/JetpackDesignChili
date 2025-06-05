@@ -14,18 +14,22 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
 fun ShadowRoundedBox(modifier: Modifier = Modifier, contentColor: Color = Chili.color.shadowContainerContent, content: @Composable () -> Unit) {
-//    Surface(
-//        modifier = modifier.advancedShadow(),
-//        color = contentColor,
-//        shape = Chili.shapes.RoundedCornerShape,
-//    ) {
-//        content.invoke()
-//    }
     Surface(
         modifier = modifier,
         color = contentColor,
         shape = Chili.shapes.RoundedCornerShape,
         shadowElevation = Chili.attrs.shadowElevation
+    ) {
+        content.invoke()
+    }
+}
+
+@Composable
+fun AdvancedShadowRoundedBox(modifier: Modifier = Modifier, contentColor: Color = Chili.color.shadowContainerContent, content: @Composable () -> Unit) {
+    Surface(
+        modifier = modifier.advancedShadow(),
+        color = contentColor,
+        shape = Chili.shapes.RoundedCornerShape,
     ) {
         content.invoke()
     }
