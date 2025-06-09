@@ -131,8 +131,10 @@ fun TextFieldValue.handleZero(previousValue: TextFieldValue) : TextFieldValue {
     if (regex.containsMatchIn(this.text)) return this
     return if (this.text.isBlank() || this.text == InputFieldDefaults.ZERO) {
         TextFieldValue(InputFieldDefaults.ZERO, TextRange(1))
+    } else if (previousValue.text == InputFieldDefaults.ZERO && previousValue.selection.start == 0) {
+        TextFieldValue(this.text.dropLast(1), selection = TextRange(this.text.length))
     } else if (previousValue.text == InputFieldDefaults.ZERO) {
-        TextFieldValue(this.text.substring(1), selection = TextRange(1))
+        TextFieldValue(this.text.drop(1), selection = TextRange(this.text.length))
     } else {
         this
     }
