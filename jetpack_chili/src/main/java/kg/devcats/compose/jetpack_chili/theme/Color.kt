@@ -40,6 +40,9 @@ val magenta_2 = Color(0xFFCC0D71)
 val magenta_3 = Color(0xFFf6a7d0)
 val magenta_5 = Color(0xFFF6ECF2)
 val magenta_6 = Color(0xFFAE2A47)
+val magenta_7 = Color(0xFFF84EA6)
+val magenta_8 = Color(0xFFF10C83)
+val magenta_9 = Color(0xFFC976C6)
 
 // Chartreuse
 
