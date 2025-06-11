@@ -27,6 +27,7 @@ val gray_8 = Color(0xFFD5D5D5)
 val gray_9 = Color(0xFFF5F5F5)
 val gray_10_alpha_70 = Color(0xB3C4C4C4)
 val gray_11 = Color(0xFFF0F0F0)
+val gray_12 = Color(0xFFD6D6D6)
 
 // White
 
@@ -75,6 +76,7 @@ val green_10 = Color(0xFFDEF2CC)
 val green_11 = Color(0xFFE5F4D8)
 val green_12 = Color(0xFF1E2D06)
 val green_13 = Color(0xFFD3EDAB)
+val green_14 = Color(0xFF71AA18)
 
 // Blue
 
@@ -89,6 +91,8 @@ val blue_8 = Color(0xFF0059BB)
 val blue_9 = Color(0xFF2A4C84)
 val blue_10 = Color(0xFFDEEBF9)
 val blue_11 = Color(0xFF001227)
+val blue_12 = Color(0xFFA9CBFF)
+val blue_13 = Color(0xFF001B33)
 
 
 // Red
