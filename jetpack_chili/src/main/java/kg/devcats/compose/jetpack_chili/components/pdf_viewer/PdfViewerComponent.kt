@@ -4,10 +4,14 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -20,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import coil.compose.AsyncImage
@@ -36,6 +41,8 @@ fun PdfViewerComponent(
     errorText: String,
     zoomIsEnabled: Boolean = true,
     closeDialogButtonText: String? = null,
+    buttonShareIsVisible: Boolean = false,
+    isEdgeToEdgeEnabled: Boolean = false,
     onErrorDialogIsClosed: () -> Unit = {},
     onFileUploaded: (uri: Uri) -> Unit = {}
 ) {
@@ -52,14 +59,17 @@ fun PdfViewerComponent(
         pdfRenderManager.renderPdfFile(pdfSourceCategory)
     }
 
-    Box(modifier = modifier
-        .clipToBounds()
-        .background(Chili.color.pdfBackgroundColor),
-        contentAlignment = Alignment.Center) {
+    Box(
+        modifier = modifier
+            .clipToBounds()
+            .background(Chili.color.pdfBackgroundColor),
+        contentAlignment = Alignment.Center
+    ) {
         when (pdfState) {
             is PdfState.Loading -> {
                 ChiliLoader()
             }
+
             is PdfState.Success -> {
                 val result = (pdfState as PdfState.Success)
                 val pages = result.pdfBitmapPages
@@ -82,9 +92,16 @@ fun PdfViewerComponent(
                                 page = page
                             )
                         }
+                        item {
+                            BottomSpacer(
+                                buttonShareIsVisible = buttonShareIsVisible,
+                                isEdgeToEdgeEnabled = isEdgeToEdgeEnabled
+                            )
+                        }
                     }
                 }
             }
+
             is PdfState.Error -> {
                 ChiliDialog(
                     showDialog = true,
@@ -97,6 +114,7 @@ fun PdfViewerComponent(
                     }
                 )
             }
+
             is PdfState.Empty -> {}
         }
     }
@@ -113,6 +131,30 @@ private fun PdfPage(
             .aspectRatio(page.width.toFloat() / page.height.toFloat()),
         model = page,
         contentDescription = null
+    )
+}
+
+@Composable
+fun BottomSpacer(
+    buttonShareIsVisible: Boolean,
+    isEdgeToEdgeEnabled: Boolean
+) {
+    val density = LocalDensity.current
+    val insetDp = if (isEdgeToEdgeEnabled) {
+        with(density) {
+            WindowInsets.safeDrawing.getBottom(density).toDp()
+        }
+    } else {
+        0.dp
+    }
+
+    val buttonPadding = if (buttonShareIsVisible) 80.dp else 0.dp
+    val totalHeight = insetDp + buttonPadding
+
+    Spacer(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(totalHeight)
     )
 }
 

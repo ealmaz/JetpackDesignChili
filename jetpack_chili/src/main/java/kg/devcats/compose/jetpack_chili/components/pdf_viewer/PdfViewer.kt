@@ -7,9 +7,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,6 +52,7 @@ fun PdfViewer(
     buttonShareIsVisible: Boolean = false,
     toolbarBackgroundColor: Color = Chili.color.toolbarBackground,
     navigationIcon: Painter = painterResource(id = R.drawable.chili4_ic_back_arrow_rounded),
+    isEdgeToEdgeEnabled: Boolean = false
 ) {
     val context = LocalContext.current
     var pdfUri by remember { mutableStateOf(Uri.EMPTY) }
@@ -55,26 +61,42 @@ fun PdfViewer(
 
     Box(modifier = modifier.fillMaxSize()) {
         Column {
-            ChiliCenteredAppToolbar(
-                title = title,
-                isDividerVisible = isDividerVisible,
-                isNavigationIconVisible = isNavigationIconVisible,
-                onNavigationIconClick = onNavigationIconClick,
-                navigationIcon = navigationIcon,
-                backgroundColor = toolbarBackgroundColor,
-                endFrame = {
-                    AnimatedVisibility(
-                        modifier = Modifier.padding(end = 16.dp),
-                        visible = shareIsVisible && (pdfUri != Uri.EMPTY)
-                    ) {
-                        Image(
-                            modifier = Modifier.clickable { context.sharePdfFile(pdfUri, shareTitle) },
-                            painter = painterResource(R.drawable.chili_ic_share),
-                            contentDescription = null
-                        )
-                    }
+            Column {
+                if (isEdgeToEdgeEnabled) {
+                    Spacer(
+                        modifier = Modifier
+                            .background(toolbarBackgroundColor)
+                            .fillMaxWidth()
+                            .windowInsetsTopHeight(WindowInsets.safeDrawing)
+                    )
                 }
-            )
+
+                ChiliCenteredAppToolbar(
+                    title = title,
+                    isDividerVisible = isDividerVisible,
+                    isNavigationIconVisible = isNavigationIconVisible,
+                    onNavigationIconClick = onNavigationIconClick,
+                    navigationIcon = navigationIcon,
+                    backgroundColor = toolbarBackgroundColor,
+                    endFrame = {
+                        AnimatedVisibility(
+                            modifier = Modifier.padding(end = 16.dp),
+                            visible = shareIsVisible && (pdfUri != Uri.EMPTY)
+                        ) {
+                            Image(
+                                modifier = Modifier.clickable {
+                                    context.sharePdfFile(
+                                        pdfUri,
+                                        shareTitle
+                                    )
+                                },
+                                painter = painterResource(R.drawable.chili_ic_share),
+                                contentDescription = null
+                            )
+                        }
+                    }
+                )
+            }
 
             PdfViewerComponent(
                 modifier = modifier.fillMaxSize(),
@@ -83,7 +105,9 @@ fun PdfViewer(
                 zoomIsEnabled = zoomIsEnabled,
                 closeDialogButtonText = closeDialogButtonText,
                 onErrorDialogIsClosed = onNavigationIconClick,
-                onFileUploaded = { uri -> pdfUri = uri }
+                onFileUploaded = { uri -> pdfUri = uri },
+                isEdgeToEdgeEnabled = isEdgeToEdgeEnabled,
+                buttonShareIsVisible = buttonShareIsVisible
             )
         }
         if (buttonShareIsVisible) {
@@ -101,7 +125,13 @@ fun PdfViewer(
                     text = stringResource(R.string.save_or_share),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 12.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
+                        .padding(
+                            top = 12.dp,
+                            bottom = if (isEdgeToEdgeEnabled) WindowInsets.safeDrawing.asPaddingValues()
+                                .calculateBottomPadding() + 16.dp else 16.dp,
+                            start = 16.dp,
+                            end = 16.dp
+                        )
                 ) {
                     context.sharePdfFile(pdfUri, shareTitle)
                 }
