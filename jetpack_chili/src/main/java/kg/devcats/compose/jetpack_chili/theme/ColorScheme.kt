@@ -12,6 +12,8 @@ interface ChiliColorScheme {
     val markedText: Color
     val linkText: Color
     val errorText: Color
+    val successText: Color
+    val warningTextColor: Color
 
     //Icons
     val primaryIcon: Color
@@ -26,7 +28,6 @@ interface ChiliColorScheme {
     val contentSecondary: Color
 
     val accentPrimaryColor: Color
-    val warningTextColor: Color
 
     //Toolbar
     val toolbarBackground: Color
@@ -208,7 +209,7 @@ data class ChiliLightColorScheme(
     override val markedText: Color = black_1,
     override val linkText: Color = magenta_1,
     override val errorText: Color = red_1,
-
+    override val successText: Color = green_8,
     override val warningTextColor: Color = orange_1,
 
     override val primaryIcon: Color = black_1,
@@ -359,8 +360,9 @@ data class ChiliDarkColorScheme(
     override val markedText: Color = white_1,
     override val linkText: Color = magenta_1,
     override val errorText: Color = red_1,
-
+    override val successText: Color = green_8,
     override val warningTextColor: Color = orange_4,
+
 
     override val primaryIcon: Color = white_1,
 

@@ -73,6 +73,24 @@ fun TextAppearance(
 
             Text(text = "Typography Primary color weight 700", style = Chili.typography.H16_Primary_700)
             Divider(modifier = Modifier.padding(bottom = 16.dp))
+
+            Text(text = "Typography Success color weight 400", style = Chili.typography.H16_Success)
+            Divider(modifier = Modifier.padding(bottom = 16.dp))
+
+            Text(text = "Typography Success color weight 500", style = Chili.typography.H16_Success_500)
+            Divider(modifier = Modifier.padding(bottom = 16.dp))
+
+            Text(text = "Typography Success color weight 700", style = Chili.typography.H16_Success_700)
+            Divider(modifier = Modifier.padding(bottom = 16.dp))
+
+            Text(text = "Typography Warning color weight 400", style = Chili.typography.H16_Warning)
+            Divider(modifier = Modifier.padding(bottom = 16.dp))
+
+            Text(text = "Typography Warning color weight 500", style = Chili.typography.H16_Warning_500)
+            Divider(modifier = Modifier.padding(bottom = 16.dp))
+
+            Text(text = "Typography Warning color weight 700", style = Chili.typography.H16_Warning_700)
+            Divider(modifier = Modifier.padding(bottom = 16.dp))
         }
     }
 }
