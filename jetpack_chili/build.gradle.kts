@@ -60,6 +60,9 @@ dependencies {
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.extractor)
     implementation(libs.coil)
+    implementation(libs.emoji)
+    implementation(libs.emoji.views)
+    implementation(libs.emoji.bundled)
     debugImplementation(libs.androidx.ui.tooling)
 }
 

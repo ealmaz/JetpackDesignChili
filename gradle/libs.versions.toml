@@ -16,6 +16,8 @@ media3Ui = "1.4.1"
 navigationCompose = "2.8.4"
 pie-chart = "v3.1.0"
 uiTooling = "1.7.5"
+emoji = "1.4.0"
+emojiBundled = "1.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +40,9 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 mp-pie-chart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "pie-chart"}
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
+emoji = { group = "androidx.emoji2", name = "emoji2", version.ref = "emoji" }
+emoji-views = { group = "androidx.emoji2", name = "emoji2-views", version.ref = "emoji" }
+emoji-bundled = { group = "androidx.emoji2", name = "emoji2-bundled", version.ref = "emojiBundled" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

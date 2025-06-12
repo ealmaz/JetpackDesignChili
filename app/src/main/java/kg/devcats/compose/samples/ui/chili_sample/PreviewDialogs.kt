@@ -28,6 +28,7 @@ import kg.devcats.compose.jetpack_chili.modals.dialog.CustomSimpleDialog
 import kg.devcats.compose.jetpack_chili.modals.dialog.DialogOption
 import kg.devcats.compose.jetpack_chili.modals.dialog.LoaderDialog
 import kg.devcats.compose.jetpack_chili.modals.pickers.ChiliDatePicker
+import kg.devcats.compose.jetpack_chili.modals.pickers.ChiliEmojiBottomSheet
 import kg.devcats.compose.jetpack_chili.theme.Chili
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -46,6 +47,7 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
     var showLoaderDialog by remember { mutableStateOf(false) }
     var showDismissLoaderDialogOnBackPress by remember { mutableStateOf(false) }
     var showDatePickerDialog by remember { mutableStateOf(false) }
+    var showEmojiPickerBS by remember { mutableStateOf(false) }
 
     var selectedOption by remember { mutableStateOf<DialogOption<Int>?>(null) }
 
@@ -142,6 +144,14 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
             ) {
                 showDatePickerDialog = true
             }
+
+            ChiliPrimaryButton(
+                text = "Emoji picker bottom sheet", modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                showEmojiPickerBS = true
+            }
         }
     }
 
@@ -235,6 +245,18 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
         onButtonClick = { day, month, year, date, _ ->
             Log.d("DatePicker", "Selected date: $day/$month/$year")
             showDatePickerDialog = false
+        }
+    )
+
+    ChiliEmojiBottomSheet(
+        showSheet = showEmojiPickerBS,
+        onDismissRequest = { showEmojiPickerBS = false },
+        onEmojiSelected = { emoji ->
+            Toast.makeText(context, "Selected emoji: $emoji", Toast.LENGTH_SHORT).show()
+            showEmojiPickerBS = false
+        },
+        onEmojiDelete = {
+            Toast.makeText(context, "On emoji delete", Toast.LENGTH_SHORT).show()
         }
     )
 
