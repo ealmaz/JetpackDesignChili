@@ -34,6 +34,7 @@ interface ChiliColorScheme {
 
     // Divider
     val dividerColor: Color
+    val borderColor: Color
 
     // Chevron
     val chevronColor: Color
@@ -223,6 +224,7 @@ data class ChiliLightColorScheme(
 
     override val toolbarBackground: Color = white_1,
     override val dividerColor: Color = gray_6,
+    override val borderColor: Color = gray_3,
     override val chevronColor: Color = black_7,
 
     override val cardViewBackground: Color = white_1,
@@ -375,6 +377,7 @@ data class ChiliDarkColorScheme(
 
     override val toolbarBackground: Color = black_3,
     override val dividerColor: Color = black_4,
+    override val borderColor: Color = black_5,
     override val chevronColor: Color = gray_4,
 
     override val cardViewBackground: Color = black_3,

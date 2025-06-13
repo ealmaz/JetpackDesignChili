@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -314,6 +315,18 @@ fun PreviewCommon(
 
             ChiliTabs(items = listOf("Open", "Closed"), selectedIndex = selectedTab2.value) {
                 selectedTab2.value = it
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            val selectedTab3 = remember { mutableStateOf(0) }
+            ChiliTabs(
+                items = listOf("Rounded", "Rounded"),
+                selectedIndex = selectedTab3.value,
+                isBorderVisible = true,
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                selectedTab3.value = it
             }
         }
     }
