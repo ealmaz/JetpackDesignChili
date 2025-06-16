@@ -19,6 +19,8 @@ object SnackbarManager {
 
     val alignment: MutableState<Alignment> = mutableStateOf(Alignment.BottomCenter)
 
+    private var wasActionClicked = false
+
     fun CoroutineScope.showSimpleSnackbar(message: String) {
         showSnackbar(
             SnackbarMessage(
@@ -84,21 +86,23 @@ object SnackbarManager {
         actionText: String,
         timerDurationMillis: Long,
         onTimerExpire: () -> Unit,
-        onActionClick: (() -> Unit),
+        onActionClick: () -> Unit,
         alignment: Alignment = Alignment.BottomCenter
     ) {
-        showSnackbar(
-            SnackbarMessage(
-                message = message,
-                type = SnackbarType.TIMER,
-                progressDurationMillis = timerDurationMillis,
-                snackbarDurationMillis = timerDurationMillis,
-                actionText = actionText,
-                onActionClick = onActionClick,
-                onDismiss = onTimerExpire,
-                alignment = alignment
-            )
+        val snackbarMessage = SnackbarMessage(
+            message = message,
+            type = SnackbarType.TIMER,
+            progressDurationMillis = timerDurationMillis,
+            snackbarDurationMillis = timerDurationMillis,
+            actionText = actionText,
+            onActionClick = {
+                wasActionClicked = true
+                onActionClick()
+            },
+            onDismiss = onTimerExpire,
+            alignment = alignment
         )
+        showSnackbar(snackbarMessage)
     }
 
     private fun CoroutineScope.showSnackbar(snackbarMessage: SnackbarMessage) {
@@ -106,15 +110,17 @@ object SnackbarManager {
             dismissSnackbar()
         }
 
+        wasActionClicked = false
         _currentSnackbarMessage = snackbarMessage
         alignment.value = snackbarMessage.alignment
+
         launch {
             snackbarHostState.showSnackbar(
                 message = snackbarMessage.message,
                 duration = SnackbarDuration.Indefinite
             )
         }.invokeOnCompletion { throwable ->
-            if (throwable is CancellationException) {
+            if (throwable is CancellationException && !wasActionClicked) {
                 snackbarMessage.onDismiss?.invoke()
             }
         }
@@ -129,4 +135,3 @@ object SnackbarManager {
         return snackbarHostState.currentSnackbarData != null
     }
 }
-
