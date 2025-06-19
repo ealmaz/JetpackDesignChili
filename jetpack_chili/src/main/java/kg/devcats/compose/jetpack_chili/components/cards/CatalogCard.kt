@@ -43,12 +43,11 @@ fun CatalogCard(
         Surface(
             modifier = modifier
                 .height(102.dp)
-                .clip(RoundedCornerShape(12.dp))
-                .padding(12.dp),
+                .clip(RoundedCornerShape(12.dp)),
             color = Chili.color.cardViewBackground,
             contentColor = Color.Unspecified
         ) {
-            Column {
+            Column(modifier = Modifier.padding(12.dp)) {
                 Shimmer(height = 32.dp, width = 32.dp)
                 Spacer(modifier = Modifier.height(16.dp))
                 Shimmer(height = 6.dp, width = 83.dp)
