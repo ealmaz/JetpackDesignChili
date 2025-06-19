@@ -191,12 +191,12 @@ fun PreviewCards(
             ShadowRoundedBox {
                 CatalogCard(
                     modifier = Modifier
-                        .clickable { }
                         .width(186.dp),
                     title = "Заголовок",
                     isHighlighted = true,
                     icon = painterResource(id = R.drawable.chili_ic_documents_green),
                     isLoading = false,
+                    onClick = {}
                 )
             }
 
@@ -206,11 +206,11 @@ fun PreviewCards(
                 ShadowRoundedBox {
                     CatalogCard(
                         modifier = Modifier
-                            .clickable { }
                             .width(186.dp),
                         title = "Заголовок",
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         isLoading = false,
+                        onClick = {}
                     )
                 }
 
