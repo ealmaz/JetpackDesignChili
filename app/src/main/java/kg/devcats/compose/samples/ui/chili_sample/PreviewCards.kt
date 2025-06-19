@@ -188,6 +188,20 @@ fun PreviewCards(
                 text = "CatalogCard",
                 style = Chili.typography.H16_Primary
             )
+            ShadowRoundedBox {
+                CatalogCard(
+                    modifier = Modifier
+                        .clickable { }
+                        .width(186.dp),
+                    title = "Заголовок",
+                    isHighlighted = true,
+                    icon = painterResource(id = R.drawable.chili_ic_documents_green),
+                    isLoading = false,
+                )
+            }
+
+            Spacer(Modifier.height(16.dp))
+
             Row {
                 ShadowRoundedBox {
                     CatalogCard(
@@ -205,7 +219,6 @@ fun PreviewCards(
                 ) {
                     CatalogCard(
                         modifier = Modifier
-                            .clickable { }
                             .width(186.dp),
                         title = "Заголовок",
                         isLoading = true,
