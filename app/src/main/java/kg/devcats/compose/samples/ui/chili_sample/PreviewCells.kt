@@ -31,6 +31,7 @@ import kg.devcats.compose.jetpack_chili.components.buttons.ChiliDoubledButtons
 import kg.devcats.compose.jetpack_chili.components.cells.DetailedInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliAdditionalInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
+import kg.devcats.compose.jetpack_chili.components.cells.ChiliCheckBoxCell
 import kg.devcats.compose.jetpack_chili.components.cells.DoubleCell
 import kg.devcats.compose.jetpack_chili.components.cells.DoubleCellItemParams
 import kg.devcats.compose.jetpack_chili.components.cells.ProductCell
@@ -674,6 +675,45 @@ fun PreviewCells(
                     DetailedInfoCell(icon = painterResource(R.drawable.chili_ic_documents_green), title = "Double buttons", value = "6 200 c", subTitle = "Below this cell")
                     ChiliDoubledButtons(startButtonText = "Продлить", endButtonText = "Погасить")
                 }
+            }
+            Column(modifier = Modifier
+                .background(Chili.color.screenSecondary)
+                .padding(16.dp)
+                .clip(Chili.shapes.RoundedCornerShape)
+            ) {
+                ChiliCheckBoxCell(
+                    title = "Сhecked",
+                    subtitle = "Подзаголовок",
+                    checked = true,
+                    iconUrl = "url",
+                    isDividerVisible = true,
+                    additionalInfo = "ruerueu",
+                ) { }
+                ChiliCheckBoxCell(
+                    title = "Unchecked",
+                    subtitle = "Подзаголовок",
+                    checked = false,
+                    iconUrl = "url",
+                    isDividerVisible = true,
+                    additionalInfo = "ruerueu",
+                ) { }
+                ChiliCheckBoxCell(
+                    title = "Disabled",
+                    subtitle = "Выключенный",
+                    isDividerVisible = true,
+                    checked = false,
+                    enabled = false,
+                    iconUrl = "url",
+                    additionalInfo = "ruerueu",
+                ) { }
+                ChiliCheckBoxCell(
+                    title = "Заголовок",
+                    subtitle = "Подзаголовок",
+                    checked = true,
+                    isLoading = true,
+                    iconUrl = "url",
+                    additionalInfo = "ruerueu",
+                ) { }
             }
         }
     }

@@ -136,7 +136,7 @@ fun ChiliCell(
                     ShowShimmerOrContent(
                         modifier = Modifier
                             .padding(top = 18.dp, bottom = 10.dp),
-                        shimmerWidth = 200.dp,
+                        shimmerWidth = 160.dp,
                         shimmerHeight = 8.dp,
                         isLoading = isLoading
                     ) {
