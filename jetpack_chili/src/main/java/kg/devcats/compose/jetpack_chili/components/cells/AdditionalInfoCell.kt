@@ -41,6 +41,7 @@ fun ChiliAdditionalInfoCell(
     onClick: (() -> Unit)? = null,
     containerBackgroundColor: Color = Chili.color.cellViewBackground,
     containerPaddingValues: PaddingValues? = null,
+    dividerPaddingValues: PaddingValues? = null,
     additionalInfoTextPaddingValues: PaddingValues = PaddingValues(end = 4.dp),
     additionalInfoTextWeight: Float? = null,
     additionalInfo: String? = null,
@@ -68,6 +69,7 @@ fun ChiliAdditionalInfoCell(
         onClick = onClick,
         containerBackgroundColor = containerBackgroundColor,
         containerPaddingValues = containerPaddingValues,
+        dividerPaddingValues = dividerPaddingValues,
         isLoading = isLoading,
         startFrame = startFrame,
         endFrame = {
