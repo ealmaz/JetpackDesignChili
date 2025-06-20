@@ -233,9 +233,9 @@ data class ChiliLightColorScheme(
     override val shadowContainerContent: Color = white_1,
 
     override val checkBoxCheckedBackground: Color = magenta_1,
-    override val checkBoxUncheckedBorder: Color = black_5,
+    override val checkBoxUncheckedBorder: Color = gray_2,
     override val checkBoxCheckedCheckmark: Color = white_1,
-    override val checkBoxDisabled: Color = gray_2,
+    override val checkBoxDisabled: Color = gray_2.copy(alpha = 0.5f),
 
     override val switchCheckedThumb: Color = white_1,
     override val switchCheckedTrack: Color = green_8,
@@ -386,9 +386,9 @@ data class ChiliDarkColorScheme(
     override val shadowContainerContent: Color = black_3,
 
     override val checkBoxCheckedBackground: Color = magenta_1,
-    override val checkBoxUncheckedBorder: Color = gray_3,
+    override val checkBoxUncheckedBorder: Color = black_5,
     override val checkBoxCheckedCheckmark: Color = black_1,
-    override val checkBoxDisabled: Color = gray_1_alpha_50,
+    override val checkBoxDisabled: Color = black_5.copy(alpha = 0.5f),
 
     override val switchCheckedThumb: Color = white_1,
     override val switchCheckedTrack: Color = green_8,
