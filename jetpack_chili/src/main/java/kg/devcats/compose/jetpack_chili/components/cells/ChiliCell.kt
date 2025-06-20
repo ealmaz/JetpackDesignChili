@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -57,6 +57,7 @@ fun ChiliCell(
     iconSize: Dp = 32.dp,
     containerPaddingValues: PaddingValues? = null,
     containerBackgroundColor: Color = Chili.color.cellViewBackground,
+    dividerPaddingValues: PaddingValues? = null,
     startFrame: (@Composable RowScope.() -> Unit)? = null,
     endFrame: (@Composable RowScope.() -> Unit)? = null,
     onClick: (() -> Unit)? = null,
@@ -175,10 +176,13 @@ fun ChiliCell(
                 endFrame?.invoke(this)
                 if (isChevronVisible) ChiliChevron(chevronTintColor = chevronTintColor)
             }
-            if (isDividerVisible) Divider(
+            if (isDividerVisible) HorizontalDivider(
                 modifier = Modifier.then(
-                    if (icon != null || iconUrl != null) Modifier.padding(start = iconSize + iconEndMargin)
-                    else Modifier
+                    when {
+                        dividerPaddingValues != null -> Modifier.padding(dividerPaddingValues)
+                        icon != null || iconUrl != null -> Modifier.padding(start = iconSize + iconEndMargin)
+                        else -> Modifier
+                    }
                 )
             )
         }
