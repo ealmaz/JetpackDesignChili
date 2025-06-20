@@ -681,14 +681,18 @@ fun PreviewCells(
                 .padding(16.dp)
                 .clip(Chili.shapes.RoundedCornerShape)
             ) {
+                var isCheckboxCellChecked by remember { mutableStateOf(true) }
                 ChiliCheckBoxCell(
                     title = "Сhecked",
                     subtitle = "Подзаголовок",
-                    checked = true,
+                    checked = isCheckboxCellChecked,
                     iconUrl = "url",
                     isDividerVisible = true,
                     additionalInfo = "Text text",
-                ) { }
+                    onCheckedChange = {
+                        isCheckboxCellChecked = it
+                    }
+                )
                 ChiliCheckBoxCell(
                     title = "Unchecked",
                     subtitle = "Подзаголовок",
@@ -696,7 +700,8 @@ fun PreviewCells(
                     iconUrl = "url",
                     isDividerVisible = true,
                     additionalInfo = "500,00 <u>c</u>",
-                ) { }
+                    onCheckedChange = {}
+                )
                 ChiliCheckBoxCell(
                     title = "Disabled",
                     subtitle = "Выключенный",
@@ -706,6 +711,15 @@ fun PreviewCells(
                     iconUrl = "url",
                     additionalInfo = "35,00 <u>c</u>",
                 ) { }
+                ChiliCheckBoxCell(
+                    title = "Заголовок",
+                    subtitle = "Подзаголовок",
+                    isDividerVisible = true,
+                    checked = isCheckboxCellChecked,
+                    iconUrl = "url",
+                ) {
+                    isCheckboxCellChecked = it
+                }
                 ChiliCheckBoxCell(
                     title = "Заголовок",
                     subtitle = "Подзаголовок",

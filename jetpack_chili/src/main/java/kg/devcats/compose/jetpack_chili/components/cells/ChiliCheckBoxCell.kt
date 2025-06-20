@@ -89,7 +89,7 @@ fun ChiliCheckBoxCell(
                 ChiliCheckBox(
                     checked = checked && !isLoading,
                     onCheckedChange = onCheckedChange,
-                    enabled = enabled,
+                    enabled = enabled && !isLoading,
                     modifier = Modifier.size(24.dp),
                 )
             }
