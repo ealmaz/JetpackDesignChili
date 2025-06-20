@@ -687,7 +687,7 @@ fun PreviewCells(
                     checked = true,
                     iconUrl = "url",
                     isDividerVisible = true,
-                    additionalInfo = "ruerueu",
+                    additionalInfo = "Text text",
                 ) { }
                 ChiliCheckBoxCell(
                     title = "Unchecked",
@@ -695,7 +695,7 @@ fun PreviewCells(
                     checked = false,
                     iconUrl = "url",
                     isDividerVisible = true,
-                    additionalInfo = "ruerueu",
+                    additionalInfo = "500,00 <u>c</u>",
                 ) { }
                 ChiliCheckBoxCell(
                     title = "Disabled",
@@ -704,7 +704,7 @@ fun PreviewCells(
                     checked = false,
                     enabled = false,
                     iconUrl = "url",
-                    additionalInfo = "ruerueu",
+                    additionalInfo = "35,00 <u>c</u>",
                 ) { }
                 ChiliCheckBoxCell(
                     title = "Заголовок",
@@ -712,7 +712,7 @@ fun PreviewCells(
                     checked = true,
                     isLoading = true,
                     iconUrl = "url",
-                    additionalInfo = "ruerueu",
+                    additionalInfo = "5,00 <u>c</u>",
                 ) { }
             }
         }
