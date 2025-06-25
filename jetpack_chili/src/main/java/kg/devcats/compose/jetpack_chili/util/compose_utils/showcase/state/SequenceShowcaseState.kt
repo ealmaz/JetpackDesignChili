@@ -74,7 +74,7 @@ data class AnimationDuration internal constructor(val enterMillis: Int, val exit
         private const val DEFAULT_MILLIS = 700
 
         val Default = AnimationDuration(DEFAULT_MILLIS, DEFAULT_MILLIS)
-        val Fast = AnimationDuration(300, 300)
+        val Fast = AnimationDuration(100, 200)
         val Slow = AnimationDuration(1000, 1000)
 
         fun create(durationMillis: Int) = AnimationDuration(durationMillis, durationMillis)

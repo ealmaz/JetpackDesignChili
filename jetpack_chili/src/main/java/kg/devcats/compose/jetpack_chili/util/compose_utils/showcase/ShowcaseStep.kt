@@ -1,13 +1,8 @@
 package kg.devcats.compose.jetpack_chili.util.compose_utils.showcase
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.animateSizeAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
@@ -17,12 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.graphicsLayer
@@ -50,33 +44,27 @@ fun ShowcaseStep(
     val transition =  remember { MutableTransitionState(false) }
     val highlightDrawer = target.highlight.create(targetCoordinates = target.coordinates)
 
-    AnimatedVisibility(
-        visibleState = transition,
-        enter = fadeIn(tween(target.duration.enterMillis)),
-        exit = fadeOut(tween(target.duration.exitMillis))
-    ) {
-        Box(
+    Box {
+        ShowcaseBackground(
             modifier = modifier
                 .fillMaxSize()
-                .pointerInput(Unit) { detectTapGestures { detectTouchScreen.invoke() } }
-        ) {
-            ShowcaseBackground(
-                coordinates = target.coordinates,
-                drawHighlight = highlightDrawer.drawHighlight,
-                backgroundAlpha = target.backgroundAlpha
-            )
-            ShowcaseDialog(
-                targetRect = target.coordinates.boundsInRoot(),
-                position = target.position,
-                alignment = target.alignment,
-                highlightBounds = highlightDrawer.highlightBounds,
-                content = target.dialog
-            )
-        }
+                .pointerInput(Unit) { detectTapGestures { detectTouchScreen.invoke() } },
+            visibleState = transition,
+            coordinates = target.coordinates,
+            drawHighlight = highlightDrawer.drawHighlight,
+            backgroundAlpha = target.backgroundAlpha
+        )
+        ShowcaseDialog(
+            visibleState = transition,
+            targetRect = target.coordinates.boundsInRoot(),
+            position = target.position,
+            alignment = target.alignment,
+            highlightBounds = highlightDrawer.highlightBounds,
+            content = target.dialog
+        )
     }
-    LaunchedEffect(key1 = visible) {
-        transition.targetState = visible
-    }
+
+    LaunchedEffect(key1 = visible) { transition.targetState = visible }
     LaunchedEffect(key1 = transition.isIdle) {
         if (transition.isIdle) {
             if (transition.targetState) {
@@ -91,34 +79,55 @@ fun ShowcaseStep(
 @Composable
 private fun ShowcaseBackground(
     modifier: Modifier = Modifier,
+    visibleState: MutableTransitionState<Boolean>,
     coordinates: LayoutCoordinates,
     backgroundAlpha: BackgroundAlpha,
     drawHighlight: DrawScope.(LayoutCoordinates) -> Unit
 ) {
-    val targetRadius = remember { mutableFloatStateOf(0f) }
+    val density = LocalDensity.current
+    val screenWidth = with(density) { LocalConfiguration.current.screenWidthDp.dp.toPx() }
+    val screenHeight = with(density) { LocalConfiguration.current.screenHeightDp.dp.toPx() }
+    val center = coordinates.boundsInRoot().center
+
+    val maxDistanceToCorner = remember(center, screenWidth, screenHeight) {
+        val corners = listOf(
+            Offset(0f, 0f),
+            Offset(screenWidth, 0f),
+            Offset(0f, screenHeight),
+            Offset(screenWidth, screenHeight)
+        )
+        corners.maxOf { corner -> center.minus(corner).getDistance() }
+    }
+
+    val targetRadius = remember(visibleState.targetState, maxDistanceToCorner) {
+        if (visibleState.targetState) maxDistanceToCorner else 0f
+    }
+
     val animatedRadius by animateFloatAsState(
-        targetValue = targetRadius.floatValue,
-        animationSpec = tween(1000)
+        targetValue = targetRadius,
+        animationSpec = tween(durationMillis = 500)
     )
 
-    Canvas(
-        modifier = modifier
-            .fillMaxSize()
-            .graphicsLayer(alpha = backgroundAlpha.value)
-    ) {
-        targetRadius.floatValue = size.height
-        drawCircle(
-            color = Color.Black.copy(alpha = backgroundAlpha.value),
-            radius = animatedRadius,
-            center = coordinates.boundsInRoot().center
-        )
-        drawHighlight(coordinates)
+    if (animatedRadius > 0f) {
+        Canvas(
+            modifier = modifier
+                .fillMaxSize()
+                .graphicsLayer(alpha = backgroundAlpha.value)
+        ) {
+            drawCircle(
+                color = Color.Black.copy(alpha = backgroundAlpha.value),
+                radius = animatedRadius,
+                center = center
+            )
+            drawHighlight(coordinates)
+        }
     }
 }
 
 @Composable
 private fun ShowcaseDialog(
     modifier: Modifier = Modifier,
+    visibleState: MutableTransitionState<Boolean>,
     targetRect: Rect,
     position: ShowcasePosition,
     alignment: ShowcaseAlignment,
@@ -166,7 +175,7 @@ private fun ShowcaseDialog(
                     }
                 }
             },
-        content = { content(highlightBounds) }
+        content = { if (visibleState.targetState) content(highlightBounds) }
     )
 }
 

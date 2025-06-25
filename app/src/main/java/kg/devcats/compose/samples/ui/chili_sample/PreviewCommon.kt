@@ -97,6 +97,8 @@ fun PreviewCommon(
                         .fillMaxWidth()
                         .sequenceShowcaseTarget(
                             index = 0,
+                            alignment = ShowcaseAlignment.CENTER_HORIZONTAL,
+                            position = ShowcasePosition.BOTTOM,
                             dialog = {
                                 SequenceShowcaseDialog("Это чекбоксы, можно их жмякать")
                             }
@@ -129,6 +131,8 @@ fun PreviewCommon(
                         .fillMaxWidth()
                         .sequenceShowcaseTarget(
                             index = 1,
+                            alignment = ShowcaseAlignment.CENTER_HORIZONTAL,
+                            position = ShowcasePosition.TOP,
                             dialog = {
                                 SequenceShowcaseDialog("Это свитчи,\n их можно переключать \nкак включатели \nтуды-сюды")
                             }
@@ -158,7 +162,18 @@ fun PreviewCommon(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                ShadowRoundedBox(modifier = Modifier.fillMaxWidth()) {
+                ShadowRoundedBox(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .sequenceShowcaseTarget(
+                            index = 2,
+                            alignment = ShowcaseAlignment.END,
+                            position = ShowcasePosition.BOTTOM,
+                            dialog = {
+                                SequenceShowcaseDialog("Это просто лоудер")
+                            }
+                        )
+                ) {
                     Column(modifier = Modifier) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -224,11 +239,11 @@ fun PreviewCommon(
                     progressPercent = progress,
                     progressGradientColors = listOf(red_1, green_1, blue_1),
                     modifier = Modifier.fillMaxWidth().sequenceShowcaseTarget(
-                        index = 2,
+                        index = 3,
                         position = ShowcasePosition.TOP,
                         alignment = ShowcaseAlignment.START,
                         dialog = {
-                            SequenceShowcaseDialog("А это прогресс лайн, его можно ратсягивать")
+                            SequenceShowcaseDialog("А это прогресс лайн, показывает загрузку")
                         }
                     )
                 )
@@ -385,12 +400,12 @@ fun PreviewCommon(
 private fun SequenceShowcaseDialog(text: String) {
     Box(
         modifier = Modifier
-            .background(Chili.color.surfaceBackground, Chili.shapes.RoundedCornerShape)
+            .background(Chili.color.screenBackground, Chili.shapes.RoundedCornerShape)
             .padding(8.dp)
     ) {
         Text(
             text = text,
-            style = Chili.typography.H14_Primary_500,
+            style = Chili.typography.H14_Secondary_500,
             color = black_5
         )
     }
