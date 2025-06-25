@@ -100,7 +100,7 @@ fun PreviewCommon(
                             alignment = ShowcaseAlignment.CENTER_HORIZONTAL,
                             position = ShowcasePosition.BOTTOM,
                             dialog = {
-                                SequenceShowcaseDialog("Это чекбоксы, можно их жмякать")
+                                SequenceShowcaseDialog("Это чекбоксы, имеет два состояния")
                             }
                         )
                 ) {
@@ -134,7 +134,7 @@ fun PreviewCommon(
                             alignment = ShowcaseAlignment.CENTER_HORIZONTAL,
                             position = ShowcasePosition.TOP,
                             dialog = {
-                                SequenceShowcaseDialog("Это свитчи,\n их можно переключать \nкак включатели \nтуды-сюды")
+                                SequenceShowcaseDialog("Это свитчи,\n их можно переключать")
                             }
                         )
                 ) {
@@ -243,7 +243,7 @@ fun PreviewCommon(
                         position = ShowcasePosition.TOP,
                         alignment = ShowcaseAlignment.START,
                         dialog = {
-                            SequenceShowcaseDialog("А это прогресс лайн, показывает загрузку")
+                            SequenceShowcaseDialog("А это прогресс лайн, показывает загрузку чего-то")
                         }
                     )
                 )
