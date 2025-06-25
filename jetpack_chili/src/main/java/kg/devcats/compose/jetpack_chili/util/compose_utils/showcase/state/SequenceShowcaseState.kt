@@ -43,6 +43,8 @@ class SequenceShowcaseState {
         isTransitioning = false
     }
 
+    fun isFinalStep(): Boolean = currentTargetIndex >= targets.size - 1
+
     internal fun onShowcaseViewAppear() {
         if (isTransitioning) {
             isTransitioning = false

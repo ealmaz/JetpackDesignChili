@@ -27,6 +27,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import kg.devcats.compose.jetpack_chili.clickableWithoutEffect
 import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.BackgroundAlpha
 import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.SequenceShowcaseTarget
 import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.ShowcaseAlignment
@@ -37,6 +38,7 @@ import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.Showca
 fun ShowcaseStep(
     modifier: Modifier = Modifier,
     visible: Boolean,
+    isFinalStep: () -> Boolean,
     target: SequenceShowcaseTarget,
     detectTouchScreen: () -> Unit,
     onDisplayStateChanged: (ShowcaseDisplayState) -> Unit = {}
@@ -44,12 +46,11 @@ fun ShowcaseStep(
     val transition =  remember { MutableTransitionState(false) }
     val highlightDrawer = target.highlight.create(targetCoordinates = target.coordinates)
 
-    Box {
+    Box(modifier = modifier) {
         ShowcaseBackground(
-            modifier = modifier
-                .fillMaxSize()
-                .pointerInput(Unit) { detectTapGestures { detectTouchScreen.invoke() } },
+            detectTouchScreen = detectTouchScreen,
             visibleState = transition,
+            isFinalStep = isFinalStep,
             coordinates = target.coordinates,
             drawHighlight = highlightDrawer.drawHighlight,
             backgroundAlpha = target.backgroundAlpha
@@ -79,7 +80,9 @@ fun ShowcaseStep(
 @Composable
 private fun ShowcaseBackground(
     modifier: Modifier = Modifier,
+    detectTouchScreen: () -> Unit,
     visibleState: MutableTransitionState<Boolean>,
+    isFinalStep: () -> Boolean,
     coordinates: LayoutCoordinates,
     backgroundAlpha: BackgroundAlpha,
     drawHighlight: DrawScope.(LayoutCoordinates) -> Unit
@@ -99,13 +102,14 @@ private fun ShowcaseBackground(
         corners.maxOf { corner -> center.minus(corner).getDistance() }
     }
 
-    val targetRadius = remember(visibleState.targetState, maxDistanceToCorner) {
-        if (visibleState.targetState) maxDistanceToCorner else 0f
+    var targetRadius by remember(visibleState.targetState, maxDistanceToCorner) {
+        mutableFloatStateOf(if (visibleState.targetState) maxDistanceToCorner else 0f)
     }
 
     val animatedRadius by animateFloatAsState(
         targetValue = targetRadius,
-        animationSpec = tween(durationMillis = 500)
+        animationSpec = tween(durationMillis = 500),
+        finishedListener = { if (it <= 0f) detectTouchScreen() }
     )
 
     if (animatedRadius > 0f) {
@@ -113,6 +117,10 @@ private fun ShowcaseBackground(
             modifier = modifier
                 .fillMaxSize()
                 .graphicsLayer(alpha = backgroundAlpha.value)
+                .clickableWithoutEffect {
+                    if (isFinalStep()) { targetRadius = 0f }
+                    else { detectTouchScreen() }
+                }
         ) {
             drawCircle(
                 color = Color.Black.copy(alpha = backgroundAlpha.value),

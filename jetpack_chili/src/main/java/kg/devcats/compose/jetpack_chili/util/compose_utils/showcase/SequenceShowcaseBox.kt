@@ -30,6 +30,7 @@ fun SequenceShowcaseBox(
         state.currentTarget?.let { target ->
             ShowcaseStep(
                 visible = state.showCaseVisible,
+                isFinalStep = state::isFinalStep,
                 target = target,
                 detectTouchScreen = { if (target.closeOnTouch) state.next() },
                 onDisplayStateChanged = { displayState ->
