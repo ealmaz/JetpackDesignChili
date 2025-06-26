@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
 
+@Deprecated("Use ChiliPrimaryButton/ChiliAdditionalButton/ChiliSecondaryButton with isLoading parameter instead")
 @Composable
 fun ChiliLoaderButton(
     modifier: Modifier = Modifier,
