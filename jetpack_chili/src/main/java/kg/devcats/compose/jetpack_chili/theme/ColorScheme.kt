@@ -12,6 +12,7 @@ interface ChiliColorScheme {
     val markedText: Color
     val linkText: Color
     val errorText: Color
+    val disabledText: Color
     val successText: Color
     val warningTextColor: Color
 
@@ -94,6 +95,7 @@ interface ChiliColorScheme {
     val buttonPrimaryContainer: Color
     val buttonPrimaryDisabledContainer: Color
     val buttonPrimaryText: Color
+    val buttonPrimaryRipple: Color
 
     //Button Component
     val buttonComponentContainer: Color
@@ -104,6 +106,7 @@ interface ChiliColorScheme {
     val buttonSecondaryContainer: Color
     val buttonSecondaryText: Color
     val buttonSecondaryDisabledText: Color
+    val buttonSecondaryRipple: Color
 
     //Figma secondary button
     val buttonSecondaryBackground: Color
@@ -119,6 +122,8 @@ interface ChiliColorScheme {
     val animatedGradient2: Color
     val animatedGradient3: Color
     val animatedGradient4: Color
+
+    val animatedCardNoteBg: Color
 
     //BottomSheet
     val bottomSheetBackground: Color
@@ -210,6 +215,7 @@ data class ChiliLightColorScheme(
     override val markedText: Color = black_1,
     override val linkText: Color = magenta_1,
     override val errorText: Color = red_1,
+    override val disabledText: Color = gray_2,
     override val successText: Color = green_8,
     override val warningTextColor: Color = orange_1,
 
@@ -264,9 +270,10 @@ data class ChiliLightColorScheme(
     override val inputFieldErrorBackground: Color = red_3,
     override val inputFieldCursorColor: Color = magenta_1,
 
-    override val buttonPrimaryContainer: Color = green_1,
-    override val buttonPrimaryDisabledContainer: Color = green_3,
+    override val buttonPrimaryContainer: Color = green_8,
+    override val buttonPrimaryDisabledContainer: Color = green_13,
     override val buttonPrimaryText: Color = white_1,
+    override val buttonPrimaryRipple: Color = green_14,
 
     override val buttonComponentContainer: Color = Color.Transparent,
     override val buttonComponentText: Color = blue_1,
@@ -275,11 +282,12 @@ data class ChiliLightColorScheme(
     override val buttonSecondaryContainer: Color = Color.Transparent,
     override val buttonSecondaryText: Color = blue_1,
     override val buttonSecondaryDisabledText: Color = blue_1_alpha_50,
+    override val buttonSecondaryRipple: Color = blue_12,
 
     override val buttonSecondaryBackground: Color = gray_3,
 
-    override val buttonAdditionalContainer: Color = gray_5,
-    override val buttonAdditionalDisabledContainer: Color = gray_5,
+    override val buttonAdditionalContainer: Color = gray_3,
+    override val buttonAdditionalDisabledContainer: Color = gray_3,
     override val buttonAdditionalText: Color = black_1,
     override val buttonAdditionalDisabledText: Color = gray_1_alpha_50,
 
@@ -287,6 +295,8 @@ data class ChiliLightColorScheme(
     override val animatedGradient2: Color = magenta_3,
     override val animatedGradient3: Color = magenta_5,
     override val animatedGradient4: Color = white_1,
+
+    override val animatedCardNoteBg: Color = gray_5,
 
     override val bottomSheetBackground: Color = white_1,
     override val bottomSheetTopIconColor: Color = gray_1,
@@ -362,6 +372,7 @@ data class ChiliDarkColorScheme(
     override val markedText: Color = white_1,
     override val linkText: Color = magenta_1,
     override val errorText: Color = red_1,
+    override val disabledText: Color = black_6,
     override val successText: Color = green_8,
     override val warningTextColor: Color = orange_4,
 
@@ -417,9 +428,10 @@ data class ChiliDarkColorScheme(
     override val inputFieldErrorBackground: Color = red_2,
     override val inputFieldCursorColor: Color = magenta_1,
 
-    override val buttonPrimaryContainer: Color = green_1,
+    override val buttonPrimaryContainer: Color = green_8,
     override val buttonPrimaryDisabledContainer: Color = green_2,
     override val buttonPrimaryText: Color = white_1,
+    override val buttonPrimaryRipple: Color = green_14,
 
     override val buttonComponentContainer: Color = Color.Transparent,
     override val buttonComponentText: Color = blue_1,
@@ -428,11 +440,12 @@ data class ChiliDarkColorScheme(
     override val buttonSecondaryContainer: Color = Color.Transparent,
     override val buttonSecondaryText: Color = blue_1,
     override val buttonSecondaryDisabledText: Color = blue_1_alpha_50,
+    override val buttonSecondaryRipple: Color = blue_1_alpha_50,
 
     override val buttonSecondaryBackground: Color = black_7,
 
-    override val buttonAdditionalContainer: Color = black_5,
-    override val buttonAdditionalDisabledContainer: Color = black_5,
+    override val buttonAdditionalContainer: Color = black_7,
+    override val buttonAdditionalDisabledContainer: Color = black_7,
     override val buttonAdditionalText: Color = white_1,
     override val buttonAdditionalDisabledText: Color = gray_1_alpha_50,
 
@@ -440,6 +453,8 @@ data class ChiliDarkColorScheme(
     override val animatedGradient2: Color = gray_2,
     override val animatedGradient3: Color = gray_1,
     override val animatedGradient4: Color = black_3,
+
+    override val animatedCardNoteBg: Color = black_2,
 
     override val bottomSheetBackground: Color = black_3,
     override val bottomSheetTopIconColor: Color = gray_1,

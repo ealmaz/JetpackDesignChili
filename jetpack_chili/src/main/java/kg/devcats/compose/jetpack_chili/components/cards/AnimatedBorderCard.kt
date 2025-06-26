@@ -111,7 +111,7 @@ fun AnimatedBorderCard(
                             style = Chili.typography.H12_Secondary,
                         )
                         Surface(
-                            color = Chili.color.buttonAdditionalContainer,
+                            color = Chili.color.animatedCardNoteBg,
                             contentColor = Color.Unspecified,
                             modifier = modifier
                                 .clip(RoundedCornerShape(8.dp)),
