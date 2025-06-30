@@ -49,7 +49,7 @@ fun ChiliSnackBar(
         )
     }
 
-    if (snackbarMessage.type == SnackbarType.TIMER && snackbarMessage.progressDurationMillis != null) {
+    if ((snackbarMessage.type == SnackbarType.TIMER && snackbarMessage.progressDurationMillis != null) || snackbarMessage.snackbarDurationMillis != null) {
         LaunchedEffect(Unit) {
             timerJob = snackbarScope.launch {
                 while (remainingTime > 0) {
