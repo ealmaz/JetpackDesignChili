@@ -210,7 +210,7 @@ val LocalChiliDarkThemeMode = compositionLocalOf<Boolean> { false }
 
 data class ChiliLightColorScheme(
     override val primaryText: Color = black_1,
-    override val secondaryText: Color = black_4,
+    override val secondaryText: Color = black_7,
     override val valueText: Color = gray_1,
     override val markedText: Color = black_1,
     override val linkText: Color = magenta_1,
@@ -367,7 +367,7 @@ data class ChiliLightColorScheme(
 
 data class ChiliDarkColorScheme(
     override val primaryText: Color = white_1,
-    override val secondaryText: Color = gray_3,
+    override val secondaryText: Color = gray_10,
     override val valueText: Color = gray_1,
     override val markedText: Color = white_1,
     override val linkText: Color = magenta_1,
