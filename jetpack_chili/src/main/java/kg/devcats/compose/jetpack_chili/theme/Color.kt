@@ -28,6 +28,7 @@ val gray_9 = Color(0xFFF5F5F5)
 val gray_10_alpha_70 = Color(0xB3C4C4C4)
 val gray_11 = Color(0xFFF0F0F0)
 val gray_12 = Color(0xFFD6D6D6)
+val gray_13 = Color(0xFFDDDDDD)
 
 // White
 

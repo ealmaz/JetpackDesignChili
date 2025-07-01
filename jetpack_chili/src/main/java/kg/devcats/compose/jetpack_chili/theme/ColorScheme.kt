@@ -203,6 +203,9 @@ interface ChiliColorScheme {
     val tabsContainerBg: Color
     val tabsSelectedTab: Color
     val tabsUnselectedTab: Color
+
+    val surfaceDarkColor: Color
+    val secondary: Color
 }
 
 val LocalChiliColorScheme = compositionLocalOf<ChiliColorScheme> { ChiliLightColorScheme() }
@@ -362,7 +365,11 @@ data class ChiliLightColorScheme(
 
     override val tabsContainerBg: Color = gray_6,
     override val tabsSelectedTab: Color = white_1,
-    override val tabsUnselectedTab: Color = gray_6
+    override val tabsUnselectedTab: Color = gray_6,
+
+    override val surfaceDarkColor: Color = gray_4,
+    override val secondary: Color = black_7
+
 ) : ChiliColorScheme
 
 data class ChiliDarkColorScheme(
@@ -521,5 +528,9 @@ data class ChiliDarkColorScheme(
 
     override val tabsContainerBg: Color = black_3,
     override val tabsSelectedTab: Color = black_4,
-    override val tabsUnselectedTab: Color = black_3
+    override val tabsUnselectedTab: Color = black_3,
+
+    override val surfaceDarkColor: Color = black_1,
+    override val secondary: Color = gray_13
+
 ): ChiliColorScheme
