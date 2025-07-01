@@ -183,7 +183,7 @@ private fun BoxScope.ChiliBottomSheetCloseIcon(
         contentDescription = "",
         modifier = Modifier
             .align(Alignment.CenterEnd)
-            .padding(top = 12.dp, end = 12.dp, bottom = 8.dp)
+            .padding(top = 12.dp, end = 12.dp)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = ripple(bounded = false),
