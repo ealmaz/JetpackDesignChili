@@ -19,12 +19,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import kg.devcats.compose.jetpack_chili.components.common.ChiliLoader
+import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -81,7 +83,7 @@ fun ChiliPrimaryButton(
             }
             Text(
                 modifier = Modifier.padding(vertical = buttonSize.verticalPadding),
-                text = if (isLoading) "" else text,
+                text = if (isLoading) AnnotatedString("") else text.parseHtml(),
                 maxLines = 1,
                 style = textStyle,
                 color = textColor,
