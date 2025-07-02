@@ -26,6 +26,7 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.clickableWithoutEffect
 import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.BackgroundAlpha
@@ -87,9 +88,9 @@ private fun ShowcaseBackground(
     backgroundAlpha: BackgroundAlpha,
     drawHighlight: DrawScope.(LayoutCoordinates) -> Unit
 ) {
-    val density = LocalDensity.current
-    val screenWidth = with(density) { LocalConfiguration.current.screenWidthDp.dp.toPx() }
-    val screenHeight = with(density) { LocalConfiguration.current.screenHeightDp.dp.toPx() }
+    val view = LocalView.current
+    val screenWidth = remember { view.width.toFloat() }
+    val screenHeight = remember { view.height.toFloat() }
     val center = coordinates.boundsInRoot().center
 
     val maxDistanceToCorner = remember(center, screenWidth, screenHeight) {
