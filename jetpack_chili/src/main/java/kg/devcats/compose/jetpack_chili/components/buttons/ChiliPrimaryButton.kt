@@ -36,7 +36,7 @@ fun ChiliPrimaryButton(
     enabled: Boolean = true,
     icon: Any? = null,
     isLoading: Boolean = false,
-    buttonSize: ButtonSize = ButtonSize.REGULAR,
+    buttonSize: ButtonSize = RegularButtonSize(),
     textStyle: TextStyle = Chili.typography.H14_Primary_500,
     textColor: Color = Chili.color.buttonPrimaryText,
     onClick: () -> Unit

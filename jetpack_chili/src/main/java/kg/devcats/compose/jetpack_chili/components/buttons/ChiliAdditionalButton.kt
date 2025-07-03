@@ -43,7 +43,7 @@ fun ChiliAdditionalButton(
     textColor: Color = if (enabled) Chili.color.buttonAdditionalText else Chili.color.buttonAdditionalDisabledText,
     startIcon: Any? = null,
     isLoading: Boolean = false,
-    buttonSize: ButtonSize = ButtonSize.REGULAR,
+    buttonSize: ButtonSize = RegularButtonSize(),
     onClick: () -> Unit
 ) {
     Box(

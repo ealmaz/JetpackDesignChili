@@ -7,15 +7,28 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
-enum class ButtonSize(
-    val verticalPadding: Dp,
-    val horizontalPadding: Dp,
-    val iconSize : Dp,
+
+interface ButtonSize {
+    val verticalPadding: Dp
+    val horizontalPadding: Dp
+    val iconSize: Dp
     val iconPadding: Dp
-) {
-    REGULAR(verticalPadding = 14.dp, horizontalPadding = 16.dp, iconSize = 24.dp, iconPadding = 8.dp),
-    SMALL(verticalPadding = 12.dp, horizontalPadding = 8.dp, iconSize = 20.dp, iconPadding = 6.dp),
 }
+
+data class RegularButtonSize(
+    override val verticalPadding: Dp = 16.dp,
+    override val horizontalPadding: Dp = 16.dp,
+    override val iconSize: Dp = 24.dp,
+    override val iconPadding: Dp = 8.dp
+) : ButtonSize
+
+
+data class SmallButtonSize(
+    override val verticalPadding: Dp = 12.dp,
+    override val horizontalPadding: Dp = 8.dp,
+    override val iconSize: Dp = 20.dp,
+    override val iconPadding: Dp = 6.dp
+) : ButtonSize
 
 @Composable
 fun primaryButtonColors(): ButtonColors {
@@ -28,7 +41,7 @@ fun primaryButtonColors(): ButtonColors {
 }
 
 @Composable
-fun secondaryButtonColors() : ButtonColors {
+fun secondaryButtonColors(): ButtonColors {
     return ButtonDefaults.buttonColors(
         containerColor = Chili.color.buttonSecondaryBackground,
         contentColor = Chili.color.primaryText,

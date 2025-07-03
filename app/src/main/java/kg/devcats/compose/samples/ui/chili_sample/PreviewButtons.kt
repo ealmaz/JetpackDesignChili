@@ -27,7 +27,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
-import kg.devcats.compose.jetpack_chili.components.buttons.ButtonSize
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliAdditionalButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliComponentButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliCustomButton
@@ -36,6 +35,7 @@ import kg.devcats.compose.jetpack_chili.components.buttons.ChiliLoaderButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliQuickActionButton
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliSecondaryButton
+import kg.devcats.compose.jetpack_chili.components.buttons.SmallButtonSize
 import kg.devcats.compose.jetpack_chili.components.buttons.primaryButtonColors
 import kg.devcats.compose.jetpack_chili.components.cells.DetailedInfoCell
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
@@ -163,7 +163,7 @@ fun PrimaryButtons() {
             icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
             text = "Small btn, url icon",
             isLoading = isLoadingPrimary,
-            buttonSize = ButtonSize.SMALL,
+            buttonSize = SmallButtonSize(),
             modifier = Modifier
                 .width(150.dp)
                 .padding(top = 8.dp)
@@ -175,7 +175,7 @@ fun PrimaryButtons() {
             icon = R.drawable.chili_ic_documents_green,
             text = "Small btn, drawable",
             isLoading = isLoadingPrimary,
-            buttonSize = ButtonSize.SMALL,
+            buttonSize = SmallButtonSize(),
             modifier = Modifier
                 .width(150.dp)
                 .padding(top = 8.dp)
@@ -187,7 +187,7 @@ fun PrimaryButtons() {
         ChiliPrimaryButton(
             text = "Small btn w/o icon",
             isLoading = isLoadingPrimary,
-            buttonSize = ButtonSize.SMALL,
+            buttonSize = SmallButtonSize(),
             modifier = Modifier
                 .width(150.dp)
                 .padding(top = 8.dp)
@@ -234,7 +234,7 @@ fun SecondaryButtons() {
             icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
             text = "Small btn, url icon",
             isLoading = isLoading,
-            buttonSize = ButtonSize.SMALL,
+            buttonSize = SmallButtonSize(),
             modifier = Modifier
                 .width(150.dp)
                 .padding(top = 8.dp)
@@ -246,7 +246,7 @@ fun SecondaryButtons() {
             icon = R.drawable.chili_ic_documents_green,
             text = "Small btn, drawable",
             isLoading = isLoading,
-            buttonSize = ButtonSize.SMALL,
+            buttonSize = SmallButtonSize(),
             modifier = Modifier
                 .width(150.dp)
                 .padding(top = 8.dp)
@@ -258,7 +258,7 @@ fun SecondaryButtons() {
         ChiliSecondaryButton(
             text = "Small btn w/o icon",
             isLoading = isLoading,
-            buttonSize = ButtonSize.SMALL,
+            buttonSize = SmallButtonSize(),
             modifier = Modifier
                 .width(150.dp)
                 .padding(top = 8.dp)
@@ -305,7 +305,7 @@ fun AdditionalButtons() {
             startIcon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQFmr0SDe-UnpQ6zuObL3Dn0QZOdDTRbkcPQ&s",
             text = "Small btn, url icon",
             isLoading = isLoading,
-            buttonSize = ButtonSize.SMALL,
+            buttonSize = SmallButtonSize(),
             modifier = Modifier
                 .width(150.dp)
                 .padding(top = 8.dp)
@@ -317,7 +317,7 @@ fun AdditionalButtons() {
             startIcon = R.drawable.chili_ic_documents_green,
             text = "Small btn, drawable",
             isLoading = isLoading,
-            buttonSize = ButtonSize.SMALL,
+            buttonSize = SmallButtonSize(),
             modifier = Modifier
                 .width(150.dp)
                 .padding(top = 8.dp)
@@ -329,7 +329,7 @@ fun AdditionalButtons() {
         ChiliAdditionalButton(
             text = "Small btn w/o icon",
             isLoading = isLoading,
-            buttonSize = ButtonSize.SMALL,
+            buttonSize = SmallButtonSize(),
             modifier = Modifier
                 .width(150.dp)
                 .padding(top = 8.dp)

@@ -42,7 +42,7 @@ fun ChiliSecondaryButton(
     pressedTextColor: Color = textColor.copy(alpha = 0.5f),
     icon: Any? = null,
     isLoading: Boolean = false,
-    buttonSize: ButtonSize = ButtonSize.REGULAR,
+    buttonSize: ButtonSize =  RegularButtonSize(),
     onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
