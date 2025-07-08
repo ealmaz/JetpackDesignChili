@@ -3,6 +3,7 @@ package kg.devcats.compose.jetpack_chili.components.cards
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
@@ -50,13 +51,23 @@ fun AdditionalContentInfoCard(
         start = 12.dp,
         end = 4.dp
     ),
+    onClick: (() -> Unit)? = null,
     content: (@Composable ColumnScope.() -> Unit)? = null
 ) {
     val iconPainter = iconUrl.takeIf { !it.isNullOrEmpty() }?.let {
         rememberAsyncImagePainter(model = it, error = errorIcon)
     } ?: icon
 
-    RoundedBox(contentColor = Chili.color.contentPrimary) {
+    RoundedBox(
+        modifier = Modifier.then(
+            onClick?.let{ click ->
+                Modifier
+                    .clip(Chili.shapes.RoundedCornerShape)
+                    .clickable(onClick = click)
+            } ?: Modifier
+        ),
+        contentColor = Chili.color.contentPrimary
+    ) {
 
         Row(
             modifier = modifier.fillMaxWidth(),

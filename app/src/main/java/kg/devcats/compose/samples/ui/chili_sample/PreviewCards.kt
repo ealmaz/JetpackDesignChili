@@ -1065,6 +1065,7 @@ fun PreviewCards(
                 AdditionalContentInfoCard(
                     title = "Заголовок",
                     subTitle = "Подзаголовок",
+                    onClick = { context.showToast("AdditionalContentInfoCard ") },
                 ) {
                     ChiliComponentButton(
                         modifier = Modifier
@@ -1080,7 +1081,7 @@ fun PreviewCards(
             ShadowRoundedBox {
                 AdditionalContentInfoCard(
                     title = "Оплачивайте покупки через QR  или в каталоге",
-                    icon = painterResource(R.drawable.chilli_ic_bonus),
+                    icon = painterResource(R.drawable.chilli_ic_bonus)
                 ) {
                     ChiliComponentButton(
                         modifier = Modifier
