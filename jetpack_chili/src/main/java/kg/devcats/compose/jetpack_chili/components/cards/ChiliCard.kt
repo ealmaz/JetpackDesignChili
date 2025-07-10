@@ -56,7 +56,7 @@ fun ChiliCard(
         color = Chili.color.cardViewBackground,
         contentColor = Color.Unspecified,
         modifier = modifier.run {
-            if (onClick != null) clickable { onClick.invoke() }
+            if (onClick != null && isEnabled) clickable { onClick.invoke() }
             else this
         },
     ) {
