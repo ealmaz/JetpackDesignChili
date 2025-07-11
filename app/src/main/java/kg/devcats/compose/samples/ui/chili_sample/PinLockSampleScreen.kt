@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kg.devcats.compose.samples.ui.navigation.LockScreens
 
 @Composable
@@ -28,7 +29,8 @@ fun PinLockSampleScreen(navController: NavController, navigateUp: () -> Unit) {
                 title = "Pdf Viewers",
                 isNavigationIconVisible = true,
                 isDividerVisible = true,
-                onNavigationIconClick = navigateUp
+                onNavigationIconClick = navigateUp,
+                endFrame = { SampleToolbarMenu() },
             )
         },
         content = { contentPadding ->

@@ -40,6 +40,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.theme.black_5
 import kg.devcats.compose.jetpack_chili.theme.gray_8
 import kg.devcats.compose.jetpack_chili.theme.green_3
+import kg.devcats.compose.samples.SampleToolbarMenu
 
 @Composable
 fun BottomSheetsPreview(
@@ -170,7 +171,10 @@ fun BottomSheetsPreview(
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.screenBackground)) {
-        ChiliCenteredAppToolbar(title = "BottomSheetsPreview", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+        ChiliCenteredAppToolbar(
+            title = "BottomSheetsPreview",
+            endFrame = { SampleToolbarMenu() },
+            isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
             navigateUp.invoke()
         })
         Column(modifier = Modifier

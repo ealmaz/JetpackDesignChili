@@ -14,6 +14,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.AccountCard
 import kg.devcats.compose.jetpack_chili.components.cards.AccountCardState
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 
 @Composable
 fun PreviewAccountCardExamples(
@@ -30,7 +31,8 @@ fun PreviewAccountCardExamples(
             isNavigationIconVisible = true,
             onNavigationIconClick = {
                 navigateUp.invoke()
-            })
+            },
+            endFrame = { SampleToolbarMenu() },)
         Column(
             modifier = Modifier
                 .fillMaxWidth()

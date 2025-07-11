@@ -20,6 +20,7 @@ import kg.devcats.compose.jetpack_chili.components.divider.TitledDividerDefaults
 import kg.devcats.compose.jetpack_chili.components.divider.TitledDividerWithAction
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
@@ -35,6 +36,7 @@ fun PreviewDividers(navigateUp: () -> Unit) {
             title = "Dividers",
             isDividerVisible = true,
             isNavigationIconVisible = true,
+            endFrame = { SampleToolbarMenu() },
             onNavigationIconClick = { navigateUp() }
         )
         Column() {

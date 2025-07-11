@@ -30,6 +30,7 @@ import kg.devcats.compose.jetpack_chili.modals.dialog.LoaderDialog
 import kg.devcats.compose.jetpack_chili.modals.pickers.ChiliDatePicker
 import kg.devcats.compose.jetpack_chili.modals.pickers.ChiliEmojiBottomSheet
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -62,6 +63,7 @@ fun PreviewDialogs(navigateUp: () -> Unit) {
             title = "Alerts",
             isDividerVisible = true,
             isNavigationIconVisible = true,
+            endFrame = { SampleToolbarMenu() },
             onNavigationIconClick = {
                 navigateUp.invoke()
             })

@@ -38,6 +38,7 @@ import kg.devcats.compose.jetpack_chili.components.input_fields.input_intercepto
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
@@ -48,7 +49,9 @@ fun PreviewInputFields(navigateUp: () -> Unit) {
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)
         .imePadding()) {
-        ChiliCenteredAppToolbar(title = "InputFields", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+        ChiliCenteredAppToolbar(title = "InputFields",
+            endFrame = { SampleToolbarMenu() },
+            isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
             navigateUp.invoke()
         })
         Column(modifier = Modifier

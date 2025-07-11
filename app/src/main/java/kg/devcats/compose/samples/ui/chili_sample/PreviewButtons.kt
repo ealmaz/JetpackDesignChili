@@ -40,6 +40,7 @@ import kg.devcats.compose.jetpack_chili.components.buttons.primaryButtonColors
 import kg.devcats.compose.jetpack_chili.components.cells.DetailedInfoCell
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
@@ -47,7 +48,10 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)) {
-        ChiliCenteredAppToolbar(title = "Buttons", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+        ChiliCenteredAppToolbar(
+            title = "Buttons",
+            endFrame = { SampleToolbarMenu() },
+            isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
             navigateUp.invoke()
         })
         Column(modifier = Modifier

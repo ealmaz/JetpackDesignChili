@@ -78,6 +78,8 @@ import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCell
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.LocalValueShimmering
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kg.devcats.compose.samples.ui.extension.showToast
 import kg.devcats.compose.samples.ui.navigation.Screens
 import kotlinx.coroutines.delay
@@ -100,6 +102,7 @@ fun PreviewCards(
             title = "Card",
             isDividerVisible = true,
             isNavigationIconVisible = true,
+            endFrame = { SampleToolbarMenu() },
             onNavigationIconClick = {
                 navigateUp.invoke()
             })
@@ -166,7 +169,7 @@ fun PreviewCards(
                         title = "Заголовок",
                         balance = "100 000 c",
                         actionText = "Action",
-                        isLoading = false,
+                        isLoading = LocalValueShimmering.current,
                     )
                 }
 
@@ -178,7 +181,7 @@ fun PreviewCards(
                             .clickable { },
                         title = "Заголовок",
                         balance = "100 000 c",
-                        isLoading = true,
+                        isLoading = LocalValueShimmering.current,
                     )
                 }
             }
@@ -195,7 +198,7 @@ fun PreviewCards(
                     title = "Заголовок",
                     isHighlighted = true,
                     icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                    isLoading = false,
+                    isLoading = LocalValueShimmering.current,
                     onClick = {}
                 )
             }
@@ -209,7 +212,7 @@ fun PreviewCards(
                             .width(186.dp),
                         title = "Заголовок",
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                        isLoading = false,
+                        isLoading = LocalValueShimmering.current,
                         onClick = {}
                     )
                 }
@@ -221,7 +224,7 @@ fun PreviewCards(
                         modifier = Modifier
                             .width(186.dp),
                         title = "Заголовок",
-                        isLoading = true,
+                        isLoading = LocalValueShimmering.current,
                     )
                 }
             }
@@ -265,6 +268,7 @@ fun PreviewCards(
                         title = "Сканер штрихкодов и QR",
                         subtitle = "Для удобной оплаты \nбез ввода реквизитов",
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
+                        isLoading = LocalValueShimmering.current,
                     )
                 }
 
@@ -276,7 +280,7 @@ fun PreviewCards(
                         title = "Заголовок",
                         subtitle = "100 000 c",
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                        isLoading = true
+                        isLoading = LocalValueShimmering.current,
                     )
                 }
             }
@@ -294,7 +298,8 @@ fun PreviewCards(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                            size = BonusCardSize.Large()
+                            size = BonusCardSize.Large(),
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
 
@@ -305,7 +310,7 @@ fun PreviewCards(
                             modifier = Modifier,
                             title = "Заголовок",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                            isLoading = true,
+                            isLoading = LocalValueShimmering.current,
                             size = BonusCardSize.Large()
                         )
                     }
@@ -318,7 +323,8 @@ fun PreviewCards(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                            size = BonusCardSize.Middle()
+                            size = BonusCardSize.Middle(),
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
 
@@ -342,7 +348,8 @@ fun PreviewCards(
                             modifier = Modifier,
                             title = "Сканер штрихкодов и QR",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                            size = BonusCardSize.Small()
+                            size = BonusCardSize.Small(),
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
 
@@ -375,7 +382,8 @@ fun PreviewCards(
                             commissionInfo = "Commission",
                             commissionValue = "13%",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                            isAnimating = true
+                            isAnimating = true,
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
 
@@ -388,7 +396,8 @@ fun PreviewCards(
                             commissionInfo = "Commission",
                             commissionValue = "13%",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                            isAnimating = false
+                            isAnimating = false,
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
                 }
@@ -403,7 +412,8 @@ fun PreviewCards(
                             commissionInfo = "Commission",
                             commissionValue = "13%",
                             icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                            isAnimating = true
+                            isAnimating = true,
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
 
@@ -472,6 +482,7 @@ fun PreviewCards(
             val context = LocalContext.current
             ShadowRoundedBox {
                 MultiIconedTitleCell(
+                    isLoading = LocalValueShimmering.current,
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
                     icons = listOf(
                         kg.devcats.compose.samples.R.drawable.elcart,
@@ -483,7 +494,6 @@ fun PreviewCards(
                     ),
                     title = "MultiiconedCell title",
                     additionalInfo = "Весь список",
-                    isLoading = true,
                     onAdditionalInfoClick = {
                         Toast.makeText(context, "Additional info clicked", Toast.LENGTH_SHORT).show()
                     }
@@ -545,6 +555,7 @@ fun PreviewCards(
 
             ShadowRoundedBox {
                 SubtitledSimpleCard(
+                    isLoading = LocalValueShimmering.current,
                     title = "Favorite",
                     iconUrl = "https://minio.o.kg/catalog/logos/obank.png"
                 )
@@ -564,6 +575,7 @@ fun PreviewCards(
                 modifier = Modifier.padding(top = 16.dp)
             ) {
                 SubtitledSimpleCard(
+                    isLoading = LocalValueShimmering.current,
                     title = "Favorite",
                     emoji = "\uD83D\uDD25"
                 )
@@ -595,7 +607,7 @@ fun PreviewCards(
                             description = "Электрочайник BEREKE BR-810 серый, гарантия 2 года, можно с рассрочками",
                             discountPrice = "-20%",
                             discountBackgroundColor = "#F91155",
-                            isLoading = false
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
                 }
@@ -649,7 +661,8 @@ fun PreviewCards(
                             bankCardCVVState = it
                         }
                     }
-                }
+                },
+                isLoading = LocalValueShimmering.current,
             )
 
             Spacer(Modifier.height(8.dp))
@@ -682,7 +695,7 @@ fun PreviewCards(
                             bankCardCVVState = it
                         }
                     }
-                }
+                },
             )
 
             coroutineScope.launch {
@@ -740,6 +753,7 @@ fun PreviewCards(
                 item {
                     var storiesIsViewed by remember { mutableStateOf(false) }
                     StoriesCard(
+                        isLoading = LocalValueShimmering.current,
                         imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/125ac05b-0cbb-4bde-9da0-1f090d1fac2e",
                         isViewed = storiesIsViewed,
                         iconSize = IconSize.MEDIUM
@@ -753,6 +767,7 @@ fun PreviewCards(
                 item {
                     var storiesIsViewed by remember { mutableStateOf(false) }
                     StoriesCard(
+                        isLoading = LocalValueShimmering.current,
                         imageLink = "https://minio.o.kg/media-service/BannerConfigurator/light/de574e23-7478-43af-b3df-b572093b818c",
                         isViewed = storiesIsViewed,
                         iconSize = IconSize.MEDIUM
@@ -789,7 +804,7 @@ fun PreviewCards(
                             modifier = Modifier.width(194.dp),
                             icon = R.drawable.chili_ic_documents_green,
                             titleText = "",
-                            isLoading = true
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
                 }
@@ -817,7 +832,8 @@ fun PreviewCards(
                             modifier = Modifier.width(194.dp),
                             icon = R.drawable.chili_ic_documents_green,
                             titleText = "Рассрочка 0-0-12",
-                            promoStatusState = PromoStatusState.Active("Активный")
+                            promoStatusState = PromoStatusState.Active("Активный"),
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
                 }
@@ -830,7 +846,8 @@ fun PreviewCards(
                             modifier = Modifier.width(194.dp),
                             icon = R.drawable.chili_ic_documents_green,
                             titleText = "Рассрочка 0-0-12",
-                            promoStatusState = PromoStatusState.Expired("Просрочен")
+                            promoStatusState = PromoStatusState.Expired("Просрочен"),
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
                 }
@@ -843,7 +860,8 @@ fun PreviewCards(
                             modifier = Modifier.width(194.dp),
                             icon = R.drawable.chili_ic_documents_green,
                             titleText = "Рассрочка 0-0-12",
-                            promoStatusState = PromoStatusState.Wait("В ожидании")
+                            promoStatusState = PromoStatusState.Wait("В ожидании"),
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
                 }
@@ -856,7 +874,8 @@ fun PreviewCards(
                             modifier = Modifier.width(194.dp),
                             icon = R.drawable.chili_ic_documents_green,
                             titleText = "Рассрочка 0-0-12",
-                            promoStatusState = PromoStatusState.NoStatus
+                            promoStatusState = PromoStatusState.NoStatus,
+                            isLoading = LocalValueShimmering.current,
                         )
                     }
                 }
@@ -876,7 +895,8 @@ fun PreviewCards(
                 ProgressCard(
                     title = "$currentSum из $maxSum c",
                     description = "Доступный объем счета",
-                    progressPercent = progressPercent
+                    progressPercent = progressPercent,
+                    isLoading = LocalValueShimmering.current,
                 )
             }
 
@@ -907,7 +927,7 @@ fun PreviewCards(
                     title = "",
                     description = "Доступный объем счета",
                     progressPercent = 20,
-                    isLoading = true
+                    isLoading = LocalValueShimmering.current,
                 )
             }
 
@@ -923,7 +943,7 @@ fun PreviewCards(
                     subtitle = "Через другие банковские приложения или терминалах на сумму от 100 с",
                     iconUrl = "https://minio.o.kg/catalog/logos/obank.png",
                     isFriend = false,
-                    status = ReferralTaskStatus.Loading
+                    status = ReferralTaskStatus.Loading,
                 )
             }
 
@@ -937,7 +957,7 @@ fun PreviewCards(
                     isFriend = false,
                     status = ReferralTaskStatus.Completed(
                         detailInfoText = "Выполнено"
-                    )
+                    ),
                 )
             }
 
@@ -1028,7 +1048,8 @@ fun PreviewCards(
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text("Expanded content")
                         }
-                    }
+                    },
+                    isLoading = LocalValueShimmering.current,
                 )
             }
 
@@ -1038,7 +1059,6 @@ fun PreviewCards(
 
             ShadowRoundedBox {
                 ExpandableCard(
-                    isLoading = true,
                     title = "Title",
                     subtitle = "Subtitle",
                     isExpanded = isExpanded2,
@@ -1047,7 +1067,8 @@ fun PreviewCards(
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text("Expanded content")
                         }
-                    }
+                    },
+                    isLoading = LocalValueShimmering.current,
                 )
             }
 

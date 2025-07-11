@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.components.tooltip.Tooltip
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -35,6 +36,7 @@ fun PreviewTooltip(
         ChiliCenteredAppToolbar(
             title = "Tooltips",
             isDividerVisible = true,
+            endFrame = { SampleToolbarMenu() },
             isNavigationIconVisible = true,
             onNavigationIconClick = {
                 navigateUp.invoke()

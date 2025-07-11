@@ -15,13 +15,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 
 @Composable
 fun TextAppearance(
     navigateUp: () -> Unit,
 ) {
     Column(modifier = Modifier.background(Chili.color.surfaceBackground)) {
-        ChiliCenteredAppToolbar(title = "TextAppearance", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+        ChiliCenteredAppToolbar(title = "TextAppearance",
+            endFrame = { SampleToolbarMenu() }, isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
             navigateUp.invoke()
         })
         Column(modifier = Modifier

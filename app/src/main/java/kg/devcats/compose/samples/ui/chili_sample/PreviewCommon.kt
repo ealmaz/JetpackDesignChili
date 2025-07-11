@@ -59,6 +59,7 @@ import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.SequenceShow
 import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.ShowcaseAlignment
 import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.ShowcasePosition
 import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.rememberSequenceShowcaseState
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
@@ -76,7 +77,12 @@ fun PreviewCommon(
             .fillMaxSize()
             .background(Chili.color.surfaceBackground)
         ) {
-            ChiliCenteredAppToolbar(title = "Common", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+            ChiliCenteredAppToolbar(
+                title = "Common",
+                isDividerVisible = true,
+                endFrame = { SampleToolbarMenu() },
+                isNavigationIconVisible = true,
+                onNavigationIconClick = {
                 navigateUp.invoke()
             })
             Column(modifier = Modifier

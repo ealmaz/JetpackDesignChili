@@ -38,6 +38,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliSearchAppToolbar
+import kg.devcats.compose.samples.SampleToolbarMenu
 
 @Composable
 fun Toolbars(
@@ -46,7 +47,8 @@ fun Toolbars(
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Chili.color.screenBackground)) {
-        ChiliCenteredAppToolbar(title = "Toolbars", isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
+        ChiliCenteredAppToolbar(title = "Toolbars",
+            endFrame = { SampleToolbarMenu() }, isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
             navigateUp.invoke()
         })
         Column(modifier = Modifier

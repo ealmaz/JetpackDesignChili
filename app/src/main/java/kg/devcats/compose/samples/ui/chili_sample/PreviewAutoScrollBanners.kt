@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import kg.devcats.compose.jetpack_chili.components.banner.AutoScrollBanner
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 
 @Composable
 fun PreviewAutoScrollBanners(navigateUp: () -> Unit) {
@@ -28,7 +29,8 @@ fun PreviewAutoScrollBanners(navigateUp: () -> Unit) {
             isNavigationIconVisible = true,
             onNavigationIconClick = {
                 navigateUp.invoke()
-            })
+            },
+            endFrame = { SampleToolbarMenu() },)
         Column(
             modifier = Modifier
                 .fillMaxWidth()

@@ -21,6 +21,7 @@ import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliAppToolbar
 import kg.devcats.compose.jetpack_chili.components.swipe_refresh.ChiliPullToRefreshBox
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -41,7 +42,8 @@ fun PreviewPullToRefresh(
     }
 
     Column {
-        ChiliAppToolbar(title = "Pull To refresh...", onNavigationIconClick = { navigateUp() })
+        ChiliAppToolbar(title = "Pull To refresh...",
+            endFrame = { SampleToolbarMenu() }, onNavigationIconClick = { navigateUp() })
 
         ChiliPullToRefreshBox(
             modifier = Modifier.fillMaxSize(),

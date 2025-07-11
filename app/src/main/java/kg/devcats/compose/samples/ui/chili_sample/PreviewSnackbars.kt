@@ -25,6 +25,7 @@ import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showSimp
 import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showTimerSnackbar
 import kg.devcats.compose.jetpack_chili.modals.snackbar.SnackbarManager.showTopSnackbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 
 @Composable
 fun PreviewSnackbars(navigateUp: () -> Unit) {
@@ -43,6 +44,7 @@ fun PreviewSnackbars(navigateUp: () -> Unit) {
                 title = "Alerts",
                 isDividerVisible = true,
                 isNavigationIconVisible = true,
+                endFrame = { SampleToolbarMenu() },
                 onNavigationIconClick = {
                     navigateUp.invoke()
                 })

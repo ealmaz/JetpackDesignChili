@@ -46,6 +46,8 @@ import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.setRoundedShapeByPosition
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.LocalValueShimmering
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kg.devcats.compose.samples.ui.extension.showToast
 
 @Composable
@@ -62,6 +64,7 @@ fun PreviewCells(
             title = "Cell",
             isDividerVisible = true,
             isNavigationIconVisible = true,
+            endFrame = { SampleToolbarMenu() },
             onNavigationIconClick = {
                 navigateUp.invoke()
             })
@@ -83,6 +86,7 @@ fun PreviewCells(
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
+                        isLoading = LocalValueShimmering.current
                     )
                 }
             }
@@ -92,6 +96,7 @@ fun PreviewCells(
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок ",
+                        isLoading = LocalValueShimmering.current,
                         endFrame = {
                             CircledBadgeText(
                                 badgeText = "2368"
@@ -107,21 +112,24 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         isDividerVisible = true,
-                        isLoading = true
+                        isLoading = LocalValueShimmering.current
                     )
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
+                        isLoading = LocalValueShimmering.current,
                     )
                 }
             }
@@ -138,6 +146,7 @@ fun PreviewCells(
                         modifier = Modifier.setRoundedShapeByPosition(true, true).clickable { },
                         title = "Заголовок",
                         isDividerVisible = false,
+                        isLoading = LocalValueShimmering.current,
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -146,20 +155,24 @@ fun PreviewCells(
                         modifier = Modifier.setRoundedShapeByPosition(isFirst = true).clickable { },
                         title = "Заголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
                         modifier = Modifier.setRoundedShapeByPosition().clickable { },
                         title = "Заголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
                         modifier = Modifier.setRoundedShapeByPosition().clickable { },
                         title = "Заголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
                         modifier = Modifier.setRoundedShapeByPosition(isLast = true).clickable { },
                         title = "Заголовок",
+                        isLoading = LocalValueShimmering.current,
                     )
                 }
             }
@@ -176,6 +189,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         iconUrl = "https://devminio.o.kg/media-service/AlgaMoreMenuConfigurator/light/a50317e3-98e3-4f11-97e4-6e5f0ecc6ef0"
                     )
                 }
@@ -188,24 +202,27 @@ fun PreviewCells(
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
-                        isLoading = true
+                        isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                     )
                 }
             }
@@ -222,6 +239,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                     )
                 }
@@ -234,14 +252,7 @@ fun PreviewCells(
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
-                        icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                        isLoading = true
-                    )
-                    ChiliCell(
-                        modifier = Modifier.clickable { },
-                        title = "Заголовок",
-                        subtitle = "Подзаголовок",
-                        isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                     )
                     ChiliCell(
@@ -255,7 +266,16 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
+                        isLoading = LocalValueShimmering.current,
+                    )
+                    ChiliCell(
+                        modifier = Modifier.clickable { },
+                        title = "Заголовок",
+                        subtitle = "Подзаголовок",
+                        icon = painterResource(id = R.drawable.chili_ic_documents_green),
+                        isLoading = LocalValueShimmering.current,
                     )
                 }
             }
@@ -277,13 +297,14 @@ fun PreviewCells(
                         isDividerVisible = true,
                         additionalInfo = "Additional text",
                         additionalInfoStyle = Chili.typography.H14_Value,
-                        isLoading = true,
+                        isLoading = LocalValueShimmering.current,
                         containerBackgroundColor = Chili.color.alertErrorBg
                     )
 
                     ChiliAdditionalInfoCell(
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         additionalInfo = "Additional 1212 <u>c</u>",
                         additionalInfoStyle = Chili.typography.H14_Value,
@@ -298,6 +319,7 @@ fun PreviewCells(
                         additionalInfo = "Подзаголовок Под Подзаголовок Под Подзаголовок",
                         additionalInfoStyle = Chili.typography.H16_Marked.copy(textAlign = TextAlign.End),
                         additionalInfoTextWeight = 1f,
+                        isLoading = LocalValueShimmering.current,
                         isDividerVisible = true
                     )
 
@@ -306,6 +328,7 @@ fun PreviewCells(
                         title = "Заголовок",
                         titleStyle = Chili.typography.H16_Value,
                         titleMaxLines = 3,
+                        isLoading = LocalValueShimmering.current,
                         additionalInfo = "Подзаголовок Под Подзаголовок Под Подзаголовок Подзаголовок ",
                         additionalInfoStyle = Chili.typography.H16_Marked.copy(textAlign = TextAlign.End),
                         additionalInfoTextWeight = 1f,
@@ -327,17 +350,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
-                        isDividerVisible = true,
-                        icon = painterResource(id = R.drawable.chili_ic_documents_green),
-                        endFrame = {
-                            BonusTag(modifier = Modifier, text = "1%")
-                        },
-                        isLoading = true
-                    )
-                    ChiliCell(
-                        modifier = Modifier.clickable { },
-                        title = "Заголовок",
-                        subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
@@ -349,6 +362,18 @@ fun PreviewCells(
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
+                        icon = painterResource(id = R.drawable.chili_ic_documents_green),
+                        endFrame = {
+                            BonusTag(modifier = Modifier, text = "1%")
+                        },
+                    )
+                    ChiliCell(
+                        modifier = Modifier.clickable { },
+                        title = "Заголовок",
+                        subtitle = "Подзаголовок",
+                        isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             BonusTag(modifier = Modifier, text = "10%")
@@ -357,6 +382,7 @@ fun PreviewCells(
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
+                        isLoading = LocalValueShimmering.current,
                         subtitle = null,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
@@ -385,6 +411,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             ChiliSwitch(checked = switchChecked) { switchChecked = it }
@@ -399,6 +426,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
@@ -407,13 +435,13 @@ fun PreviewCells(
                                 checked = switchChecked2
                             ) { switchChecked2 = it }
                         },
-                        isLoading = true
                     )
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             ChiliSwitch(checked = switchChecked2) { switchChecked2 = it }
@@ -423,6 +451,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         isDividerVisible = true,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
@@ -433,6 +462,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             ChiliSwitch(checked = switchChecked4) { switchChecked4 = it }
@@ -446,6 +476,7 @@ fun PreviewCells(
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Material2 Switch",
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             ChiliMaterial2Switch(checked = switchCheckedMaterial) { switchCheckedMaterial = it }
@@ -472,6 +503,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             ChiliCheckBox(checked = checkBoxChecked) { checkBoxChecked = it }
@@ -487,6 +519,7 @@ fun PreviewCells(
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             ChiliCheckBox(
@@ -494,13 +527,13 @@ fun PreviewCells(
                                 checked = checkBoxChecked2
                             ) { checkBoxChecked2 = it }
                         },
-                        isLoading = true
                     )
                     ChiliCell(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             ChiliCheckBox(checked = checkBoxChecked2) { checkBoxChecked2 = it }
@@ -511,6 +544,7 @@ fun PreviewCells(
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
                         isDividerVisible = true,
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             ChiliCheckBox(checked = checkBoxChecked3) { checkBoxChecked3 = it }
@@ -520,6 +554,7 @@ fun PreviewCells(
                         modifier = Modifier.clickable { },
                         title = "Заголовок",
                         subtitle = "Подзаголовок",
+                        isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
                             ChiliCheckBox(checked = checkBoxChecked4) { checkBoxChecked4 = it }
@@ -542,7 +577,7 @@ fun PreviewCells(
                     title = "Заголовок",
                     additionalText = "121212 <u>c</u>",
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
-                    isLoading = true
+                    isLoading = LocalValueShimmering.current,
                 )
                 ProductCell(
                     modifier = Modifier
@@ -553,6 +588,7 @@ fun PreviewCells(
                     additionalText = "121212",
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
                     isMain = true,
+                    isLoading = LocalValueShimmering.current,
                     onClick = {
                         context.showToast("Clicked")
                     }
@@ -564,6 +600,7 @@ fun PreviewCells(
                     additionalText = "121212 <u>c</u>",
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
                     isBlocked = true,
+                    isLoading = LocalValueShimmering.current,
                     overlayIcon = painterResource(kg.devcats.compose.samples.R.drawable.chili_ic_lock),
                     subtitleTextAppearance = Chili.typography.H12_Error,
                     onClick = {
@@ -574,6 +611,7 @@ fun PreviewCells(
                     modifier = Modifier.padding(vertical = 8.dp),
                     title = "Заголовок",
                     subtitle = "Подзаголовок",
+                    isLoading = LocalValueShimmering.current,
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
                     overlayIcon = painterResource(kg.devcats.compose.samples.R.drawable.ic_overlay_status_declined),
                     onClick = {
@@ -585,6 +623,7 @@ fun PreviewCells(
                     title = "Заголовок, занимающий 2 строки",
                     subtitle = "Подзаголовок",
                     additionalText = "121212 <u>c</u>",
+                    isLoading = LocalValueShimmering.current,
                     subtitleTextAppearance = Chili.typography.H12_Error,
                     additionalTextAppearance = Chili.typography.H15_Error,
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
@@ -594,6 +633,7 @@ fun PreviewCells(
                         .padding(vertical = 8.dp)
                         .alpha(0.4f),
                     title = "Заголовок",
+                    isLoading = LocalValueShimmering.current,
                     additionalText = "Сервис \nнедоступен",
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default),
                 )
@@ -601,9 +641,11 @@ fun PreviewCells(
                     modifier = Modifier.padding(vertical = 8.dp),
                     title = "Заголовок",
                     additionalText = "121212",
+                    isLoading = LocalValueShimmering.current,
                     icon = painterResource(kg.devcats.compose.samples.R.drawable.ic_card_default)
                 )
                 ProductCell(
+                    isLoading = LocalValueShimmering.current,
                     modifier = Modifier.padding(vertical = 8.dp),
                     title = "Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки, Заголовок, занимающий 3 строки",
                     subtitle = "Подзаголовок, Подзаголовок, Подзаголовок, Подзаголовок, Подзаголовок, ",
@@ -620,6 +662,7 @@ fun PreviewCells(
                     subTitle = "Достигнут лимит",
                     value = "- 500,00 <u>с</u>",
                     subValue = "44 500,00 ",
+                    isLoading = LocalValueShimmering.current,
                     additionalText = "Ожидает зачисления: 10 500,00 <u>с</u>",
                     caption = "09:42",
                 )
@@ -632,9 +675,9 @@ fun PreviewCells(
                     subTitle = "Достигнут лимит",
                     value = "- 500,00 с",
                     subValue = "44 500,00 с ",
+                    isLoading = LocalValueShimmering.current,
                     additionalText = "Ожидает зачисления: 10 500,00 c",
                     caption = "09:42",
-                    isLoading = true,
                 )
             }
 
@@ -672,7 +715,13 @@ fun PreviewCells(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Column(modifier = Modifier.clip(Chili.shapes.RoundedCornerShape).background(Chili.color.cellViewBackground)) {
-                    DetailedInfoCell(icon = painterResource(R.drawable.chili_ic_documents_green), title = "Double buttons", value = "6 200 c", subTitle = "Below this cell")
+                    DetailedInfoCell(
+                        icon = painterResource(R.drawable.chili_ic_documents_green),
+                        title = "Double buttons",
+                        value = "6 200 c",
+                        isLoading = LocalValueShimmering.current,
+                        subTitle = "Below this cell"
+                    )
                     ChiliDoubledButtons(startButtonText = "Продлить", endButtonText = "Погасить")
                 }
             }
@@ -688,6 +737,7 @@ fun PreviewCells(
                     checked = isCheckboxCellChecked,
                     iconUrl = "url",
                     isDividerVisible = true,
+                    isLoading = LocalValueShimmering.current,
                     additionalInfo = "Text text",
                     onCheckedChange = {
                         isCheckboxCellChecked = it
@@ -697,6 +747,7 @@ fun PreviewCells(
                     title = "Unchecked",
                     subtitle = "Подзаголовок",
                     checked = false,
+                    isLoading = LocalValueShimmering.current,
                     iconUrl = "url",
                     isDividerVisible = true,
                     additionalInfo = "500,00 <u>c</u>",
@@ -707,12 +758,14 @@ fun PreviewCells(
                     subtitle = "Выключенный",
                     isDividerVisible = true,
                     checked = false,
+                    isLoading = LocalValueShimmering.current,
                     enabled = false,
                     iconUrl = "url",
                     additionalInfo = "35,00 <u>c</u>",
                 ) { }
                 ChiliCheckBoxCell(
                     title = "Заголовок",
+                    isLoading = LocalValueShimmering.current,
                     subtitle = "Подзаголовок",
                     isDividerVisible = true,
                     checked = isCheckboxCellChecked,
@@ -723,8 +776,8 @@ fun PreviewCells(
                 ChiliCheckBoxCell(
                     title = "Заголовок",
                     subtitle = "Подзаголовок",
+                    isLoading = LocalValueShimmering.current,
                     checked = true,
-                    isLoading = true,
                     iconUrl = "url",
                     additionalInfo = "5,00 <u>c</u>",
                 ) { }

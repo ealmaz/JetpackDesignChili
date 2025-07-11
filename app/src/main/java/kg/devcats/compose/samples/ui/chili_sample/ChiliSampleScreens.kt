@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliPrimaryButton
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
+import kg.devcats.compose.samples.SampleToolbarMenu
 import kg.devcats.compose.samples.StoryActivity
 import kg.devcats.compose.samples.ui.navigation.Screens
 
@@ -32,6 +33,7 @@ fun ChiliSampleScreens(
             title = "Compose DesignChili",
             isNavigationIconVisible = false,
             isDividerVisible = true,
+            endFrame = { SampleToolbarMenu() }
         )
         Column(modifier = Modifier
             .verticalScroll(rememberScrollState())
