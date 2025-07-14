@@ -306,7 +306,7 @@ data class ChiliLightColorScheme(
 
     override val snackbarBackground: Color = black_5,
     override val snackbarIndeterminateColor: Color = white_1,
-    override val snackbarActionText: Color = blue_12,
+    override val snackbarActionText: Color = blue_14,
     override val snackbarWarningBackgound: Color = orange_10,
     override val snackbarText: Color = white_1,
 
@@ -467,7 +467,7 @@ data class ChiliDarkColorScheme(
 
     override val snackbarBackground: Color = black_5,
     override val snackbarIndeterminateColor: Color = white_1,
-    override val snackbarActionText: Color = blue_12,
+    override val snackbarActionText: Color = blue_14,
     override val snackbarWarningBackgound: Color = orange_11,
     override val snackbarText: Color = white_1,
 
