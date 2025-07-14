@@ -385,18 +385,17 @@ fun PreviewCommon(
                 ChiliTabs(items = listOf("Open", "Closed"), selectedIndex = selectedTab2.value) {
                     selectedTab2.value = it
                 }
-            }
+                Spacer(modifier = Modifier.height(8.dp))
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-            val selectedTab3 = remember { mutableStateOf(0) }
-            ChiliTabs(
-                items = listOf("Rounded", "Rounded"),
-                selectedIndex = selectedTab3.value,
-                isBorderVisible = true,
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                selectedTab3.value = it
+                val selectedTab3 = remember { mutableStateOf(0) }
+                ChiliTabs(
+                    items = listOf("Rounded", "Rounded"),
+                    selectedIndex = selectedTab3.value,
+                    isBorderVisible = true,
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    selectedTab3.value = it
+                }
             }
         }
     }
