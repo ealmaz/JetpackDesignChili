@@ -24,10 +24,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.buttons.ChiliDoubledButtons
+import kg.devcats.compose.jetpack_chili.components.cells.AnimatedCell
 import kg.devcats.compose.jetpack_chili.components.cells.DetailedInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliAdditionalInfoCell
 import kg.devcats.compose.jetpack_chili.components.cells.ChiliCell
@@ -392,6 +394,23 @@ fun PreviewCells(
                 }
             }
 
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "AnimatedCell",
+                style = Chili.typography.H16_Primary
+            )
+
+            AnimatedCell(
+                modifier = Modifier.fillMaxWidth(),
+                title = "Переведите пользователю на O!Bank(O!Деньги)",
+                subtitle = "Подзаголовок",
+                titleMaxLines = 2,
+                titleOverflow = TextOverflow.Visible,
+                isChevronVisible = true,
+                subtitleStyle = Chili.typography.H14_Success,
+                iconUrl = "",
+                isLoading = LocalValueShimmering.current
+            )
 
             Text(
                 modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),

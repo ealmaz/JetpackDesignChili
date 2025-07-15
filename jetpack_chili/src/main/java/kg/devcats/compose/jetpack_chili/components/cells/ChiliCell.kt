@@ -50,6 +50,7 @@ fun ChiliCell(
     subtitleStyle: TextStyle = Chili.typography.H14_Secondary,
     titleMaxLines: Int = 2,
     subtitleMaxLines: Int = 3,
+    titleOverflow: TextOverflow = TextOverflow.Ellipsis,
     isDividerVisible: Boolean = false,
     isChevronVisible: Boolean = true,
     chevronTintColor: Color = Chili.color.chevronColor,
@@ -150,7 +151,7 @@ fun ChiliCell(
                                 .align(Alignment.Start)
                                 .padding(top = 12.dp, bottom = 4.dp),
                             maxLines = titleMaxLines,
-                            overflow = TextOverflow.Ellipsis
+                            overflow = titleOverflow
                         )
                     }
 
