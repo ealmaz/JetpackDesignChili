@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.widget.Space
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -57,6 +60,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.BankCardFieldState
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCard
 import kg.devcats.compose.jetpack_chili.components.cards.BonusCardSize
 import kg.devcats.compose.jetpack_chili.components.cards.AdditionalContentInfoCard
+import kg.devcats.compose.jetpack_chili.components.cards.AdditionalLabelCard
 import kg.devcats.compose.jetpack_chili.components.cards.CatalogCard
 import kg.devcats.compose.jetpack_chili.components.cards.ChiliCard
 import kg.devcats.compose.jetpack_chili.components.cards.ExpandableCard
@@ -1154,6 +1158,74 @@ fun PreviewCards(
                         textStyle = buttonTextStyle,
                         enabledTextColor = buttonTextStyle.color) {}
                 }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "AdditionalLabelCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            Spacer(Modifier.width(16.dp))
+
+            Row(Modifier.horizontalScroll(rememberScrollState())) {
+
+                AdditionalLabelCard(
+                    Modifier.size(120.dp, 106.dp),
+                    icon = painterResource(R.drawable.chili_ic_documents_green),
+                    additionalLabel = "10%",
+                    isLoading = LocalValueShimmering.current,
+                    subtitle = "no commission",
+                    isHighlighted = true,
+                    title = "Header and header"
+                )
+
+                Spacer(Modifier.width(8.dp))
+
+                AdditionalLabelCard(
+                    Modifier.size(120.dp, 106.dp),
+                    icon = painterResource(R.drawable.chili_ic_documents_green),
+                    additionalLabel = "10%",
+                    isLoading = LocalValueShimmering.current,
+                    subtitle = "no commission",
+                    isHighlighted = false,
+                    title = "Header and header"
+                )
+
+                Spacer(Modifier.width(8.dp))
+
+                AdditionalLabelCard(
+                    Modifier.size(120.dp, 106.dp),
+                    icon = painterResource(R.drawable.chili_ic_documents_green),
+                    additionalLabel = "10%",
+                    isLoading = LocalValueShimmering.current,
+                    subtitle = "no commission",
+                    isHighlighted = true,
+                    title = "Header"
+                )
+
+                Spacer(Modifier.width(8.dp))
+
+                AdditionalLabelCard(
+                    Modifier.size(120.dp, 106.dp),
+                    icon = painterResource(R.drawable.chili_ic_documents_green),
+                    isLoading = LocalValueShimmering.current,
+                    isHighlighted = true,
+                    title = "Header and header"
+                )
+
+                Spacer(Modifier.width(8.dp))
+
+
+                AdditionalLabelCard(
+                    Modifier.size(120.dp, 106.dp),
+                    isLoading = LocalValueShimmering.current,
+                    isHighlighted = false,
+                    title = "Header"
+                )
+
+                Spacer(Modifier.width(8.dp))
             }
         }
     }
