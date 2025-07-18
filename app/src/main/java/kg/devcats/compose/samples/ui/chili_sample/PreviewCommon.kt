@@ -45,6 +45,7 @@ import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliChipsGroup
 import kg.devcats.compose.jetpack_chili.components.common.chips.ChiliTextChip
 import kg.devcats.compose.jetpack_chili.components.common.chips.CustomChiliChipsGroup
+import kg.devcats.compose.jetpack_chili.components.common.chips.MultiRowChiliChipsGroup
 import kg.devcats.compose.jetpack_chili.components.common.chips.SimpleTextChip
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
 import kg.devcats.compose.jetpack_chili.theme.Chili
@@ -73,9 +74,10 @@ fun PreviewCommon(
             .fillMaxSize(),
         state = showcaseState
     ) {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(Chili.color.surfaceBackground)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Chili.color.surfaceBackground)
         ) {
             ChiliCenteredAppToolbar(
                 title = "Common",
@@ -83,12 +85,14 @@ fun PreviewCommon(
                 endFrame = { SampleToolbarMenu() },
                 isNavigationIconVisible = true,
                 onNavigationIconClick = {
-                navigateUp.invoke()
-            })
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
-                .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 64.dp)) {
+                    navigateUp.invoke()
+                })
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 64.dp)
+            ) {
 
                 ChiliPrimaryButton(
                     modifier = Modifier.fillMaxWidth(),
@@ -125,7 +129,10 @@ fun PreviewCommon(
                             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                         ) {
                             ChiliCheckBox(checked = isChecked, enabled = false) { isChecked = it }
-                            Text(text = "Disabled ChiliCheckBox", style = Chili.typography.H16_Primary)
+                            Text(
+                                text = "Disabled ChiliCheckBox",
+                                style = Chili.typography.H16_Primary
+                            )
                         }
                     }
                 }
@@ -161,7 +168,10 @@ fun PreviewCommon(
                         ) {
                             ChiliSwitch(checked = isChecked, enabled = false) { isChecked = it }
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text(text = "Disabled ChiliCheckBox", style = Chili.typography.H16_Primary)
+                            Text(
+                                text = "Disabled ChiliCheckBox",
+                                style = Chili.typography.H16_Primary
+                            )
                         }
                     }
                 }
@@ -244,14 +254,16 @@ fun PreviewCommon(
                 AnimatedProgressLine(
                     progressPercent = progress,
                     progressGradientColors = listOf(red_1, green_1, blue_1),
-                    modifier = Modifier.fillMaxWidth().sequenceShowcaseTarget(
-                        index = 3,
-                        position = ShowcasePosition.TOP,
-                        alignment = ShowcaseAlignment.START,
-                        dialog = {
-                            SequenceShowcaseDialog("А это прогресс лайн, показывает загрузку чего-то")
-                        }
-                    )
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .sequenceShowcaseTarget(
+                            index = 3,
+                            position = ShowcasePosition.TOP,
+                            alignment = ShowcaseAlignment.START,
+                            dialog = {
+                                SequenceShowcaseDialog("А это прогресс лайн, показывает загрузку чего-то")
+                            }
+                        )
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -358,7 +370,32 @@ fun PreviewCommon(
                     selectionType = SelectionType.SINGLE,
                     onSelectionChanged = { id, isSelected ->
                         context.showToast("$id - $isSelected")
+                    },
+                ) { item, isSelected, onClick ->
+                    ChiliTextChip(
+                        text = (item as? SimpleTextChip)?.text ?: "",
+                        isSelected = isSelected
+                    ) {
+                        onClick()
                     }
+                }
+
+                Text(
+                    modifier = Modifier.padding(vertical = 16.dp),
+                    text = "MultiRowChiliChipsGroup",
+                    style = Chili.typography.H16_Primary
+                )
+
+                val selectedIds2 = remember { mutableStateListOf<Any>() }
+                MultiRowChiliChipsGroup(
+                    title = "Выберите день",
+                    isMultiRow = true,
+                    items = items,
+                    selectedIds = selectedIds2,
+                    selectionType = SelectionType.SINGLE,
+                    onSelectionChanged = { id, isSelected ->
+                        context.showToast("$id - $isSelected")
+                    },
                 ) { item, isSelected, onClick ->
                     ChiliTextChip(
                         text = (item as? SimpleTextChip)?.text ?: "",
@@ -374,7 +411,10 @@ fun PreviewCommon(
 
                 val selectedTab = remember { mutableStateOf(0) }
 
-                ChiliTabs(items = listOf("Open", "Closed", "Free"), selectedIndex = selectedTab.value) {
+                ChiliTabs(
+                    items = listOf("Open", "Closed", "Free"),
+                    selectedIndex = selectedTab.value
+                ) {
                     selectedTab.value = it
                 }
 
