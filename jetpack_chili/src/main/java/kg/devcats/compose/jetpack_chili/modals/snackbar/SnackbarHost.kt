@@ -1,16 +1,14 @@
 package kg.devcats.compose.jetpack_chili.modals.snackbar
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ChiliSnackbarHost() {
-    Box(modifier = Modifier.fillMaxSize()) {
+fun ChiliSnackbarHost(modifier: Modifier = Modifier) {
+    Box(modifier = modifier.fillMaxSize()) {
         SnackbarHost(
             hostState = SnackbarManager.snackbarHostState,
             modifier = Modifier.align(
