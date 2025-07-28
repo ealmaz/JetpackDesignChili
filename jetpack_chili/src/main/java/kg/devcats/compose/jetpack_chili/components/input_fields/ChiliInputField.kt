@@ -300,13 +300,16 @@ private fun InputFieldContainer(
 
     Column(modifier = modifier) {
         Surface(
-            modifier = Modifier
-                .pointerInput(Unit) {
-                    detectTapGestures(
-                        onLongPress = onLongClick,
-                        onDoubleTap = onDoubleClick
-                    )
-                },
+            modifier = Modifier.then(
+                if (onDoubleClick != null || onLongClick != null) {
+                    Modifier.pointerInput(Unit) {
+                        detectTapGestures(
+                            onLongPress = onLongClick,
+                            onDoubleTap = onDoubleClick
+                        )
+                    }
+                } else Modifier
+            ),
             color = decideBackgroundColor(error, inputBgColor),
             shape = Chili.shapes.RoundedCornerShape
         ) {
