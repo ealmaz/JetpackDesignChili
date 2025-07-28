@@ -5,10 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,6 +44,7 @@ fun ChiliDetailBottomSheet(
         onDismissRequest = onDismissRequest
     ) {
         ChiliDetailBottomSheetContent(
+            modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars),
             icon = icon,
             headerText = headerText,
             bodyText = bodyText,
@@ -54,6 +58,7 @@ fun ChiliDetailBottomSheet(
 
 @Composable
 fun ColumnScope.ChiliDetailBottomSheetContent(
+    modifier: Modifier = Modifier,
     icon: Painter? = null,
     headerText: String? = null,
     bodyText: String? = null,
@@ -68,7 +73,7 @@ fun ColumnScope.ChiliDetailBottomSheetContent(
     headerText?.let {Text(text = headerText, modifier = Modifier.padding(top = 16.dp), style = Chili.typography.H16_Primary_500) } ?: Spacer(modifier = Modifier.height(8.dp)
     )
     bodyText?. let { Text(text = bodyText, modifier = Modifier.padding(top = 8.dp), style = Chili.typography.H14_Primary) }
-    Row(modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)) {
+    Row(modifier = modifier.padding(top = 16.dp, bottom = 16.dp)) {
         secondaryButtonText?.let { ChiliAdditionalButton(text = it, modifier = Modifier.weight(1f), onClick = onSecondaryButtonClick) }
         if (secondaryButtonText != null && primaryButtonText != null) Spacer(modifier = Modifier.width(12.dp))
         primaryButtonText?.let { ChiliPrimaryButton(text = it, modifier = Modifier.weight(1f), onClick = onPrimaryButtonClick) }

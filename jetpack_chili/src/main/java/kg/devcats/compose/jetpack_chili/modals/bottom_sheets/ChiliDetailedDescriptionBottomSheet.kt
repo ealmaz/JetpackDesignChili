@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -48,6 +51,7 @@ fun ChiliDetailedDescriptionBottomSheet(
         closeIcon = painterResource(id = R.drawable.chili_ic_close)
     ) {
         ChiliDetailedDescriptionBottomSheetContent(
+            modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars),
             icon = icon,
             iconUrl = iconUrl,
             headerText = headerText,
@@ -62,6 +66,7 @@ fun ChiliDetailedDescriptionBottomSheet(
 
 @Composable
 fun ColumnScope.ChiliDetailedDescriptionBottomSheetContent(
+    modifier: Modifier = Modifier,
     icon: Painter? = null,
     iconUrl: String? = null,
     headerText: String? = null,
@@ -125,7 +130,7 @@ fun ColumnScope.ChiliDetailedDescriptionBottomSheetContent(
         }
     }
 
-    Row(modifier = Modifier.padding(top = 20.dp, bottom = 16.dp)) {
+    Row(modifier = modifier.padding(top = 20.dp, bottom = 16.dp)) {
         primaryButtonText?.let {
             ChiliPrimaryButton(
                 text = it,

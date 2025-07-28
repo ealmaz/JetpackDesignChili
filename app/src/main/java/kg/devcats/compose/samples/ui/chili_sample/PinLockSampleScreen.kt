@@ -4,7 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
@@ -26,6 +28,7 @@ fun PinLockSampleScreen(navController: NavController, navigateUp: () -> Unit) {
             .background(Chili.color.surfaceBackground),
         topBar = {
             ChiliCenteredAppToolbar(
+                modifier = Modifier.statusBarsPadding(),
                 title = "Pdf Viewers",
                 isNavigationIconVisible = true,
                 isDividerVisible = true,
@@ -39,6 +42,7 @@ fun PinLockSampleScreen(navController: NavController, navigateUp: () -> Unit) {
                     .verticalScroll(rememberScrollState())
                     .padding(contentPadding)
                     .padding(horizontal = 16.dp, vertical = 16.dp)
+                    .navigationBarsPadding()
             ) {
                 ChiliPrimaryButton(
                     text = "Create Pin", modifier = Modifier

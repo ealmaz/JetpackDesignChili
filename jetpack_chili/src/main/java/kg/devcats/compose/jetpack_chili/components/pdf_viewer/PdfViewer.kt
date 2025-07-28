@@ -52,7 +52,7 @@ fun PdfViewer(
     buttonShareIsVisible: Boolean = false,
     toolbarBackgroundColor: Color = Chili.color.toolbarBackground,
     navigationIcon: Painter = painterResource(id = R.drawable.chili4_ic_back_arrow_rounded),
-    isEdgeToEdgeEnabled: Boolean = false
+    isEdgeToEdgeEnabled: Boolean = true
 ) {
     val context = LocalContext.current
     var pdfUri by remember { mutableStateOf(Uri.EMPTY) }

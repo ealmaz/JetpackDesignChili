@@ -14,9 +14,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
@@ -78,6 +76,7 @@ fun ChiliBottomSheetContainer(
 
     if (internalBottomSheetVisibilityState) {
         ModalBottomSheet(
+            contentWindowInsets = { WindowInsets(0,0,0,0) },
             onDismissRequest = onDismissRequest,
             sheetState = sheetState,
             contentColor = Color.Unspecified,
@@ -87,7 +86,6 @@ fun ChiliBottomSheetContainer(
         ) {
             if (isTopIconVisible) {
                 Column(
-                    modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Spacer(Modifier.height(8.dp))

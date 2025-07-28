@@ -4,10 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -56,6 +59,7 @@ fun ChiliDetailActionsBottomSheet(
         onDismissRequest = onDismissRequest
     ) {
         ChiliDetailActionsBottomSheetContent(
+            modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars),
             icon = icon,
             iconSize = iconSize,
             headerText = headerText,
@@ -74,6 +78,7 @@ fun ChiliDetailActionsBottomSheet(
 
 @Composable
 fun ColumnScope.ChiliDetailActionsBottomSheetContent(
+    modifier: Modifier = Modifier,
     icon: Painter? = null,
     iconSize: Dp? = null,
     headerText: String? = null,
@@ -120,7 +125,7 @@ fun ColumnScope.ChiliDetailActionsBottomSheetContent(
             style = bodyTextStyle ?: Chili.typography.H14_Primary,
         )
     }
-    Column(modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)) {
+    Column(modifier = modifier.padding(top = 16.dp, bottom = 16.dp)) {
         secondaryButtonText?.let { ChiliAdditionalButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onSecondaryButtonClick) }
         if (secondaryButtonText != null && primaryButtonText != null) Spacer(modifier = Modifier.height(12.dp))
         primaryButtonText?.let { ChiliPrimaryButton(text = it, modifier = Modifier.fillMaxWidth(), onClick = onPrimaryButtonClick) }

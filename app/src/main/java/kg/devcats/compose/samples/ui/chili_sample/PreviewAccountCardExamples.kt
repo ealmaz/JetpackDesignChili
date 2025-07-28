@@ -4,7 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -26,6 +28,7 @@ fun PreviewAccountCardExamples(
             .background(Chili.color.screenBackground)
     ) {
         ChiliCenteredAppToolbar(
+            modifier = Modifier.statusBarsPadding(),
             title = "AccountCard",
             isDividerVisible = true,
             isNavigationIconVisible = true,
@@ -38,6 +41,7 @@ fun PreviewAccountCardExamples(
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
                 .padding(bottom = 64.dp)
+                .navigationBarsPadding()
         ) {
             AccountCard(
                 modifier = Modifier

@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -49,6 +51,7 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
         .fillMaxSize()
         .background(Chili.color.surfaceBackground)) {
         ChiliCenteredAppToolbar(
+            modifier = Modifier.statusBarsPadding(),
             title = "Buttons",
             endFrame = { SampleToolbarMenu() },
             isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
@@ -57,7 +60,9 @@ fun PreviewButtons(navigateUp: () -> Unit,) {
         Column(modifier = Modifier
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
-            .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)) {
+            .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)
+            .navigationBarsPadding()
+        ) {
 
             var isLoading by remember { mutableStateOf(false) }
 

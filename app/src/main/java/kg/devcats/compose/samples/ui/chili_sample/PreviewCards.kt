@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.widget.Space
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,8 +16,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -103,6 +104,7 @@ fun PreviewCards(
             .background(Chili.color.surfaceBackground)
     ) {
         ChiliCenteredAppToolbar(
+            modifier = Modifier.statusBarsPadding(),
             title = "Card",
             isDividerVisible = true,
             isNavigationIconVisible = true,
@@ -115,6 +117,7 @@ fun PreviewCards(
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
                 .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)
+                .navigationBarsPadding()
         ) {
             ChiliPrimaryButton(text = "Account card examples", modifier = Modifier.fillMaxWidth().padding(top = 32.dp, bottom = 16.dp)) {
                 navController.navigate(Screens.AccountCardExamplesScreen.toString())

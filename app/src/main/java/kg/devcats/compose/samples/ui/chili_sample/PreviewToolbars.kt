@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ripple
@@ -44,19 +46,33 @@ import kg.devcats.compose.samples.SampleToolbarMenu
 fun Toolbars(
     navigateUp: () -> Unit,
 ) {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(Chili.color.screenBackground)) {
-        ChiliCenteredAppToolbar(title = "Toolbars",
-            endFrame = { SampleToolbarMenu() }, isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
-            navigateUp.invoke()
-        })
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
-            .padding(top = 16.dp, bottom = 64.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Chili.color.screenBackground)
+    ) {
+        ChiliCenteredAppToolbar(
+            modifier = Modifier.statusBarsPadding(),
+            title = "Toolbars",
+            endFrame = { SampleToolbarMenu() },
+            isDividerVisible = true,
+            isNavigationIconVisible = true,
+            onNavigationIconClick = {
+                navigateUp.invoke()
+            })
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .padding(top = 16.dp, bottom = 64.dp)
+                .navigationBarsPadding()
+        ) {
 
-            ChiliAppToolbar(title = "Simple toolbar", isDividerVisible = true, isNavigationIconVisible = false)
+            ChiliAppToolbar(
+                title = "Simple toolbar",
+                isDividerVisible = true,
+                isNavigationIconVisible = false
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -64,28 +80,51 @@ fun Toolbars(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            ChiliAppToolbar(title = "Simple toolbar", navigationIcon = painterResource(id = R.drawable.chili_ic_close))
+            ChiliAppToolbar(
+                title = "Simple toolbar",
+                navigationIcon = painterResource(id = R.drawable.chili_ic_close)
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            ChiliCenteredAppToolbar(title = "Centered toolbar", navigationIcon = painterResource(id = R.drawable.chili_ic_close))
+            ChiliCenteredAppToolbar(
+                title = "Centered toolbar",
+                navigationIcon = painterResource(id = R.drawable.chili_ic_close)
+            )
 
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            ChiliCenteredAppToolbar(title = "End icon toolbar", navigationIcon = painterResource(id = R.drawable.chili_ic_close), endFrame = {
-                Image(painter = painterResource(id = R.drawable.chili_ic_documents_green), contentDescription = "")
-            })
+            ChiliCenteredAppToolbar(
+                title = "End icon toolbar",
+                navigationIcon = painterResource(id = R.drawable.chili_ic_close),
+                endFrame = {
+                    Image(
+                        painter = painterResource(id = R.drawable.chili_ic_documents_green),
+                        contentDescription = ""
+                    )
+                })
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            ChiliCenteredAppToolbar(title = "Start icon toolbar", navigationIcon = painterResource(id = R.drawable.chili_ic_close), startFrame = {
-                Image(painter = painterResource(id = R.drawable.chili_ic_documents_green), contentDescription = "")
-            })
+            ChiliCenteredAppToolbar(
+                title = "Start icon toolbar",
+                navigationIcon = painterResource(id = R.drawable.chili_ic_close),
+                startFrame = {
+                    Image(
+                        painter = painterResource(id = R.drawable.chili_ic_documents_green),
+                        contentDescription = ""
+                    )
+                })
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            ChiliAppToolbar(title = "Transparent toolbar", isDividerVisible = true, isNavigationIconVisible = false, backgroundColor = Color.Transparent)
+            ChiliAppToolbar(
+                title = "Transparent toolbar",
+                isDividerVisible = true,
+                isNavigationIconVisible = false,
+                backgroundColor = Color.Transparent
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -165,19 +204,20 @@ fun Toolbars(
     }
 }
 
-@Composable fun popupMenu(expanded: Boolean, onDismissRequest: () -> Unit) {
+@Composable
+fun popupMenu(expanded: Boolean, onDismissRequest: () -> Unit) {
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismissRequest,
         modifier = Modifier.background(Chili.color.surfaceBackground)
     ) {
         DropdownMenuItem(
-            text = {  Text("Sample 1") },
+            text = { Text("Sample 1") },
             onClick = { onDismissRequest() }
         )
         DropdownMenuItem(
             text = { Text("Sample 2") },
-            onClick = {onDismissRequest() /* Handle settings! */ }
+            onClick = { onDismissRequest() /* Handle settings! */ }
         )
         Divider()
         DropdownMenuItem(

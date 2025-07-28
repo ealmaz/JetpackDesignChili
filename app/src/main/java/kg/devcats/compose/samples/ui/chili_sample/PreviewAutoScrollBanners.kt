@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -24,6 +26,7 @@ fun PreviewAutoScrollBanners(navigateUp: () -> Unit) {
             .background(Chili.color.surfaceBackground)
     ) {
         ChiliCenteredAppToolbar(
+            modifier = Modifier.statusBarsPadding(),
             title = "Banners",
             isDividerVisible = true,
             isNavigationIconVisible = true,
@@ -35,6 +38,7 @@ fun PreviewAutoScrollBanners(navigateUp: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
+                .navigationBarsPadding()
         ) {
             AutoScrollBanner(
                 Modifier.fillMaxWidth(),

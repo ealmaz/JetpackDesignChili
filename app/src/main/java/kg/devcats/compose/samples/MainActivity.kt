@@ -3,6 +3,7 @@ package kg.devcats.compose.samples
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
@@ -31,10 +32,11 @@ class MainActivity : AppCompatActivity(), SystemSettings {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         Locale.setDefault(Locale("ru"))
         setContent {
             CompositionLocalProvider(LocalValueShimmering provides isShimmeringState) {
-                ChiliTheme(darkTheme = isCurrentDarkTheme()) {
+                ChiliTheme(darkTheme = isCurrentDarkTheme(), edgeToEdgeEnabled = true) {
                     SamplesNavGraph()
                 }
             }

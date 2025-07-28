@@ -30,16 +30,20 @@ fun PreviewDividers(navigateUp: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .background(Chili.color.surfaceBackground)
-            .verticalScroll(rememberScrollState())
     ) {
         ChiliCenteredAppToolbar(
+            modifier = Modifier.statusBarsPadding(),
             title = "Dividers",
             isDividerVisible = true,
             isNavigationIconVisible = true,
             endFrame = { SampleToolbarMenu() },
             onNavigationIconClick = { navigateUp() }
         )
-        Column() {
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .navigationBarsPadding()
+        ) {
 
             ShadowRoundedBox {
                 Text("Simple Dividers (title, subtitle, actionText):", style = Chili.typography.H24_Primary_700, modifier = Modifier.padding(horizontal = 16.dp))

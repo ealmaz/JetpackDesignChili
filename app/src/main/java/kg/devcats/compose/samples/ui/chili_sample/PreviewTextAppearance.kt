@@ -3,8 +3,13 @@ package kg.devcats.compose.samples.ui.chili_sample
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
@@ -23,33 +28,79 @@ fun TextAppearance(
 ) {
     Column(modifier = Modifier.background(Chili.color.surfaceBackground)) {
         ChiliCenteredAppToolbar(title = "TextAppearance",
-            endFrame = { SampleToolbarMenu() }, isDividerVisible = true, isNavigationIconVisible = true, onNavigationIconClick = {
-            navigateUp.invoke()
-        })
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 32.dp)) {
-            Text(text = "Typography H64", style = Chili.typography.H64, color = Chili.color.primaryText)
+            modifier = Modifier.statusBarsPadding(),
+            endFrame = { SampleToolbarMenu() },
+            isDividerVisible = true,
+            isNavigationIconVisible = true,
+            onNavigationIconClick = {
+                navigateUp.invoke()
+            })
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp)
+                .padding(bottom = 32.dp)
+        ) {
+            Text(
+                text = "Typography H64",
+                style = Chili.typography.H64,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
-            Text(text = "Typography H32", style = Chili.typography.H32, color = Chili.color.primaryText)
+            Text(
+                text = "Typography H32",
+                style = Chili.typography.H32,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
-            Text(text = "Typography H28", style = Chili.typography.H28, color = Chili.color.primaryText)
+            Text(
+                text = "Typography H28",
+                style = Chili.typography.H28,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
-            Text(text = "Typography H24", style = Chili.typography.H24, color = Chili.color.primaryText)
+            Text(
+                text = "Typography H24",
+                style = Chili.typography.H24,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
-            Text(text = "Typography H20", style = Chili.typography.H20, color = Chili.color.primaryText)
+            Text(
+                text = "Typography H20",
+                style = Chili.typography.H20,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
-            Text(text = "Typography H18", style = Chili.typography.H18, color = Chili.color.primaryText)
+            Text(
+                text = "Typography H18",
+                style = Chili.typography.H18,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
-            Text(text = "Typography H16", style = Chili.typography.H16, color = Chili.color.primaryText)
+            Text(
+                text = "Typography H16",
+                style = Chili.typography.H16,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
-            Text(text = "Typography H14", style = Chili.typography.H14, color = Chili.color.primaryText)
+            Text(
+                text = "Typography H14",
+                style = Chili.typography.H14,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
-            Text(text = "Typography H12", style = Chili.typography.H12, color = Chili.color.primaryText)
+            Text(
+                text = "Typography H12",
+                style = Chili.typography.H12,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
-            Text(text = "Typography H10", style = Chili.typography.H10, color = Chili.color.primaryText)
+            Text(
+                text = "Typography H10",
+                style = Chili.typography.H10,
+                color = Chili.color.primaryText
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
 
             Text(text = "Typography Primary color", style = Chili.typography.H16_Primary)
@@ -70,29 +121,53 @@ fun TextAppearance(
             Text(text = "Typography Primary color weight 400", style = Chili.typography.H16_Primary)
             Divider(modifier = Modifier.padding(bottom = 16.dp))
 
-            Text(text = "Typography Primary color weight 500", style = Chili.typography.H16_Primary_500)
+            Text(
+                text = "Typography Primary color weight 500",
+                style = Chili.typography.H16_Primary_500
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
 
-            Text(text = "Typography Primary color weight 700", style = Chili.typography.H16_Primary_700)
+            Text(
+                text = "Typography Primary color weight 700",
+                style = Chili.typography.H16_Primary_700
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
 
             Text(text = "Typography Success color weight 400", style = Chili.typography.H16_Success)
             Divider(modifier = Modifier.padding(bottom = 16.dp))
 
-            Text(text = "Typography Success color weight 500", style = Chili.typography.H16_Success_500)
+            Text(
+                text = "Typography Success color weight 500",
+                style = Chili.typography.H16_Success_500
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
 
-            Text(text = "Typography Success color weight 700", style = Chili.typography.H16_Success_700)
+            Text(
+                text = "Typography Success color weight 700",
+                style = Chili.typography.H16_Success_700
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
 
             Text(text = "Typography Warning color weight 400", style = Chili.typography.H16_Warning)
             Divider(modifier = Modifier.padding(bottom = 16.dp))
 
-            Text(text = "Typography Warning color weight 500", style = Chili.typography.H16_Warning_500)
+            Text(
+                text = "Typography Warning color weight 500",
+                style = Chili.typography.H16_Warning_500
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
 
-            Text(text = "Typography Warning color weight 700", style = Chili.typography.H16_Warning_700)
+            Text(
+                text = "Typography Warning color weight 700",
+                style = Chili.typography.H16_Warning_700
+            )
             Divider(modifier = Modifier.padding(bottom = 16.dp))
+
+            Spacer(
+                Modifier.windowInsetsBottomHeight(
+                    WindowInsets.systemBars
+                )
+            )
         }
     }
 }

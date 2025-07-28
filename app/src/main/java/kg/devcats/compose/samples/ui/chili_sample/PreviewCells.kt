@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -63,6 +65,7 @@ fun PreviewCells(
             .background(Chili.color.surfaceBackground)
     ) {
         ChiliCenteredAppToolbar(
+            modifier = Modifier.statusBarsPadding(),
             title = "Cell",
             isDividerVisible = true,
             isNavigationIconVisible = true,
@@ -75,6 +78,7 @@ fun PreviewCells(
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
                 .padding(start = 16.dp, end = 16.dp, bottom = 64.dp)
+                .navigationBarsPadding()
         ) {
 
             Text(
@@ -145,7 +149,9 @@ fun PreviewCells(
             Box(modifier = Modifier.background(Chili.color.screenBackground)) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     ChiliCell(
-                        modifier = Modifier.setRoundedShapeByPosition(true, true).clickable { },
+                        modifier = Modifier
+                            .setRoundedShapeByPosition(true, true)
+                            .clickable { },
                         title = "Заголовок",
                         isDividerVisible = false,
                         isLoading = LocalValueShimmering.current,
@@ -154,25 +160,33 @@ fun PreviewCells(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     ChiliCell(
-                        modifier = Modifier.setRoundedShapeByPosition(isFirst = true).clickable { },
+                        modifier = Modifier
+                            .setRoundedShapeByPosition(isFirst = true)
+                            .clickable { },
                         title = "Заголовок",
                         isDividerVisible = true,
                         isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
-                        modifier = Modifier.setRoundedShapeByPosition().clickable { },
+                        modifier = Modifier
+                            .setRoundedShapeByPosition()
+                            .clickable { },
                         title = "Заголовок",
                         isDividerVisible = true,
                         isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
-                        modifier = Modifier.setRoundedShapeByPosition().clickable { },
+                        modifier = Modifier
+                            .setRoundedShapeByPosition()
+                            .clickable { },
                         title = "Заголовок",
                         isDividerVisible = true,
                         isLoading = LocalValueShimmering.current,
                     )
                     ChiliCell(
-                        modifier = Modifier.setRoundedShapeByPosition(isLast = true).clickable { },
+                        modifier = Modifier
+                            .setRoundedShapeByPosition(isLast = true)
+                            .clickable { },
                         title = "Заголовок",
                         isLoading = LocalValueShimmering.current,
                     )
@@ -335,7 +349,11 @@ fun PreviewCells(
                         additionalInfoStyle = Chili.typography.H16_Marked.copy(textAlign = TextAlign.End),
                         additionalInfoTextWeight = 1f,
                         containerPaddingValues = PaddingValues(start = 8.dp),
-                        additionalInfoTextPaddingValues = PaddingValues(start = 4.dp, top = 8.dp, bottom = 8.dp),
+                        additionalInfoTextPaddingValues = PaddingValues(
+                            start = 4.dp,
+                            top = 8.dp,
+                            bottom = 8.dp
+                        ),
                     )
                 }
             }
@@ -490,7 +508,7 @@ fun PreviewCells(
                 }
             }
 
-            RoundedBox (modifier = Modifier.padding(top = 16.dp)) {
+            RoundedBox(modifier = Modifier.padding(top = 16.dp)) {
                 Column {
                     ChiliCell(
                         modifier = Modifier.clickable { },
@@ -498,7 +516,9 @@ fun PreviewCells(
                         isLoading = LocalValueShimmering.current,
                         icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         endFrame = {
-                            ChiliMaterial2Switch(checked = switchCheckedMaterial) { switchCheckedMaterial = it }
+                            ChiliMaterial2Switch(checked = switchCheckedMaterial) {
+                                switchCheckedMaterial = it
+                            }
                         },
                         isChevronVisible = false
                     )
@@ -674,7 +694,9 @@ fun PreviewCells(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Column(modifier = Modifier.background(Chili.color.screenSecondary).padding(16.dp)) {
+            Column(modifier = Modifier
+                .background(Chili.color.screenSecondary)
+                .padding(16.dp)) {
                 DetailedInfoCell(
                     icon = painterResource(R.drawable.chili_ic_documents_green),
                     title = "USDT (TRC20)",
@@ -702,7 +724,9 @@ fun PreviewCells(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Column(modifier = Modifier.background(Chili.color.screenSecondary).padding(16.dp)) {
+            Column(modifier = Modifier
+                .background(Chili.color.screenSecondary)
+                .padding(16.dp)) {
                 DoubleCell(
                     DoubleCellItemParams.getDefaultParams(
                         title = "Заговолок",
@@ -733,7 +757,11 @@ fun PreviewCells(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Column(modifier = Modifier.clip(Chili.shapes.RoundedCornerShape).background(Chili.color.cellViewBackground)) {
+                Column(
+                    modifier = Modifier
+                        .clip(Chili.shapes.RoundedCornerShape)
+                        .background(Chili.color.cellViewBackground)
+                ) {
                     DetailedInfoCell(
                         icon = painterResource(R.drawable.chili_ic_documents_green),
                         title = "Double buttons",
@@ -744,10 +772,11 @@ fun PreviewCells(
                     ChiliDoubledButtons(startButtonText = "Продлить", endButtonText = "Погасить")
                 }
             }
-            Column(modifier = Modifier
-                .background(Chili.color.screenSecondary)
-                .padding(16.dp)
-                .clip(Chili.shapes.RoundedCornerShape)
+            Column(
+                modifier = Modifier
+                    .background(Chili.color.screenSecondary)
+                    .padding(16.dp)
+                    .clip(Chili.shapes.RoundedCornerShape)
             ) {
                 var isCheckboxCellChecked by remember { mutableStateOf(true) }
                 ChiliCheckBoxCell(

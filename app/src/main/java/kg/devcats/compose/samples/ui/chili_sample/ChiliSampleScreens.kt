@@ -3,9 +3,14 @@ package kg.devcats.compose.samples.ui.chili_sample
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -28,7 +33,9 @@ fun ChiliSampleScreens(
     val context = LocalContext.current
     Column(modifier = Modifier
         .background(Chili.color.surfaceBackground)
-        .fillMaxSize()) {
+        .fillMaxSize()
+        .statusBarsPadding()
+    ) {
         ChiliCenteredAppToolbar(
             title = "Compose DesignChili",
             isNavigationIconVisible = false,
@@ -151,6 +158,11 @@ fun ChiliSampleScreens(
                 navController?.navigate(Screens.PullToRefreshScreen.toString())
             }
 
+            Spacer(
+                Modifier.windowInsetsBottomHeight(
+                    WindowInsets.systemBars
+                )
+            )
         }
     }
 }

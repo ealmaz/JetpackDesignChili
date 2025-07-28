@@ -1,7 +1,9 @@
 package kg.devcats.compose.samples.ui.chili_sample.keyboards
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -34,9 +36,11 @@ fun PreviewNumberKeyboard(navigateUp: () -> Unit) {
         specialSymbols = listOf(',', '&'),
         isKeyboardVisible = isKeyboardVisible,
         keyboardModifier = Modifier
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .navigationBarsPadding(),
         topBar = {
             ChiliCenteredAppToolbar(
+                modifier = Modifier.statusBarsPadding(),
                 title = "NumberKeyboard",
                 isDividerVisible = true,
                 isNavigationIconVisible = true,

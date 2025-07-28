@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
@@ -37,6 +38,7 @@ fun PreviewPinInput(navigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             ChiliCenteredAppToolbar(
+                modifier = Modifier.statusBarsPadding(),
                 title = "Pin Input Field",
                 isDividerVisible = true,
                 isNavigationIconVisible = true,

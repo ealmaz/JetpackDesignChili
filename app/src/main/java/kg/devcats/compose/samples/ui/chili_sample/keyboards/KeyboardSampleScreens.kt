@@ -22,6 +22,7 @@ fun KeyboardSampleScreens(navController: NavController, navigateUp: () -> Unit) 
             .fillMaxSize()
     ) {
         ChiliCenteredAppToolbar(
+            modifier = Modifier.statusBarsPadding(),
             title = "Keyboards",
             isNavigationIconVisible = true,
             isDividerVisible = true,
@@ -32,6 +33,7 @@ fun KeyboardSampleScreens(navController: NavController, navigateUp: () -> Unit) 
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp, vertical = 16.dp)
+                .navigationBarsPadding()
         ) {
             ChiliPrimaryButton(
                 text = "Chili Keyboard",
