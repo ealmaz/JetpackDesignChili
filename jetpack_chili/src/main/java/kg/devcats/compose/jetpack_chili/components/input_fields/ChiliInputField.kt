@@ -25,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
@@ -73,8 +74,8 @@ fun ChiliInputField(
     onRightActionIconClick: (() -> Unit) = {},
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
-    onDoubleClick: (() -> Unit)? = null,
-    onLongClick: (() -> Unit)? = null,
+    onDoubleClick: ((Offset) -> Unit)? = null,
+    onLongClick: ((Offset) -> Unit)? = null,
     onValueChange: ((String) -> Unit),
 ) {
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value, selection = TextRange(value.length))) }
@@ -141,8 +142,8 @@ fun ChiliInputField(
     onRightActionIconClick: (() -> Unit) = {},
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
-    onDoubleClick: (() -> Unit)? = null,
-    onLongClick: (() -> Unit)? = null,
+    onDoubleClick: ((Offset) -> Unit)? = null,
+    onLongClick: ((Offset) -> Unit)? = null,
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
     InputFieldContainer(
@@ -210,8 +211,8 @@ fun ChiliAmountInputField(
     suffix: AnnotatedString? = null,
     enabled: Boolean = true,
     onActionClick: (() -> Unit) = {},
-    onDoubleClick: (() -> Unit)? = null,
-    onLongClick: (() -> Unit)? = null,
+    onDoubleClick: ((Offset) -> Unit)? = null,
+    onLongClick: ((Offset) -> Unit)? = null,
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
     InputFieldContainer(
@@ -287,8 +288,8 @@ private fun InputFieldContainer(
     onRightActionIconClick: (() -> Unit) = {},
     startFrame: @Composable (() -> Unit)? = null,
     onActionClick: (() -> Unit) = {},
-    onDoubleClick: (() -> Unit)? = null,
-    onLongClick: (() -> Unit)? = null,
+    onDoubleClick: ((Offset) -> Unit)? = null,
+    onLongClick: ((Offset) -> Unit)? = null,
     onValueChange: ((TextFieldValue) -> Unit),
     onClearInput: (() -> Unit) = { onValueChange(TextFieldValue()) },
     inputField: @Composable RowScope.() -> Unit
@@ -302,8 +303,8 @@ private fun InputFieldContainer(
             modifier = Modifier
                 .pointerInput(Unit) {
                     detectTapGestures(
-                        onLongPress = { onLongClick?.invoke() },
-                        onDoubleTap = { onDoubleClick?.invoke() }
+                        onLongPress = onLongClick,
+                        onDoubleTap = onDoubleClick
                     )
                 },
             color = decideBackgroundColor(error, inputBgColor),

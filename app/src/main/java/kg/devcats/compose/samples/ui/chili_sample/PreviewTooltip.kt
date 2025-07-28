@@ -114,8 +114,8 @@ fun PreviewTooltip(
                 rightActionIcon = painterResource(kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_contact),
                 isInputFieldEmpty = inputText.text == inputMask,
                 keyboardType = KeyboardType.Number,
-                onLongClick = ::showTooltip,
-                onDoubleClick = ::showTooltip
+                onLongClick = { showTooltip() },
+                onDoubleClick = { showTooltip() }
             ) {
                 inputText = maskInterceptor.intercept(it)
             }
