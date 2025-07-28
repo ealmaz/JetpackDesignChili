@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
@@ -76,7 +78,7 @@ fun ChiliBottomSheetContainer(
 
     if (internalBottomSheetVisibilityState) {
         ModalBottomSheet(
-            contentWindowInsets = { WindowInsets(0,0,0,0) },
+            contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
             onDismissRequest = onDismissRequest,
             sheetState = sheetState,
             contentColor = Color.Unspecified,
@@ -88,7 +90,11 @@ fun ChiliBottomSheetContainer(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Spacer(Modifier.height(8.dp))
+                    Spacer(
+                        Modifier
+                            .height(8.dp)
+                            .windowInsetsTopHeight(WindowInsets.systemBars)
+                    )
                     Spacer(
                         modifier = Modifier
                             .height(3.dp)
@@ -160,7 +166,10 @@ fun BottomSheetContent(
                         )
                         .align(Alignment.TopCenter)
                 )
-                if (isCloseIconVisible) ChiliBottomSheetCloseIcon(onDismissRequest, closeIcon = closeIcon)
+                if (isCloseIconVisible) ChiliBottomSheetCloseIcon(
+                    onDismissRequest,
+                    closeIcon = closeIcon
+                )
             }
             if (!isCloseIconVisible) Spacer(modifier = Modifier.height(8.dp))
             Column(
