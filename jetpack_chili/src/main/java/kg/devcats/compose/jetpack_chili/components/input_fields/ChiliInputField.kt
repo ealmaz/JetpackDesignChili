@@ -2,6 +2,7 @@ package kg.devcats.compose.jetpack_chili.components.input_fields
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextRange
@@ -71,6 +73,8 @@ fun ChiliInputField(
     onRightActionIconClick: (() -> Unit) = {},
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
+    onDoubleClick: (() -> Unit)? = null,
+    onLongClick: (() -> Unit)? = null,
     onValueChange: ((String) -> Unit),
 ) {
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value, selection = TextRange(value.length))) }
@@ -102,6 +106,8 @@ fun ChiliInputField(
         onRightActionIconClick = onRightActionIconClick,
         keyboardType = keyboardType,
         onActionClick = onActionClick,
+        onDoubleClick = onDoubleClick,
+        onLongClick = onLongClick,
         onValueChange = { newTextFieldValueState ->
             textFieldValueState = newTextFieldValueState
             onValueChange(newTextFieldValueState.text)
@@ -135,6 +141,8 @@ fun ChiliInputField(
     onRightActionIconClick: (() -> Unit) = {},
     keyboardType: KeyboardType = KeyboardType.Text,
     onActionClick: (() -> Unit) = {},
+    onDoubleClick: (() -> Unit)? = null,
+    onLongClick: (() -> Unit)? = null,
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
     InputFieldContainer(
@@ -158,6 +166,8 @@ fun ChiliInputField(
         clearIcon = clearIcon,
         startFrame = startFrame,
         onActionClick = onActionClick,
+        onDoubleClick = onDoubleClick,
+        onLongClick = onLongClick,
         onValueChange = onValueChange,
     ) {
         ChiliPlainInputField(
@@ -200,6 +210,8 @@ fun ChiliAmountInputField(
     suffix: AnnotatedString? = null,
     enabled: Boolean = true,
     onActionClick: (() -> Unit) = {},
+    onDoubleClick: (() -> Unit)? = null,
+    onLongClick: (() -> Unit)? = null,
     onValueChange: ((TextFieldValue) -> Unit),
 ) {
     InputFieldContainer(
@@ -218,6 +230,8 @@ fun ChiliAmountInputField(
         clearIcon = clearIcon,
         isInputCenteredAlign = isInputCenteredAlign,
         onActionClick = onActionClick,
+        onDoubleClick = onDoubleClick,
+        onLongClick = onLongClick,
         onValueChange = onValueChange,
         onClearInput = {
             onValueChange(TextFieldValue("0", selection = TextRange(1)))
@@ -273,17 +287,25 @@ private fun InputFieldContainer(
     onRightActionIconClick: (() -> Unit) = {},
     startFrame: @Composable (() -> Unit)? = null,
     onActionClick: (() -> Unit) = {},
+    onDoubleClick: (() -> Unit)? = null,
+    onLongClick: (() -> Unit)? = null,
     onValueChange: ((TextFieldValue) -> Unit),
     onClearInput: (() -> Unit) = { onValueChange(TextFieldValue()) },
     inputField: @Composable RowScope.() -> Unit
 ) {
-
     val isValueEmpty by remember(isInputFieldEmpty, value.text) {
         mutableStateOf(isInputFieldEmpty ?: value.text.isEmpty())
     }
 
     Column(modifier = modifier) {
         Surface(
+            modifier = Modifier
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onLongPress = { onLongClick?.invoke() },
+                        onDoubleTap = { onDoubleClick?.invoke() }
+                    )
+                },
             color = decideBackgroundColor(error, inputBgColor),
             shape = Chili.shapes.RoundedCornerShape
         ) {
