@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsTopHeight
@@ -88,12 +89,11 @@ fun ChiliBottomSheetContainer(
         ) {
             if (isTopIconVisible) {
                 Column(
+                    modifier = Modifier.statusBarsPadding(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Spacer(
-                        Modifier
-                            .height(8.dp)
-                            .windowInsetsTopHeight(WindowInsets.systemBars)
+                        Modifier.height(8.dp)
                     )
                     Spacer(
                         modifier = Modifier
