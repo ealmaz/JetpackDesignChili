@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -28,6 +29,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.shimmer.ShowShimmerOrContent
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -42,6 +44,7 @@ fun ChiliAppToolbar(
     endFrame: (@Composable RowScope.() -> Unit)? = null,
     isDividerVisible: Boolean = false,
     titleStyle: TextStyle = Chili.typography.H16_Primary_500,
+    isLoading: Boolean = false
 ) {
 
     Surface(modifier = modifier, color = backgroundColor) {
@@ -65,14 +68,24 @@ fun ChiliAppToolbar(
                 startFrame?.let {
                     Row(verticalAlignment = Alignment.CenterVertically) { it.invoke(this) }
                 }
-
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = 18.dp)
-                        .weight(1f),
-                    text = title,
-                    style = titleStyle
-                )
+                Box(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    ShowShimmerOrContent(
+                        modifier = Modifier
+                            .padding(vertical = 24.dp),
+                        shimmerWidth = 160.dp,
+                        shimmerHeight = 6.dp,
+                        isLoading = isLoading
+                    ) {
+                        Text(
+                            modifier = Modifier
+                                .padding(vertical = 18.dp),
+                            text = title,
+                            style = titleStyle
+                        )
+                    }
+                }
 
                 endFrame?.let {
                     Row(verticalAlignment = Alignment.CenterVertically) { it.invoke(this) }

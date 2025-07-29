@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
+import kg.devcats.compose.jetpack_chili.components.shimmer.ShowShimmerOrContent
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
 @Composable
@@ -41,7 +42,8 @@ fun ChiliCenteredAppToolbar(
     title: String,
     backgroundColor: Color = Chili.color.toolbarBackground,
     endFrame: (@Composable RowScope.() -> Unit)? = null,
-    isDividerVisible: Boolean = false
+    isDividerVisible: Boolean = false,
+    isLoading: Boolean = false
 ) {
     Surface(modifier = modifier, color = backgroundColor) {
         Column {
@@ -70,11 +72,19 @@ fun ChiliCenteredAppToolbar(
                 }
                 
                 Box(contentAlignment = Alignment.Center, modifier = Modifier.weight(2f)) {
-                    Text(
-                        modifier = Modifier.padding(vertical = 18.dp),
-                        text = title,
-                        style = Chili.typography.H16_Primary_500
-                    )
+                    ShowShimmerOrContent(
+                        modifier = Modifier
+                            .padding(vertical = 24.dp),
+                        shimmerWidth = 160.dp,
+                        shimmerHeight = 6.dp,
+                        isLoading = isLoading
+                    ) {
+                        Text(
+                            modifier = Modifier.padding(vertical = 18.dp),
+                            text = title,
+                            style = Chili.typography.H16_Primary_500
+                        )
+                    }
                 }
 
                 Box(contentAlignment = Alignment.CenterEnd, modifier = Modifier.weight(1f)) {
