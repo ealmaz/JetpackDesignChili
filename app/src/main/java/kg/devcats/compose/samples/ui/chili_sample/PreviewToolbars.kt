@@ -40,6 +40,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 import kg.devcats.compose.jetpack_chili.R
 import kg.devcats.compose.jetpack_chili.components.common.BonusTag
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliSearchAppToolbar
+import kg.devcats.compose.samples.LocalValueShimmering
 import kg.devcats.compose.samples.SampleToolbarMenu
 
 @Composable
@@ -71,25 +72,31 @@ fun Toolbars(
             ChiliAppToolbar(
                 title = "Simple toolbar",
                 isDividerVisible = true,
-                isNavigationIconVisible = false
+                isNavigationIconVisible = false,
+                isLoading = LocalValueShimmering.current
             )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            ChiliAppToolbar(title = "Simple toolbar")
 
             Spacer(modifier = Modifier.height(8.dp))
 
             ChiliAppToolbar(
                 title = "Simple toolbar",
-                navigationIcon = painterResource(id = R.drawable.chili_ic_close)
+                isLoading = LocalValueShimmering.current
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            ChiliAppToolbar(
+                title = "Simple toolbar",
+                navigationIcon = painterResource(id = R.drawable.chili_ic_close),
+                isLoading = LocalValueShimmering.current
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             ChiliCenteredAppToolbar(
                 title = "Centered toolbar",
-                navigationIcon = painterResource(id = R.drawable.chili_ic_close)
+                navigationIcon = painterResource(id = R.drawable.chili_ic_close),
+                isLoading = LocalValueShimmering.current
             )
 
 
@@ -98,6 +105,7 @@ fun Toolbars(
             ChiliCenteredAppToolbar(
                 title = "End icon toolbar",
                 navigationIcon = painterResource(id = R.drawable.chili_ic_close),
+                isLoading = LocalValueShimmering.current,
                 endFrame = {
                     Image(
                         painter = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -110,6 +118,7 @@ fun Toolbars(
             ChiliCenteredAppToolbar(
                 title = "Start icon toolbar",
                 navigationIcon = painterResource(id = R.drawable.chili_ic_close),
+                isLoading = LocalValueShimmering.current,
                 startFrame = {
                     Image(
                         painter = painterResource(id = R.drawable.chili_ic_documents_green),
@@ -123,6 +132,7 @@ fun Toolbars(
                 title = "Transparent toolbar",
                 isDividerVisible = true,
                 isNavigationIconVisible = false,
+                isLoading = LocalValueShimmering.current,
                 backgroundColor = Color.Transparent
             )
 
@@ -133,6 +143,7 @@ fun Toolbars(
             ChiliCenteredAppToolbar(
                 title = "End icon toolbar",
                 isNavigationIconVisible = false,
+                isLoading = LocalValueShimmering.current,
                 endFrame = {
                     Image(painter = painterResource(id = kg.devcats.compose.jetpack_chili.R.drawable.chili_ic_more),
                         contentDescription = "",
@@ -152,6 +163,7 @@ fun Toolbars(
                 title = "ToolbarWithBonusTag",
                 isNavigationIconVisible = true,
                 backgroundColor = Color.Transparent,
+                isLoading = LocalValueShimmering.current,
                 endFrame = {
                     BonusTag(modifier = Modifier, text = "Бонусы: 500")
                 }
@@ -163,6 +175,7 @@ fun Toolbars(
                 title = "ToolbarWithBonusTag",
                 isNavigationIconVisible = true,
                 backgroundColor = Color.Transparent,
+                isLoading = LocalValueShimmering.current,
                 endFrame = {
                     BonusTag(modifier = Modifier, enabled = false, text = "Бонусы")
                 }
