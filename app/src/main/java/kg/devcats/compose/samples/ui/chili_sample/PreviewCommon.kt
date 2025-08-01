@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +16,8 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -26,6 +29,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,6 +68,7 @@ import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.Showca
 import kg.devcats.compose.jetpack_chili.util.compose_utils.showcase.state.rememberSequenceShowcaseState
 import kg.devcats.compose.samples.SampleToolbarMenu
 import kg.devcats.compose.samples.ui.extension.showToast
+import kotlinx.coroutines.launch
 
 @Composable
 fun PreviewCommon(
@@ -413,33 +418,40 @@ fun PreviewCommon(
                 Text("Chili tabs")
                 Spacer(modifier = Modifier.height(8.dp))
 
-                val selectedTab = remember { mutableStateOf(0) }
-
+                val selectedTab = remember { mutableIntStateOf(0) }
+                val tabs = listOf("Open", "Closed", "Free")
                 ChiliTabs(
-                    items = listOf("Open", "Closed", "Free"),
-                    selectedIndex = selectedTab.value
+                    items = tabs,
+                    selectedIndex = selectedTab.intValue
                 ) {
-                    selectedTab.value = it
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                val selectedTab2 = remember { mutableStateOf(0) }
-
-                ChiliTabs(items = listOf("Open", "Closed"), selectedIndex = selectedTab2.value) {
-                    selectedTab2.value = it
+                    selectedTab.intValue = it % tabs.size
                 }
                 Spacer(modifier = Modifier.height(8.dp))
 
-                val selectedTab3 = remember { mutableStateOf(0) }
+                val selectedTab2 = remember { mutableIntStateOf(0) }
+                val tabs2 = listOf("Open", "Closed")
+                ChiliTabs(items = tabs2, selectedIndex = selectedTab2.intValue) {
+                    selectedTab2.intValue = it % tabs2.size
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+
+                val selectedTab3 = remember { mutableIntStateOf(0) }
+                val tab3 = listOf("Rounded", "Rounded")
                 ChiliTabs(
-                    items = listOf("Rounded", "Rounded"),
-                    selectedIndex = selectedTab3.value,
+                    items = tab3,
+                    selectedIndex = selectedTab3.intValue,
                     isBorderVisible = true,
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(8.dp),
+                    cornerRadius = 6.dp
+
                 ) {
-                    selectedTab3.value = it
+                    selectedTab3.intValue = it % tab3.size
                 }
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text("Chili tabs with HorizontalPager")
+                Spacer(modifier = Modifier.height(8.dp))
+                ChiliTabsWithHorizontalPager()
             }
         }
     }
@@ -459,6 +471,55 @@ private fun SequenceShowcaseDialog(text: String) {
         )
     }
 }
+
+@Composable
+private fun ChiliTabsWithHorizontalPager() {
+    val tabs = listOf("Home", "Profile", "Settings", "About")
+    val pagerState = rememberPagerState { tabs.size }
+    val coroutineScope = rememberCoroutineScope()
+
+    Column {
+        ChiliTabs(
+            items = tabs,
+            selectedIndex = pagerState.currentPage,
+            pagerOffsetFraction = pagerState.currentPageOffsetFraction
+        ) { index ->
+            coroutineScope.launch {
+                pagerState.animateScrollToPage(index)
+            }
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(0.4f)
+        ) { page ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Chili.color.contentSecondary, shape = Chili.shapes.RoundedCornerShape)
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                val text = when (page) {
+                    0 -> "Swipe to the right"
+                    tabs.lastIndex -> "Swipe to the left"
+                    else -> "Swipe to the right/left"
+                }
+                Text(
+                    text = text,
+                    style = Chili.typography.H24_Action
+                )
+                Text(
+                    text = "This is ${tabs[page]} page",
+                    style = Chili.typography.H20_Primary_500
+                )
+            }
+        }
+    }
+}
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
