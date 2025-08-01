@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -79,6 +80,7 @@ import kg.devcats.compose.jetpack_chili.components.cards.ReferralTaskCard
 import kg.devcats.compose.jetpack_chili.components.cards.ReferralTaskStatus
 import kg.devcats.compose.jetpack_chili.components.cards.StoriesCard
 import kg.devcats.compose.jetpack_chili.components.cards.SubtitledSimpleCard
+import kg.devcats.compose.jetpack_chili.components.cards.TransferCard
 import kg.devcats.compose.jetpack_chili.components.cells.MultiIconedTitleCell
 import kg.devcats.compose.jetpack_chili.components.common.ShadowRoundedBox
 import kg.devcats.compose.jetpack_chili.components.navigation.ChiliCenteredAppToolbar
@@ -231,6 +233,35 @@ fun PreviewCards(
                         modifier = Modifier
                             .width(186.dp),
                         title = "Заголовок",
+                        isLoading = LocalValueShimmering.current,
+                    )
+                }
+            }
+
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 16.dp),
+                text = "TransferCard",
+                style = Chili.typography.H16_Primary
+            )
+
+            Box(modifier = Modifier.background(Chili.color.screenBackground)) {
+                Row(modifier = Modifier.padding(16.dp)) {
+                    TransferCard(
+                        modifier = Modifier.width(120.dp),
+                        title = "Переводы по номеру телефона",
+                        icon = painterResource(id = R.drawable.chili_ic_documents_green),
+                        isLoading = LocalValueShimmering.current,
+                        onClick = {}
+                    )
+
+                    Spacer(modifier = Modifier.width(12.dp))
+
+                    TransferCard(
+                        modifier = Modifier
+                            .width(120.dp),
+                        title = "Между счетами",
+                        isHighlighted = true,
+                        icon = painterResource(id = R.drawable.chili_ic_documents_green),
                         isLoading = LocalValueShimmering.current,
                     )
                 }
