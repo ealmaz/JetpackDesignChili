@@ -7,6 +7,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import kg.devcats.compose.jetpack_chili.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.coroutines.cancellation.CancellationException
@@ -17,7 +18,7 @@ object SnackbarManager {
     val currentSnackbarMessage: SnackbarMessage?
         get() = _currentSnackbarMessage
 
-    val alignment: MutableState<Alignment> = mutableStateOf(Alignment.BottomCenter)
+    val alignment: MutableState<Alignment> = mutableStateOf(Alignment.TopCenter)
 
     private var wasActionClicked = false
 
@@ -45,7 +46,7 @@ object SnackbarManager {
         )
     }
 
-    fun CoroutineScope.showTopSnackbar(
+    fun CoroutineScope.showBottomSnackbar(
         message: String,
         @DrawableRes iconRes: Int? = null,
         backgroundColor: Color? = null
@@ -55,7 +56,7 @@ object SnackbarManager {
                 message = message,
                 type = SnackbarType.SIMPLE,
                 iconRes = iconRes,
-                alignment = Alignment.TopCenter,
+                alignment = Alignment.BottomCenter,
                 backgroundColor = backgroundColor
             )
         )
@@ -87,7 +88,7 @@ object SnackbarManager {
         timerDurationMillis: Long,
         onTimerExpire: () -> Unit,
         onActionClick: () -> Unit,
-        alignment: Alignment = Alignment.BottomCenter
+        alignment: Alignment = Alignment.TopCenter
     ) {
         val snackbarMessage = SnackbarMessage(
             message = message,
@@ -103,6 +104,19 @@ object SnackbarManager {
             alignment = alignment
         )
         showSnackbar(snackbarMessage)
+    }
+
+    fun CoroutineScope.showWarningSnackbar(
+        message: String,
+        iconRes: Int = R.drawable.chili4_ic_white_warning
+    ) {
+        showSnackbar(
+            SnackbarMessage(
+                message = message,
+                iconRes = iconRes,
+                type = SnackbarType.WARNING
+            )
+        )
     }
 
     private fun CoroutineScope.showSnackbar(snackbarMessage: SnackbarMessage) {
