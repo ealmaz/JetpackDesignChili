@@ -46,11 +46,11 @@ fun TransferCard(
             color = Chili.color.cardViewBackground,
             contentColor = Color.Unspecified
         ) {
-            Column(modifier = Modifier.padding(12.dp)) {
+            Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
                 Shimmer(height = 32.dp, width = 32.dp)
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(9.dp))
                 Shimmer(height = 6.dp, width = 83.dp)
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 Shimmer(height = 6.dp, width = 60.dp)
             }
         }
