@@ -41,14 +41,14 @@ fun TransferCard(
     if (isLoading == true) {
         Surface(
             modifier = modifier
-                .height(86.dp)
+                .height(90.dp)
                 .clip(RoundedCornerShape(12.dp)),
             color = Chili.color.cardViewBackground,
             contentColor = Color.Unspecified
         ) {
             Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
                 Shimmer(height = 32.dp, width = 32.dp)
-                Spacer(modifier = Modifier.height(9.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 Shimmer(height = 6.dp, width = 83.dp)
                 Spacer(modifier = Modifier.height(8.dp))
                 Shimmer(height = 6.dp, width = 60.dp)
@@ -57,7 +57,7 @@ fun TransferCard(
     } else {
         Box(
             modifier = modifier
-                .height(86.dp)
+                .height(90.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .then(
                     onClick?.let { Modifier.clickable(onClick = it) } ?: Modifier
@@ -90,7 +90,7 @@ fun TransferCard(
                     title = title,
                     icon = icon,
                     titleStyle = titleStyle,
-                    titlePaddingValues = PaddingValues(top = 2.dp),
+                    titlePaddingValues = PaddingValues(top = 8.dp),
                     titleMaxLines = titleMaxLines
                 )
             }
