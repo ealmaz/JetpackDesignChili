@@ -38,7 +38,7 @@ fun ChiliPrimaryButton(
     isLoading: Boolean = false,
     buttonSize: ButtonSize = RegularButtonSize(),
     textStyle: TextStyle = Chili.typography.H14_Primary_500,
-    textColor: Color = Chili.color.buttonPrimaryText,
+    textColor: Color = if (enabled) Chili.color.buttonPrimaryText else Chili.color.buttonPrimaryDisabledText,
     onClick: () -> Unit
 ) {
     Box(
