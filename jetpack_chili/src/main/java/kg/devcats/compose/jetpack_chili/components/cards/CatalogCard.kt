@@ -30,7 +30,7 @@ import kg.devcats.compose.jetpack_chili.theme.white_1
 @Composable
 fun CatalogCard(
     modifier: Modifier = Modifier,
-    titleStyle: TextStyle = Chili.typography.H16_Primary,
+    titleStyle: TextStyle = Chili.typography.H14_Primary,
     titleMaxLines: Int = 2,
     title: String,
     icon: Painter? = null,
