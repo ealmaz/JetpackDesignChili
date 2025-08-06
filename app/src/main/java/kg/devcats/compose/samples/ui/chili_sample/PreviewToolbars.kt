@@ -94,7 +94,7 @@ fun Toolbars(
             Spacer(modifier = Modifier.height(8.dp))
 
             ChiliCenteredAppToolbar(
-                title = "Centered toolbar",
+                title = "Centered toolbar with navigation icon",
                 navigationIcon = painterResource(id = R.drawable.chili_ic_close),
                 isLoading = LocalValueShimmering.current
             )

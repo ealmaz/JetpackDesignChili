@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kg.devcats.compose.jetpack_chili.R
@@ -82,7 +83,9 @@ fun ChiliCenteredAppToolbar(
                         Text(
                             modifier = Modifier.padding(vertical = 18.dp),
                             text = title,
-                            style = Chili.typography.H16_Primary_500
+                            style = Chili.typography.H16_Primary_500,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 }
@@ -109,6 +112,16 @@ fun PreviewChiliCenteredAppToolbarNav() {
         modifier = Modifier.fillMaxWidth(),
         title = "Заголовок",
         isNavigationIconVisible = true
+    )
+
+}
+
+@Preview
+@Composable
+fun PreviewChiliCenteredAppToolbarWithLongText() {
+    ChiliCenteredAppToolbar(
+        modifier = Modifier.fillMaxWidth(),
+        title = "Заголовок с длинным текстом"
     )
 
 }
