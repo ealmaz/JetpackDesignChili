@@ -7,7 +7,8 @@ import androidx.compose.ui.graphics.Color
 enum class SnackbarType {
     SIMPLE,
     LOADER,
-    TIMER
+    TIMER,
+    WARNING
 }
 
 data class SnackbarMessage(
@@ -17,7 +18,7 @@ data class SnackbarMessage(
     val snackbarDurationMillis: Long = 3000,
     val progressDurationMillis: Long? = null,
     val actionText: String? = null,
-    val alignment: Alignment = Alignment.BottomCenter,
+    val alignment: Alignment = Alignment.TopCenter,
     val backgroundColor: Color? = null,
     val onActionClick: (() -> Unit)? = null,
     val onDismiss: (() -> Unit)? = null,
