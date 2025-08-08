@@ -39,7 +39,7 @@ fun ChiliDoubleInputField(
     firstFieldTextStyle: TextStyle = Chili.typography.H16_Primary_500,
     secondFieldTextStyle: TextStyle = Chili.typography.H16_Primary_500,
     firstFieldValue: TextFieldValue,
-    secondFieldValue: TextFieldValue,
+    secondFieldValue: TextFieldValue? = null,
     onInputOnFirstField: (TextFieldValue) -> Unit,
     onInputOnSecondField: (TextFieldValue) -> Unit,
 ) {
@@ -59,20 +59,23 @@ fun ChiliDoubleInputField(
                 enabled = isFirstFieldEnabled,
                 textStyle = firstFieldTextStyle
             )
-            Spacer(modifier = Modifier.width(8.dp))
-            ChiliAmountInputField(
-                inputBgColor = fieldColor,
-                value = secondFieldValue,
-                modifier = Modifier.weight(1f).onFocusChanged { onFocusChange?.invoke(it.hasFocus, false) },
-                suffix = secondFieldSuffix,
-                keyboardType = KeyboardType.Number,
-                maxLenBeforeComma = secondFieldMaxLengthBeforeComma,
-                maxLenAfterComma = secondFieldMaxLengthAfterComma,
-                onValueChange = onInputOnSecondField,
-                isClearButtonEnabled = false,
-                enabled = isSecondFieldEnabled,
-                textStyle = secondFieldTextStyle
-            )
+
+            secondFieldValue?.let {
+                Spacer(modifier = Modifier.width(8.dp))
+                ChiliAmountInputField(
+                    inputBgColor = fieldColor,
+                    value = secondFieldValue,
+                    modifier = Modifier.weight(1f).onFocusChanged { onFocusChange?.invoke(it.hasFocus, false) },
+                    suffix = secondFieldSuffix,
+                    keyboardType = KeyboardType.Number,
+                    maxLenBeforeComma = secondFieldMaxLengthBeforeComma,
+                    maxLenAfterComma = secondFieldMaxLengthAfterComma,
+                    onValueChange = onInputOnSecondField,
+                    isClearButtonEnabled = false,
+                    enabled = isSecondFieldEnabled,
+                    textStyle = secondFieldTextStyle
+                )
+            }
         }
         if (!errorMessage.isNullOrBlank()) {
             Text(
