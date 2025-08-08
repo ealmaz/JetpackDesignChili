@@ -27,7 +27,7 @@ class MaskInputInterceptor(newMask: String) {
         if (mask == "*") return newValue
         selectionPosition = newValue.selection.start
 
-        val isDelete = newValue.text.length < lastInterceptedValue.length
+        val isDelete = (lastInterceptedValue.length - newValue.text.length == 1)
         val inputText = StringBuilder(newValue.text)
         val clearedText = clearMaskSymbols(inputText.toString()).clearForbiddenSymbols()
         val maskedText = mergeStrings(clearedText, isDelete)
@@ -47,7 +47,17 @@ class MaskInputInterceptor(newMask: String) {
             else -> selectionPosition
         }
         lastInterceptedValue = result.text
-        return TextFieldValue(result, TextRange(startSelectionPosition, startSelectionPosition))
+
+        val oldEndSelectionPosition = newValue.selection.end
+
+        val textRange = when {
+            oldEndSelectionPosition == newValue.selection.start -> TextRange(startSelectionPosition)
+            oldEndSelectionPosition <= startSelectionPosition -> TextRange(startSelectionPosition)
+            oldEndSelectionPosition > selectionEndLimit -> TextRange(newValue.selection.start, selectionEndLimit)
+            else -> TextRange(newValue.selection.start, oldEndSelectionPosition)
+        }
+
+        return TextFieldValue(result, textRange)
     }
 
     fun setupNewMask(newMask: String = mask) {
