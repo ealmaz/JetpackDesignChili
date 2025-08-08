@@ -110,6 +110,10 @@ class MaskInputInterceptor(newMask: String) {
         return maskedText.toString()
     }
 
+    fun getCurrentMask(): String {
+        return mask
+    }
+
     companion object {
         const val EMPTY_MASK = "*"
         const val REPRESENTATION = 'X'
