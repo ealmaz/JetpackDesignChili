@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
@@ -23,6 +24,7 @@ import kg.devcats.compose.jetpack_chili.theme.Chili
 @Composable
 fun ChiliDoubleInputField(
     modifier: Modifier = Modifier,
+    focusRequester: FocusRequester = FocusRequester(),
     errorMessage: String? = null,
     message: String? = null,
     messageStyle: TextStyle = Chili.typography.H12_Secondary,
@@ -47,6 +49,7 @@ fun ChiliDoubleInputField(
     Column(modifier = modifier) {
         Row {
             ChiliAmountInputField(
+                focusRequester = focusRequester,
                 inputBgColor = fieldColor,
                 value = firstFieldValue,
                 modifier = Modifier.weight(1f).onFocusChanged { onFocusChange?.invoke(it.hasFocus, true) },
