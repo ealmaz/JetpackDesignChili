@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
@@ -53,6 +55,7 @@ fun ChiliInputField(
     value: String,
     textStyle: TextStyle = Chili.typography.H16_Primary_500,
     inputBgColor: Color = Chili.color.inputFieldBackground,
+    containerShape: Shape = Chili.shapes.RoundedCornerShape,
     error: String? = null,
     isClearButtonEnabled: Boolean = true,
     placeholder: String? = null,
@@ -87,6 +90,7 @@ fun ChiliInputField(
         textStyle = textStyle,
         error = error,
         inputBgColor = inputBgColor,
+        containerShape = containerShape,
         isClearButtonEnabled = isClearButtonEnabled,
         placeholder = placeholder,
         focusRequester = focusRequester,
@@ -121,6 +125,7 @@ fun ChiliInputField(
     value: TextFieldValue,
     textStyle: TextStyle = Chili.typography.H16_Primary_500,
     inputBgColor: Color = Chili.color.inputFieldBackground,
+    containerShape: Shape = Chili.shapes.RoundedCornerShape,
     error: String? = null,
     isClearButtonEnabled: Boolean = true,
     placeholder: String? = null,
@@ -152,6 +157,7 @@ fun ChiliInputField(
         error = error,
         isInputFieldEmpty = isInputFieldEmpty,
         inputBgColor = inputBgColor,
+        containerShape = containerShape,
         isClearButtonEnabled = isClearButtonEnabled,
         message = message,
         messageWeight = messageWeight,
@@ -273,6 +279,7 @@ private fun InputFieldContainer(
     error: String? = null,
     isClearButtonEnabled: Boolean = true,
     inputBgColor: Color = Chili.color.inputFieldBackground,
+    containerShape: Shape = Chili.shapes.RoundedCornerShape,
     message: String? = null,
     messageWeight: Float = 2f,
     messagePaddingValues: PaddingValues = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
@@ -311,7 +318,7 @@ private fun InputFieldContainer(
                 } else Modifier
             ),
             color = decideBackgroundColor(error, inputBgColor),
-            shape = Chili.shapes.RoundedCornerShape
+            shape = containerShape
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 when {
