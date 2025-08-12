@@ -18,6 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kg.devcats.compose.jetpack_chili.components.shimmer.Shimmer
 import kg.devcats.compose.jetpack_chili.parseHtml
 import kg.devcats.compose.jetpack_chili.theme.Chili
 
@@ -26,6 +27,7 @@ fun ChiliDoubleInputField(
     modifier: Modifier = Modifier,
     focusRequester: FocusRequester = FocusRequester(),
     errorMessage: String? = null,
+    isMessageLoading: Boolean? = null,
     message: String? = null,
     messageStyle: TextStyle = Chili.typography.H12_Secondary,
     firstFieldSuffix: AnnotatedString? = null,
@@ -80,18 +82,28 @@ fun ChiliDoubleInputField(
                 )
             }
         }
-        if (!errorMessage.isNullOrBlank()) {
-            Text(
-                modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp),
-                text = errorMessage.parseHtml(),
-                style = messageStyle.copy(color = Chili.color.errorText)
-            )
-        } else if (!message.isNullOrBlank()) {
-            Text(
-                modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp),
-                text = message.parseHtml(),
-                style = messageStyle
-            )
+
+        when {
+            isMessageLoading == true -> {
+                Shimmer(
+                    modifier = Modifier.padding(12.dp),
+                    height = 6.dp, width = 160.dp
+                )
+            }
+            !errorMessage.isNullOrBlank() -> {
+                Text(
+                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp),
+                    text = errorMessage.parseHtml(),
+                    style = messageStyle.copy(color = Chili.color.errorText)
+                )
+            }
+            !message.isNullOrBlank() -> {
+                Text(
+                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp),
+                    text = message.parseHtml(),
+                    style = messageStyle
+                )
+            }
         }
     }
 }
@@ -100,6 +112,19 @@ fun ChiliDoubleInputField(
 @Preview
 private fun ChiliDoubleInputFieldPreview() {
     Column {
+        ChiliDoubleInputField(
+            message = "В этом месяце можно продать на 87 000,00 c",
+            isMessageLoading = true,
+            firstFieldValue = TextFieldValue("1000.123123"),
+            secondFieldValue = TextFieldValue("1000.23123"),
+            firstFieldSuffix = "<u>c</u>".parseHtml(),
+            firstFieldMaxLengthAfterComma = 6,
+            secondFieldMaxLengthAfterComma = 6,
+            onInputOnFirstField = {},
+            onInputOnSecondField = {}
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
         ChiliDoubleInputField(
             message = "В этом месяце можно продать на 87 000,00 c",
             firstFieldValue = TextFieldValue("1000.123123"),
