@@ -48,6 +48,7 @@ fun ChiliTabs(
     selectedIndex: Int,
     pagerOffsetFraction: Float? = null,
     tabTextStyle: TextStyle = Chili.typography.H14_Primary,
+    selectedTabTextStyle: TextStyle = Chili.typography.H14_Primary,
     tabPaddings: PaddingValues = PaddingValues(8.dp),
     tabsContainerColor: Color = Chili.color.tabsContainerBg,
     tabsSelectedTabColor: Color = Chili.color.tabsSelectedTab,
@@ -104,7 +105,7 @@ fun ChiliTabs(
                 ChiliTab(
                     index = index,
                     title = title,
-                    tabTextStyle = tabTextStyle,
+                    tabTextStyle = if (index == selectedIndex) selectedTabTextStyle else tabTextStyle,
                     tabPaddings = tabPaddings,
                     onHeightMeasured = {
                         if (tabHeightPx == 0) tabHeightPx = it
