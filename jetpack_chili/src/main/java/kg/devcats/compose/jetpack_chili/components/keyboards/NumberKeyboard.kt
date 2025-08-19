@@ -39,6 +39,8 @@ sealed class KeyboardKeyType {
 fun NumberKeyboard(
     modifier: Modifier = Modifier,
     specialSymbols: List<Char> = emptyList(),
+    keysVerticalSpace: Dp =4.dp,
+    keysHorizontalSpace: Dp = 4.dp,
     onKeyClick: (KeyboardKeyType) -> Unit
 ) {
 
@@ -49,8 +51,8 @@ fun NumberKeyboard(
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(3),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(keysVerticalSpace),
+        horizontalArrangement = Arrangement.spacedBy(keysHorizontalSpace),
     ) {
         items(keys) { key ->
             KeyButton(
