@@ -2,13 +2,22 @@ package kg.devcats.compose.jetpack_chili.theme
 
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
+import kg.devcats.compose.jetpack_chili.R
 
 class ChiliTypography(colorScheme: ChiliColorScheme) {
 
-    val DefaultTextStyle = TextStyle.Default.copy()
+    val DefaultTextStyle = TextStyle.Default.copy(
+        fontFamily = FontFamily(
+            Font(R.font.roboto_regular, FontWeight.Normal),
+            Font(R.font.roboto_medium, FontWeight.Medium),
+            Font(R.font.roboto_700, FontWeight.Bold)
+        )
+    )
 
     val BaseChiliTextStyle = DefaultTextStyle.copy()
 
