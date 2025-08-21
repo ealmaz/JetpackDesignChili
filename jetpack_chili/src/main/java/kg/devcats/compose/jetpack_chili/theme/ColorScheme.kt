@@ -133,6 +133,9 @@ interface ChiliColorScheme {
     //Snackbar
     val snackbarBackground: Color
     val snackbarIndeterminateColor: Color
+    val snackbarWarningBackgound: Color
+    val snackbarActionText: Color
+    val snackbarText: Color
 
     //QuickAction button
     val quickActionIconBackgroundDisabledColor: Color
@@ -303,8 +306,11 @@ data class ChiliLightColorScheme(
     override val bottomSheetBackground: Color = white_1,
     override val bottomSheetTopIconColor: Color = gray_1,
 
-    override val snackbarBackground: Color = white_1,
-    override val snackbarIndeterminateColor: Color = black_5,
+    override val snackbarBackground: Color = black_5,
+    override val snackbarIndeterminateColor: Color = white_1,
+    override val snackbarActionText: Color = blue_14,
+    override val snackbarWarningBackgound: Color = orange_10,
+    override val snackbarText: Color = white_1,
 
     override val quickActionIconBackgroundDisabledColor: Color = gray_5,
     override val quickActionIconBackgroundClickedColor: Color = gray_9,
@@ -462,8 +468,11 @@ data class ChiliDarkColorScheme(
     override val bottomSheetBackground: Color = black_3,
     override val bottomSheetTopIconColor: Color = gray_1,
 
-    override val snackbarBackground: Color = black_3,
-    override val snackbarIndeterminateColor: Color = gray_3,
+    override val snackbarBackground: Color = black_5,
+    override val snackbarIndeterminateColor: Color = white_1,
+    override val snackbarActionText: Color = blue_14,
+    override val snackbarWarningBackgound: Color = orange_11,
+    override val snackbarText: Color = white_1,
 
     override val quickActionIconBackgroundDisabledColor: Color = black_4,
     override val quickActionIconBackgroundClickedColor: Color = black_4,
